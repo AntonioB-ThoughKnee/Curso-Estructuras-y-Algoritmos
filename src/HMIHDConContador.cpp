@@ -4,7 +4,7 @@
 
 #include <vector>
 
-HMIHDConContador* HMIHDConContador::raiz = nullptr;
+shared_ptr<HMIHDConContador> HMIHDConContador::raiz = nullptr;
   int HMIHDConContador::contador = 0;
 
 HMIHDConContador::HMIHDConContador()
@@ -22,28 +22,28 @@ HMIHDConContador::HMIHDConContador(int etiqueta)
 
 HMIHDConContador::~HMIHDConContador()
 {
-  delete raiz;
-  delete this->hijo;
-  delete this->hermano;
+  // delete raiz;
+  // delete this->hijo;
+  // delete this->hermano;
 }
 
 HMIHDConContador& HMIHDConContador::ponerRaiz(int etiqueta)
 {
-  HMIHDConContador* tmp = new HMIHDConContador(etiqueta);
+  shared_ptr<HMIHDConContador> tmp = make_shared<HMIHDConContador>(etiqueta);
   raiz = tmp;
   contador++;
   return *this;
 }
 
-HMIHDConContador* HMIHDConContador::Raiz()
+shared_ptr<HMIHDConContador> HMIHDConContador::Raiz()
 {
   return raiz;
 }
 
-HMIHDConContador* HMIHDConContador::agregarHijo(HMIHDConContador* nodo, int etiqueta)
+shared_ptr<HMIHDConContador> HMIHDConContador::agregarHijo(shared_ptr<HMIHDConContador> nodo, int etiqueta)
 {
-  HMIHDConContador* tmp = new HMIHDConContador(etiqueta);
-  HMIHDConContador* tmpHijoOriginal = nodo->hijo;
+  shared_ptr<HMIHDConContador> tmp = make_shared<HMIHDConContador>(etiqueta);
+  shared_ptr<HMIHDConContador> tmpHijoOriginal = nodo->hijo;
   nodo->hijo = tmp;
   tmp->hermano = tmpHijoOriginal;
   contador++;
@@ -51,18 +51,18 @@ HMIHDConContador* HMIHDConContador::agregarHijo(HMIHDConContador* nodo, int etiq
   return tmp;
 }
 
-HMIHDConContador* HMIHDConContador::agregarHijoMasDerecho (HMIHDConContador* nodo, int etiqueta)
+shared_ptr<HMIHDConContador> HMIHDConContador::agregarHijoMasDerecho (shared_ptr<HMIHDConContador> nodo, int etiqueta)
 {
   contador++;
-  HMIHDConContador* tmp = new HMIHDConContador(etiqueta);
-  HMIHDConContador* tmpHijoMasDerecho = nodo->hijo;
+  shared_ptr<HMIHDConContador> tmp = make_shared<HMIHDConContador>(etiqueta);
+  shared_ptr<HMIHDConContador> tmpHijoMasDerecho = nodo->hijo;
   if(tmpHijoMasDerecho == nullptr)
   {
     nodo->hijo = tmp;
     return tmp;
   }
 
-  HMIHDConContador* tmpNull = tmpHijoMasDerecho->hermano; // Esta variable sirve para mantener registrado el nodo anterior cuando se llega al nodo nulo
+  shared_ptr<HMIHDConContador> tmpNull = tmpHijoMasDerecho->hermano; // Esta variable sirve para mantener registrado el nodo anterior cuando se llega al nodo nulo
   while(tmpNull != nullptr)
   {
     tmpNull = tmpNull->hermano;
@@ -73,23 +73,49 @@ HMIHDConContador* HMIHDConContador::agregarHijoMasDerecho (HMIHDConContador* nod
   return tmp;
 }
 
-HMIHDConContador* HMIHDConContador::borrarHoja(HMIHDConContador* hoja)
+void HMIHDConContador::borrarHoja(shared_ptr<HMIHDConContador> hoja)
 {
-  //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  ARREGLAR  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-  HMIHDConContador* tmp = hoja;
-  hoja->hermano = nullptr;
-  hoja->hijo = nullptr;
-  delete hoja;
+  vector<shared_ptr<HMIHDConContador>> auxiliar; // Utilizado para recorrer el árbol
+  shared_ptr<HMIHDConContador> tmp = raiz;
+  shared_ptr<HMIHDConContador> padre;
+  bool hojaEsHMI = false;
+  auxiliar.push_back(tmp);
+  int i = 0;
+  while(i < auxiliar.size()) // Recorrido del árbol por niveles
+  {
+    tmp = auxiliar[i];
+    i ++;
+    if(tmp->hermano == hoja) { break; } // Caso en el quela hoja sea hermano de alguien
+    padre = tmp;
+    tmp = tmp->hijo;
+    if(tmp == hoja) { hojaEsHMI = true; break; } // Caso en el que la hoja es HMI
+
+    while(tmp != nullptr)
+    {
+      auxiliar.push_back(tmp);
+      tmp = tmp->hermano;
+    }
+  }
+
+  if(hojaEsHMI)
+  {
+    padre->hijo = tmp->hermano;
+    tmp->hermano = nullptr;
+  } else
+  {
+    tmp->hermano = tmp->hermano->hermano;
+    tmp->hermano = tmp;
+    tmp->hermano = nullptr;
+  }
   contador--;
-  return tmp;
 }
 
-HMIHDConContador* HMIHDConContador::Padre(HMIHDConContador* nodo)
+shared_ptr<HMIHDConContador> HMIHDConContador::Padre(shared_ptr<HMIHDConContador> nodo)
 {
   if(nodo == raiz) { return nullptr; }
-  vector<HMIHDConContador*> auxiliar; // Utilizado para almacenar tanto tmp como el padre de tmp
-  HMIHDConContador* tmp = raiz;
-  HMIHDConContador* padre;
+  vector<shared_ptr<HMIHDConContador>> auxiliar; // Utilizado para almacenar tanto tmp como el padre de tmp
+  shared_ptr<HMIHDConContador> tmp = raiz;
+  shared_ptr<HMIHDConContador> padre;
   auxiliar.push_back(tmp);
   int i = 0;
   while(i < auxiliar.size())
@@ -112,22 +138,22 @@ HMIHDConContador* HMIHDConContador::Padre(HMIHDConContador* nodo)
   return nullptr;
 }
 
-HMIHDConContador* HMIHDConContador::HMI(HMIHDConContador* nodo)
+shared_ptr<HMIHDConContador> HMIHDConContador::HMI(shared_ptr<HMIHDConContador> nodo)
 {
   return nodo->hijo;
 }
 
-HMIHDConContador* HMIHDConContador::HD(HMIHDConContador* nodo)
+shared_ptr<HMIHDConContador> HMIHDConContador::HD(shared_ptr<HMIHDConContador> nodo)
 {
   return nodo->hermano;
 }
 
-int HMIHDConContador::Etiqueta(HMIHDConContador* nodo)
+int HMIHDConContador::Etiqueta(shared_ptr<HMIHDConContador> nodo)
 {
   return nodo->etiqueta;
 }
 
-HMIHDConContador& HMIHDConContador::modificarEtiqueta(HMIHDConContador* nodo, int etiqueta)
+HMIHDConContador& HMIHDConContador::modificarEtiqueta(shared_ptr<HMIHDConContador> nodo, int etiqueta)
 {
   nodo->etiqueta = etiqueta;
   return *this;

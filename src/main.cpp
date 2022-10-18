@@ -1,15 +1,18 @@
 // #include "include/Arbol.cpp" NOT .cpp
 //=====  
-// #include "../include/HMIHDConContador.h"
+#include "../include/HMIHDConContador.h"
 // #include "../include/HMIHDConPtrPadreOptimizado.h"
-//carlos.Sanchezblanco@ucr.ac.cr
-#include "../include/HMIHDConPtrPadreyHI.h"
-#include <vector>
+// #include "../include/HMIHDConPtrPadreyHI.h"
 
-Arbol* buscarEtiqueta(int etiqueta, Arbol* A)
+//carlos.Sanchezblanco@ucr.ac.cr
+#include <vector>
+#include <memory>
+#include <iostream>
+
+shared_ptr<Arbol> buscarEtiqueta(int etiqueta, shared_ptr<Arbol> A)
 {
-  Arbol* tmp;
-  vector<Arbol*> auxiliar;
+  shared_ptr<Arbol> tmp;
+  vector<shared_ptr<Arbol>> auxiliar;
   auxiliar.push_back(A->Raiz());
   int i = 0;
   while(i < auxiliar.size())
@@ -31,14 +34,14 @@ Arbol* buscarEtiqueta(int etiqueta, Arbol* A)
 
 int main()
 {
-Arbol* iko = new Arbol();
+shared_ptr<Arbol> iko = make_shared<Arbol>();
 
 iko->ponerRaiz(10)
   .agregarHijo(iko->Raiz(), 2)
   ->agregarHijo(iko->Raiz(), 3);
-Arbol* root = iko->Raiz();
+shared_ptr<Arbol> root = iko->Raiz();
   
-Arbol* level3 = 
+shared_ptr<Arbol> level3 = 
   iko->agregarHijo(iko->HMI(iko->Raiz()), 4)
     ->agregarHijo(iko->HMI(iko->Raiz()), 5)
     ->agregarHijoMasDerecho(iko->Raiz(), 6)
@@ -46,12 +49,12 @@ Arbol* level3 =
     
 iko->agregarHijo(level3, 8);
 
-Arbol* father = iko->Padre(level3);
+shared_ptr<Arbol> father = iko->Padre(level3);
 
-//iko->borrarHoja(root); Falta que funcione correctamente el borrar hoja
+iko->borrarHoja(iko->HMI(level3)); //Falta que funcione correctamente el borrar hoja
 int c = iko->numNodos();
 
-Arbol* test = buscarEtiqueta(7, iko);
+shared_ptr<Arbol> test = buscarEtiqueta(7, iko);
 
 return 0;
 }

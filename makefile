@@ -15,7 +15,7 @@ TESTOUTPUT_DIR=testOutput
 
 # Compilation flags
 INCLUDES= -I include -I src -I lib
-FLAGS= $(strip -g -std=c++11 -Wall -Wextra $(INCLUDES))
+FLAGS= $(strip -g $(INCLUDES)) #-std=c++11 -Wall -Wextra 
 
 # Get list of all .cpp files in SRC_DIR
 SOURCE_FILES=$(wildcard $(SRC_DIR)/*.cpp)

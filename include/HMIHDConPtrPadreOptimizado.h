@@ -1,12 +1,13 @@
 #pragma once
 using namespace std;
+#include <memory>
 
 typedef class HMIHDConPtrPadreOptimizado //typedef usado para el main()
 {
 private:
-  static HMIHDConPtrPadreOptimizado* raiz; /**< Raíz del árbol */
-  HMIHDConPtrPadreOptimizado* hijo; /**< Hijo del nodo definido   */
-  HMIHDConPtrPadreOptimizado* hermano; /**<  hermano derecho del nodo definido  */
+  static shared_ptr<HMIHDConPtrPadreOptimizado> raiz; /**< Raíz del árbol */
+  shared_ptr<HMIHDConPtrPadreOptimizado> hijo; /**< Hijo del nodo definido   */
+  shared_ptr<HMIHDConPtrPadreOptimizado> hermano; /**<  hermano derecho del nodo definido  */
   bool tienePtrAlPadre; /**<  Booleano que define si el nodo apunta al padre o no */
   int etiqueta; /**< Etiqueta del modo definido */
 
@@ -54,82 +55,82 @@ Modifica: Agrega el nodo raÃ­z al Ã¡rbol
   /**
    * @brief Retornar la raíz del árbol
    * 
-   * @return HMIHDConPtrPadreOptimizado* Raíz del árbol
+   * @return shared_ptr<HMIHDConPtrPadreOptimizado> Raíz del árbol
 Requiere: Ãrbol con raÃ­z definida
 Efecto: Retorna el nodo raÃ­z
 Modifica: Nada
    */
-  HMIHDConPtrPadreOptimizado* Raiz();
+  shared_ptr<HMIHDConPtrPadreOptimizado> Raiz();
 
   /**
    * @brief Agregar un hijo en la posición más barata
    * 
    * @param nodo Nodo al que se le va a agregar un hijo
    * @param etiqueta Etiqueta del nodo nuevo
-   * @return HMIHDConPtrPadreOptimizado*  Puntero al nodo agregado
+   * @return shared_ptr<HMIHDConPtrPadreOptimizado>  Puntero al nodo agregado
    * 
 Requiere: Nodo vÃ¡lido y etiqueta para el nodo hijo
 Efecto: AÃ±adir un hijo en la posiciÃ³n mÃ¡s barata al nodo dado y retorna el nodo aÃ±adido
 Modifica: Un nodo agregando un hijo
    */
-  HMIHDConPtrPadreOptimizado* agregarHijo(HMIHDConPtrPadreOptimizado* nodo, int etiqueta);
+  shared_ptr<HMIHDConPtrPadreOptimizado> agregarHijo(shared_ptr<HMIHDConPtrPadreOptimizado> nodo, int etiqueta);
 
   /**
    * @brief Agregar un hijo en la última posición de hermanos 
    * 
    * @param nodo Nodo al que se le va a agregar un hijo
    * @param etiqueta Etiqueta del nodo nuevo
-   * @return HMIHDConPtrPadreOptimizado* Puntero al nodo agregado
+   * @return shared_ptr<HMIHDConPtrPadreOptimizado> Puntero al nodo agregado
 RRequiere: Nodo vÃ¡lido y etiqueta para el nodo hijo
 fecto: AÃ±adir un hijo en la Ãºltima posiciÃ³n de los hijos del nodo dado, a la derecha,
 retorna el nodo aÃ±adido
 Modifica: Un nodo agregando un hijo
    */
-  HMIHDConPtrPadreOptimizado* agregarHijoMasDerecho (HMIHDConPtrPadreOptimizado* nodo, int etiqueta);
+  shared_ptr<HMIHDConPtrPadreOptimizado> agregarHijoMasDerecho (shared_ptr<HMIHDConPtrPadreOptimizado> nodo, int etiqueta);
 
   /**
    * @brief Borra una hoja del árbol
    * 
    * @param hoja Nodo hoja por ser eliminado
-   * @return HMIHDConPtrPadreOptimizado* Nodo hoja eliminado
+   * @return shared_ptr<HMIHDConPtrPadreOptimizado> Nodo hoja eliminado
 Requiere: Nodo vÃ¡lido y que el nodo sea una hoja
 Efecto: Elimina un nodo hoja del Ã¡rbol y lo retorna
 Modifica: EliminaciÃ³n de un nodo
    */
-  HMIHDConPtrPadreOptimizado* borrarHoja(HMIHDConPtrPadreOptimizado* hoja);
+  void borrarHoja(shared_ptr<HMIHDConPtrPadreOptimizado> hoja);
 
   /**
    * @brief Retorna el padre deun nodo dado
    * 
    * @param nodo Nodo al que se va a retornar su padre
-   * @return HMIHDConPtrPadreOptimizado*  Padre del nodo dado
+   * @return shared_ptr<HMIHDConPtrPadreOptimizado>  Padre del nodo dado
 Requiere: Nodo vÃ¡lido y que no sea raÃ­z
 Efecto: Retorna el padre de un nodo dado
 Modifica: Nada
    */
-  HMIHDConPtrPadreOptimizado* Padre(HMIHDConPtrPadreOptimizado* nodo);
+  shared_ptr<HMIHDConPtrPadreOptimizado> Padre(shared_ptr<HMIHDConPtrPadreOptimizado> nodo);
 
   /**
    * @brief Retorna el hijo más izquierdo de un nodo dado
    * 
    * @param nodo Nodo al que se va a retornar su hijo más izquierdo
-   * @return HMIHDConPtrPadreOptimizado* Hijo más izquierdo del nodo dado
+   * @return shared_ptr<HMIHDConPtrPadreOptimizado> Hijo más izquierdo del nodo dado
 Requiere: Nodo vÃ¡lido con al menos un hijo
 Efecto: Regresa el primer hijo (hijo mÃ¡s izquierdo)
 Modifica: Agrega un hijo a un nodo dado
    */
-  HMIHDConPtrPadreOptimizado* HMI(HMIHDConPtrPadreOptimizado* nodo);
+  shared_ptr<HMIHDConPtrPadreOptimizado> HMI(shared_ptr<HMIHDConPtrPadreOptimizado> nodo);
 
   /**
    * @brief Retorna el nodo hermano izquierdo de un nodo dado
    * 
    * @param nodo Nodo al que se va a retornar su hermano derecho
-   * @return HMIHDConPtrPadreOptimizado* Hermano derecho del nodo dado
+   * @return shared_ptr<HMIHDConPtrPadreOptimizado> Hermano derecho del nodo dado
 Requiere: Nodo vÃ¡lido y la existencia de nodos hermanos
 Efecto: Retorna el nodo hermano apuntado por el nodo dado (a la derecha)
 Modifica: Nada
    */
-  HMIHDConPtrPadreOptimizado* HD(HMIHDConPtrPadreOptimizado* nodo);
+  shared_ptr<HMIHDConPtrPadreOptimizado> HD(shared_ptr<HMIHDConPtrPadreOptimizado> nodo);
 
   /**
    * @brief Retorna la etiqueta de un nodo dado
@@ -140,7 +141,7 @@ Requiere: Nodo vÃ¡lido
 Efecto: Retorna la etiqueta contenida en el nodo
 Modifica: Nada
    */
-  int Etiqueta(HMIHDConPtrPadreOptimizado* nodo);
+  int Etiqueta(shared_ptr<HMIHDConPtrPadreOptimizado> nodo);
 
   /**
    * @brief Modifica la etiqueta de un nodo dado
@@ -152,7 +153,7 @@ Requiere: Nodo vÃ¡lido
 Efecto: Modifica la etiqueta de el nodo
 Modifica: La etiqueta de un nodo
    */
-  HMIHDConPtrPadreOptimizado& modificarEtiqueta(HMIHDConPtrPadreOptimizado* nodo, int etiqueta);
+  HMIHDConPtrPadreOptimizado& modificarEtiqueta(shared_ptr<HMIHDConPtrPadreOptimizado> nodo, int etiqueta);
 
   /**
    * @brief Regresa la cantidad de nodos 
