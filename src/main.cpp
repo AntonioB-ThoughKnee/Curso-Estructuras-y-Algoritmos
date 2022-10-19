@@ -1,8 +1,8 @@
 // #include "include/Arbol.cpp" NOT .cpp
 //=====  
-#include "../include/HMIHDConContador.h"
+// #include "../include/HMIHDConContador.h"
 // #include "../include/HMIHDConPtrPadreOptimizado.h"
-// #include "../include/HMIHDConPtrPadreyHI.h"
+#include "../include/HMIHDConPtrPadreyHI.h"
 
 //carlos.Sanchezblanco@ucr.ac.cr
 #include <vector>
@@ -34,11 +34,43 @@ shared_ptr<Arbol> buscarEtiqueta(int etiqueta, shared_ptr<Arbol> A)
 
 int main()
 {
+
+cout << "Bienhallado sea \n Quec desea hacer?" << endl;
+int accion;
+cin >> accion;
+switch(accion)
+{
+  case 1:
+  //TODO
+  cout << "Elija una opcion " << endl;
+  //print(opciones de ED1)
+  cin >> accion;
+  while(accion != 0)
+  {
+    //Función de acciones de ED1 que recibe como parámetro "acción" y hace cosas según la adicción
+    cin >> accion;
+  }
+  break;
+
+  case 2:
+  //TODO
+  break;
+
+  case 3:
+  //TODO
+  break;
+
+  default:
+  cout << "Debe elegir una opción valida" << endl;
+  break;
+}
+
 shared_ptr<Arbol> iko = make_shared<Arbol>();
 
 iko->ponerRaiz(10)
   .agregarHijo(iko->Raiz(), 2)
   ->agregarHijo(iko->Raiz(), 3);
+
 shared_ptr<Arbol> root = iko->Raiz();
   
 shared_ptr<Arbol> level3 = 
@@ -54,7 +86,11 @@ shared_ptr<Arbol> father = iko->Padre(level3);
 iko->borrarHoja(iko->HMI(level3)); //Falta que funcione correctamente el borrar hoja
 int c = iko->numNodos();
 
+
 shared_ptr<Arbol> test = buscarEtiqueta(7, iko);
+
+iko->destruir();
+root = iko->Raiz();
 
 return 0;
 }

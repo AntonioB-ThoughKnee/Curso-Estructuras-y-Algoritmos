@@ -22,6 +22,34 @@ HMIHDConPtrPadreyHI::HMIHDConPtrPadreyHI(int etiqueta)
   this->padre = nullptr;
 }
 
+void HMIHDConPtrPadreyHI::destruir()
+{
+  vector<shared_ptr<HMIHDConPtrPadreyHI>> auxiliar; 
+  shared_ptr<HMIHDConPtrPadreyHI> tmp = raiz;
+  shared_ptr<HMIHDConPtrPadreyHI> tmpSgte;
+  auxiliar.push_back(tmp);
+  int i = 0;
+  while(i < auxiliar.size())
+  {
+    tmp = auxiliar[i];
+    i++;
+    tmpSgte = tmp->hijo;
+
+    tmp->hijo = nullptr;
+    tmp->padre = nullptr;
+    tmp->hermanoDerecho = nullptr;
+    tmp->hermanoIzquierdo = nullptr;
+
+
+    while(tmpSgte != nullptr)
+    {
+      auxiliar.push_back(tmpSgte);
+      tmpSgte = tmpSgte->hermanoDerecho;
+    }
+  }
+  raiz = nullptr;
+}
+
 HMIHDConPtrPadreyHI::~HMIHDConPtrPadreyHI()
 {
   // delete raiz;

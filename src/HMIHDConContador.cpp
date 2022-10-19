@@ -20,6 +20,33 @@ HMIHDConContador::HMIHDConContador(int etiqueta)
   this->hermano = nullptr;
 }
 
+void HMIHDConContador::destruir()
+{
+  vector<shared_ptr<HMIHDConContador>> auxiliar; 
+  shared_ptr<HMIHDConContador> tmp = raiz;
+  shared_ptr<HMIHDConContador> tmpSgte;
+  auxiliar.push_back(tmp);
+  int i = 0;
+  while(i < auxiliar.size())
+  {
+    tmp = auxiliar[i];
+    i++;
+    tmpSgte = tmp->hijo;
+
+    tmp->hijo = nullptr;
+    tmp->hermano = nullptr;
+
+
+    while(tmpSgte != nullptr)
+    {
+      auxiliar.push_back(tmpSgte);
+      tmpSgte = tmpSgte->hermano;
+    }
+  }
+  contador = 0;
+  raiz = nullptr;
+}
+
 HMIHDConContador::~HMIHDConContador()
 {
   // delete raiz;

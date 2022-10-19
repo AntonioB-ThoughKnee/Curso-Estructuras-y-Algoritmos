@@ -21,6 +21,39 @@ HMIHDConPtrPadreOptimizado::HMIHDConPtrPadreOptimizado(int etiqueta)
   this->tienePtrAlPadre = false;
 }
 
+void HMIHDConPtrPadreOptimizado::destruir()
+{
+  vector<shared_ptr<HMIHDConPtrPadreOptimizado>> auxiliar; 
+  shared_ptr<HMIHDConPtrPadreOptimizado> tmp = raiz;
+  shared_ptr<HMIHDConPtrPadreOptimizado> tmpSgte;
+  auxiliar.push_back(tmp);
+  int i = 0;
+  while(i < auxiliar.size())
+  {
+    tmp = auxiliar[i];
+    i++;
+    tmpSgte = tmp->hijo;
+
+    tmp->hijo = nullptr;
+    tmp->hermano = nullptr;
+
+
+    while(tmpSgte != nullptr)
+    {
+      auxiliar.push_back(tmpSgte);
+      if( !(tmpSgte->tienePtrAlPadre) )
+      {
+        tmpSgte = tmpSgte->hermano;
+      }else
+      {
+        tmpSgte = nullptr;
+      }
+    }
+  }
+  raiz = nullptr;
+
+}
+
 HMIHDConPtrPadreOptimizado::~HMIHDConPtrPadreOptimizado()
 {
   // delete this;
