@@ -6,7 +6,6 @@
 #define TAREA_PROGRAMADA_LISTAHIJOS_HPP
 
 #include <string>
-// #include "NodoListaHijos.hpp"
 
 typedef class ListaHijos {
 public:

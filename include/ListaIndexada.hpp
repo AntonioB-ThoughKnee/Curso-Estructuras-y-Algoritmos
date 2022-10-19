@@ -1,12 +1,12 @@
 #ifndef LISTAINDEXADAHPP
 #define LISTAINDEXADAHPP
 
-class listaIndexada
+class ListaIndexada
 {
 
 class Nodo
 {
-    friend class listaIndexada;
+    friend class ListaIndexada;
     private:
     int dato;
     Nodo* siguiente;
@@ -21,8 +21,8 @@ private:
     Nodo* ultimo;
     int contador;
 public:
-    listaIndexada();
-    ~listaIndexada();
+    ListaIndexada();
+    ~ListaIndexada();
     void insertar(int dato,int posicion);
     void borrar(int posicion);
     int recuperar(int posicion);

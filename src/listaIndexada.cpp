@@ -1,20 +1,18 @@
 #include <iostream>
 
-#include "listaIndexada.hpp"
+#include "../include/ListaIndexada.hpp"
 
 using namespace std;
  
-listaIndexada::listaIndexada()
-{
+ListaIndexada::ListaIndexada(){
     this->primero=nullptr;
     this->ultimo=nullptr;
     this->contador=0;
 }
-listaIndexada::~listaIndexada()
-{
+ListaIndexada::~ListaIndexada(){
     delete this->primero;
 }
-void listaIndexada::borrar(int posicion){
+void ListaIndexada::borrar(int posicion){
     Nodo* actual=this->primero;
     if(posicion==1){
         Nodo* nodoBorrar=this->primero;
@@ -35,7 +33,7 @@ void listaIndexada::borrar(int posicion){
     }
     --contador;
 }
-void listaIndexada::insertar(int dato,int posicion){
+void ListaIndexada::insertar(int dato,int posicion){
     Nodo* nodo=new Nodo(dato);
     Nodo* actual=this->primero;
     if(posicion==1){
@@ -56,33 +54,33 @@ void listaIndexada::insertar(int dato,int posicion){
         this->ultimo=nodo;
     }
 }
-int listaIndexada::recuperar(int posicion){
+int ListaIndexada::recuperar(int posicion){
     Nodo* actual=this->primero;
     for (int i=1;i<posicion;++i){
     actual=actual->siguiente;
     }
     return actual->dato;
 }
-void listaIndexada::modificar(int posicion,int dato){
+void ListaIndexada::modificar(int posicion,int dato){
     Nodo* actual=this->primero;
     for (int i=1;i<posicion;++i){
     actual=actual->siguiente;
     }
     actual->dato=dato;
 }
-int listaIndexada::numElem(){
+int ListaIndexada::numElem(){
     return this->contador;
 }
-listaIndexada::Nodo::Nodo(int dato){
+ListaIndexada::Nodo::Nodo(int dato){
     this->dato=dato;
     this->siguiente=nullptr;
 }
-listaIndexada::Nodo::~Nodo(){
+ListaIndexada::Nodo::~Nodo(){
     if(this->siguiente!=nullptr){
         delete this->siguiente;
     }
 }
-void listaIndexada::imprimir(){
+void ListaIndexada::imprimir(){
     for(int i=1;i<=this->contador;++i){
         cout << recuperar(i) << " ";
     }
