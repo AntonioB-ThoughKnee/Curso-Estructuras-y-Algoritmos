@@ -70,6 +70,7 @@ void Opciones::menuLista(){
             break;
             case 6:
                 delete this->lista;
+                this->lista=nullptr;
                 cout << "La lista ha sido destruida" << endl;
             break;
             default:
@@ -104,6 +105,7 @@ void Opciones::menuCola(){
             break;
             case 4:
                 delete this->cola;
+                this->cola=nullptr;
                 cout << "La cola ha sido destruida" << endl;
             break;
             default:
