@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../include/cola.hpp"
+#include "../include/Cola.hpp"
 
 using namespace std;
 
