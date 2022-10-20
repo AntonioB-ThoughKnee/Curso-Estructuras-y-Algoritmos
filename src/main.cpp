@@ -1,8 +1,8 @@
 #include <iostream>
-#include "ArregloPadre.hpp"
+//#include "ListaHijos.hpp"
 //#include "ListaHijos.hpp"
 //#include "HMIHDConContador.hpp"
-//#include "HMIHDConPtrPadreOptimizado.hpp"
+#include "HMIHDConPtrPadreOptimizado.hpp"
 //#include "HMIHDConPtrPadreyHI.hpp"
 int main() {
     std::cout << "Hello, World" << std::endl;

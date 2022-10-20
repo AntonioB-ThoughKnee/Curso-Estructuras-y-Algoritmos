@@ -10,8 +10,14 @@
 
 //template <typename TipoNodo>
 typedef class ArregloPadre {
+public:
+    struct Nodo{
+        Nodo(int et) : indice(et){};
+        int indice;
+    };
     struct contenedorArreglo {
 //        TipoNodo* nodo;
+<<<<<<< HEAD:include/ArregloPadre.hpp
         contenedorArreglo(int et, int padre, int nodo_id) : etiqueta(et), padre(padre), nodo_id(nodo_id) {};
         contenedorArreglo() {};
         // Nodo nulo es constructor vacio
@@ -20,8 +26,17 @@ typedef class ArregloPadre {
         int nodo_id;
         int etiqueta;
         int padre;
+=======
+        contenedorArreglo(int et, Nodo* padre, Nodo* nodo_id) : etiqueta(et), padre(padre), nodo_id(nodo_id) {};
+        contenedorArreglo() {};
+        // Nodo nulo es constructor vacio
+        Nodo* nodo_id;
+        int etiqueta;
+        Nodo* padre;
+>>>>>>> 380c073555ead46279bcd5cc16d9dd988299bfaf:include/ArregloSenaladorPadre.h
     };
-public:
+
+
     std::vector<contenedorArreglo> arreglo;
 
     ArregloPadre() {};
@@ -36,26 +51,40 @@ public:
 
 
 //    void AgregarHijo(int etiqueta, TipoNodo elemento);
+<<<<<<< HEAD:include/ArregloPadre.hpp
     int AgregarHijo(int nodoPadre, int etiqueta);
 
 
 //    void AgregarHijoMasDerecho(TipoNodo elemento);
     int AgregarHijoMasDerecho(int nodoPadre, int etiqueta);
+=======
+    Nodo* AgregarHijo(Nodo* nodoPadre, int etiqueta);
 
-//    void BorrarHoja(std::string etiqueta);
-    void BorrarHoja(int nodo_id_externo);
 
-    int Raiz();
+//    void AgregarHijoMasDerecho(TipoNodo elemento);
+    Nodo* AgregarHijoMasDerecho(Nodo* nodoPadre, int etiqueta);
+>>>>>>> 380c073555ead46279bcd5cc16d9dd988299bfaf:include/ArregloSenaladorPadre.h
 
-    int Padre(int nodo_id_externo);
+//    void BorrarHoja(int etiqueta);
+    void BorrarHoja(Nodo* nodo_id_externo);
 
-    int HijoMasIzquierdo(int nodo_id_externo);
+    Nodo* Raiz();
 
-    int HermanoDerecho(int nodo_id_hermano);
+    Nodo* Padre(Nodo* nodo_id_externo);
 
+    Nodo* HMI(Nodo* nodo_id_externo);
+
+    Nodo* HD(Nodo* nodo_id_hermano);
+
+<<<<<<< HEAD:include/ArregloPadre.hpp
     int Etiqueta(int nodo_id_externo);
 
     void ModificaEtiqueta(int etiqueta, int nodo_id_externo);
+=======
+    int Etiqueta(Nodo* nodo_id_externo);
+
+    void ModificaEtiqueta(Nodo* nodo_id_externo, int etiqueta);
+>>>>>>> 380c073555ead46279bcd5cc16d9dd988299bfaf:include/ArregloSenaladorPadre.h
 
     int NumNodos();
 

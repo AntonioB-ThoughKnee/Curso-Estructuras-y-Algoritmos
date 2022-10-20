@@ -2,7 +2,7 @@
 // Created by Jean C on 10/19/2022.
 //
 
-#include "HMIHDConContador.hpp"
+#include "../include/HMIHDConContador.hpp"
 
 #include <vector>
 
