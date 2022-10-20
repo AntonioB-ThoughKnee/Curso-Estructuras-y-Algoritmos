@@ -12,15 +12,15 @@ ListaIndexada::ListaIndexada(){
 ListaIndexada::~ListaIndexada(){
     delete this->primero;
 }
-void ListaIndexada::borrar(int posicion){
+void ListaIndexada::borrar(int indice){
     Caja* actual=this->primero;
-    if(posicion==1){
+    if(indice==1){
         Caja* cajaBorrar=this->primero;
         this->primero=this->primero->siguiente;
         cajaBorrar->siguiente=nullptr;
         delete cajaBorrar;
     }else{
-        for (int i=1;i<posicion-1;++i){
+        for (int i=1;i<indice-1;++i){
         actual=actual->siguiente;
         }
         Caja* cajaBorrar=actual->siguiente;
@@ -28,42 +28,42 @@ void ListaIndexada::borrar(int posicion){
         cajaBorrar->siguiente=nullptr;
         delete cajaBorrar;
     }
-    if(this->contador==posicion){
+    if(this->contador==indice){
         this->ultimo=actual;
     }
     --contador;
 }
-void ListaIndexada::insertar(int dato,int posicion){
+void ListaIndexada::insertar(int dato,int indice){
     Caja* caja=new Caja(dato);
     Caja* actual=this->primero;
-    if(posicion==1){
+    if(indice==1){
         caja->siguiente=this->primero;
         this->primero=caja;
     }
-    else if(posicion==this->contador && posicion!=1){
+    else if(indice==this->contador && indice!=1){
         this->ultimo->siguiente=caja;
     }else{
-        for (int i=1;i<posicion-1;++i){
+        for (int i=1;i<indice-1;++i){
         actual=actual->siguiente;
         }
         caja->siguiente=actual->siguiente;
         actual->siguiente=caja;
     }
     ++this->contador;
-    if(this->contador==posicion){
+    if(this->contador==indice){
         this->ultimo=caja;
     }
 }
-int ListaIndexada::recuperar(int posicion){
+int ListaIndexada::recuperar(int indice){
     Caja* actual=this->primero;
-    for (int i=1;i<posicion;++i){
+    for (int i=1;i<indice;++i){
     actual=actual->siguiente;
     }
     return actual->dato;
 }
-void ListaIndexada::modificar(int posicion,int dato){
+void ListaIndexada::modificar(int indice,int dato){
     Caja* actual=this->primero;
-    for (int i=1;i<posicion;++i){
+    for (int i=1;i<indice;++i){
     actual=actual->siguiente;
     }
     actual->dato=dato;

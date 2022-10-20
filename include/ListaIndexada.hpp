@@ -59,45 +59,45 @@ public:
      */
     ~ListaIndexada();
     /**
-     * @brief Metodo que inserta un elemento en una posicion de la lista
+     * @brief Metodo que inserta un elemento en una indice de la lista
      * 
      * @param dato numero por guardar en la lista
-     * @param posicion indice donde se desea insertar el numero
+     * @param indice indice donde se desea insertar el numero
      * @remark Efecto: Inserta un nuevo elemento (enviado por parámetro)
      * en la posición especificada por parámetro.
      * @remark Requiere: Índice sea válido.(Por ejemplo: si la lista tiene 5 elementos, el indice 7 no es valido)
      * @remark Modifica: Se modifica a la lista indexada L.
      */
-    void insertar(int dato,int posicion);
+    void insertar(int dato,int indice);
     /**
-     * @brief Metodo que borra un elemento de una posicion de la lista
+     * @brief Metodo que borra un elemento de una indice de la lista
      * 
-     * @param posicion indice del elemento que se desea borrar
+     * @param indice indice del elemento que se desea borrar
      * @remark Efecto: Elimina un elemento de una posición específica de la lista indexada.
      * @remark Requiere: Índice sea válido para la lista.
      * @remark Modifica: Modifica a la lista L, ya que el operador básico se dedica a borrar un elemento entonces el estado de la lista indexada cambia.
      */
-    void borrar(int posicion);
+    void borrar(int indice);
     /**
      * @brief Metodo que devuelve el numero de un indice en especifico
      * 
-     * @param posicion ndice del elemento que se desea recuperar
+     * @param indice ndice del elemento que se desea recuperar
      * @return int numero recuperado
      * @remark Efecto: Retorna el elemento que se encuentra en la posición i, pasada por parámetro.
      * @remark Requiere: índice válido dentro del rango de la lista.
      * @remark Modifica: Este operador básico no realiza modificaciones sobre la lista indexada.
      */
-    int recuperar(int posicion);
+    int recuperar(int indice);
     /**
      * @brief Metodo que modifica un dato de un indice en la lista
      * 
      * @param dato nuevo elemento por poner en el indice 
-     * @param posicion indice del elemento por modificar
+     * @param indice indice del elemento por modificar
      * @remark Efecto: Reemplaza el elemento que se encuentra en el índice i, por el elemento que se pasa por parámetro llamado e, en la lista indexada.
      * @remark Requiere: i= una posición válida.
      * @remark Modifica: L, ya que hace un reemplazo de un elemento.
      */
-    void modificar(int dato,int posicion);
+    void modificar(int dato,int indice);
     /**
      * @brief Metodo que devuelve la cantidad de elementos de la lista
      * 
