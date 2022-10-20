@@ -4,28 +4,16 @@
 
 #include <vector>
 
-HMIHDConPtrPadreOptimizado* HMIHDConPtrPadreOptimizado::raiz = nullptr;
 
 HMIHDConPtrPadreOptimizado::HMIHDConPtrPadreOptimizado()
 {
-  this->hijo = nullptr;
-  this->hermano = nullptr;
-  this->tienePtrAlPadre = false;
-}
-
-HMIHDConPtrPadreOptimizado::HMIHDConPtrPadreOptimizado(int etiqueta)
-{
-  this->etiqueta = etiqueta;
-  this->hijo = nullptr;
-  this->hermano = nullptr;
-  this->tienePtrAlPadre = false;
 }
 
 void HMIHDConPtrPadreOptimizado::destruir()
 {
-  vector<HMIHDConPtrPadreOptimizado*> auxiliar; 
-  HMIHDConPtrPadreOptimizado*tmp = raiz;
-  HMIHDConPtrPadreOptimizado*tmpSgte;
+  vector<Nodo*> auxiliar; 
+  Nodo* tmp = raiz;
+  Nodo* tmpSgte;
   auxiliar.push_back(tmp);
   int i = 0;
   while(i < auxiliar.size())
@@ -64,21 +52,21 @@ HMIHDConPtrPadreOptimizado::~HMIHDConPtrPadreOptimizado()
 
 HMIHDConPtrPadreOptimizado& HMIHDConPtrPadreOptimizado::ponerRaiz(int etiqueta)
 {
-  HMIHDConPtrPadreOptimizado* tmp = new HMIHDConPtrPadreOptimizado(etiqueta);
+  Nodo*  tmp = new Nodo(etiqueta);
   raiz = move(tmp);
   return *this;
 }
 
-HMIHDConPtrPadreOptimizado*HMIHDConPtrPadreOptimizado::Raiz()
+HMIHDConPtrPadreOptimizado::Nodo*  HMIHDConPtrPadreOptimizado::Raiz()
 {
-  HMIHDConPtrPadreOptimizado*tmp = raiz;
+  Nodo* tmp = raiz;
   return tmp;
 }
 
-HMIHDConPtrPadreOptimizado* HMIHDConPtrPadreOptimizado::agregarHijo(HMIHDConPtrPadreOptimizado* nodo, int etiqueta)
+HMIHDConPtrPadreOptimizado::Nodo*  HMIHDConPtrPadreOptimizado::agregarHijo(Nodo*  nodo, int etiqueta)
 {
-  HMIHDConPtrPadreOptimizado* tmp = new HMIHDConPtrPadreOptimizado(etiqueta);
-  HMIHDConPtrPadreOptimizado*tmpHijoOriginal = nodo->hijo;
+  Nodo*  tmp = new Nodo(etiqueta);
+  Nodo* tmpHijoOriginal = nodo->hijo;
   nodo->hijo = tmp;
   tmp->hermano = tmpHijoOriginal;
   if(tmpHijoOriginal == nullptr)
@@ -90,10 +78,10 @@ HMIHDConPtrPadreOptimizado* HMIHDConPtrPadreOptimizado::agregarHijo(HMIHDConPtrP
   return tmp;
 }
 
-HMIHDConPtrPadreOptimizado* HMIHDConPtrPadreOptimizado::agregarHijoMasDerecho (HMIHDConPtrPadreOptimizado* nodo, int etiqueta)
+HMIHDConPtrPadreOptimizado::Nodo*  HMIHDConPtrPadreOptimizado::agregarHijoMasDerecho (Nodo*  nodo, int etiqueta)
 {
-  HMIHDConPtrPadreOptimizado* tmp = new HMIHDConPtrPadreOptimizado(etiqueta);
-  HMIHDConPtrPadreOptimizado*tmpHijoMasDerecho = nodo->hijo;
+  Nodo*  tmp = new Nodo(etiqueta);
+  Nodo* tmpHijoMasDerecho = nodo->hijo;
   while(tmpHijoMasDerecho != nullptr && !(tmpHijoMasDerecho->tienePtrAlPadre)) //Avanzar hasta el hijo mas derecho de nodo
   {
     tmpHijoMasDerecho = tmpHijoMasDerecho->hermano;
@@ -114,11 +102,11 @@ HMIHDConPtrPadreOptimizado* HMIHDConPtrPadreOptimizado::agregarHijoMasDerecho (H
   return tmp;
 }
 
-void HMIHDConPtrPadreOptimizado::borrarHoja(HMIHDConPtrPadreOptimizado* hoja)
+void HMIHDConPtrPadreOptimizado::borrarHoja(Nodo*  hoja)
 {  
-  vector<HMIHDConPtrPadreOptimizado*> auxiliar; // Utilizado para recorrer el árbol
-  HMIHDConPtrPadreOptimizado*tmp = raiz;
-  HMIHDConPtrPadreOptimizado*padre;
+  vector<Nodo* > auxiliar; // Utilizado para recorrer el árbol
+  Nodo* tmp = raiz;
+  Nodo* padre;
   bool hojaEsHMI = false;
   auxiliar.push_back(tmp);
   int i = 0;
@@ -161,7 +149,7 @@ void HMIHDConPtrPadreOptimizado::borrarHoja(HMIHDConPtrPadreOptimizado* hoja)
     {
       tmp->tienePtrAlPadre = true;
     }
-    HMIHDConPtrPadreOptimizado* tmp2  = tmp->hermano;
+    Nodo*  tmp2  = tmp->hermano;
     tmp->hermano = tmp->hermano->hermano;
     tmp2->hermano = nullptr;
     tmp2->hijo = nullptr;
@@ -169,11 +157,11 @@ void HMIHDConPtrPadreOptimizado::borrarHoja(HMIHDConPtrPadreOptimizado* hoja)
   }
 }
 
-HMIHDConPtrPadreOptimizado* HMIHDConPtrPadreOptimizado::Padre(HMIHDConPtrPadreOptimizado* nodo)
+HMIHDConPtrPadreOptimizado::Nodo*  HMIHDConPtrPadreOptimizado::Padre(Nodo*  nodo)
 {
   if(nodo == raiz) { return nullptr; }
 
-  HMIHDConPtrPadreOptimizado*tmp = nodo;
+  Nodo* tmp = nodo;
   while(tmp != nullptr && !(tmp->tienePtrAlPadre))
   {
     tmp = tmp->hermano;
@@ -183,23 +171,23 @@ HMIHDConPtrPadreOptimizado* HMIHDConPtrPadreOptimizado::Padre(HMIHDConPtrPadreOp
 
 }
 
-HMIHDConPtrPadreOptimizado* HMIHDConPtrPadreOptimizado::HMI(HMIHDConPtrPadreOptimizado* nodo)
+HMIHDConPtrPadreOptimizado::Nodo*  HMIHDConPtrPadreOptimizado::HMI(Nodo*  nodo)
 {
   return nodo->hijo;
 }
 
-HMIHDConPtrPadreOptimizado* HMIHDConPtrPadreOptimizado::HD(HMIHDConPtrPadreOptimizado* nodo)
+HMIHDConPtrPadreOptimizado::Nodo*  HMIHDConPtrPadreOptimizado::HD(Nodo*  nodo)
 {
   if(nodo->tienePtrAlPadre) {return nullptr; }
   return nodo->hermano;
 }
 
-int HMIHDConPtrPadreOptimizado::Etiqueta(HMIHDConPtrPadreOptimizado* nodo)
+int HMIHDConPtrPadreOptimizado::Etiqueta(Nodo*  nodo)
 {
   return nodo->etiqueta;
 }
 
-HMIHDConPtrPadreOptimizado& HMIHDConPtrPadreOptimizado::modificarEtiqueta(HMIHDConPtrPadreOptimizado*nodo, int etiqueta)
+HMIHDConPtrPadreOptimizado& HMIHDConPtrPadreOptimizado::modificarEtiqueta(Nodo* nodo, int etiqueta)
 {
   nodo->etiqueta = etiqueta;
   return *this;
@@ -208,8 +196,8 @@ HMIHDConPtrPadreOptimizado& HMIHDConPtrPadreOptimizado::modificarEtiqueta(HMIHDC
 int HMIHDConPtrPadreOptimizado::numNodos()
 {
   if(raiz == nullptr) { return 0; }
-  vector<HMIHDConPtrPadreOptimizado*> auxiliar; 
-  HMIHDConPtrPadreOptimizado*tmp = raiz;
+  vector<Nodo* > auxiliar; 
+  Nodo* tmp = raiz;
   auxiliar.push_back(tmp);
   int i = 0;
   while(i < auxiliar.size())

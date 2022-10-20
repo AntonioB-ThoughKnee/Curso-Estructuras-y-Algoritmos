@@ -1,8 +1,8 @@
 // #include "include/Arbol.cpp" NOT .cpp
 //=====  
-#include "../include/HMIHDConContador.h"
+// #include "../include/HMIHDConContador.h"
 // #include "../include/HMIHDConPtrPadreOptimizado.h"
-// #include "../include/HMIHDConPtrPadreyHI.h"
+#include "../include/HMIHDConPtrPadreyHI.h"
 
 //carlos.Sanchezblanco@ucr.ac.cr
 #include <vector>
@@ -46,9 +46,9 @@ Arbol::Nodo* root = iko->Raiz();
   
 Arbol::Nodo* level3 = iko->agregarHijo(iko->HMI(iko->Raiz()), 7);
 iko->agregarHijo(level3, 6);
-iko->agregarHijo(level3, 4);
-iko->agregarHijo(level3, 5);
-iko->agregarHijo(level3, 8);
+// iko->agregarHijo(level3, 4);
+// iko->agregarHijo(level3, 5);
+// iko->agregarHijo(level3, 8);
 
 Arbol::Nodo* father = iko->Padre(level3);
 
@@ -57,7 +57,7 @@ int c = iko->numNodos();
 
 iko->agregarHijoMasDerecho(level3, 8);
 iko->agregarHijoMasDerecho(level3, 9);
-iko->borrarHoja( ( iko->HMI(level3) ) ); 
+iko->borrarHoja( iko->HD( iko->HMI(level3) ) ); 
 c = iko->numNodos();
 
 // Arbol* test = buscarEtiqueta(7, iko);
