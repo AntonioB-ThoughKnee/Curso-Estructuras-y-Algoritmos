@@ -13,14 +13,14 @@ public:
     struct ContenedorSublista; // "forward-declaration"
     struct ContenedorPrincipal {
         // nodo =
-        ContenedorPrincipal(ContenedorPrincipal* sgte, std::string etiqueta, ContenedorSublista* primerHijo) : sgtePrincipal(sgte)
+        ContenedorPrincipal(ContenedorPrincipal* sgte, int etiqueta, ContenedorSublista* primerHijo) : sgtePrincipal(sgte)
                 , primerHijo(primerHijo), etiqueta(etiqueta) {
             //        this->nodo = new NodoLista(etiqueta);
         };
 
         ContenedorPrincipal* sgtePrincipal;
         //      NodoLista* nodo;
-        std::string etiqueta;
+        int etiqueta;
         ContenedorSublista* primerHijo;
         ContenedorSublista* ultimoHijo;
     };
@@ -44,17 +44,17 @@ public:
     void Destruir();
 
     //    void PonerRaiz(TipoNodo elemento);
-    void PonerRaiz(std::string etiqueta);
+    void PonerRaiz(int etiqueta);
 
 
     //    void AgregarHijo(int etiqueta, TipoNodo elemento);
-    ContenedorPrincipal* AgregarHijo(ContenedorPrincipal* nodoPadre, std::string etiqueta);
+    ContenedorPrincipal* AgregarHijo(ContenedorPrincipal* nodoPadre, int etiqueta);
 
 
     //    void AgregarHijoMasDerecho(TipoNodo elemento);
-    ContenedorPrincipal* AgregarHijoMasDerecho(ContenedorPrincipal* nodoPadre, std::string etiqueta);
+    ContenedorPrincipal* AgregarHijoMasDerecho(ContenedorPrincipal* nodoPadre, int etiqueta);
 
-    //    void BorrarHoja(std::string etiqueta);
+    //    void BorrarHoja(int etiqueta);
     void BorrarHoja(int nodo_id_externo);
 
     ContenedorPrincipal* Raiz();
@@ -65,9 +65,9 @@ public:
 
     ContenedorPrincipal* HermanoDerecho(ContenedorPrincipal* nodo);
 
-    std::string Etiqueta(ContenedorPrincipal* nodo);
+    int Etiqueta(ContenedorPrincipal* nodo);
 
-    void ModificaEtiqueta(std::string etiqueta, ContenedorPrincipal* nodo);
+    void ModificaEtiqueta(int etiqueta, ContenedorPrincipal* nodo);
 
     int NumNodos();
 };

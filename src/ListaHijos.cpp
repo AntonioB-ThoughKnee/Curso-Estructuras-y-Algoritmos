@@ -25,13 +25,13 @@ void ListaHijos::Destruir() {
     cantNodos = 0;
 }
 
-void ListaHijos::PonerRaiz(std::string etiqueta) {
+void ListaHijos::PonerRaiz(int etiqueta) {
     this->pPrimeroPrincipal = new ContenedorPrincipal(nullptr, etiqueta, nullptr);
     this->pUltimoPrincipal = this->pPrimeroPrincipal;
     cantNodos++;
 }
 
-ListaHijos::ContenedorPrincipal* ListaHijos::AgregarHijo(ListaHijos::ContenedorPrincipal* nodoPadre, std::string etiqueta) {
+ListaHijos::ContenedorPrincipal* ListaHijos::AgregarHijo(ListaHijos::ContenedorPrincipal* nodoPadre, int etiqueta) {
     ContenedorPrincipal* iter = this->pPrimeroPrincipal;
     ContenedorPrincipal* nuevoContenedor = new ContenedorPrincipal(nullptr, etiqueta, nullptr); // puntero porque sino se borra
     // Lo agrego a la lista principal.
@@ -61,7 +61,7 @@ ListaHijos::ContenedorPrincipal* ListaHijos::AgregarHijo(ListaHijos::ContenedorP
     return nuevoContenedor;
 }
 
-ListaHijos::ContenedorPrincipal* ListaHijos::AgregarHijoMasDerecho(ListaHijos::ContenedorPrincipal* nodoPadre, std::string etiqueta) {
+ListaHijos::ContenedorPrincipal* ListaHijos::AgregarHijoMasDerecho(ListaHijos::ContenedorPrincipal* nodoPadre, int etiqueta) {
     ContenedorPrincipal* iter = this->pPrimeroPrincipal;
     ContenedorPrincipal* nuevoContenedor = new ContenedorPrincipal(nullptr, etiqueta, nullptr); // puntero porque sino se borra
     ContenedorPrincipal* ultimoInicial = this->pUltimoPrincipal;
@@ -148,11 +148,11 @@ ListaHijos::ContenedorPrincipal* ListaHijos::HermanoDerecho(ListaHijos::Contened
     // if *nodoPadre == ...
 }
 
-std::string ListaHijos::Etiqueta(ListaHijos::ContenedorPrincipal* nodo) {
+int ListaHijos::Etiqueta(ListaHijos::ContenedorPrincipal* nodo) {
     return nodo->etiqueta;
 }
 
-void ListaHijos::ModificaEtiqueta(std::string etiqueta, ListaHijos::ContenedorPrincipal* nodo) {
+void ListaHijos::ModificaEtiqueta(int etiqueta, ListaHijos::ContenedorPrincipal* nodo) {
     nodo->etiqueta = etiqueta;
 }
 
