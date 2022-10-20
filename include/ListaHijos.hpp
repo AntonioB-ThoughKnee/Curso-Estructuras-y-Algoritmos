@@ -10,19 +10,18 @@
 typedef class ListaHijos {
 public:
     struct ContenedorSublista; // "forward-declaration"
-    struct ContenedorPrincipal {
+    typedef struct ContenedorPrincipal {
        // nodo =
-      ContenedorPrincipal(ContenedorPrincipal* sgte, std::string etiqueta, ContenedorSublista* primerHijo) : sgtePrincipal(sgte)
+    ContenedorPrincipal(ContenedorPrincipal* sgte, std::string etiqueta, ContenedorSublista* primerHijo) : sgtePrincipal(sgte)
         , primerHijo(primerHijo), etiqueta(etiqueta) {
-//        this->nodo = new NodoLista(etiqueta);
       };
 
       ContenedorPrincipal* sgtePrincipal;
-//      NodoLista* nodo;
+        //      NodoLista* nodo;
       std::string etiqueta;
       ContenedorSublista* primerHijo;
       ContenedorSublista* ultimoHijo;
-    };
+    } Nodo;
 
     struct ContenedorSublista {
         ContenedorSublista(ContenedorPrincipal* nodo) : nodo(nodo) {};

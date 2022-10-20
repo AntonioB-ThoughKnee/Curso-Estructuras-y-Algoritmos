@@ -4,27 +4,17 @@
 
 #include <vector>
 
-HMIHDConContador*HMIHDConContador::raiz = nullptr;
-  int HMIHDConContador::contador = 0;
-
 HMIHDConContador::HMIHDConContador()
 {
-  this->hijo = nullptr;
-  this->hermano = nullptr;
-}
-
-HMIHDConContador::HMIHDConContador(int etiqueta)
-{
-  this->etiqueta = etiqueta;
-  this->hijo = nullptr;
-  this->hermano = nullptr;
+  raiz = nullptr;
+  contador = 0;
 }
 
 void HMIHDConContador::destruir()
 {
-  vector<HMIHDConContador*> auxiliar; 
-  HMIHDConContador*tmp = raiz;
-  HMIHDConContador*tmpSgte;
+  vector<Nodo*> auxiliar; 
+  Nodo* tmp = raiz;
+  Nodo* tmpSgte;
   auxiliar.push_back(tmp);
   int i = 0;
   while(i < auxiliar.size())
@@ -56,21 +46,21 @@ HMIHDConContador::~HMIHDConContador()
 
 HMIHDConContador& HMIHDConContador::ponerRaiz(int etiqueta)
 {
-  HMIHDConContador*tmp = new HMIHDConContador(etiqueta);
+  Nodo* tmp = new Nodo(etiqueta);
   raiz = tmp;
   contador++;
   return *this;
 }
 
-HMIHDConContador*HMIHDConContador::Raiz()
+HMIHDConContador::Nodo* HMIHDConContador::Raiz()
 {
   return raiz;
 }
 
-HMIHDConContador*HMIHDConContador::agregarHijo(HMIHDConContador*nodo, int etiqueta)
+HMIHDConContador::Nodo* HMIHDConContador::agregarHijo(Nodo* nodo, int etiqueta)
 {
-  HMIHDConContador*tmp = new HMIHDConContador(etiqueta);
-  HMIHDConContador*tmpHijoOriginal = nodo->hijo;
+  Nodo* tmp = new Nodo(etiqueta);
+  Nodo* tmpHijoOriginal = nodo->hijo;
   nodo->hijo = tmp;
   tmp->hermano = tmpHijoOriginal;
   contador++;
@@ -78,18 +68,18 @@ HMIHDConContador*HMIHDConContador::agregarHijo(HMIHDConContador*nodo, int etique
   return tmp;
 }
 
-HMIHDConContador*HMIHDConContador::agregarHijoMasDerecho (HMIHDConContador*nodo, int etiqueta)
+HMIHDConContador::Nodo* HMIHDConContador::agregarHijoMasDerecho (Nodo* nodo, int etiqueta)
 {
   contador++;
-  HMIHDConContador*tmp = new HMIHDConContador(etiqueta);
-  HMIHDConContador*tmpHijoMasDerecho = nodo->hijo;
+  Nodo* tmp = new Nodo(etiqueta);
+  Nodo* tmpHijoMasDerecho = nodo->hijo;
   if(tmpHijoMasDerecho == nullptr)
   {
     nodo->hijo = tmp;
     return tmp;
   }
 
-  HMIHDConContador*tmpNull = tmpHijoMasDerecho->hermano; // Esta variable sirve para mantener registrado el nodo anterior cuando se llega al nodo nulo
+  Nodo* tmpNull = tmpHijoMasDerecho->hermano; // Esta variable sirve para mantener registrado el nodo anterior cuando se llega al nodo nulo
   while(tmpNull != nullptr)
   {
     tmpNull = tmpNull->hermano;
@@ -100,11 +90,11 @@ HMIHDConContador*HMIHDConContador::agregarHijoMasDerecho (HMIHDConContador*nodo,
   return tmp;
 }
 
-void HMIHDConContador::borrarHoja(HMIHDConContador*hoja)
+void HMIHDConContador::borrarHoja(Nodo* hoja)
 {
-  vector<HMIHDConContador*> auxiliar; // Utilizado para recorrer el árbol
-  HMIHDConContador*tmp = raiz;
-  HMIHDConContador*padre;
+  vector<Nodo* > auxiliar; // Utilizado para recorrer el árbol
+  Nodo* tmp = raiz;
+  Nodo* padre;
   bool hojaEsHMI = false;
   auxiliar.push_back(tmp);
   int i = 0;
@@ -137,12 +127,12 @@ void HMIHDConContador::borrarHoja(HMIHDConContador*hoja)
   contador--;
 }
 
-HMIHDConContador*HMIHDConContador::Padre(HMIHDConContador*nodo)
+HMIHDConContador::Nodo* HMIHDConContador::Padre(Nodo* nodo)
 {
   if(nodo == raiz) { return nullptr; }
-  vector<HMIHDConContador*> auxiliar; // Utilizado para almacenar tanto tmp como el padre de tmp
-  HMIHDConContador*tmp = raiz;
-  HMIHDConContador*padre;
+  vector<Nodo* > auxiliar; // Utilizado para almacenar tanto tmp como el padre de tmp
+  Nodo* tmp = raiz;
+  Nodo* padre;
   auxiliar.push_back(tmp);
   int i = 0;
   while(i < auxiliar.size())
@@ -165,22 +155,22 @@ HMIHDConContador*HMIHDConContador::Padre(HMIHDConContador*nodo)
   return nullptr;
 }
 
-HMIHDConContador*HMIHDConContador::HMI(HMIHDConContador*nodo)
+HMIHDConContador::Nodo* HMIHDConContador::HMI(Nodo* nodo)
 {
   return nodo->hijo;
 }
 
-HMIHDConContador*HMIHDConContador::HD(HMIHDConContador*nodo)
+HMIHDConContador::Nodo* HMIHDConContador::HD(Nodo* nodo)
 {
   return nodo->hermano;
 }
 
-int HMIHDConContador::Etiqueta(HMIHDConContador*nodo)
+int HMIHDConContador::Etiqueta(Nodo* nodo)
 {
   return nodo->etiqueta;
 }
 
-HMIHDConContador& HMIHDConContador::modificarEtiqueta(HMIHDConContador*nodo, int etiqueta)
+HMIHDConContador& HMIHDConContador::modificarEtiqueta(Nodo* nodo, int etiqueta)
 {
   nodo->etiqueta = etiqueta;
   return *this;
