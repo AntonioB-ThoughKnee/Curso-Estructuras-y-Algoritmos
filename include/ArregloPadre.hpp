@@ -17,12 +17,23 @@ public:
     };
     struct contenedorArreglo {
 //        TipoNodo* nodo;
+<<<<<<< HEAD:include/ArregloPadre.hpp
+        contenedorArreglo(int et, int padre, int nodo_id) : etiqueta(et), padre(padre), nodo_id(nodo_id) {};
+        contenedorArreglo() {};
+        // Nodo nulo es constructor vacio
+        // Nodo_id va a tener la pos del arreglo empezando en 0, pero por fuera, cuando manden nodo_id tengo que restarle
+        // 1 porque para el usuario, el arreglo va a empezar en 1.
+        int nodo_id;
+        int etiqueta;
+        int padre;
+=======
         contenedorArreglo(int et, Nodo* padre, Nodo* nodo_id) : etiqueta(et), padre(padre), nodo_id(nodo_id) {};
         contenedorArreglo() {};
         // Nodo nulo es constructor vacio
         Nodo* nodo_id;
         int etiqueta;
         Nodo* padre;
+>>>>>>> 380c073555ead46279bcd5cc16d9dd988299bfaf:include/ArregloSenaladorPadre.h
     };
 
 
@@ -40,11 +51,19 @@ public:
 
 
 //    void AgregarHijo(int etiqueta, TipoNodo elemento);
+<<<<<<< HEAD:include/ArregloPadre.hpp
+    int AgregarHijo(int nodoPadre, int etiqueta);
+
+
+//    void AgregarHijoMasDerecho(TipoNodo elemento);
+    int AgregarHijoMasDerecho(int nodoPadre, int etiqueta);
+=======
     Nodo* AgregarHijo(Nodo* nodoPadre, int etiqueta);
 
 
 //    void AgregarHijoMasDerecho(TipoNodo elemento);
     Nodo* AgregarHijoMasDerecho(Nodo* nodoPadre, int etiqueta);
+>>>>>>> 380c073555ead46279bcd5cc16d9dd988299bfaf:include/ArregloSenaladorPadre.h
 
 //    void BorrarHoja(int etiqueta);
     void BorrarHoja(Nodo* nodo_id_externo);
@@ -57,9 +76,15 @@ public:
 
     Nodo* HD(Nodo* nodo_id_hermano);
 
+<<<<<<< HEAD:include/ArregloPadre.hpp
+    int Etiqueta(int nodo_id_externo);
+
+    void ModificaEtiqueta(int etiqueta, int nodo_id_externo);
+=======
     int Etiqueta(Nodo* nodo_id_externo);
 
     void ModificaEtiqueta(Nodo* nodo_id_externo, int etiqueta);
+>>>>>>> 380c073555ead46279bcd5cc16d9dd988299bfaf:include/ArregloSenaladorPadre.h
 
     int NumNodos();
 

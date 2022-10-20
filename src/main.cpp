@@ -1,69 +1,33 @@
-// #include "include/Arbol.cpp" NOT .cpp
-//=====  
-// #include "../include/HMIHDConContador.h"
-// #include "../include/HMIHDConPtrPadreOptimizado.h"
-#include "../include/HMIHDConPtrPadreyHI.h"
-
-//carlos.Sanchezblanco@ucr.ac.cr
-#include <vector>
-#include <memory>
 #include <iostream>
+//#include "../include/ListaHijos.hpp"
+//#include "../include/ListaHijos.hpp"
+//#include "../include/HMIHDConContador.hpp"
+#include "../include/HMIHDConPtrPadreOptimizado.hpp"
+//#include "../include/HMIHDConPtrPadreyHI.hpp"
+int main() {
+    std::cout << "Hello, World" << std::endl;
+    Arbol arr;
+    arr.Crear();
+    // Visto desde aqui afuera el arreglo con senalador al padre empieza con indice 1
+    arr.PonerRaiz(1);
+    auto nodo2 = arr.AgregarHijo(arr.Raiz(), 2);
+    auto nodo3 = arr.AgregarHijo(arr.Raiz(), 3);
+    auto nodo4 = arr.AgregarHijoMasDerecho(arr.Raiz(), 4);
+    auto nodo5 = arr.AgregarHijo(nodo3, 5);
+    auto nodo6 = arr.AgregarHijoMasDerecho(nodo3, 6);
+    auto nodo7 = arr.AgregarHijoMasDerecho(nodo4, 7);
+    auto nodo8 = arr.AgregarHijoMasDerecho(nodo2, 8);
+    auto nodo9 = arr.AgregarHijoMasDerecho(nodo8, 9);
+    auto nodo10 = arr.AgregarHijoMasDerecho(nodo8, 10);
+    auto nodo11 = arr.AgregarHijoMasDerecho(nodo7, 11);
+    auto nodo12 = arr.AgregarHijoMasDerecho(nodo7, 12);
+    auto nodo13 = arr.AgregarHijoMasDerecho(nodo12, 13);
+    int etiquetaN10 = arr.Etiqueta(nodo9);
+    auto raiz = arr.Raiz();
 
-// Arbol* buscarEtiqueta(int etiqueta, Arbol* A)
-// {
-//   Arbol* tmp;
-//   vector<Arbol*> auxiliar;
-//   auxiliar.push_back(A->Raiz());
-//   int i = 0;
-//   while(i < auxiliar.size())
-//   {
-//     tmp = auxiliar[i];
-//     i++;
-//     if(tmp->Etiqueta(tmp) == etiqueta) { return tmp; }
-//     tmp = tmp->HMI(tmp);
-//     while(tmp != nullptr)
-//     {
-//       auxiliar.push_back(tmp);
-//       tmp = tmp->HD(tmp);
-//     }
-//   }
+    auto hermDerDel10 = arr.HermanoDerecho(nodo10);
+    auto hermDerDel11 = arr.HermanoDerecho(nodo11);
 
-//   return nullptr;
-
-// }
-
-int main()
-{
-struct Arbol::Nodo;
-
-Arbol* iko = new Arbol();
-
-iko->ponerRaiz(10)
-  .agregarHijo(iko->Raiz(), 2);
-iko->agregarHijo(iko->Raiz(), 3);
-
-Arbol::Nodo* root = iko->Raiz();
-  
-Arbol::Nodo* level3 = iko->agregarHijo(iko->HMI(iko->Raiz()), 7);
-iko->agregarHijo(level3, 6);
-// iko->agregarHijo(level3, 4);
-// iko->agregarHijo(level3, 5);
-// iko->agregarHijo(level3, 8);
-
-Arbol::Nodo* father = iko->Padre(level3);
-
-iko->borrarHoja(iko->HMI(level3)); 
-int c = iko->numNodos();
-
-iko->agregarHijoMasDerecho(level3, 8);
-iko->agregarHijoMasDerecho(level3, 9);
-iko->borrarHoja( iko->HD( iko->HMI(level3) ) ); 
-c = iko->numNodos();
-
-// Arbol* test = buscarEtiqueta(7, iko);
-
-iko->destruir();
-root = iko->Raiz();
-
-return 0;
+    arr.Destruir();
+    return 0;
 }
