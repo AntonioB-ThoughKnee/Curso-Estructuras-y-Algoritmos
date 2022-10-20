@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/Opciones.hpp"
-
+#define Arbol
+#define Nodo
 using namespace std;
 
 Opciones::Opciones(){
@@ -120,4 +121,132 @@ void Opciones::menuCola(){
             break;
         }
     }
+}
+
+void Opciones::menuArbol(){
+// Se inicializa la cola
+    Arbol* A=new Arbol();
+    cout << "Una Arbol ha sido creado" << endl;
+    int accion=0;
+// Se despliega un menu para controlar la Arbol
+    while (!accion){
+        cout << "Digite una opcion: 1-  Poner Raíz 2-Agregar Hijo 3-Agregar Hijo más derecho 4- Buscar etiqueta 5- borrar hoja 6- destruir árbol" << endl;
+                int el;
+        cin >> accion;
+        switch(accion){
+            case 1:
+                int el;
+                cout << "Digite el valor que desea agregar como raiz: " << endl;
+                cin >> el;
+                A-> PonerRaiz(el);
+                accion=0;
+            break;
+            case 2:
+                if(A->Raiz() == nullptr){
+                    cout << " Debe poner al menos una raíz " << endl;
+                    break;
+                }
+                int el;
+                cout << "Digite el valor que desea agregar: " << endl;
+                cin >> el;
+                A->Agregar(A->Raiz, el);
+                accion=0;
+            break;
+            case 3:
+                if(A->Raiz() == nullptr){
+                    cout << " Debe poner al menos una raíz " << endl;
+                    break;
+                }
+                int el;
+                cout << "Digite el valor que desea agregar: " << endl;
+                cin >> el;
+                A->AgregarHijoMasDerecho(A->Raiz,el);
+                accion=0;
+            break;
+            case 4:
+                if(A->Raiz() == nullptr){
+                    cout << " Debe poner al menos una raíz " << endl;
+                    break;
+                }
+
+                int el;
+                cout << "Digite el valor que desea buscar: " << endl;
+                cin >> el;
+                Nodo* tmp = buscarEtiqueta(el, A);
+                cout << "Que desea hacer con está etiqueta? " << endl;
+                cout << "Digite una opcion: 1-Agregar Hijo 2-Agregar Hijo más derecho 3- Borrar 4-Padre 5-modificar etiqueta" << endl;
+                switch(accion){
+                    case 1:
+                        int el;
+                        cout << "Digite el valor que desea agregar: " << endl;
+                        cin >> el;
+                        A->Agregar(tmp, el);
+                        accion=0;
+                    break;
+                    case 2:
+                        int el;
+                        cout << "Digite el valor que desea agregar: " << endl;
+                        cin >> el;
+                        A->AgregarHijoMasDerecho(tmp, el);
+                        accion=0;
+                    break;
+                    case 3:
+                        A->BorrarHoja(tmp);
+                        cout << "El nodo seleccionado fue eliminado " << endl;
+                    break;
+                    case 4:
+                        ;
+                        cout << "La etiqueta del padre del nodo seleccionado es " + A->Padre(tmp)->etiqueta << endl;
+                    break;
+                    case 5:
+                        cout << "Digitel que etiqueta poner " << endl;
+                        cin >> el;
+                        A->ModificarEtiqueta(tmp, el)
+                        cout << "La etiqueta fue modificada" << endl;
+                    break;
+
+                accion=0;
+            break;
+            case 5:
+                if(A->Raiz() == nullptr){
+                    cout << " Debe poner al menos una raíz " << endl;
+                    break;
+                }
+                A->BorrarHoja(buscarEtiqueta(el, A));
+                cout << "la etiqueta fue eliminada " << endl;
+            break;
+            case 6:
+                A->Destruir();
+                A=nullptr;
+                cout << "El A ha sido destruido" << endl;
+            break;
+            default:
+                cout << "Debe elegir una opción valida" << endl;
+                accion=0;
+            break;
+        }
+    }
+}
+
+Nodo* buscarEtiqueta(int etiqueta, Arbol* A)
+{
+  Nodo* tmp;
+  vector<Nodo*> auxiliar;
+  auxiliar.push_back(A->Raiz());
+  int i = 0;
+  while(i < auxiliar.size())
+  {
+    tmp = auxiliar[i];
+    i++;
+    if(tmp->Etiqueta(tmp) == etiqueta) { return tmp; }
+    tmp = tmp->HMI(tmp);
+    while(tmp != nullptr)
+    {
+      auxiliar.push_back(tmp);
+      tmp = tmp->HD(tmp);
+    }
+  }
+
+  return nullptr;
+
 }
