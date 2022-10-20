@@ -2,7 +2,7 @@
 // Created by Jean C on 10/19/2022.
 //
 
-#include "../include/HMIHDConPtrPadreOptimizado.hpp"
+#include "HMIHDConPtrPadreOptimizado.hpp"
 
 #include <vector>
 

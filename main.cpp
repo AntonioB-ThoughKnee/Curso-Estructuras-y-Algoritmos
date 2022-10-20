@@ -1,9 +1,9 @@
 #include <iostream>
-//#include "../include/ListaHijos.hpp"
-//#include "../include/ListaHijos.hpp"
-//#include "../include/HMIHDConContador.hpp"
-#include "../include/HMIHDConPtrPadreOptimizado.hpp"
-//#include "../include/HMIHDConPtrPadreyHI.hpp"
+#include "ArregloPadre.hpp"
+//#include "ListaHijos.hpp"
+//#include "HMIHDConContador.hpp"
+//#include "HMIHDConPtrPadreOptimizado.hpp"
+//#include "HMIHDConPtrPadreyHI.hpp"
 int main() {
     std::cout << "Hello, World" << std::endl;
     Arbol arr;

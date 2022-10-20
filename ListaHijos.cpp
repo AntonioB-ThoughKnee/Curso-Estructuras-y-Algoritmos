@@ -1,4 +1,4 @@
-#include "../include/ListaHijos.hpp"
+#include "ListaHijos.hpp"
 //
 // Created by jean on 17/10/22.
 //

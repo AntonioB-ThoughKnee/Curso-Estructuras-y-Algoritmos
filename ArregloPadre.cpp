@@ -2,7 +2,7 @@
 // Created by Jean C on 10/19/2022.
 //
 
-#include "../include/ArregloPadre.hpp"
+#include "ArregloPadre.hpp"
 //
 // Created by jean on 14/10/22.
 //
