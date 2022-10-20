@@ -4,11 +4,13 @@
 using namespace std;
 
 Opciones::Opciones(){
+// Se inicializan los punteros a las estructuras por probar
     this->lista = nullptr;
     this->cola = nullptr;
     this->arbol = nullptr;
 }
 Opciones::~Opciones(){
+// En caso de ser necesario se libera la memoria
     if(this->lista!=nullptr){
         delete this->lista;
         this->lista=nullptr;
@@ -23,9 +25,11 @@ Opciones::~Opciones(){
     }
 }
 void Opciones::menuLista(){
+// Se inicializa la lista
     this->lista=new ListaIndexada();
     cout << "Una lista ha sido creada" << endl;
     int accion=0;
+// Se despliega un menu para controlar la lista
     while (!accion){
         cout << "Digite una opcion: 1-Insertar 2-Borrar 3-Recuperar 4-Modificar 5- NumElem 6-Destruir (salir)" << endl;
         cin >> accion;
@@ -81,9 +85,11 @@ void Opciones::menuLista(){
     }
 }
 void Opciones::menuCola(){
+// Se inicializa la cola
     this->cola=new Cola();
     cout << "Una cola ha sido creada" << endl;
     int accion=0;
+// Se despliega un menu para controlar la cola
     while (!accion){
         cout << "Digite una opcion: 1-Encolar 2-Desencolar 3-NumElem 4-Destruir (salir)" << endl;
         cin >> accion;
