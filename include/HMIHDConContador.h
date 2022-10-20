@@ -13,7 +13,7 @@ public:
          : hijo(nullptr), hermano(nullptr), etiqueta(etiqueta){};
       Nodo* hijo; /**< Hijo del nodo definido   */
       Nodo* hermano; /**<  hermano derecho del nodo definido  */
-      int etiqueta; /**< Etiqueta del nodo definido */
+      int etiqueta; /**< Etiqueta del modo definido */
   };
    Nodo* raiz; /**< Raíz del árbol */
    int contador; /**< Cantidad de nodos del árbol  */
