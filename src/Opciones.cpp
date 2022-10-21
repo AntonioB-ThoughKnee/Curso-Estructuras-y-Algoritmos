@@ -125,28 +125,33 @@ void Opciones::menuArbol(){
 // Se inicializa la lista
     this->arbol=new Arbol();
     cout << "Un arbol ha sido creado" << endl;
-    int accion=0;
+    int accion=1;
+    bool raizDefinida = false;
 // Se despliega un menu para controlar la lista
-    while (!accion){
-        cout << "Digite una opcion: 1-PonerRaíz  2-AgregarHijo 3-AgregarHijoMásDerecho 4-BorrarHoja  5-Raíz 6-Padre 7-HijoMásIzquierdo 8-Hermano Derecho 9-Etiqueta 10-ModificaEtiqueta 11-NumNodos" << endl;
+    while (accion != 0){
+        cout << "\nDigite una opcion: 1-PonerRaíz  2-AgregarHijo 3-AgregarHijoMásDerecho 4-BorrarHoja  5-Raíz 6-Padre 7-HijoMásIzquierdo 8-Hermano Derecho 9-Etiqueta 10-ModificaEtiqueta 11-NumNodos" << endl;
         cin >> accion;
         //TODO: HACER FUNCIONAR ESTE MENU CON LAS OPCIONES DEL ARBOL
         switch(accion){
             case 1:
+                if(raizDefinida) {
+                    cout << "Ya hay una raiz en el árbol " << endl; 
+                    break;
+                }
                 int numeroEtiqueta;
                 cout << "Digite el numero de la etiqueta: " << endl;
                 cin >> numeroEtiqueta;
                 this->arbol->PonerRaiz(numeroEtiqueta);
             break;
             case 2:
-                // int raiz = this->arbol->Etiqueta(this->arbol->Raiz());
+                int raiz = this->arbol->Etiqueta(this->arbol->Raiz());
                 // auto raiz = this->arbol->Raiz();
-                cout << "raiz "<< endl;
+                cout << raiz << endl;
             break;
-            default:
-                cout << "Debe elegir una opción valida" << endl;
-                accion=0;
-            break;
+            // default:
+            //     cout << "Debe elegir una opción valida" << endl;
+            //     accion=0;
+            // break;
         }
     }
 }

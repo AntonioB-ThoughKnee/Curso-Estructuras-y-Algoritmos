@@ -10,7 +10,7 @@
 typedef class ListaHijos {
 public:
     struct ContenedorSublista; // "forward-declaration"
-    struct ContenedorPrincipal {
+    typedef struct ContenedorPrincipal {
         // nodo =
         ContenedorPrincipal(ContenedorPrincipal* sgte, int etiqueta, ContenedorSublista* primerHijo) : sgtePrincipal(sgte)
                 , primerHijo(primerHijo), etiqueta(etiqueta) {
@@ -22,7 +22,7 @@ public:
         int etiqueta;
         ContenedorSublista* primerHijo;
         ContenedorSublista* ultimoHijo;
-    };
+    } Nodo;
 
     struct ContenedorSublista {
         ContenedorSublista(ContenedorPrincipal* nodo) : nodo(nodo) {};
@@ -66,7 +66,7 @@ public:
 
     int Etiqueta(ContenedorPrincipal* nodo);
 
-    void ModificaEtiqueta(int etiqueta, ContenedorPrincipal* nodo);
+    void ModificarEtiqueta(int etiqueta, ContenedorPrincipal* nodo);
 
     int NumNodos();
 } Arbol;
