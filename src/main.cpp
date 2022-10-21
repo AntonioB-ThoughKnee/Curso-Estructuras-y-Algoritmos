@@ -36,7 +36,7 @@ Arbol::Nodo* buscarEtiqueta(int etiqueta, Arbol* A)
 
 int main(){
   Arbol* arbol = new Arbol();
-  // Arbol::Nodo* nodo;  
+  Arbol::Nodo* nodo;
 
   // Se inicializa un arbol
   cout << "Un arbol ha sido creado" << endl;
@@ -45,6 +45,14 @@ int main(){
   bool raizDefinida = false;
 
   //===========================  Creando arbol predefinido
+    // 1
+    // |_2
+    // | |_5
+    // | |_6
+    // |_3
+    // |_4
+    // | |_7
+
   arbol->PonerRaiz(1);
   Arbol::Nodo* root = arbol->Raiz();
   Arbol::Nodo* nodo2 = arbol->AgregarHijo(root, 2);
@@ -55,8 +63,8 @@ int main(){
   arbol->AgregarHijo(nodo2, 5);
   arbol->AgregarHijo(nodo4, 7);
   raizDefinida = true;
-
-  Arbol::Nodo* nodo = buscarEtiqueta(7, arbol);  
+  
+  nodo = buscarEtiqueta(7, arbol);  
   nodo = buscarEtiqueta(5, arbol);  
   nodo = buscarEtiqueta(6, arbol);  
   nodo = buscarEtiqueta(1, arbol); 
@@ -72,7 +80,6 @@ int main(){
   while (accion != 0){
     cout << "\nDigite una opcion: \n1-PonerRaíz  \n2-AgregarHijo \n3-AgregarHijoMásDerecho \n4-BorrarHoja  \n5-Imprimir raíz \n6-Imprimir padre de un nodo\n7-Imprimir hijoMásIzquierdo \n8-Imprimir hermano Derecho \n9-Modificar etiqueta \n10-NumNodos\n 0-Salir" << endl;
     cin >> accion;
-    //TODO: HACER FUNCIONAR ESTE MENU CON LAS OPCIONES DEL ARBOL
     switch(accion){
       case 1:
         if(raizDefinida) {
@@ -123,7 +130,7 @@ int main(){
         cout << "El hijo más izquierdo del nodo " << accion << " es: " << arbol->Etiqueta( arbol-> HijoMasIzquierdo(nodo) ) << endl;
       break;
       case 8:
-        cout << "Digite la etiqueta del nodo que desea conocer el  hermano derecho " << endl;
+        cout << "Digite la etiqueta del nodo que desea conocer el hermano derecho " << endl;
         cin >> accion;
         nodo = buscarEtiqueta(accion, arbol);
         cout << "El hermano derecho del nodo " << accion << " es: " << arbol->Etiqueta( arbol-> HermanoDerecho(nodo) ) << endl;
@@ -138,6 +145,14 @@ int main(){
       break;
       case 10:
         cout << "La cantidad de nodos en el árbol es: " << arbol->NumNodos() << endl;
+      break;
+      case 11:
+        cout << "Digite la etiqueta del nodo que desea conocer si existe" << endl;
+        cin >> accion;
+        nodo = buscarEtiqueta(accion, arbol);
+        if(nodo != nullptr) { cout << "La etiqueta existe en el árbol " << endl; }
+        else { cout << "La etiqueta no existe en el árbol " << endl; }
+
       break;
       // default:
       //     cout << "Debe elegir una opción valida" << endl;
