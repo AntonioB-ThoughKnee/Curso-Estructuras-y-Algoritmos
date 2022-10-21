@@ -45,7 +45,7 @@ void menuCola();
  * @brief Metodo que muestra el menu controlador del arbol
  * 
  */
-void manuArbol();
+void menuArbol();
 };
 
 #endif

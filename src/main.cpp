@@ -1,33 +1,30 @@
 #include <iostream>
-//#include "ListaHijos.hpp"
-//#include "ListaHijos.hpp"
-//#include "HMIHDConContador.hpp"
-#include "HMIHDConPtrPadreOptimizado.hpp"
-//#include "HMIHDConPtrPadreyHI.hpp"
-int main() {
-    std::cout << "Hello, World" << std::endl;
-    Arbol arr;
-    arr.Crear();
-    // Visto desde aqui afuera el arreglo con senalador al padre empieza con indice 1
-    arr.PonerRaiz(1);
-    auto nodo2 = arr.AgregarHijo(arr.Raiz(), 2);
-    auto nodo3 = arr.AgregarHijo(arr.Raiz(), 3);
-    auto nodo4 = arr.AgregarHijoMasDerecho(arr.Raiz(), 4);
-    auto nodo5 = arr.AgregarHijo(nodo3, 5);
-    auto nodo6 = arr.AgregarHijoMasDerecho(nodo3, 6);
-    auto nodo7 = arr.AgregarHijoMasDerecho(nodo4, 7);
-    auto nodo8 = arr.AgregarHijoMasDerecho(nodo2, 8);
-    auto nodo9 = arr.AgregarHijoMasDerecho(nodo8, 9);
-    auto nodo10 = arr.AgregarHijoMasDerecho(nodo8, 10);
-    auto nodo11 = arr.AgregarHijoMasDerecho(nodo7, 11);
-    auto nodo12 = arr.AgregarHijoMasDerecho(nodo7, 12);
-    auto nodo13 = arr.AgregarHijoMasDerecho(nodo12, 13);
-    int etiquetaN10 = arr.Etiqueta(nodo9);
-    auto raiz = arr.Raiz();
 
-    auto hermDerDel10 = arr.HermanoDerecho(nodo10);
-    auto hermDerDel11 = arr.HermanoDerecho(nodo11);
+#include "../include/Opciones.hpp"
 
-    arr.Destruir();
+using namespace std;
+int main(){
+  Opciones opciones;
+  cout << "Bienvenid@!\n Qué estructura desea probar ?" << endl;
+  int accion=0;
+  while (!accion){
+    cout << "1- Lista 2-Cola 3-Arbol 4-Salir" << endl;
+    cin >> accion;
+    switch(accion){
+      case 1:
+      opciones.menuLista();
+      break;
+      case 2:
+      opciones.menuCola();
+      break;
+      case 3:
+      opciones.menuArbol();
+      break;
+      default:
+      cout << "Debe elegir una opción valida" << endl;
+      accion=0;
+      break;
+    }
     return 0;
+  }
 }

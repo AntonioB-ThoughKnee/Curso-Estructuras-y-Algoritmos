@@ -121,3 +121,64 @@ void Opciones::menuCola(){
         }
     }
 }
+void Opciones::menuArbol(){
+// Se inicializa la lista
+    this->arbol=new Arbol();
+    cout << "Un arbol ha sido creado" << endl;
+    int accion=0;
+// Se despliega un menu para controlar la lista
+    while (!accion){
+        cout << "Digite una opcion: 1-PonerRaíz  2-AgregarHijo 3-AgregarHijoMásDerecho 4-BorrarHoja  5-Raíz 6-Padre 7-HijoMásIzquierdo 8-Hermano Derecho 9-Etiqueta 10-ModificaEtiqueta 11-NumNodos" << endl;
+        cin >> accion;
+        //TODO: HACER FUNCIONAR ESTE MENU CON LAS OPCIONES DEL ARBOL
+        switch(accion){
+            case 1:
+                int indiceAgregar;
+                int elementoAgregar;
+                cout << "Digite un indice: " << endl;
+                cin >> indiceAgregar;
+                cout << "Digite el valor que desea agregar: " << endl;
+                cin >> elementoAgregar;
+                this->lista->insertar(elementoAgregar,indiceAgregar);
+                accion=0;
+            break;
+            case 2:
+                int indiceBorrar;
+                cout << "Digite un indice: " << endl;
+                cin >> indiceBorrar;
+                this->lista->borrar(indiceBorrar);
+                accion=0;
+            break;
+            case 3:
+                int indiceRecuperar;
+                cout << "Digite un indice: " << endl;
+                cin >> indiceRecuperar;
+                cout << "El elemento recuperado es: " << this->lista->recuperar(indiceRecuperar) << endl;
+                accion=0;
+            break;
+            case 4:
+                int indiceModificar;
+                int elementoModificar;
+                cout << "Digite un indice: " << endl;
+                cin >> indiceModificar;
+                cout << "Digite el nuevo valor: " << endl;
+                cin >> elementoModificar;
+                this->lista->modificar(elementoModificar,indiceModificar);
+                accion=0;
+            break;
+            case 5:
+                cout << "La cantidad de elementos es: " << this->lista->numElem() << endl;
+                accion=0;
+            break;
+            case 6:
+                delete this->lista;
+                this->lista=nullptr;
+                cout << "La lista ha sido destruida" << endl;
+            break;
+            default:
+                cout << "Debe elegir una opción valida" << endl;
+                accion=0;
+            break;
+        }
+    }
+}
