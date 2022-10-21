@@ -7,8 +7,7 @@
 #define TAREA_PROGRAMADA_LISTAHIJOS_HPP
 
 #include <string>
-
-class ListaHijos {
+typedef class ListaHijos {
 public:
     struct ContenedorSublista; // "forward-declaration"
     struct ContenedorPrincipal {
@@ -54,7 +53,7 @@ public:
     //    void AgregarHijoMasDerecho(TipoNodo elemento);
     ContenedorPrincipal* AgregarHijoMasDerecho(ContenedorPrincipal* nodoPadre, int etiqueta);
 
-    //    void BorrarHoja(int etiqueta);
+    //    void BorrarHoja(std::string etiqueta);
     void BorrarHoja(int nodo_id_externo);
 
     ContenedorPrincipal* Raiz();
@@ -70,6 +69,6 @@ public:
     void ModificaEtiqueta(int etiqueta, ContenedorPrincipal* nodo);
 
     int NumNodos();
-};
+} Arbol;
 
 #endif //TAREA_PROGRAMADA_LISTAHIJOS_HPP

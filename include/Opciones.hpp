@@ -3,11 +3,11 @@
 
 #include "ListaIndexada.hpp"
 #include "Cola.hpp"
-//#include "ArregloSenaladorPadre.h"
-//#include "HMIHDConPtrPadreOptimizado.h"
-//#include "HMIHDConPtrPadreyHI.h"
+//#include "ArregloSenaladorPadre.hpp"
+//#include "HMIHDConPtrPadreOptimizado.hpp"
+//#include "HMIHDConPtrPadreyHI.hpp"
 //#include "ListaHijos.hpp"
-#include "HMIHDConContador.h"
+#include "HMIHDConContador.hpp"
 /**
  * @brief Clase controladora del programa de pruebas 
  * @param lista puntero a la lista por crear

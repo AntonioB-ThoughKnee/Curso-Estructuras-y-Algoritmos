@@ -133,47 +133,15 @@ void Opciones::menuArbol(){
         //TODO: HACER FUNCIONAR ESTE MENU CON LAS OPCIONES DEL ARBOL
         switch(accion){
             case 1:
-                int indiceAgregar;
-                int elementoAgregar;
-                cout << "Digite un indice: " << endl;
-                cin >> indiceAgregar;
-                cout << "Digite el valor que desea agregar: " << endl;
-                cin >> elementoAgregar;
-                this->lista->insertar(elementoAgregar,indiceAgregar);
-                accion=0;
+                int numeroEtiqueta;
+                cout << "Digite el numero de la etiqueta: " << endl;
+                cin >> numeroEtiqueta;
+                this->arbol->PonerRaiz(numeroEtiqueta);
             break;
             case 2:
-                int indiceBorrar;
-                cout << "Digite un indice: " << endl;
-                cin >> indiceBorrar;
-                this->lista->borrar(indiceBorrar);
-                accion=0;
-            break;
-            case 3:
-                int indiceRecuperar;
-                cout << "Digite un indice: " << endl;
-                cin >> indiceRecuperar;
-                cout << "El elemento recuperado es: " << this->lista->recuperar(indiceRecuperar) << endl;
-                accion=0;
-            break;
-            case 4:
-                int indiceModificar;
-                int elementoModificar;
-                cout << "Digite un indice: " << endl;
-                cin >> indiceModificar;
-                cout << "Digite el nuevo valor: " << endl;
-                cin >> elementoModificar;
-                this->lista->modificar(elementoModificar,indiceModificar);
-                accion=0;
-            break;
-            case 5:
-                cout << "La cantidad de elementos es: " << this->lista->numElem() << endl;
-                accion=0;
-            break;
-            case 6:
-                delete this->lista;
-                this->lista=nullptr;
-                cout << "La lista ha sido destruida" << endl;
+                // int raiz = this->arbol->Etiqueta(this->arbol->Raiz());
+                // auto raiz = this->arbol->Raiz();
+                cout << "raiz "<< endl;
             break;
             default:
                 cout << "Debe elegir una opción valida" << endl;
