@@ -1,0 +1,29 @@
+// Nombre: Listar Etiquetas de Nivel
+// Paramentros: nodoMax (Entero), El algoritmo usa una variable global de 
+// tipo arbol.
+// Efecto: Encontrar cuantos niveles hay en un arbol.
+// Requiere: Arbol inicializado pasado como variable global.
+// Modifica: El algoritmo no modifica al arbol.
+
+global nodoMax=1
+
+global arbol 
+
+contarNiveles(){
+    if(!arbol.vacio()){
+        contarHojasR(arbol.Raiz(),1,nivelDeseado)
+    }
+    return nodoMax
+}
+
+contarHojasR(nodo,nivelActual,nivelDeseado){
+    if(nivelActual>nodoMax){
+        nodoMax=nivelActual
+    }
+    nodo=arbol.hMI(nodo)
+    nivelActual=nivelActual+1
+    while (nodo!=nodoNulo){
+        contarHojasR(nodo,nivelActual,nivelDeseado)
+        nodo=arbol.hD(nodo)
+    }
+}

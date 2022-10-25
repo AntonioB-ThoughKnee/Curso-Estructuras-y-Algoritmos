@@ -1,0 +1,20 @@
+// Nombre: Listar en preorden
+// Paramentros: Arbol (tipo Arbol)
+// Efecto: Listar (Imprimir) las etiquetas del árbol haciendo un recorrido
+// en preOrden
+// Requiere: Arbol inicializado
+// Modifica: El algoritmo no modifica al arbol
+
+ListarPreOrden(A){
+    if !A.Vacío(){
+    ListarPreOrdenR(A.Raíz(),A)
+    }
+}
+ListarPreOrdenR(n,A){
+    Imprimir(A.Etiq(n))
+    n1= A.HMI(n)
+    while n1 != nodonulo{
+    PreOrdenR(n1,A)
+    n1 = A.HD(n1)
+    }
+}

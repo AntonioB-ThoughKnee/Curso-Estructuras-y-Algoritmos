@@ -1,0 +1,22 @@
+// Nombre: Listar por niveles
+// Paramentros: Arbol (tipo Arbol)
+// Efecto: Listar (Imprimir) las etiquetas del árbol por niveles
+// Requiere: Arbol inicializado 
+// Modifica: El algoritmo no modifica al arbol
+
+ListarPorNiveles(A){
+    if !A.Vacío(){
+        Cola.Iniciar()
+        Cola.Agregar(A.Raíz())
+        while !Cola.Vacía(){
+            n = Cola.Sacar()
+            Imprimir(A.Etiq(n))
+            n1= A.HMI(n)
+            while n1 != nodonulo{
+                Cola.Agregar(n1)
+                n1 = A.HD(n1)
+            }
+        }
+        Cola.Destruir()
+    }
+}

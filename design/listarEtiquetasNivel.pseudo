@@ -1,0 +1,27 @@
+// Nombre: Listar Etiquetas de Nivel
+// Paramentros: NivelDeseado (Entero), El algoritmo usa una variable global de 
+// tipo arbol.
+// Efecto: Listar (Imprimir) las etiquetas de un nivel en especifico del arbol
+// Requiere: Arbol inicializado pasado como variable global, nivelDeseado
+// tiene que ser un nivel valido en el arbol
+// Modifica: El algoritmo no modifica al arbol
+
+global arbol 
+
+listarEtiquietasNivel(nivelDeseado){
+    if(!arbol.vacio()){
+        listarEtiquietasNivelR(arbol.Raiz(),0,nivelDeseado)
+    }
+}
+
+listarEtiquietasNivelR(nodo,nivelActual,nivelDeseado){
+    if(nivelActual==nivelDeseado){
+        Imprimir(A.Etiqueta(nodo));
+    }
+    nodo=arbol.hMI(nodo)
+    nivelActual=nivelActual+1
+    while (nodo!=nodoNulo){
+        listarEtiquietasNivelR(nodo,nivelActual,nivelDeseado)
+        nodo=arbol.hD(nodo)
+    }
+}
