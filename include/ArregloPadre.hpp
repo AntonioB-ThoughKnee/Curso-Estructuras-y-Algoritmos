@@ -7,21 +7,27 @@
 
 #include <vector>
 #include <string>
+// #include "Nodo.h"
 
-//template <typename TipoNodo>
 typedef class ArregloPadre {
+public:
+    struct Nodo {    
+        Nodo(int nodo_id) : nodo(nodo_id) {};
+        int nodo;
+    };
     struct contenedorArreglo {
 //        TipoNodo* nodo;
         contenedorArreglo(int et, int padre, int nodo_id) : etiqueta(et), padre(padre), nodo_id(nodo_id) {};
-        contenedorArreglo() {};
+        // contenedorArreglo() {};
         // Nodo nulo es constructor vacio
         // Nodo_id va a tener la pos del arreglo empezando en 0, pero por fuera, cuando manden nodo_id tengo que restarle
         // 1 porque para el usuario, el arreglo va a empezar en 1.
-        int nodo_id;
+        Nodo nodo_id;
         int etiqueta;
         int padre;
     };
-public:
+    
+
     std::vector<contenedorArreglo> arreglo;
 
     ArregloPadre() {};

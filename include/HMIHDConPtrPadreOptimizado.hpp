@@ -14,12 +14,12 @@ typedef class HMIHDConPtrPadreOptimizado //typedef usado para el main()
 public:
     struct Nodo
     {
-        Nodo()
-                : hijo(nullptr), hermano(nullptr){};
+      //   Nodo()
+      //           : hijo(nullptr), hermano(nullptr){};
         Nodo(int etiqueta)
                 : hijo(nullptr), hermano(nullptr), etiqueta(etiqueta){};
-        Nodo* hijo; /**< Hijo del nodo definido   */
-        Nodo* hermano; /**<  hermano derecho del nodo definido  */
+        Nodo* hijo = nullptr; /**< Hijo del nodo definido   */
+        Nodo* hermano = nullptr; /**<  hermano derecho del nodo definido  */
         bool tienePtrAlPadre; /**<  Booleano que define si el nodo apunta al padre o no */
         int etiqueta; /**< Etiqueta del modo definido */
     };

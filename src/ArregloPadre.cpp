@@ -3,6 +3,7 @@
 //
 
 #include "../include/ArregloPadre.hpp"
+#include <iostream>
 //
 // Created by jean on 14/10/22.
 //
@@ -55,7 +56,7 @@ void ArregloPadre::BorrarHoja(int nodo_id_externo) {
 
 int ArregloPadre::Raiz() {
     if (!this->arreglo.empty()) {
-        return (this->arreglo[0].nodo_id)+1;
+        return (this->arreglo[0].nodo_id.nodo)+1;
     }
     return -1; // Arbol esta vacio.
 }
@@ -72,7 +73,7 @@ int ArregloPadre::HijoMasIzquierdo(int nodo_id_externo_papa) {
         // Técnicamente sería mas eficiente empezar i en el valor pasado por el parametro porque el hijo siempre tiene que estar
         // a la derecha del papá pero mejor por términos de efectividad lo voy a dejar asi.
         if (this->arreglo[i].padre == (nodo_id_externo_papa-1)) { // los nodos por debajo en mi programa empiezan en 0, por eso el -1
-            return (this->arreglo[i].nodo_id)+1;
+            return (this->arreglo[i].nodo_id.nodo)+1;
         }
     }
     return toRet;
@@ -82,9 +83,10 @@ int ArregloPadre::HermanoDerecho(int nodo_id_hermano_externo) {
     int papaComun = this->arreglo[nodo_id_hermano_externo-1].padre; // nodo por dentro es 1 valor menos por el arreglo.
     // Empieza en nodo_id_hermano porque de esta manera, si a la derecha del arreglo a partir de el encontramos a otro nodo con el mismo
     // papa entonces es el hermano derecho.
+    std::cout << "Prueba\n";
     for (int i = nodo_id_hermano_externo; i < this->arreglo.size(); ++i) { // Le deberia hacer -1, pero ocupo que empiece a buscar 1 pos mayor, porque sino se encuentra a si mismo.
         if (this->arreglo[i].padre == papaComun) { // como es inmediatamente el siguiente encontrado a la derecha del arreglo, es el herm. der
-            return (this->arreglo[i].nodo_id)+1;
+            return (this->arreglo[i].nodo_id.nodo)+1;
         }
     }
     return -1;

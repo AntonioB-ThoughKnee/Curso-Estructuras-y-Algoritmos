@@ -4,9 +4,9 @@
 #include "../include/ListaIndexada.hpp"
 #include "../include/Cola.hpp"
 // #include "../include/ArregloPadre.hpp"
-#include "../include/HMIHDConPtrPadreOptimizado.hpp"
+// #include "../include/HMIHDConPtrPadreOptimizado.hpp"
 // #include "../include/HMIHDConPtrPadreyHI.hpp"
-// #include "../include/ListaHijos.hpp"
+#include "../include/ListaHijos.hpp"
 // #include "../include/HMIHDConContador.hpp"
 
 using namespace std;
@@ -35,7 +35,8 @@ Arbol::Nodo* buscarEtiqueta(int etiqueta, Arbol* A)
 }
 
 int main(){
-  Arbol* arbol = new Arbol();
+  Arbol Principal; 
+  Arbol* arbol = &Principal;
   Arbol::Nodo* nodo;
 
   // Se inicializa un arbol
@@ -53,27 +54,27 @@ int main(){
     // |_4
     // | |_7
 
-  arbol->PonerRaiz(1);
-  Arbol::Nodo* root = arbol->Raiz();
-  Arbol::Nodo* nodo2 = arbol->AgregarHijo(root, 2);
-  arbol->AgregarHijoMasDerecho(root, 3);
-  Arbol::Nodo* nodo4 = arbol->AgregarHijoMasDerecho(root, 4);
+  // arbol->PonerRaiz(1);
+  // Arbol::Nodo* root = arbol->Raiz();
+  // Arbol::Nodo* nodo2 = arbol->AgregarHijo(root, 2);
+  // arbol->AgregarHijoMasDerecho(root, 3);
+  // Arbol::Nodo* nodo4 = arbol->AgregarHijoMasDerecho(root, 4);
 
-  arbol->AgregarHijo(nodo2, 6);
-  arbol->AgregarHijo(nodo2, 5);
-  arbol->AgregarHijo(nodo4, 7);
-  raizDefinida = true;
+  // arbol->AgregarHijo(nodo2, 6);
+  // arbol->AgregarHijo(nodo2, 5);
+  // arbol->AgregarHijo(nodo4, 7);
+  // raizDefinida = true;
   
-  nodo = buscarEtiqueta(7, arbol);  
-  nodo = buscarEtiqueta(5, arbol);  
-  nodo = buscarEtiqueta(6, arbol);  
-  nodo = buscarEtiqueta(1, arbol); 
-  nodo = buscarEtiqueta(6, arbol); 
+  // nodo = buscarEtiqueta(7, arbol);  
+  // nodo = buscarEtiqueta(5, arbol);  
+  // nodo = buscarEtiqueta(6, arbol);  
+  // nodo = buscarEtiqueta(1, arbol); 
+  // nodo = buscarEtiqueta(6, arbol); 
 
-  nodo = arbol-> Padre(nodo);  
-  nodo = arbol-> Padre( arbol->HijoMasIzquierdo(nodo4) );  
-  nodo = arbol-> Padre(nodo2);  
-  nodo = arbol-> Padre(root);
+  // auto nodo = arbol-> Padre(nodo);  
+  // nodo = arbol-> Padre( arbol->HijoMasIzquierdo(nodo4) );  
+  // nodo = arbol-> Padre(nodo2);  
+  // nodo = arbol-> Padre(root);
   //=====  
 
   // Se despliega un menu para controlar el arbol
@@ -141,7 +142,7 @@ int main(){
         nodo = buscarEtiqueta(accion, arbol);
         cout << "Digite la nueva etiqueta" << endl;
         cin >> accion;
-        arbol->ModificarEtiqueta(nodo, accion);
+        arbol->ModificarEtiqueta(accion, nodo);
       break;
       case 10:
         cout << "La cantidad de nodos en el árbol es: " << arbol->NumNodos() << endl;
@@ -161,7 +162,7 @@ int main(){
     }
   }
   arbol->Destruir();
-  delete arbol;
+  // delete arbol;
 
   // Opciones opciones;
   // cout << "Bienvenid@!\n Qué estructura desea probar ?" << endl;
