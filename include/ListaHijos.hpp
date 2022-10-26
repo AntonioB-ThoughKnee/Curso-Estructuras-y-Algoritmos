@@ -66,7 +66,7 @@ public:
 
     int Etiqueta(ContenedorPrincipal* nodo);
 
-    void ModificarEtiqueta(int etiqueta, ContenedorPrincipal* nodo);
+    void ModificarEtiqueta(ContenedorPrincipal* nodo, int etiqueta);
 
     int NumNodos();
 } Arbol;
