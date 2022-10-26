@@ -54,7 +54,7 @@ public:
     ContenedorPrincipal* AgregarHijoMasDerecho(ContenedorPrincipal* nodoPadre, int etiqueta);
 
     //    void BorrarHoja(std::string etiqueta);
-    void BorrarHoja(int nodo_id_externo);
+    void BorrarHoja(ContenedorPrincipal* nodo);
 
     ContenedorPrincipal* Raiz();
 
