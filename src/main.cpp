@@ -142,7 +142,7 @@ int main(){
         nodo = buscarEtiqueta(accion, arbol);
         cout << "Digite la nueva etiqueta" << endl;
         cin >> accion;
-        arbol->ModificarEtiqueta(accion, nodo);
+        arbol->ModificarEtiqueta(nodo, accion);
       break;
       case 10:
         cout << "La cantidad de nodos en el árbol es: " << arbol->NumNodos() << endl;
