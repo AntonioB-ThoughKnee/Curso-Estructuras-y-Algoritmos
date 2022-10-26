@@ -90,8 +90,36 @@ ListaHijos::ContenedorPrincipal* ListaHijos::AgregarHijoMasDerecho(ListaHijos::C
     return nuevoContenedor;
 }
 
-void ListaHijos::BorrarHoja(int nodo_id_externo) {
+void ListaHijos::BorrarHoja(ContenedorPrincipal* nodo) {
     // TODO: BorrarHoja()
+    ContenedorPrincipal* iter = this->pPrimeroPrincipal;
+  // Caso Inicio
+  if (iter == nodo) {
+    ContenedorPrincipal* temp = this->pPrimeroPrincipal;
+    this->pPrimeroPrincipal = this->pPrimeroPrincipal->sgtePrincipal;
+    delete temp;
+  }
+  /* Casos Medio y Final */
+  while (iter != nullptr) {
+    if (iter->sgtePrincipal == nodo) {
+      ContenedorPrincipal* temp = iter->sgtePrincipal;
+      iter->sgtePrincipal = iter->sgtePrincipal->sgtePrincipal;
+
+      ContenedorSublista* iter2 = temp->primerHijo;
+      while (iter2 != nullptr) { /* BORRAR LOS HIJOS DEL NODO */
+        // delete &iter2; // ?
+        // iter2 = iter2->sgte;
+        ContenedorSublista* temp = iter2->sgte;
+        delete iter2;
+        iter2 = temp;
+      }
+
+      delete temp;
+      break;
+    } // end if
+    iter = iter->sgtePrincipal;
+  }
+  this->cantNodos--;
     this->cantNodos--;
 }
 
