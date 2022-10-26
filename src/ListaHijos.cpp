@@ -180,7 +180,7 @@ int ListaHijos::Etiqueta(ListaHijos::ContenedorPrincipal* nodo) {
     return nodo->etiqueta;
 }
 
-void ListaHijos::ModificarEtiqueta(int etiqueta, ListaHijos::ContenedorPrincipal* nodo) {
+void ListaHijos::ModificarEtiqueta(ContenedorPrincipal* nodo, int etiqueta) {
     nodo->etiqueta = etiqueta;
 }
 
