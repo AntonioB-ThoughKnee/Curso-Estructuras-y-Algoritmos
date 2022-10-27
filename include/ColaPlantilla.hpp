@@ -32,7 +32,7 @@ Cola(){
     this->inicio=0;
     this->final=-1;
     this->capacidad=10;
-    this->cola= new Elemento[10];
+    this->cola= new Elemento[100];
     this->contador=0;
 }
 /**
