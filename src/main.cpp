@@ -3,10 +3,10 @@
 
 #include "../include/ListaIndexada.hpp"
 #include "../include/Cola.hpp"
-// #include "../include/ArregloPadre.hpp"
+#include "../include/ArregloPadre.hpp"
 // #include "../include/HMIHDConPtrPadreOptimizado.hpp"
 // #include "../include/HMIHDConPtrPadreyHI.hpp"
-#include "../include/ListaHijos.hpp"
+// #include "../include/ListaHijos.hpp"
 // #include "../include/HMIHDConContador.hpp"
 
 using namespace std;
@@ -44,6 +44,21 @@ int main(){
   cout << "Bienvenid@!\n Qué estructura desea probar ?" << endl;
   int accion=1;
   bool raizDefinida = false;
+// Arbol Principal;
+  Principal.PonerRaiz(0);
+  Arbol::Nodo* nodo1 = Principal.AgregarHijo(Principal.Raiz(), 1);
+  Arbol::Nodo* nodo2 = Principal.AgregarHijo(Principal.Raiz(), 2);
+  std::cout << nodo1->nodo_id << endl;
+  Arbol::Nodo* nodo3 = Principal.AgregarHijoMasDerecho(Principal.Raiz(), 3);
+  Arbol::Nodo* nodo4 = Principal.AgregarHijo(nodo1, 4);
+  Arbol::Nodo* nodo5 = Principal.AgregarHijoMasDerecho(nodo2, 5);
+  Arbol::Nodo* nodo6 = Principal.AgregarHijoMasDerecho(nodo2, 6);
+  Arbol::Nodo* nodo7 = Principal.AgregarHijoMasDerecho(nodo3, 7);
+  Arbol::Nodo* nodo8 = Principal.AgregarHijoMasDerecho(nodo4, 8);
+  Arbol::Nodo* nodo9 = Principal.AgregarHijoMasDerecho(nodo4, 9);
+  Arbol::Nodo* nodo10 = Principal.AgregarHijoMasDerecho(nodo7, 10);
+  Arbol::Nodo* nodo11 = Principal.AgregarHijoMasDerecho(nodo7, 11);
+  Arbol::Nodo* nodo12 = Principal.AgregarHijoMasDerecho(nodo11, 12);
 
   //===========================  Creando arbol predefinido
     // 1
