@@ -30,7 +30,7 @@ Arbol::Nodo* buscarEtiqueta(int etiqueta, Arbol* A)
     }
   }
 
-  return nullptr;
+  return nullptr; //hd
 
 }
 
