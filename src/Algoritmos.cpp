@@ -22,27 +22,31 @@ void Algoritmos::menu(){
         cout<<"Seleccione el algoritmo que desea probar: "<<endl;
         // TODO: Terminar de agregar las opciones
         string opciones =
-        "1- Contar los niveles de un abol 2- Listar Etiquetas de un nivel"
-        "3- Recorrer el arbol en PreOrden 4- Recorrer el arbol por niveles"
+        "\n1- Encontrar el hermano izquierdo de un nodo \n2- Averiguar si el árbol tiene etiquetas repetidas\n"
+        "3- Encontrar la profundidad de un nodo \n4- Encontrar la cantidad de niveles del árbol en Pre-Orden\n"
+        "5- Encontrar la cantidad de niveles del árbol Por Niveles \n6- Listar las etiquetas de un nivel\n"
+        "7- Listar las etiquetas del árbol en Pre-Orden \n8- Listar las etiquetas del árbol Por Niveles\n"
+        "9- Buscar el nodo correspondiente con una etiqueta \n10- Eliminar subárbol a partir de un nodo\n"
+        "11- Construir árbol de i-niveles y k-hijos a partir de una Lista Indexada\n"
         "OTRO- Salir"
         ;
         cout<<opciones<<endl;
         cin >> accion;
         switch(accion){
             case 1:
-                cout<<"El arbol tiene "<<this->contarPorNiveles()<<" niveles"<<endl;
+                // cout<<"El arbol tiene "<<this->contarPorNiveles()<<" niveles"<<endl;
             break;
             case 2:
                 int nivel;
-                cout<<"Seleccione el nivel: "<<endl;
+                // cout<<"Seleccione el nivel: "<<endl;
                 cin>>nivel;
-                this->listaEtiquetasNivel(nivel);
+                // this->listaEtiquetasNivel(nivel);
             break;
             case 3:
-                this->recorridoPreOrden();
+                // this->recorridoPreOrden();
             break;
             case 4:
-                this->recorridoPorNiveles();
+                // this->recorridoPorNiveles();
             break;
             default:
                 accion=0;
