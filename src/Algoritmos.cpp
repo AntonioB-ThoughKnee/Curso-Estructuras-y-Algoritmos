@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string.h>
-#include <vector> //FIXME Reemplazar por lista
 
 #include "../include/Algoritmos.hpp"
 
@@ -11,41 +10,39 @@ Algoritmos::Algoritmos(){
 
 }
 Algoritmos::~Algoritmos(){
-    if (this->arbol!=nullptr){
-        delete this->arbol;
-    }
 }
 
 //===========================   Algoritmos 9, 10 y 11
 Arbol::Nodo* Algoritmos::BuscarEtiqueta(int etiqueta, Arbol* A)
 {
   Arbol::Nodo* tmp;
-  vector<Arbol::Nodo*> auxiliar;
-  auxiliar.push_back(A->Raiz());
-  int i = 0;
-  while(i < auxiliar.size())
+  ListaIndexada<Arbol::Nodo*> auxiliar;
+  auxiliar.insertar(A->Raiz(), auxiliar.numElem()+1);
+  int i = 1;
+  //Se hace recorrido por niveles y se usa un if para encontrar el nodo buscado
+  while(i <= auxiliar.numElem())
   {
-    tmp = auxiliar[i];
+    tmp = auxiliar.recuperar(i);
     i++;
-    if(A->Etiqueta(tmp) == etiqueta) { return tmp; }
+    if(A->Etiqueta(tmp) == etiqueta) { return tmp; } 
     tmp = A->HijoMasIzquierdo(tmp);
     while(tmp != nullptr)
     {
-      auxiliar.push_back(tmp);
+      auxiliar.insertar(tmp, auxiliar.numElem()+1);
       tmp = A->HermanoDerecho(tmp);
     }
   }
-
   return nullptr;
-
 }
 
-void  Algoritmos::EliminarSubarbol(Arbol::Nodo* hijos, Arbol* A)
-{
+//FIXME ArregloPadre no funciona con este algoritmo
+void  Algoritmos::EliminarSubarbol(Arbol::Nodo* nodo, Arbol* A){
   ListaIndexada<Arbol::Nodo*> auxiliar;
   int iAuxiliar = 1;
-  Arbol::Nodo* tmp = hijos;
+  Arbol::Nodo* tmp = nodo;
   auxiliar.insertar(tmp, auxiliar.numElem()+1);
+
+  //Se hace recorrido por niveles para guardar el subárbol de "nodo"
   for(int ii = 0; ii <  auxiliar.numElem() ; ii++){
     tmp = auxiliar.recuperar(iAuxiliar);
     iAuxiliar++;
@@ -55,32 +52,38 @@ void  Algoritmos::EliminarSubarbol(Arbol::Nodo* hijos, Arbol* A)
       tmp = A->HermanoDerecho(tmp);
     }
   }
-
+  //Se borra en orden inverso los nodos guardados porque son hojas
   for(int ii = auxiliar.numElem(); ii > 0 ; ii--){
     tmp = auxiliar.recuperar(ii);
     A->BorrarHoja(tmp);
   }
 }
 
-Arbol* Algoritmos::HacerArbol(int nodos, ListaIndexada<int> lista){
+Arbol* Algoritmos::HacerArbol(int nodosPorHijo, ListaIndexada<int> lista){
   Arbol* nuevoArbol = new Arbol();
   ListaIndexada<Arbol::Nodo*> auxiliar;
-  int iLista = 1; // Empieza en 1 porque ya se añade la raíz 
+  int iLista = 1; 
   int iAuxiliar = 1;
   nuevoArbol->PonerRaiz(lista.recuperar(iLista));
-      iLista++;
-  Arbol::Nodo* tmp = nuevoArbol->Raiz();
+  iLista++; //Se suma 1 porque ya se añadió la raíz
+  Arbol::Nodo* tmp = nuevoArbol->Raiz(); 
 
+  //Se pasa por toda la lista dada
   while(iLista < lista.numElem() ){
-    for(int ii = 0; ii < nodos ; ii++){
+    //Agregando nodos correspondientes segun "nodosPorHijo" a tmp
+    for(int ii = 0; ii < nodosPorHijo ; ii++){
       nuevoArbol->AgregarHijoMasDerecho(tmp, lista.recuperar(iLista));
       iLista++;
     }
+    //===========================  Guardando los nodos agregados para agregarles mas tarde los nodos correspondientes
     Arbol::Nodo* hijoDeTmp = nuevoArbol->HijoMasIzquierdo(tmp);
     while(hijoDeTmp != nullptr){
       auxiliar.insertar(hijoDeTmp, auxiliar.numElem()+1);
       hijoDeTmp = nuevoArbol->HermanoDerecho(hijoDeTmp);
     }
+    //=====  
+
+    //Sacando de auxiliar los nodos guardados para seguir agregando nodos
     tmp = auxiliar.recuperar(iAuxiliar);
     iAuxiliar++;
   }
@@ -106,14 +109,9 @@ void Algoritmos::menu(){
     Arbol::Nodo* nodo4 = arbol->AgregarHijoMasDerecho(root, 4);
     //=====  
     ListaIndexada<int> lista;
-    lista.insertar(1, 1);
-    lista.insertar(2, 2);
-    lista.insertar(3, 3);
-    lista.insertar(4, 4);
-    lista.insertar(5, 5);
-    lista.insertar(6, 6);
-    lista.insertar(7, 7);
-
+    for(int ii = 1; ii <= 7 ; ii++){ // Se puede cambiar el número de elementos en la lista para hacer un árbol siempre y cuando cumpla con el requisito del algoritmo
+      lista.insertar(ii, ii);
+    }
     arbol = HacerArbol(2, lista);
     EliminarSubarbol(BuscarEtiqueta(3, arbol), arbol);
     }
