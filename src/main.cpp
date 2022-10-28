@@ -3,7 +3,8 @@
 
 #include "../include/ListaIndexada.hpp"
 #include "../include/Cola.hpp"
-#include "../include/ArregloPadre.hpp"
+// #include "../include/ArregloPadre.hpp"
+#include "../include/Algoritmos.hpp"
 // #include "../include/HMIHDConPtrPadreOptimizado.hpp"
 // #include "../include/HMIHDConPtrPadreyHI.hpp"
 // #include "../include/ListaHijos.hpp"
@@ -35,30 +36,35 @@ Arbol::Nodo* buscarEtiqueta(int etiqueta, Arbol* A)
 }
 
 int main(){
-  Arbol Principal; 
-  Arbol* arbol = &Principal;
-  Arbol::Nodo* nodo;
+  Algoritmos alg;
+  alg.menu();
 
-  // Se inicializa un arbol
-  cout << "Un arbol ha sido creado" << endl;
-  cout << "Bienvenid@!\n Qué estructura desea probar ?" << endl;
-  int accion=1;
-  bool raizDefinida = false;
-// Arbol Principal;
-  Principal.PonerRaiz(0);
-  Arbol::Nodo* nodo1 = Principal.AgregarHijo(Principal.Raiz(), 1);
-  Arbol::Nodo* nodo2 = Principal.AgregarHijo(Principal.Raiz(), 2);
-  std::cout << nodo1->nodo_id << endl;
-  Arbol::Nodo* nodo3 = Principal.AgregarHijoMasDerecho(Principal.Raiz(), 3);
-  Arbol::Nodo* nodo4 = Principal.AgregarHijo(nodo1, 4);
-  Arbol::Nodo* nodo5 = Principal.AgregarHijoMasDerecho(nodo2, 5);
-  Arbol::Nodo* nodo6 = Principal.AgregarHijoMasDerecho(nodo2, 6);
-  Arbol::Nodo* nodo7 = Principal.AgregarHijoMasDerecho(nodo3, 7);
-  Arbol::Nodo* nodo8 = Principal.AgregarHijoMasDerecho(nodo4, 8);
-  Arbol::Nodo* nodo9 = Principal.AgregarHijoMasDerecho(nodo4, 9);
-  Arbol::Nodo* nodo10 = Principal.AgregarHijoMasDerecho(nodo7, 10);
-  Arbol::Nodo* nodo11 = Principal.AgregarHijoMasDerecho(nodo7, 11);
-  Arbol::Nodo* nodo12 = Principal.AgregarHijoMasDerecho(nodo11, 12);
+//   Arbol Principal; 
+//   Arbol* arbol = &Principal;
+//   Arbol::Nodo* nodo;
+
+//   // Se inicializa un arbol
+//   cout << "Un arbol ha sido creado" << endl;
+//   cout << "Bienvenid@!\n Qué estructura desea probar ?" << endl;
+//   int accion=1;
+//   bool raizDefinida = false;
+// // Arbol Principal;
+//   Principal.PonerRaiz(0);
+//   Arbol::Nodo* nodo1 = Principal.AgregarHijo(Principal.Raiz(), 1);
+//   Arbol::Nodo* nodo2 = Principal.AgregarHijo(Principal.Raiz(), 2);
+//   std::cout << nodo1->nodo_id << endl;
+//   Arbol::Nodo* nodo3 = Principal.AgregarHijoMasDerecho(Principal.Raiz(), 3);
+//   Arbol::Nodo* nodo4 = Principal.AgregarHijo(nodo1, 4);
+//   Arbol::Nodo* nodo5 = Principal.AgregarHijoMasDerecho(nodo2, 5);
+//   Arbol::Nodo* nodo6 = Principal.AgregarHijoMasDerecho(nodo2, 6);
+//   Arbol::Nodo* nodo7 = Principal.AgregarHijoMasDerecho(nodo3, 7);
+//   Arbol::Nodo* nodo8 = Principal.AgregarHijoMasDerecho(nodo4, 8);
+//   Arbol::Nodo* nodo9 = Principal.AgregarHijoMasDerecho(nodo4, 9);
+//   Arbol::Nodo* nodo10 = Principal.AgregarHijoMasDerecho(nodo7, 10);
+//   Arbol::Nodo* nodo11 = Principal.AgregarHijoMasDerecho(nodo7, 11);
+//   Arbol::Nodo* nodo12 = Principal.AgregarHijoMasDerecho(nodo11, 12);
+
+
 
   //===========================  Creando arbol predefinido
     // 1
@@ -93,90 +99,90 @@ int main(){
   //=====  
 
   // Se despliega un menu para controlar el arbol
-  while (accion != 0){
-    cout << "\nDigite una opcion: \n1-PonerRaíz  \n2-AgregarHijo \n3-AgregarHijoMásDerecho \n4-BorrarHoja  \n5-Imprimir raíz \n6-Imprimir padre de un nodo\n7-Imprimir hijoMásIzquierdo \n8-Imprimir hermano Derecho \n9-Modificar etiqueta \n10-NumNodos\n 0-Salir" << endl;
-    cin >> accion;
-    switch(accion){
-      case 1:
-        if(raizDefinida) {
-          cout << "Ya hay una raiz en el árbol " << endl; 
-          break;
-        }
-        int numeroEtiqueta;
-        cout << "Digite el numero de la etiqueta: " << endl;
-        cin >> numeroEtiqueta;
-        arbol->PonerRaiz(numeroEtiqueta);
-        raizDefinida = true;
-      break;
-      case 2:
-        cout << "A cual nodo desea agregar un hijo? " << endl;     
-        cin >> accion;   
-        nodo = buscarEtiqueta(accion, arbol);
-        cout << "Digite el numero de la etiqueta que desea agregar " << endl;
-        cin >> accion; 
-        arbol->AgregarHijo(nodo, accion);
-      break;
-      case 3:
-        cout << "A cual nodo desea agregar un hijo mas derecho? " << endl;     
-        cin >> accion;   
-        nodo = buscarEtiqueta(accion, arbol);
-        cout << "Digite la etiqueta que desea agregar " << endl;
-        cin >> accion; 
-        arbol->AgregarHijoMasDerecho(nodo, accion);
-      break;
-      case 4:
-        cout << "Digite la etiqueta del nodo hoja desea borrar" << endl;     
-        cin >> accion;   
-        nodo = buscarEtiqueta(accion, arbol);
-        arbol->BorrarHoja(nodo);
-      break;
-      case 5:
-        cout << "La raíz del árbol es: " << arbol->Etiqueta( arbol->Raiz() ) << endl;
-      break;
-      case 6:
-        cout << "Digite la etiqueta del nodo que desea conocer el padre " << endl;
-        cin >> accion;
-        nodo = buscarEtiqueta(accion, arbol);
-        cout << "El padre del nodo " << accion << " es: " << arbol->Etiqueta( arbol-> Padre(nodo) ) << endl;
-      break;
-      case 7:
-        cout << "Digite la etiqueta del nodo que desea conocer el  hijo más izquierdo " << endl;
-        cin >> accion;
-        nodo = buscarEtiqueta(accion, arbol);
-        cout << "El hijo más izquierdo del nodo " << accion << " es: " << arbol->Etiqueta( arbol-> HijoMasIzquierdo(nodo) ) << endl;
-      break;
-      case 8:
-        cout << "Digite la etiqueta del nodo que desea conocer el hermano derecho " << endl;
-        cin >> accion;
-        nodo = buscarEtiqueta(accion, arbol);
-        cout << "El hermano derecho del nodo " << accion << " es: " << arbol->Etiqueta( arbol-> HermanoDerecho(nodo) ) << endl;
-      break;
-      case 9:
-        cout << "Digite la etiqueta del nodo que desea conocer el modificar " << endl;
-        cin >> accion;
-        nodo = buscarEtiqueta(accion, arbol);
-        cout << "Digite la nueva etiqueta" << endl;
-        cin >> accion;
-        arbol->ModificarEtiqueta(nodo, accion);
-      break;
-      case 10:
-        cout << "La cantidad de nodos en el árbol es: " << arbol->NumNodos() << endl;
-      break;
-      case 11:
-        cout << "Digite la etiqueta del nodo que desea conocer si existe" << endl;
-        cin >> accion;
-        nodo = buscarEtiqueta(accion, arbol);
-        if(nodo != nullptr) { cout << "La etiqueta existe en el árbol " << endl; }
-        else { cout << "La etiqueta no existe en el árbol " << endl; }
+  // while (accion != 0){
+  //   cout << "\nDigite una opcion: \n1-PonerRaíz  \n2-AgregarHijo \n3-AgregarHijoMásDerecho \n4-BorrarHoja  \n5-Imprimir raíz \n6-Imprimir padre de un nodo\n7-Imprimir hijoMásIzquierdo \n8-Imprimir hermano Derecho \n9-Modificar etiqueta \n10-NumNodos\n 0-Salir" << endl;
+  //   cin >> accion;
+  //   switch(accion){
+  //     case 1:
+  //       if(raizDefinida) {
+  //         cout << "Ya hay una raiz en el árbol " << endl; 
+  //         break;
+  //       }
+  //       int numeroEtiqueta;
+  //       cout << "Digite el numero de la etiqueta: " << endl;
+  //       cin >> numeroEtiqueta;
+  //       arbol->PonerRaiz(numeroEtiqueta);
+  //       raizDefinida = true;
+  //     break;
+  //     case 2:
+  //       cout << "A cual nodo desea agregar un hijo? " << endl;     
+  //       cin >> accion;   
+  //       nodo = buscarEtiqueta(accion, arbol);
+  //       cout << "Digite el numero de la etiqueta que desea agregar " << endl;
+  //       cin >> accion; 
+  //       arbol->AgregarHijo(nodo, accion);
+  //     break;
+  //     case 3:
+  //       cout << "A cual nodo desea agregar un hijo mas derecho? " << endl;     
+  //       cin >> accion;   
+  //       nodo = buscarEtiqueta(accion, arbol);
+  //       cout << "Digite la etiqueta que desea agregar " << endl;
+  //       cin >> accion; 
+  //       arbol->AgregarHijoMasDerecho(nodo, accion);
+  //     break;
+  //     case 4:
+  //       cout << "Digite la etiqueta del nodo hoja desea borrar" << endl;     
+  //       cin >> accion;   
+  //       nodo = buscarEtiqueta(accion, arbol);
+  //       arbol->BorrarHoja(nodo);
+  //     break;
+  //     case 5:
+  //       cout << "La raíz del árbol es: " << arbol->Etiqueta( arbol->Raiz() ) << endl;
+  //     break;
+  //     case 6:
+  //       cout << "Digite la etiqueta del nodo que desea conocer el padre " << endl;
+  //       cin >> accion;
+  //       nodo = buscarEtiqueta(accion, arbol);
+  //       cout << "El padre del nodo " << accion << " es: " << arbol->Etiqueta( arbol-> Padre(nodo) ) << endl;
+  //     break;
+  //     case 7:
+  //       cout << "Digite la etiqueta del nodo que desea conocer el  hijo más izquierdo " << endl;
+  //       cin >> accion;
+  //       nodo = buscarEtiqueta(accion, arbol);
+  //       cout << "El hijo más izquierdo del nodo " << accion << " es: " << arbol->Etiqueta( arbol-> HijoMasIzquierdo(nodo) ) << endl;
+  //     break;
+  //     case 8:
+  //       cout << "Digite la etiqueta del nodo que desea conocer el hermano derecho " << endl;
+  //       cin >> accion;
+  //       nodo = buscarEtiqueta(accion, arbol);
+  //       cout << "El hermano derecho del nodo " << accion << " es: " << arbol->Etiqueta( arbol-> HermanoDerecho(nodo) ) << endl;
+  //     break;
+  //     case 9:
+  //       cout << "Digite la etiqueta del nodo que desea conocer el modificar " << endl;
+  //       cin >> accion;
+  //       nodo = buscarEtiqueta(accion, arbol);
+  //       cout << "Digite la nueva etiqueta" << endl;
+  //       cin >> accion;
+  //       arbol->ModificarEtiqueta(nodo, accion);
+  //     break;
+  //     case 10:
+  //       cout << "La cantidad de nodos en el árbol es: " << arbol->NumNodos() << endl;
+  //     break;
+  //     case 11:
+  //       cout << "Digite la etiqueta del nodo que desea conocer si existe" << endl;
+  //       cin >> accion;
+  //       nodo = buscarEtiqueta(accion, arbol);
+  //       if(nodo != nullptr) { cout << "La etiqueta existe en el árbol " << endl; }
+  //       else { cout << "La etiqueta no existe en el árbol " << endl; }
 
-      break;
-      // default:
-      //     cout << "Debe elegir una opción valida" << endl;
-      //     accion=0;
-      // break;
-    }
-  }
-  arbol->Destruir();
+  //     break;
+  //     // default:
+  //     //     cout << "Debe elegir una opción valida" << endl;
+  //     //     accion=0;
+  //     // break;
+  //   }
+  // }
+  // arbol->Destruir();
   // delete arbol;
 
   // Opciones opciones;

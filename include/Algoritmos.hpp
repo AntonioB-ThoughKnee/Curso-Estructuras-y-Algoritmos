@@ -1,14 +1,14 @@
 #ifndef ALGORITMOSHPP
 #define ALGORITMOSHPP
 
-#include "ListaIndexada.hpp"
-#include "Cola.hpp"
-//#include "ArregloSenaladorPadre.hpp"
-//#include "HMIHDConPtrPadreOptimizado.hpp"
-//#include "HMIHDConPtrPadreyHI.hpp"
-//#include "ListaHijos.hpp"
+#include "ListaIndexadaPlantilla.hpp"
+#include "ColaPlantilla.hpp"
+// #include "ArregloPadre.hpp"
+// #include "HMIHDConPtrPadreOptimizado.hpp"
+// #include "HMIHDConPtrPadreyHI.hpp"
+// #include "ListaHijos.hpp"
 #include "HMIHDConContador.hpp"
-
+// template < template <Arbol::Nodo*> class ListaIndexada >
 class Algoritmos{
 private:
 Arbol* arbol;
@@ -19,14 +19,25 @@ Algoritmos();
 void inicializarArbol();
 void menu();
 
-void hermanoIzquierdo(Arbol::Nodo*);  // Por dentro imprime la etiqueta, no devuelve nada entonces.
+void hermanoIzquierdo(Arbol::Nodo* nodo);  // Por dentro imprime la etiqueta, no devuelve nada entonces.
 void contieneEtiquetasRepetidas();  // Imprime por dentro el mensaje de verdadero o falso.
-void profundidadNodo(Arbol::Nodo*);  // Imprime por dentro el numero.
+void profundidadNodo(Arbol::Nodo* nodo);  // Imprime por dentro el numero.
 void cantidadNivelesPreOrden();  // Imprime la cantidad de niveles por dentro.
+
 int contarPorNiveles();
 void listaEtiquetasNivel(int nivel);
 void recorridoPreOrden();
 void recorridoPorNiveles();
+
+// ===========================================
+// METODO PARA CONTIENE ETIQUETAS REPETIDAS
+// bool BuscarRepetidaEnLista(int etiqueta, ListaIndexada<Arbol::Nodo*>* L);
+
+// ==========================================================
+// METODO PARA CANTIDAD DE NIVELES PRE ORDEN
+void ListarPreOrdenR(Arbol::Nodo* nodo, int nivel, int* nivelRet);
+
+
 };
 
 #endif
