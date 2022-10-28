@@ -77,6 +77,9 @@ public:
         // Se libera la memoria utilizada
         // delete this->primero; //bug?
     }
+
+    void Iniciar() {};
+    void Destruir() {};
     /**
      * @brief Metodo que inserta un elemento en una indice de la lista
      * 

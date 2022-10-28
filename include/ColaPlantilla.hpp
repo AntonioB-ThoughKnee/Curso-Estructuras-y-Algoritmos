@@ -10,7 +10,10 @@
  * @param cola puntero al arreglo circular
  * @param contador cantidad de datos en la cola
  */
+using namespace std;
 template <typename Elemento>
+
+
 class Cola{
 
 private:
@@ -50,6 +53,10 @@ void Destruir(){
     this->contador=0;
     delete this->cola;
 }
+
+void Iniciar() {};
+
+
 /**
  * @brief Metodo para agregar un elemento a la cola
  * 
@@ -83,7 +90,7 @@ Elemento Desencolar(){
     // Se verifica si la cola esta vacia, de ser asi no se puede desencolar de ella
     if(this->contador==0){
         cout << "La cola esta vacía" << endl;
-        return 123;
+        return nullptr;
     }else{
     // Si no lo está, se modifica el inicio y se devuelve el primer valor agregado
         Elemento elemDevolver=cola[this->inicio];

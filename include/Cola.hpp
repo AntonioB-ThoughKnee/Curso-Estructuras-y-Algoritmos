@@ -43,6 +43,9 @@ Cola();
  * @remark Requiere: Que la cola esté inicializada y que no se haya excedido la capacidad maxima de la misma.
  * @remark Modifica: El contenido de la cola.
  */
+
+void Iniciar();
+
 void Encolar(int elemento);
 /**
  * @brief Metodo para agregar un elemento a la cola
