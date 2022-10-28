@@ -36,7 +36,7 @@ void Algoritmos::inicializarArbol() {
     // Pruebas:
     this->hermanoIzquierdo(nodo2); // ? no imprime nada y deberia imprimir 1 (solo ocurre error con hmihdconcontador, arregloPadre). (creo que solo sirve con listaHijos)
     this->contieneEtiquetasRepetidas(); // Funciona perfecto
-    // this->profundidadNodo(nodo10);
+    this->profundidadNodo(nodo1); // malo.. why?
     this->cantidadNivelesPreOrden(); // Funciona perfecto.
 
 }
@@ -151,7 +151,35 @@ void Algoritmos::contieneEtiquetasRepetidas() {
 //     return false; // no se encontró repetida
 // }
 
-// ================== EMPIEZA PROFUNDIDAD NODO ======================
+
+// ============ EMPIEZA PROFUNDIDAD NODO ===================================
+void Algoritmos::profundidadNodo(Arbol::Nodo* nodoBuscar) {
+    bool encontrado = false;
+    int nivelRet = -1;
+    if (this->arbol->NumNodos() != 0) {
+        ListarPreOrdenRProfundidad(this->arbol->Raiz(), 1, nodoBuscar,
+            &nivelRet, &encontrado);
+    }
+    cout << "La profundidad desde la raíz hasta el nodo introducido es: " << nivelRet << endl;
+}
+
+void Algoritmos::ListarPreOrdenRProfundidad(Arbol::Nodo* nodo, int nivel,
+  Arbol::Nodo* nodoBuscar, int* nivelRet, bool* encontrado) {
+    if (nodo == nodoBuscar) {
+        *encontrado = true;
+        *nivelRet = nivel;
+    }
+    nodo = this->arbol->HijoMasIzquierdo(nodo);
+    while (nodo != nullptr && !encontrado) {
+        ListarPreOrdenRProfundidad(nodo, nivel+1, nodoBuscar, nivelRet, encontrado);
+        nodo = this->arbol->HermanoDerecho(nodo);
+    }
+  }
+
+// ============ TERMINA PROFUNDIDAD NODO ===================================
+
+
+// ============= EMPIEZA CANTIDAD NIVELES PRE ORDEN ==========================
 void Algoritmos::cantidadNivelesPreOrden() {
     int nivelRet = -1;
     if (this->arbol->NumNodos() != 0) {
@@ -170,3 +198,5 @@ void Algoritmos::ListarPreOrdenR(Arbol::Nodo* nodo, int nivel, int* nivelRet) {
         nodo = this->arbol->HermanoDerecho(nodo);
     }
 }
+
+// =================== TERMINA CANTIDAD NIVELES PRE ORDEN =====================
