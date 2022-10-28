@@ -1,13 +1,13 @@
 #ifndef ALGORITMOSHPP
 #define ALGORITMOSHPP
 
-#include "ListaIndexada.hpp"
+#include "ListaIndexadaPlantilla.hpp"
 #include "Cola.hpp"
-//#include "ArregloSenaladorPadre.hpp"
-//#include "HMIHDConPtrPadreOptimizado.hpp"
-//#include "HMIHDConPtrPadreyHI.hpp"
-//#include "ListaHijos.hpp"
-#include "HMIHDConContador.hpp"
+#include "ArregloPadre.hpp"
+// #include "HMIHDConPtrPadreOptimizado.hpp"
+// #include "HMIHDConPtrPadreyHI.hpp"
+// #include "ListaHijos.hpp"
+// #include "HMIHDConContador.hpp"
 
 class Algoritmos{
 private:
@@ -25,6 +25,8 @@ private:
 
 
   //===========================  Algoritmos 9, 10 y 11
+
+   
   /**
    * @brief Busca una  etiqueta en un árbol dado y regresa el nodo que tenga esa etiqueta si existe ese nodo
    * 
@@ -55,7 +57,7 @@ private:
      * @param
   Modifica: Nada
    */
-  Arbol* HacerArbol(int hijos, ListaIndexada lista);
+  Arbol* HacerArbol(int hijos, ListaIndexada<int> (lista));
 
   /**
    * @brief Elimina un nodo dado y el subarbol que contiene el nodo de un árbol dado
