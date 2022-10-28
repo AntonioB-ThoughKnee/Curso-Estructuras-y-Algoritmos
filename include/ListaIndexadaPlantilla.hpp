@@ -75,7 +75,7 @@ public:
      */
     ~ListaIndexada(){
         // Se libera la memoria utilizada
-        delete this->primero;
+        // delete this->primero; //bug?
     }
     /**
      * @brief Metodo que inserta un elemento en una indice de la lista

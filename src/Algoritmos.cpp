@@ -95,35 +95,24 @@ Arbol* Algoritmos::HacerArbol(int nodosPorHijo, ListaIndexada<int> lista){
 void Algoritmos::menu(){
     int accion=1;
     cout<<"Bienvenido al programa que prueba Algoritmos!"<<endl;
-    Arbol::Nodo* nodo;
-
-    //===========================  Configurando tests
-    {
+    //===========================  Configurando variables para el programa
     Arbol* arbol=new Arbol();
-
-    //===========================  Defining arbol
-    arbol->PonerRaiz(1);
-    Arbol::Nodo* root = arbol->Raiz();
-    Arbol::Nodo* nodo2 = arbol->AgregarHijo(root, 2);
-    arbol->AgregarHijoMasDerecho(root, 3);
-    Arbol::Nodo* nodo4 = arbol->AgregarHijoMasDerecho(root, 4);
-    //=====  
     ListaIndexada<int> lista;
-    for(int ii = 1; ii <= 7 ; ii++){ // Se puede cambiar el número de elementos en la lista para hacer un árbol siempre y cuando cumpla con el requisito del algoritmo
-      lista.insertar(ii, ii);
-    }
-    arbol = HacerArbol(2, lista);
-    EliminarSubarbol(BuscarEtiqueta(3, arbol), arbol);
-    }
-    //=====   
+    Arbol::Nodo* nodo;
+    //=====  
 
-        //TODO: HACER FUNCIONAR ESTE MENU CON LAS OPCIONES DEL ARBOL
     while (accion != 0){
         cout<<"Seleccione el algoritmo que desea probar: "<<endl;
-        // TODO: Terminar de agregar las opciones
         string opciones = "\n9-Buscar Etiqueta\n10-Eliminar Subarbol \n11-Construir arbol completo";
         cout<<opciones<<endl;
         cin >> accion;
+        
+        //===========================  Limpiando "lista"
+        int ii = 1;
+        while(lista.numElem() > 0 ){
+          lista.borrar(ii);
+        }
+        //=====  
         switch(accion){
             case 1:
                 cout << "404" << endl;
@@ -149,12 +138,35 @@ void Algoritmos::menu(){
                 cin >> accion;   
                 nodo = BuscarEtiqueta(accion, arbol);
                 if(nodo == nullptr){
-                    cout << "No existe nodo con esa etiqueta " << endl;
+                  cout << "No existe nodo con esa etiqueta " << endl;
                 } else {
-                    cout << "Si existe nodo con esa etiqueta " << endl;
+                  cout << "Si existe nodo con esa etiqueta " << endl;
                 }
             break;
+            case 10: //  Borrar sub árbol
+              cout << "Cuál nodo desea borrar?\nDigite la etiqueta del nodo " << endl;
+              cin >> accion;
+              nodo = BuscarEtiqueta(accion, arbol);
+              if(nodo == nullptr){
+                cout << "No existe nodo con esa etiqueta " << endl;
+              } else {
+                EliminarSubarbol(BuscarEtiqueta(accion, arbol), arbol);
+                cout << "Nodo eliminado" << endl;
+              }
+            break;
             case 11: // Construir arbol
+              cout << "Se creará una lista con los números del 1 hasta el número que digite, y estos números formarán parte del nuevo árbol" << endl;
+              cout << "La lista creada debe cumplir un tamaño igual a \n(k**i-1) / (k-1)\nDonde 'k' = hijos por nodo e 'i' = nivel de profundidad del arbol " << endl;
+              cin >> accion;
+
+              for(int ii = 1; ii <= accion ; ii++){ 
+                lista.insertar(ii, ii);//FIXME Datos existentes en la lista se corrompen
+              }
+
+              cout << "Ingrese la cantidad de hijos por nodo " << endl;
+              cin >> accion;
+              arbol = HacerArbol(accion, lista);
+
 
             break;
             default:
