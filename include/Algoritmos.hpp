@@ -1,7 +1,7 @@
 #ifndef ALGORITMOSHPP
 #define ALGORITMOSHPP
 
-#include "ListaIndexada.hpp"
+#include "ListaIndexadaPlantilla.hpp"
 #include "Cola.hpp"
 //#include "ArregloSenaladorPadre.hpp"
 //#include "HMIHDConPtrPadreOptimizado.hpp"
