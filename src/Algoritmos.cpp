@@ -100,6 +100,13 @@ void Algoritmos::menu(){
     ListaIndexada<int> lista;
     Arbol::Nodo* nodo;
     //=====  
+    //===========================  Testeando el árbol
+    for(int ii = 1; ii <= 7 ; ii++){ // Se puede cambiar el número de elementos en la lista para hacer un árbol siempre y cuando cumpla con el requisito del algoritmo
+      lista.insertar(ii, ii);
+    }
+    arbol = HacerArbol(2, lista);
+    EliminarSubarbol(BuscarEtiqueta(3, arbol), arbol);
+    //=====  
 
     while (accion != 0){
         cout<<"Seleccione el algoritmo que desea probar: "<<endl;
@@ -114,25 +121,6 @@ void Algoritmos::menu(){
         }
         //=====  
         switch(accion){
-            case 1:
-                cout << "404" << endl;
-                // cout<<"El arbol tiene "<<this->contarPorNiveles()<<" niveles"<<endl;
-            break;
-            case 2:
-                cout << "404" << endl;
-                // int nivel;
-                // cout<<"Seleccione el nivel: "<<endl;
-                // cin>>nivel;
-                // this->listaEtiquetasNivel(nivel);
-            break;
-            case 3:
-                cout << "404" << endl;
-                // this->recorridoPreOrden();
-            break;
-            case 4:
-                cout << "404" << endl;
-                // this->recorridoPorNiveles();
-            break;
             case 9: // buscar Etiqueta
                 cout << "A cual nodo desea buscar? " << endl;     
                 cin >> accion;   
@@ -166,8 +154,6 @@ void Algoritmos::menu(){
               cout << "Ingrese la cantidad de hijos por nodo " << endl;
               cin >> accion;
               arbol = HacerArbol(accion, lista);
-
-
             break;
             default:
                 accion=0;
