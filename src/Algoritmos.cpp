@@ -3,6 +3,9 @@
 
 #include "../include/Algoritmos.hpp"
 #include "../include/ColaPlantilla.hpp"
+#include "../include/ListaIndexadaPlantilla.hpp"
+
+
 
 
 using namespace std;
@@ -12,14 +15,16 @@ Algoritmos::Algoritmos(){
     this->nivelMaximo=1;
 }
 Algoritmos::~Algoritmos(){
-    if (this->arbol!=nullptr){
-        delete this->arbol;
-    }
 }
+
 void Algoritmos::menu(){
     int accion=1;
     cout<<"Bienvenido al programa que prueba Algoritmos!"<<endl;
-        //TODO: HACER FUNCIONAR ESTE MENU CON LAS OPCIONES DEL ARBOL
+
+    // TODO: Poner como parametros de la clase
+    
+    ListaIndexada<int> lista;
+    Arbol::Nodo* nodo;
     while (accion != 0){
         cout<<"Seleccione el algoritmo que desea probar: "<<endl;
         // TODO: Terminar de agregar las opciones
@@ -64,6 +69,39 @@ void Algoritmos::menu(){
             break;
             case 8:
                 this->listarPorNiveles();
+            case 9: // buscar Etiqueta
+                cout << "A cual nodo desea buscar? " << endl;     
+                cin >> accion;   
+                nodo = BuscarEtiqueta(accion, arbol);
+                if(nodo == nullptr){
+                  cout << "No existe nodo con esa etiqueta " << endl;
+                } else {
+                  cout << "Si existe nodo con esa etiqueta " << endl;
+                }
+            break;
+            case 10: //  Borrar sub árbol
+              cout << "Cuál nodo desea borrar?\nDigite la etiqueta del nodo " << endl;
+              cin >> accion;
+              nodo = BuscarEtiqueta(accion, arbol);
+              if(nodo == nullptr){
+                cout << "No existe nodo con esa etiqueta " << endl;
+              } else {
+                EliminarSubarbol(BuscarEtiqueta(accion, arbol), arbol);
+                cout << "Nodo eliminado" << endl;
+              }
+            break;
+            case 11: // Construir arbol
+              cout << "Se creará una lista con los números del 1 hasta el número que digite, y estos números formarán parte del nuevo árbol" << endl;
+              cout << "La lista creada debe cumplir un tamaño igual a \n(k**i-1) / (k-1)\nDonde 'k' = hijos por nodo e 'i' = nivel de profundidad del arbol " << endl;
+              cin >> accion;
+
+              for(int ii = 1; ii <= accion ; ii++){ //bg
+                lista.Insertar(ii, ii);
+              }
+
+              cout << "Ingrese la cantidad de hijos por nodo " << endl;
+              cin >> accion;
+              arbol = HacerArbol(accion, lista);
             break;
             default:
                 accion=0;
@@ -127,7 +165,7 @@ void Algoritmos::listarPorNiveles(){
         Cola<Arbol::Nodo*> cola;
         cola.Iniciar();
         cola.Encolar(this->arbol->Raiz());
-        while (cola.numElem()!=0){
+        while (cola.NumElem()!=0){
             Arbol::Nodo* nodo = cola.Desencolar();
             cout<<this->arbol->Etiqueta(nodo)<<" ";
             Arbol::Nodo* n1= this->arbol->HijoMasIzquierdo(nodo);
@@ -138,4 +176,72 @@ void Algoritmos::listarPorNiveles(){
         }
         cola.Destruir();
     }
+}
+
+Arbol::Nodo* Algoritmos::BuscarEtiqueta(int etiqueta, Arbol* A)
+{
+  Arbol::Nodo* tmp;
+  ListaIndexada<Arbol::Nodo*> auxiliar;
+  auxiliar.Insertar(A->Raiz(), auxiliar.NumElem()+1);
+  int i = 1;
+  //Se hace recorrido por niveles y se usa un if para encontrar el nodo buscado
+  while(i <= auxiliar.NumElem())
+  {
+    tmp = auxiliar.Recuperar(i);
+    i++;
+    if(A->Etiqueta(tmp) == etiqueta) { return tmp; } 
+    tmp = A->HijoMasIzquierdo(tmp);
+    while(tmp != nullptr)
+    {
+      auxiliar.Insertar(tmp, auxiliar.NumElem()+1);
+      tmp = A->HermanoDerecho(tmp);
+    }
+  }
+  return nullptr;
+}
+
+void  Algoritmos::EliminarSubarbol(Arbol::Nodo* nodo, Arbol* A){
+  Arbol::Nodo* tmp = A->HijoMasIzquierdo(nodo); //Hijo de nodo
+  Arbol::Nodo* tmpHermanoDerecho; // Hermano derecho del hijo de nodo, existe porque se necesita guardar antes de que se elimine tmp al salir de la llamada recursiva en el while loop
+  while(tmp != nullptr){
+    tmpHermanoDerecho = A->HermanoDerecho(tmp);
+    EliminarSubarbol(tmp, A);
+    tmp = tmpHermanoDerecho;
+  } 
+
+  //Si se llegó al final del subárbol, se elimina la hoja y se crea un efecto dominó hacía arriba
+  if(tmp == nullptr){
+    A->BorrarHoja(nodo);
+  }
+}
+
+Arbol* Algoritmos::HacerArbol(int nodosPorHijo, ListaIndexada<int> lista){
+  Arbol* nuevoArbol = new Arbol();
+  ListaIndexada<Arbol::Nodo*> auxiliar;
+  int iLista = 1; 
+  int iAuxiliar = 1;
+  nuevoArbol->PonerRaiz(lista.Recuperar(iLista));
+  iLista++; //Se suma 1 porque ya se añadió la raíz
+  Arbol::Nodo* tmp = nuevoArbol->Raiz(); 
+
+  //Se pasa por toda la lista dada
+  while(iLista < lista.NumElem() ){
+    //Agregando nodos correspondientes segun "nodosPorHijo" a tmp
+    for(int ii = 0; ii < nodosPorHijo ; ii++){
+      nuevoArbol->AgregarHijoMasDerecho(tmp, lista.Recuperar(iLista));
+      iLista++;
+    }
+    //===========================  Guardando los nodos agregados para agregarles mas tarde los nodos correspondientes
+    Arbol::Nodo* hijoDeTmp = nuevoArbol->HijoMasIzquierdo(tmp);
+    while(hijoDeTmp != nullptr){
+      auxiliar.Insertar(hijoDeTmp, auxiliar.NumElem()+1);
+      hijoDeTmp = nuevoArbol->HermanoDerecho(hijoDeTmp);
+    }
+    //=====  
+
+    //Sacando de auxiliar los nodos guardados para seguir agregando nodos
+    tmp = auxiliar.Recuperar(iAuxiliar);
+    iAuxiliar++;
+  }
+  return nuevoArbol;
 }

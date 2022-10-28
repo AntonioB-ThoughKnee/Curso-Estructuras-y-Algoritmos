@@ -1,5 +1,5 @@
-#ifndef LISTAINDEXADAHPP
-#define LISTAINDEXADAHPP
+#ifndef LISTAINDEXADAPLANTILLAHPP
+#define LISTAINDEXADAPLANTILLAHPP
 /**
  * @brief Estructura de datos ListaIndexada
  * @remark Esta estructura es implementada por una lista simplemente enlazada
