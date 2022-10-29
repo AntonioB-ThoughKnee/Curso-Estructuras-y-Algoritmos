@@ -122,8 +122,9 @@ void HMIHDConContador::BorrarHoja(Nodo* hoja)
         tmp->hermano = nullptr;
     } else
     {
+        padre = tmp->hermano;
         tmp->hermano = tmp->hermano->hermano;
-        tmp = tmp->hermano;
+        tmp = padre;
     }
     delete tmp;
     contador--;
