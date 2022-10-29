@@ -54,8 +54,6 @@ void Destruir(){
     delete this->cola;
 }
 
-void Iniciar() {};
-
 
 /**
  * @brief Metodo para agregar un elemento a la cola

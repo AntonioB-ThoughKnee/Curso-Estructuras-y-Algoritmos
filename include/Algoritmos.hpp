@@ -2,12 +2,12 @@
 #define ALGORITMOSHPP
 
 #include "ListaIndexadaPlantilla.hpp"
-#include "Cola.hpp"
-//#include "ArregloSenaladorPadre.hpp"
-//#include "HMIHDConPtrPadreOptimizado.hpp"
-//#include "HMIHDConPtrPadreyHI.hpp"
-//#include "ListaHijos.hpp"
-#include "HMIHDConContador.hpp"
+#include "ColaPlantilla.hpp"
+// #include "ArregloPadre.hpp"
+// #include "HMIHDConPtrPadreOptimizado.hpp"
+// #include "HMIHDConPtrPadreyHI.hpp"
+// #include "ListaHijos.hpp"
+// #include "HMIHDConContador.hpp"
 #include "ListaIndexadaPlantilla.hpp"
 
 class Algoritmos{
@@ -31,12 +31,10 @@ void listaEtiquetasNivel(int nivel);
 void recorridoPreOrden();
 void recorridoPorNiveles();
 void cantidadNivelesPorNiveles();
-void listarEtiquetasNivel(int nivelDeseado);
-void listarPreOrden();
 void listarPorNivel();
 void contarNivelesR(Arbol::Nodo* nodo,int nivelActual);
-void listarEtiquietasNivel(int nivelDeseado);
-void listarEtiquietasNivelR(Arbol::Nodo* nodo, int nivelActual,int nivelDeseado);
+void listarEtiquetasNivel(int nivelDeseado);
+void listarEtiquetasNivelR(Arbol::Nodo* nodo, int nivelActual,int nivelDeseado);
 void listarPreOrden();
 void listarPreOrdenR(Arbol::Nodo* nodo);
 void listarPorNiveles();

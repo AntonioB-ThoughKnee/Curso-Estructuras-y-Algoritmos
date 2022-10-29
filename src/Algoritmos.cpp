@@ -10,7 +10,6 @@ using namespace std;
 Algoritmos::Algoritmos(){
     this->arbol=new Arbol();
     this->nivelMaximo=1;
-    this->inicializarArbol();
 }
 Algoritmos::~Algoritmos(){
     if (this->arbol){
@@ -36,10 +35,14 @@ void Algoritmos::inicializarArbol() {
 }
 
 void Algoritmos::menu(){
+    this->inicializarArbol();
     int accion=1;
-    cout<<"Bienvenido al programa que prueba Algoritmos!"<<endl;
     ListaIndexada<int> lista;
+    lista.Iniciar();
     Arbol::Nodo* nodo;
+    int etiqueta;
+
+    cout<<"Bienvenido al programa que prueba Algoritmos!"<<endl;
     while (accion != 0){
         cout<<"Seleccione el algoritmo que desea probar: "<<endl;
         string opciones =
@@ -55,7 +58,6 @@ void Algoritmos::menu(){
         cin >> accion;
         switch(accion){
             case 1:
-                int etiqueta;
                 cout<<"Digite la etiqueta del nodo del cual quiere conocer el hermano izquierdo: "<<endl;
                 cin>>etiqueta;
                 this->hermanoIzquierdo(this->BuscarEtiqueta(etiqueta,this->arbol));
@@ -64,7 +66,6 @@ void Algoritmos::menu(){
                 this->contieneEtiquetasRepetidas();
             break;
             case 3:
-                int etiqueta;
                 cout<<"Digite la etiqueta del nodo del cual quiere conocer la profundidad: "<<endl;
                 cin>>etiqueta;
                 this->profundidadNodo(this->BuscarEtiqueta(etiqueta,this->arbol));
@@ -86,6 +87,7 @@ void Algoritmos::menu(){
             break;
             case 8:
                 this->listarPorNiveles();
+            break;
             case 9:
                 cout << "A cual nodo desea buscar? " << endl;     
                 cin >> accion;   
@@ -106,6 +108,7 @@ void Algoritmos::menu(){
                 EliminarSubarbol(BuscarEtiqueta(accion, this->arbol), this->arbol);
                 cout << "SubArbol eliminado" << endl;
               }
+              this->listarPorNiveles();
             break;
             case 11: // Construir arbol
               cout << "Se creará una lista con los números del 1 hasta el número que digite, y estos números formarán parte del nuevo árbol" << endl;
@@ -119,6 +122,7 @@ void Algoritmos::menu(){
               cout << "Ingrese la cantidad de hijos por nodo " << endl;
               cin >> accion;
               arbol = HacerArbol(accion, lista);
+              this->listarPorNiveles();
             break;
             default:
                 accion=0;
@@ -129,6 +133,7 @@ void Algoritmos::menu(){
 
 
 // ALGORITMO 1:
+// TODO: Clausula requiere: que no se pida con un nodo que no tiene herm izq.
 
 void Algoritmos::hermanoIzquierdo(Arbol::Nodo* nodo) {
     //TODO: Arreglar caso nodo = 3
@@ -263,21 +268,22 @@ void Algoritmos::contarNivelesR(Arbol::Nodo* nodo,int nivelActual){
 }
 
 // ALGORITMO 6: 
-
-void Algoritmos::listarEtiquietasNivel(int nivelDeseado){
+void Algoritmos::listarEtiquetasNivel(int nivelDeseado){
+    cout << "\n";
     if(this->arbol->NumNodos()!=0){
-        listarEtiquietasNivelR(this->arbol->Raiz(),1,nivelDeseado);
+        listarEtiquetasNivelR(this->arbol->Raiz(),1,nivelDeseado);
     }
+    cout << "\n";
 }
 
-void Algoritmos::listarEtiquietasNivelR(Arbol::Nodo* nodo,int nivelActual,int nivelDeseado){
+void Algoritmos::listarEtiquetasNivelR(Arbol::Nodo* nodo,int nivelActual,int nivelDeseado){
     if(nivelActual==nivelDeseado){
         cout<<this->arbol->Etiqueta(nodo)<<" ";
     }
     nodo=this->arbol->HijoMasIzquierdo(nodo);
     nivelActual=nivelActual+1;
     while (nodo!=nullptr){
-        listarEtiquietasNivelR(nodo,nivelActual,nivelDeseado);
+        listarEtiquetasNivelR(nodo,nivelActual,nivelDeseado);
         nodo=this->arbol->HermanoDerecho(nodo);
     }
 }
@@ -285,9 +291,11 @@ void Algoritmos::listarEtiquietasNivelR(Arbol::Nodo* nodo,int nivelActual,int ni
 //ALGORITMO 7:
 
 void Algoritmos::listarPreOrden(){
+    cout << "\n";
     if (this->arbol->NumNodos()!=0){
     listarPreOrdenR(this->arbol->Raiz());
     }
+    cout << "\n";
 }
 void Algoritmos::listarPreOrdenR(Arbol::Nodo* nodo){
     cout<<this->arbol->Etiqueta(nodo)<<" ";
@@ -301,6 +309,7 @@ void Algoritmos::listarPreOrdenR(Arbol::Nodo* nodo){
 //ALGORITMO 8:
 
 void Algoritmos::listarPorNiveles(){
+    cout << "\n";
     if (this->arbol->NumNodos()!=0){
         Cola<Arbol::Nodo*> cola;
         cola.Iniciar();
@@ -316,6 +325,7 @@ void Algoritmos::listarPorNiveles(){
         }
         cola.Destruir();
     }
+    cout << "\n";
 }
 
 //ALGORITMO 9:
@@ -324,6 +334,7 @@ Arbol::Nodo* Algoritmos::BuscarEtiqueta(int etiqueta, Arbol* A)
 {
   Arbol::Nodo* tmp;
   ListaIndexada<Arbol::Nodo*> auxiliar;
+  auxiliar.Iniciar();
   auxiliar.Insertar(A->Raiz(), auxiliar.NumElem()+1);
   int i = 1;
   //Se hace recorrido por niveles y se usa un if para encontrar el nodo buscado
@@ -364,6 +375,7 @@ void  Algoritmos::EliminarSubarbol(Arbol::Nodo* nodo, Arbol* A){
 Arbol* Algoritmos::HacerArbol(int nodosPorHijo, ListaIndexada<int> lista){
   Arbol* nuevoArbol = new Arbol();
   ListaIndexada<Arbol::Nodo*> auxiliar;
+  auxiliar.Iniciar();
   int iLista = 1; 
   int iAuxiliar = 1;
   nuevoArbol->PonerRaiz(lista.Recuperar(iLista));
