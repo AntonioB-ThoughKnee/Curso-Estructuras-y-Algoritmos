@@ -4,6 +4,11 @@
 #include "../include/Algoritmos.hpp"
 #include "../include/ColaPlantilla.hpp"
 #include "../include/ListaIndexadaPlantilla.hpp"
+#include "../include/HMIHDConPtrPadreOptimizado.hpp"
+// #include "ArregloPadre.hpp"
+// #include "HMIHDConPtrPadreyHI.hpp"
+// #include "ListaHijos.hpp"
+// #include "HMIHDConContador.hpp"
 
 using namespace std;
 
