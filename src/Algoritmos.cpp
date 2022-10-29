@@ -249,21 +249,25 @@ void Algoritmos::ListarPreOrdenR(Arbol::Nodo* nodo, int nivel, int* nivelRet) {
 // ALGORITMO 5: NO FUNCIONA (ARREGLAR)
 
 void Algoritmos::cantidadNivelesPorNiveles(){
-    if(this->arbol->NumNodos()!=0){
-        contarNivelesR(this->arbol->Raiz(),1);
-    }
-    cout << "El nivel maximo del arbol es: "<<this->nivelMaximo<<endl;
-}
-
-void Algoritmos::contarNivelesR(Arbol::Nodo* nodo,int nivelActual){
-    if(nivelActual>this->nivelMaximo){
-        this->nivelMaximo=nivelActual;
-    }
-    nodo=this->arbol->HijoMasIzquierdo(nodo);
-    nivelActual=nivelActual+1;
-    while (nodo!=nullptr){
-        contarNivelesR(nodo,nivelActual);
-        nodo=this->arbol->HermanoDerecho(nodo);
+    if (this->arbol->NumNodos()!=0){
+        Cola<Pares> cola;
+        cola.Iniciar();
+        Pares par(this->arbol->Raiz(),1);
+        cola.Encolar(par);
+        while (cola.NumElem()!=0){
+            Pares par = cola.Desencolar();
+            if(this->nivelMaximo<par.nivel){
+                this->nivelMaximo=par.nivel;
+            }
+            Arbol::Nodo* n1 = this->arbol->HijoMasIzquierdo(par.nodo);
+            int nuevoNivel = par.nivel + 1;
+            Pares nuevoPar(n1,nuevoNivel);
+            while (nuevoPar.nodo != nullptr){
+                cola.Encolar(nuevoPar);
+                nuevoPar.nodo = this->arbol->HermanoDerecho(nuevoPar.nodo);
+            }
+        }
+        cola.Destruir();
     }
 }
 
