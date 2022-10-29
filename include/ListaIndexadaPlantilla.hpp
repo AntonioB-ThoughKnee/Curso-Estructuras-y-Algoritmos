@@ -60,7 +60,7 @@ public:
      * @remark Requiere: Objeto no inicializado de tipo Lista Indexada.
      * @remark Modifica: La lista.
      */
-    ListaIndexada(){
+    void Iniciar(){
         // Se inicializan los atributos de la clase
         this->primero=nullptr;
         this->ultimo=nullptr;
@@ -73,7 +73,7 @@ public:
      * @remark Modifica: La lista indexada, ya que el operador básico se dedica a destruirla.
      * 
      */
-    ~ListaIndexada(){
+    void Destruir(){
         // Se libera la memoria utilizada
         delete this->primero;
     }
