@@ -10,6 +10,16 @@
 // #include "HMIHDConContador.hpp"
 #include "ListaIndexadaPlantilla.hpp"
 
+struct Pares
+{
+   Arbol::Nodo* nodo;
+   int nivel;
+   Pares(Arbol::Nodo* nodo,int nivel){
+      this->nodo=nodo;
+      this->nivel=nivel;
+   }
+};
+
 class Algoritmos{
 private:
 Arbol* arbol;
