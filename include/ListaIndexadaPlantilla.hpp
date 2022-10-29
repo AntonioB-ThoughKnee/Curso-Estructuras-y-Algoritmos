@@ -87,7 +87,7 @@ public:
      * @remark Requiere: Índice sea válido.(Por ejemplo: si la lista tiene 5 elementos, el indice 7 no es valido)
      * @remark Modifica: Se modifica a la lista indexada L.
      */
-    void insertar(Elemento dato,int indice){
+    void Insertar(Elemento dato,int indice){
         // Se crea una nueva caja con el numero por insertar
         Caja* caja=new Caja(dato);
         // Se crea un puntero para iterar por la lista
@@ -128,7 +128,7 @@ public:
      * @remark Requiere: Índice sea válido para la lista.
      * @remark Modifica: Modifica a la lista L, ya que el operador básico se dedica a borrar un elemento entonces el estado de la lista indexada cambia.
      */
-    void borrar(int indice){
+    void Borrar(int indice){
         // Se crea un puntero para iterar por la lista
         Caja* actual=this->primero;
         // Se verifica si el borrado se hace al frente de la lista
@@ -166,7 +166,7 @@ public:
      * @remark Requiere: índice válido dentro del rango de la lista.
      * @remark Modifica: Este operador básico no realiza modificaciones sobre la lista indexada.
      */
-    Elemento recuperar(int indice){
+    Elemento Recuperar(int indice){
         // Se itera por la lista para llegar al indice deseado
         Caja* actual=this->primero;
         for (int i=1;i<indice;++i){
@@ -184,7 +184,7 @@ public:
      * @remark Requiere: i= una posición válida.
      * @remark Modifica: L, ya que hace un reemplazo de un elemento.
      */
-    void modificar(Elemento dato,int indice){
+    void Modificar(Elemento dato,int indice){
         // Se itera por la lista para llegar al indice deseado
         // y se modifica con el dato ingresado 
         Caja* actual=this->primero;
@@ -201,7 +201,7 @@ public:
      * @remark Modifica: Este operador básico no realiza modificaciones.
      * 
      */
-    int numElem(){
+    int NumElem(){
         // Se devuelve la cantidad de datos en la lista
         return this->contador;
     }

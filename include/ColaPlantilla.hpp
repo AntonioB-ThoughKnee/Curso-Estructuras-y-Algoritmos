@@ -101,7 +101,7 @@ Elemento Desencolar(){
  * @remark Requiere: Que la cola esté inicializada.
  * @remark Modifica: No produce modificaciones en la estructura.
  */
-int numElem(){
+int NumElem(){
     return this->contador;
 }
 
