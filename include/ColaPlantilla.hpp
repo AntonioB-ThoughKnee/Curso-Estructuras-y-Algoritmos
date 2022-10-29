@@ -1,5 +1,5 @@
-#ifndef COLAHPP
-#define COLAHPP
+#ifndef COLAPLANTILLAHPP
+#define COLAPLANTILLAHPP
 /**
  * @brief Estructura de datos Cola
  * @remark Esta estructura es implementada por un arreglo circular
@@ -27,7 +27,7 @@ public:
  * @remark Requiere: Que la cola no esté inicializada.
  * @remark Modifica: La cola.
  */
-Cola(){
+void Iniciar(){
     // Se inicializan los atributos de la clase
     this->inicio=0;
     this->final=-1;
@@ -42,7 +42,7 @@ Cola(){
  * @remark Modifica: La cola.
  * 
  */
-~Cola(){
+void Destruir(){
     // Se dejan en cero todos los atributos de la clase y se libera la memoria utilizada
     this->inicio=0;
     this->final=0;

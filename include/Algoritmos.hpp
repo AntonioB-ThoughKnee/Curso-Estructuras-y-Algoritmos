@@ -33,6 +33,11 @@ void listarEtiquetasNivel(int nivelDeseado);
 void listarPreOrden();
 void listarPorNivel();
 void contarNivelesR(Arbol::Nodo* nodo,int nivelActual);
+void listarEtiquietasNivel(int nivelDeseado);
+void listarEtiquietasNivelR(Arbol::Nodo* nodo, int nivelActual,int nivelDeseado);
+void listarPreOrden();
+void listarPreOrdenR(Arbol::Nodo* nodo);
+void listarPorNiveles();
 };
 
 #endif
