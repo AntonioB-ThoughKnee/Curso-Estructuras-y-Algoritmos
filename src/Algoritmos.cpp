@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "../include/Algoritmos.hpp"
+#include "../include/ColaPlantilla.hpp"
 
 
 using namespace std;
@@ -62,7 +63,7 @@ void Algoritmos::menu(){
                 this->listarPreOrden();
             break;
             case 8:
-                this->listarPorNivel();
+                this->listarPorNiveles();
             break;
             default:
                 accion=0;
@@ -87,5 +88,54 @@ void Algoritmos::contarNivelesR(Arbol::Nodo* nodo,int nivelActual){
     while (nodo!=nullptr){
         contarNivelesR(nodo,nivelActual);
         nodo=this->arbol->HermanoDerecho(nodo);
+    }
+}
+
+void Algoritmos::listarEtiquietasNivel(int nivelDeseado){
+    if(this->arbol->NumNodos()!=0){
+        listarEtiquietasNivelR(this->arbol->Raiz(),1,nivelDeseado);
+    }
+}
+
+void Algoritmos::listarEtiquietasNivelR(Arbol::Nodo* nodo,int nivelActual,int nivelDeseado){
+    if(nivelActual==nivelDeseado){
+        cout<<this->arbol->Etiqueta(nodo)<<" ";
+    }
+    nodo=this->arbol->HijoMasIzquierdo(nodo);
+    nivelActual=nivelActual+1;
+    while (nodo!=nullptr){
+        listarEtiquietasNivelR(nodo,nivelActual,nivelDeseado);
+        nodo=this->arbol->HermanoDerecho(nodo);
+    }
+}
+void Algoritmos::listarPreOrden(){
+    if (this->arbol->NumNodos()!=0){
+    listarPreOrdenR(this->arbol->Raiz());
+    }
+}
+void Algoritmos::listarPreOrdenR(Arbol::Nodo* nodo){
+    cout<<this->arbol->Etiqueta(nodo)<<" ";
+    Arbol::Nodo* n1= this->arbol->HijoMasIzquierdo(nodo);
+    while (n1 != nullptr){
+    listarPreOrdenR(n1);
+    n1 = this->arbol->HermanoDerecho(n1);
+    }
+}
+
+void Algoritmos::listarPorNiveles(){
+    if (this->arbol->NumNodos()!=0){
+        Cola<Arbol::Nodo*> cola;
+        cola.Iniciar();
+        cola.Encolar(this->arbol->Raiz());
+        while (cola.numElem()!=0){
+            Arbol::Nodo* nodo = cola.Desencolar();
+            cout<<this->arbol->Etiqueta(nodo)<<" ";
+            Arbol::Nodo* n1= this->arbol->HijoMasIzquierdo(nodo);
+            while (n1 != nullptr){
+                cola.Encolar(n1);
+                n1 = this->arbol->HermanoDerecho(n1);
+            }
+        }
+        cola.Destruir();
     }
 }
