@@ -12,6 +12,7 @@
 class Algoritmos{
 private:
 Arbol* arbol;
+int nivelMaximo;
 public:
 Algoritmos();
 ~Algoritmos();
@@ -27,6 +28,11 @@ int contarPorNiveles();
 void listaEtiquetasNivel(int nivel);
 void recorridoPreOrden();
 void recorridoPorNiveles();
+void cantidadNivelesPorNiveles();
+void listarEtiquetasNivel(int nivelDeseado);
+void listarPreOrden();
+void listarPorNivel();
+void contarNivelesR(Arbol::Nodo* nodo,int nivelActual);
 };
 
 #endif

@@ -5,25 +5,25 @@
 // Requiere: Arbol inicializado pasado como variable global.
 // Modifica: El algoritmo no modifica al arbol.
 
-global nodoMax=1
+global nivelMax=1
 
 global arbol 
 
 contarNiveles(){
     if(!arbol.vacio()){
-        contarHojasR(arbol.Raiz(),1,nivelDeseado)
+        contarNivelesR(arbol.Raiz(),1)
     }
-    return nodoMax
+    imprimir (nivelMax);
 }
 
-contarHojasR(nodo,nivelActual,nivelDeseado){
+contarNivelesR(nodo,nivelActual){
     if(nivelActual>nodoMax){
-        nodoMax=nivelActual
+        nivelMax=nivelActual
     }
     nodo=arbol.hMI(nodo)
     nivelActual=nivelActual+1
     while (nodo!=nodoNulo){
-        contarHojasR(nodo,nivelActual,nivelDeseado)
+        contarNivelesR(nodo,nivelActual,nivelDeseado)
         nodo=arbol.hD(nodo)
     }
 }

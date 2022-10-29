@@ -8,6 +8,7 @@ using namespace std;
 
 Algoritmos::Algoritmos(){
     this->arbol=new Arbol();
+    this->nivelMaximo=1;
 }
 Algoritmos::~Algoritmos(){
     if (this->arbol!=nullptr){
@@ -48,9 +49,43 @@ void Algoritmos::menu(){
             case 4:
                 // this->recorridoPorNiveles();
             break;
+            case 5:
+                this->cantidadNivelesPorNiveles();
+            break;
+            case 6:
+                int nivelDeseado;
+                cout << "Ingrese el nivel del que desea listar las etiquetas:"<<endl;
+                cin >> nivelDeseado;
+                this->listarEtiquetasNivel(nivelDeseado);
+            break;
+            case 7:
+                this->listarPreOrden();
+            break;
+            case 8:
+                this->listarPorNivel();
+            break;
             default:
                 accion=0;
             break;
         }
+    }
+}
+
+void Algoritmos::cantidadNivelesPorNiveles(){
+    if(this->arbol->NumNodos()!=0){
+        contarNivelesR(this->arbol->Raiz(),1);
+    }
+    cout << "El nivel maximo del arbol es: "<<this->nivelMaximo<<endl;
+}
+
+void Algoritmos::contarNivelesR(Arbol::Nodo* nodo,int nivelActual){
+    if(nivelActual>this->nivelMaximo){
+        this->nivelMaximo=nivelActual;
+    }
+    nodo=this->arbol->HijoMasIzquierdo(nodo);
+    nivelActual=nivelActual+1;
+    while (nodo!=nullptr){
+        contarNivelesR(nodo,nivelActual);
+        nodo=this->arbol->HermanoDerecho(nodo);
     }
 }
