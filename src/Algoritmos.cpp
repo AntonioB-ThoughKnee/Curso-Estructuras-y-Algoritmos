@@ -5,9 +5,6 @@
 #include "../include/ColaPlantilla.hpp"
 #include "../include/ListaIndexadaPlantilla.hpp"
 
-
-
-
 using namespace std;
 
 Algoritmos::Algoritmos(){
