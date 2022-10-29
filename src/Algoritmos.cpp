@@ -35,27 +35,18 @@ Arbol::Nodo* Algoritmos::BuscarEtiqueta(int etiqueta, Arbol* A)
   return nullptr;
 }
 
-//FIXME ArregloPadre no funciona con este algoritmo
 void  Algoritmos::EliminarSubarbol(Arbol::Nodo* nodo, Arbol* A){
-  ListaIndexada<Arbol::Nodo*> auxiliar;
-  int iAuxiliar = 1;
-  Arbol::Nodo* tmp = nodo;
-  auxiliar.insertar(tmp, auxiliar.numElem()+1);
+  Arbol::Nodo* tmp = A->HijoMasIzquierdo(nodo); //Hijo de nodo
+  Arbol::Nodo* tmpHermanoDerecho; // Hermano derecho del hijo de nodo, existe porque se necesita guardar antes de que se elimine tmp al salir de la llamada recursiva en el while loop
+  while(tmp != nullptr){
+    tmpHermanoDerecho = A->HermanoDerecho(tmp);
+    EliminarSubarbol(tmp, A);
+    tmp = tmpHermanoDerecho;
+  } 
 
-  //Se hace recorrido por niveles para guardar el subárbol de "nodo"
-  for(int ii = 0; ii <  auxiliar.numElem() ; ii++){
-    tmp = auxiliar.recuperar(iAuxiliar);
-    iAuxiliar++;
-    tmp = A->HijoMasIzquierdo(tmp);
-    while(tmp != nullptr){
-      auxiliar.insertar(tmp, auxiliar.numElem()+1);
-      tmp = A->HermanoDerecho(tmp);
-    }
-  }
-  //Se borra en orden inverso los nodos guardados porque son hojas
-  for(int ii = auxiliar.numElem(); ii > 0 ; ii--){
-    tmp = auxiliar.recuperar(ii);
-    A->BorrarHoja(tmp);
+  //Si se llegó al final del subárbol, se elimina la hoja y se crea un efecto dominó hacía arriba
+  if(tmp == nullptr){
+    A->BorrarHoja(nodo);
   }
 }
 
@@ -100,12 +91,23 @@ void Algoritmos::menu(){
     ListaIndexada<int> lista;
     Arbol::Nodo* nodo;
     //=====  
+
     //===========================  Testeando el árbol
-    for(int ii = 1; ii <= 7 ; ii++){ // Se puede cambiar el número de elementos en la lista para hacer un árbol siempre y cuando cumpla con el requisito del algoritmo
+
+      //===========================  Bug el parámetro "nodo" pasado al operador básico AgregarHijo es modificado 
+      arbol->PonerRaiz(1);
+      nodo = arbol->Raiz();
+      arbol->AgregarHijo(nodo, 2);// FIXME después de ejecutar está línea, "nodo" empieza a tener valores inválidos
+      arbol->AgregarHijo(arbol->Raiz(), 3);
+      //=====  
+
+    for(int ii = 1; ii <= 13 ; ii++){ // Se puede cambiar el número de elementos en la lista para hacer un árbol siempre y cuando cumpla con el requisito del algoritmo
       lista.insertar(ii, ii);
     }
-    arbol = HacerArbol(2, lista);
+    arbol = HacerArbol(3, lista);
     EliminarSubarbol(BuscarEtiqueta(3, arbol), arbol);
+    nodo = BuscarEtiqueta(12, arbol);
+    nodo = arbol->Padre(nodo);
     //=====  
 
     while (accion != 0){
@@ -147,8 +149,8 @@ void Algoritmos::menu(){
               cout << "La lista creada debe cumplir un tamaño igual a \n(k**i-1) / (k-1)\nDonde 'k' = hijos por nodo e 'i' = nivel de profundidad del arbol " << endl;
               cin >> accion;
 
-              for(int ii = 1; ii <= accion ; ii++){ 
-                lista.insertar(ii, ii);//FIXME Datos existentes en la lista se corrompen
+              for(int ii = 1; ii <= accion ; ii++){ //bg
+                lista.insertar(ii, ii);
               }
 
               cout << "Ingrese la cantidad de hijos por nodo " << endl;
