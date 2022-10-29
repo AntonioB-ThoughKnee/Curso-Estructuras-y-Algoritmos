@@ -17,11 +17,11 @@ Algoritmos::~Algoritmos(){
 void Algoritmos::inicializarArbol() {
 
     this->arbol->PonerRaiz(0);
-    Arbol::Nodo* nodo1 = this->arbol->AgregarHijo(this->arbol->Raiz(), 1);
-    Arbol::Nodo* nodo2 = this->arbol->AgregarHijo(this->arbol->Raiz(), 2);
+    Arbol::Nodo* nodo1 = this->arbol->AgregarHijoMasDerecho(this->arbol->Raiz(), 1);
+    Arbol::Nodo* nodo2 = this->arbol->AgregarHijoMasDerecho(this->arbol->Raiz(), 2);
     // std::cout << nodo1->nodo_id << endl;
     Arbol::Nodo* nodo3 = this->arbol->AgregarHijoMasDerecho(this->arbol->Raiz(), 3);
-    Arbol::Nodo* nodo4 = this->arbol->AgregarHijo(nodo1, 4);
+    Arbol::Nodo* nodo4 = this->arbol->AgregarHijoMasDerecho(nodo1, 4);
     Arbol::Nodo* nodo5 = this->arbol->AgregarHijoMasDerecho(nodo2, 5);
     Arbol::Nodo* nodo6 = this->arbol->AgregarHijoMasDerecho(nodo2, 6);
     Arbol::Nodo* nodo7 = this->arbol->AgregarHijoMasDerecho(nodo3, 7);
@@ -31,11 +31,16 @@ void Algoritmos::inicializarArbol() {
     Arbol::Nodo* nodo11 = this->arbol->AgregarHijoMasDerecho(nodo7, 11);
     Arbol::Nodo* nodo12 = this->arbol->AgregarHijoMasDerecho(nodo11, 12);
 
-    // Pruebas:
-    this->hermanoIzquierdo(nodo2); // ? no imprime nada y deberia imprimir 1 (solo ocurre error con hmihdconcontador, arregloPadre). (creo que solo sirve con listaHijos)
-    this->contieneEtiquetasRepetidas(); // Funciona perfecto
-    this->profundidadNodo(nodo1); // malo.. why?
-    this->cantidadNivelesPreOrden(); // Funciona perfecto.
+    /* Pruebas: */
+    // Todos imprimen por si solos.
+    this->hermanoIzquierdo(nodo6); // debe dar = 5
+    this->hermanoIzquierdo(nodo11); // debe dar= 10
+    this->hermanoIzquierdo(nodo3); // debe dar = 2
+    this->contieneEtiquetasRepetidas(); // depende, sin modificarlo debe dar no.
+    this->profundidadNodo(nodo11); // debe dar = 4
+    this->profundidadNodo(nodo12); // debe dar = 5
+    this->profundidadNodo(nodo2); // debe dar = 2
+    this->cantidadNivelesPreOrden(); // = 5
 
 }
 
@@ -276,13 +281,19 @@ void Algoritmos::hermanoIzquierdo(Arbol::Nodo* nodo) {
         C.Iniciar();
         C.Encolar(this->arbol->Raiz());
         while (C.numElem() != 0) {
-            auto n = C.Desencolar();
-            auto nh = this->arbol->HijoMasIzquierdo(n);
+            Arbol::Nodo* n = C.Desencolar();
+            Arbol::Nodo* nh = this->arbol->HijoMasIzquierdo(n);
             while (nh != nullptr) {
-                auto hermDer = this->arbol->HermanoDerecho(nh);
-                if (hermDer == nodo) {
-                    // return nh;
-                    std::cout << nh->etiqueta << std::endl;
+                
+                Arbol::Nodo* hermDer = this->arbol->HermanoDerecho(nh);
+                // if (hermDer == nodo) {
+                if (hermDer != nullptr) {
+                    if (this->arbol->Etiqueta(hermDer) == this->arbol->Etiqueta(nodo)) {
+                        // return nh;
+                        // cout << "Si entra" << endl;
+                        std::cout << "El hermano izquierdo del nodo es: " << 
+                            this->arbol->Etiqueta(nh) << std::endl;
+                    }
                 }
                 C.Encolar(nh);
                 nh = this->arbol->HermanoDerecho(nh);
@@ -350,12 +361,13 @@ void Algoritmos::profundidadNodo(Arbol::Nodo* nodoBuscar) {
 
 void Algoritmos::ListarPreOrdenRProfundidad(Arbol::Nodo* nodo, int nivel,
   Arbol::Nodo* nodoBuscar, int* nivelRet, bool* encontrado) {
-    if (nodo == nodoBuscar) {
+    // if (nodo == nodoBuscar) {
+    if (this->arbol->Etiqueta(nodo) == this->arbol->Etiqueta(nodoBuscar)) {
         *encontrado = true;
         *nivelRet = nivel;
     }
     nodo = this->arbol->HijoMasIzquierdo(nodo);
-    while (nodo != nullptr && !encontrado) {
+    while (nodo != nullptr && !(*encontrado)) {
         ListarPreOrdenRProfundidad(nodo, nivel+1, nodoBuscar, nivelRet, encontrado);
         nodo = this->arbol->HermanoDerecho(nodo);
     }
