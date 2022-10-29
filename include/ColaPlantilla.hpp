@@ -49,7 +49,7 @@ Cola(){
     // Se dejan en cero todos los atributos de la clase y se libera la memoria utilizada
     this->inicio=0;
     this->final=0;
-    this->capacidad=10;
+    this->capacidad=100;
     this->contador=0;
     delete this->cola;
 }
