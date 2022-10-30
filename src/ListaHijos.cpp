@@ -91,41 +91,81 @@ ListaHijos::ContenedorPrincipal* ListaHijos::AgregarHijoMasDerecho(ListaHijos::C
 }
 
 void ListaHijos::BorrarHoja(ContenedorPrincipal* nodo) {
-    // TODO: No tengo que borrar los hijos 
+    // TODO: No tengo que borrar los hijos, pero antes de borrar a la hoja que quiero
+    // tengo que recorrer todos los hijos de todos nos nodos para borrarlo como hijo
+    // de otros nodos.
     ContenedorPrincipal* iter = this->pPrimeroPrincipal;
-  // Caso Inicio
+  // Caso Inicio Principal
   if (iter == nodo) {
     ContenedorPrincipal* temp = this->pPrimeroPrincipal;
     this->pPrimeroPrincipal = this->pPrimeroPrincipal->sgtePrincipal;
-    // borrar hijos
-    // ContenedorSublista* iter2 = temp->primerHijo;
-    //   while (iter2 != nullptr) { /* BORRAR LOS HIJOS DEL NODO */
-    //     ContenedorSublista* temp = iter2->sgte;
-    //     delete iter2;
-    //     iter2 = temp;
-    //   }
+    // No lo tengo que buscar como hijo de otros nodos.
     delete temp;
     temp = nullptr;
-    // iter2 = nullptr;
+    
   } else {
     /* Casos Medio y Final */
     while (iter != nullptr) {
+        bool borrado = false;
+
+        ContenedorSublista* iterHijos = iter->primerHijo;
+        // podria comparar con etiquetas.
+        /* CASOS INICIALES DE BORRADO (BORRADO DEL PRIMER ELEMENTO) */
+        if (iterHijos->nodo == nodo) {
+          ContenedorSublista* tempPrimerHijo = iter->primerHijo;
+          iter->primerHijo = iter->primerHijo->sgte;
+          
+          iterHijos = tempPrimerHijo->sgte; 
+          borrado = true;
+          delete tempPrimerHijo;
+          tempPrimerHijo = nullptr;
+          // tecnicamente solo lo puede tener como hijo 1 vez.
+          break;
+
+        }
+
+
+
+
+        // Ocupo otra vez comparar con el siguiente porque no tengo como devolverme.
+        // Necesito borrarlo como hijo de otros nodos.
+        while (iterHijos != nullptr && !borrado) { // Buscar dentro de los hijos de todos los nodos.
+          // TODO: Preguntar si es el primer caso porque si lo es tengo que 
+          // cambiar el punter al primerHijo
+
+           
+            /* CASOS MEDIOS-FINALES DE BORRADO*/
+            if (iterHijos->sgte != nullptr) {
+              if (iterHijos->sgte->nodo == nodo) { // si el siguiente es el que ocupo borrar
+                ContenedorSublista* temp = iterHijos->sgte; // el que ocupo borrar.
+                iterHijos->sgte = temp->sgte; // le digo que el siguiente va a moverse 1 campo.
+                
+                // iterHijos = iterHijos->sgte; // no importa por el break?
+                borrado = true;
+                
+                delete temp;
+                temp = nullptr;
+
+
+                // tecnicamente solo lo puede tener como hijo 1 vez.
+                break;
+              }
+            }
+          } // end else
+          iterHijos = iterHijos->sgte;
+        } 
+
+
+        // Si el siguiente principal es el que tengo que borrar. 
         if (iter->sgtePrincipal == nodo) {
         ContenedorPrincipal* temp = iter->sgtePrincipal;
         iter->sgtePrincipal = iter->sgtePrincipal->sgtePrincipal;
 
-        //   ContenedorSublista* iter2 = temp->primerHijo;
-        //   while (iter2 != nullptr) { /* BORRAR LOS HIJOS DEL NODO */
-        //     // delete &iter2; // ?
-        //     // iter2 = iter2->sgte;
-        //     ContenedorSublista* temp = iter2->sgte;
-        //     delete iter2;
-        //     iter2 = temp;
-        //   }
+        
 
         delete temp;
         temp = nullptr;
-        //   iter2 = nullptr;
+        
         break;
         } // end if
         iter = iter->sgtePrincipal;
