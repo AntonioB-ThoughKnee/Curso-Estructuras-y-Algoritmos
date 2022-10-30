@@ -49,7 +49,10 @@ static: $(OBJECT_FILES)
 	ar rcs $(BIN_DIR)/$(libname).a $(OBJECT_FILES)
 dynamic: $(OBJECT_FILES)
 	mkdir -p $(BIN_DIR)
-	g++ -shared -fPIC $(OBJECT_FILES) -o $(BIN_DIR)/$(libname).so 
+	g++ -shared -fPIC $(OBJECT_FILES) -o $(BIN_DIR)/$(libname).so
+run:
+	$(BIN_DIR)/program.exe
+
 
 
 

@@ -255,24 +255,32 @@ void Algoritmos::ListarPreOrdenR(Arbol::Nodo* nodo, int nivel, int* nivelRet) {
 
 void Algoritmos::cantidadNivelesPorNiveles(){
     if (this->arbol->NumNodos()!=0){
-        Cola<Pares> cola;
+        Cola<Pares*> cola;
         cola.Iniciar();
         Pares par(this->arbol->Raiz(),1);
-        cola.Encolar(par);
+        cola.Encolar(&par);
         while (cola.NumElem()!=0){
-            Pares par = cola.Desencolar();
-            if(this->nivelMaximo<par.nivel){
-                this->nivelMaximo=par.nivel;
+            cout<<"ciclo superior"<<endl;
+            Pares*par = cola.Desencolar();
+            if(this->nivelMaximo<par->nivel){
+                this->nivelMaximo=par->nivel;
             }
-            Arbol::Nodo* n1 = this->arbol->HijoMasIzquierdo(par.nodo);
-            int nuevoNivel = par.nivel + 1;
+            Arbol::Nodo* n1 = this->arbol->HijoMasIzquierdo(par->nodo);
+            cout<<"chi"<<endl;
+            int nuevoNivel = par->nivel + 1;
             Pares nuevoPar(n1,nuevoNivel);
-            while (nuevoPar.nodo != nullptr){
-                cola.Encolar(nuevoPar);
-                nuevoPar.nodo = this->arbol->HermanoDerecho(nuevoPar.nodo);
+            Pares* ptrPar = &nuevoPar;
+            while (n1 != nullptr){
+                if(ptrPar->nodo!=nullptr){
+                    cola.Encolar(ptrPar);
+                }
+                n1=this->arbol->HermanoDerecho(n1);
+                Pares nuevoPar1(n1,nuevoNivel);
+                ptrPar = &nuevoPar1;
             }
         }
         cola.Destruir();
+        cout<<this->nivelMaximo<<endl;
     }
 }
 

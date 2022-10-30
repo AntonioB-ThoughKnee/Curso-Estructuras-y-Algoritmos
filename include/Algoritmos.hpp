@@ -4,16 +4,19 @@
 #include "ListaIndexadaPlantilla.hpp"
 #include "ColaPlantilla.hpp"
 // #include "ArregloPadre.hpp"
-// #include "HMIHDConPtrPadreOptimizado.hpp"
+#include "HMIHDConPtrPadreOptimizado.hpp"
 // #include "HMIHDConPtrPadreyHI.hpp"
 // #include "ListaHijos.hpp"
 // #include "HMIHDConContador.hpp"
-#include "ListaIndexadaPlantilla.hpp"
 
 struct Pares
 {
    Arbol::Nodo* nodo;
    int nivel;
+   Pares(){
+      this->nodo=nullptr;
+      this->nivel=0;
+   }
    Pares(Arbol::Nodo* nodo,int nivel){
       this->nodo=nodo;
       this->nivel=nivel;
