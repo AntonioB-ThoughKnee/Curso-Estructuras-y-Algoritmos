@@ -4,11 +4,11 @@
 #include "../include/Algoritmos.hpp"
 #include "../include/ColaPlantilla.hpp"
 #include "../include/ListaIndexadaPlantilla.hpp"
-#include "../include/HMIHDConPtrPadreOptimizado.hpp"
-// #include "ArregloPadre.hpp"
-// #include "HMIHDConPtrPadreyHI.hpp"
-// #include "ListaHijos.hpp"
-// #include "HMIHDConContador.hpp"
+// #include "../include/HMIHDConPtrPadreOptimizado.hpp"
+#include "../include/ArregloPadre.hpp"
+// #include "../include/HMIHDConPtrPadreyHI.hpp"
+// #include "../include/ListaHijos.hpp"
+// #include "../include/HMIHDConContador.hpp"
 
 using namespace std;
 
@@ -257,30 +257,24 @@ void Algoritmos::cantidadNivelesPorNiveles(){
     if (this->arbol->NumNodos()!=0){
         Cola<Pares*> cola;
         cola.Iniciar();
-        Pares par(this->arbol->Raiz(),1);
-        cola.Encolar(&par);
+        Pares* par=new Pares(this->arbol->Raiz(),1);
+        cola.Encolar(par);
         while (cola.NumElem()!=0){
-            cout<<"ciclo superior"<<endl;
-            Pares*par = cola.Desencolar();
+            Pares* par = cola.Desencolar();
             if(this->nivelMaximo<par->nivel){
                 this->nivelMaximo=par->nivel;
             }
-            Arbol::Nodo* n1 = this->arbol->HijoMasIzquierdo(par->nodo);
-            cout<<"chi"<<endl;
+            Arbol::Nodo* n1= this->arbol->HijoMasIzquierdo(par->nodo);
             int nuevoNivel = par->nivel + 1;
-            Pares nuevoPar(n1,nuevoNivel);
-            Pares* ptrPar = &nuevoPar;
+            delete par;
             while (n1 != nullptr){
-                if(ptrPar->nodo!=nullptr){
-                    cola.Encolar(ptrPar);
-                }
-                n1=this->arbol->HermanoDerecho(n1);
-                Pares nuevoPar1(n1,nuevoNivel);
-                ptrPar = &nuevoPar1;
+                Pares* nuevoPar = new Pares(n1,nuevoNivel);
+                cola.Encolar(nuevoPar);
+                n1 = this->arbol->HermanoDerecho(n1);
             }
         }
+        cout<<"El nivel maximo es: "<<this->nivelMaximo<<endl;
         cola.Destruir();
-        cout<<this->nivelMaximo<<endl;
     }
 }
 

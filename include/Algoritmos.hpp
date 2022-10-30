@@ -3,8 +3,8 @@
 
 #include "ListaIndexadaPlantilla.hpp"
 #include "ColaPlantilla.hpp"
-// #include "ArregloPadre.hpp"
-#include "HMIHDConPtrPadreOptimizado.hpp"
+#include "ArregloPadre.hpp"
+// #include "HMIHDConPtrPadreOptimizado.hpp"
 // #include "HMIHDConPtrPadreyHI.hpp"
 // #include "ListaHijos.hpp"
 // #include "HMIHDConContador.hpp"
