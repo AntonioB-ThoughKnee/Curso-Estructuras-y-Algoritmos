@@ -14,15 +14,18 @@ void ArregloPadre::Crear() {
 }
 
 //template<typename TipoNodo>
-void ArregloPadre::Destruir() {
-
+void ArregloPadre::Destruir() { // TODO: llamarlo.
+  for (int i = 0; i < this->arreglo.size(); i++) {
+    delete this->arreglo[i];
+  }
 }
 
 //template <typename TipoNodo>
 void ArregloPadre::PonerRaiz(int etiqueta) {
   auto it = this->arreglo.begin();
-
-  this->arreglo.emplace(it, ArregloPadre::contenedorArreglo(etiqueta, -1, 0)); // -1 porque no tiene papá.
+  ArregloPadre::contenedorArreglo* newContenedor = new ArregloPadre::contenedorArreglo(etiqueta, nullptr, 0);
+  // this->arreglo.emplace(it, newContenedor); // -1 porque no tiene papá.
+  this->arreglo.push_back(newContenedor); // -1 porque no tiene papá.
 }
 
 //template <typename TipoNodo>
@@ -30,8 +33,8 @@ ArregloPadre::contenedorArreglo* ArregloPadre::AgregarHijo(contenedorArreglo* no
   auto it = this->arreglo.end();
   int nuevo_nodo_id = this->arreglo.size();
 //  this->arreglo.emplace(it, ArregloPadre::contenedorArreglo(etiqueta, nodoPadre->nodo_id-1, nuevo_nodo_id)); // nodo_id empieza en 1
-  ArregloPadre::contenedorArreglo* newContenedor = new contenedorArreglo(etiqueta, nodoPadre->nodo_id, nuevo_nodo_id);
-  this->arreglo.push_back(*newContenedor);
+  ArregloPadre::contenedorArreglo* newContenedor = new contenedorArreglo(etiqueta, nodoPadre, nuevo_nodo_id);
+  this->arreglo.push_back(newContenedor);
 
 //  this->arreglo.emplace(it, ArregloPadre::contenedorArreglo(etiqueta, nodoPadre->nodo_id, nuevo_nodo_id)); // nodo_id empieza en 1
   // return nuevo_nodo_id+1; // Para el "outside-world" el arreglo empieza en 1, entonces tengo que sumarle 1.
@@ -49,14 +52,16 @@ ArregloPadre::contenedorArreglo* ArregloPadre::AgregarHijoMasDerecho(contenedorA
   // return nuevo_nodo_id+1; // Para el "outside-world" el arreglo empieza en 1, entonces tengo que sumarle 1.
   // ArregloPadre::contenedorArreglo* toRet = &(this->arreglo.back());
   // return toRet;
-  ArregloPadre::contenedorArreglo* newContenedor = new contenedorArreglo(etiqueta, nodoPadre->nodo_id, nuevo_nodo_id);
-  this->arreglo.push_back(*newContenedor);
+  ArregloPadre::contenedorArreglo* newContenedor = new contenedorArreglo(etiqueta, nodoPadre, nuevo_nodo_id);
+  this->arreglo.push_back((newContenedor));
   return newContenedor;
+  // return (this->arreglo.back());
+
 }
 
 void ArregloPadre::BorrarHoja(ArregloPadre::contenedorArreglo* nodo) {
  for (int i = 0 ; i < this->arreglo.size(); i++) {
-   if (this->arreglo[i].etiqueta == nodo->etiqueta) {
+   if (this->arreglo[i]->etiqueta == nodo->etiqueta) {
      this->arreglo.erase(this->arreglo.begin()+i);
    }
  }
@@ -71,14 +76,15 @@ void ArregloPadre::BorrarHoja(ArregloPadre::contenedorArreglo* nodo) {
 
 ArregloPadre::contenedorArreglo* ArregloPadre::Raiz() {
   if (!this->arreglo.empty()) {
-    return &(this->arreglo[0]);
+    return (this->arreglo[0]);
   }
   return nullptr; // Arbol esta vacio.
 }
 
 ArregloPadre::contenedorArreglo* ArregloPadre::Padre(ArregloPadre::contenedorArreglo* nodo_id_externo) {
 //   return &(this->arreglo[this->arreglo[nodo_id_externo->nodo_id-1].padre]);
-  return &(this->arreglo[this->arreglo[nodo_id_externo->nodo_id].padre]);
+  // return &(this->arreglo[this->arreglo[nodo_id_externo->nodo_id].padre]);
+  return nodo_id_externo->padre;
 }
 
 ArregloPadre::contenedorArreglo* ArregloPadre::HijoMasIzquierdo(ArregloPadre::contenedorArreglo* nodo_id_externo_papa) {
@@ -89,9 +95,13 @@ ArregloPadre::contenedorArreglo* ArregloPadre::HijoMasIzquierdo(ArregloPadre::co
     // Técnicamente sería mas eficiente empezar i en el valor pasado por el parametro porque el hijo siempre tiene que estar
     // a la derecha del papá pero mejor por términos de efectividad lo voy a dejar asi.
 //    if (this->arreglo[i].padre == (nodo_id_externo_papa->nodo_id-1)) { // los nodos por debajo en mi programa empiezan en 0, por eso el -1
-    if (this->arreglo[i].padre == (nodo_id_externo_papa->etiqueta)) { // los nodos por debajo en mi programa empiezan en 0, por eso el -1
 
-      return &(this->arreglo[i]);
+    if (this->arreglo[i]->padre) {
+      if (this->arreglo[i]->padre->etiqueta == (nodo_id_externo_papa->etiqueta)) { // los nodos por debajo en mi programa empiezan en 0, por eso el -1
+
+        return (this->arreglo[i]);
+      }
+
     }
   }
   return nullptr;
@@ -100,18 +110,21 @@ ArregloPadre::contenedorArreglo* ArregloPadre::HijoMasIzquierdo(ArregloPadre::co
 ArregloPadre::contenedorArreglo* ArregloPadre::HermanoDerecho(ArregloPadre::contenedorArreglo* nodo_id_hermano_externo) {
   // std::cout << "Prueba\n";
 //  int papaComun = this->arreglo[nodo_id_hermano_externo->nodo_id-1].padre; // nodo por dentro es 1 valor menos por el arreglo.
-  int papaComun = this->arreglo[nodo_id_hermano_externo->nodo_id].padre; // nodo por dentro es 1 valor menos por el arreglo.
+  // int papaComun = this->arreglo[nodo_id_hermano_externo->nodo_id].padre; // nodo por dentro es 1 valor menos por el arreglo.
+  int papaComun = nodo_id_hermano_externo->padre->etiqueta;
 
   // Empieza en nodo_id_hermano porque de esta manera, si a la derecha del arreglo a partir de el encontramos a otro nodo con el mismo
   // papa entonces es el hermano derecho.
   // for (int i = nodo_id_hermano_externo->nodo_id+1; i < this->arreglo.size(); ++i) { // Le deberia hacer -1, pero ocupo que empiece a buscar 1 pos mayor, porque sino se encuentra a si mismo.
   bool encontrado = false;
   for (int i = 0; i < this->arreglo.size(); ++i) { // Le deberia hacer -1, pero ocupo que empiece a buscar 1 pos mayor, porque sino se encuentra a si mismo.
-    if (this->arreglo[i].etiqueta == nodo_id_hermano_externo->etiqueta) {
-      encontrado = true;
+    if (this->arreglo[i]->padre) {
+      if ((this->arreglo[i]->padre->etiqueta == papaComun) && encontrado) { // como es inmediatamente el siguiente encontrado a la derecha del arreglo, es el herm. der
+        return (this->arreglo[i]);
+      }
     }
-    if (this->arreglo[i].padre == papaComun && encontrado) { // como es inmediatamente el siguiente encontrado a la derecha del arreglo, es el herm. der
-      return &(this->arreglo[i]);
+    if (this->arreglo[i]->etiqueta == nodo_id_hermano_externo->etiqueta) {
+      encontrado = true;
     }
   }
   return nullptr;

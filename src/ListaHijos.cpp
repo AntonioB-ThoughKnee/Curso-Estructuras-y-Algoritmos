@@ -97,7 +97,16 @@ void ListaHijos::BorrarHoja(ContenedorPrincipal* nodo) {
   if (iter == nodo) {
     ContenedorPrincipal* temp = this->pPrimeroPrincipal;
     this->pPrimeroPrincipal = this->pPrimeroPrincipal->sgtePrincipal;
+    // borrar hijos
+    ContenedorSublista* iter2 = temp->primerHijo;
+      while (iter2 != nullptr) { /* BORRAR LOS HIJOS DEL NODO */
+        ContenedorSublista* temp = iter2->sgte;
+        delete iter2;
+        iter2 = temp;
+      }
     delete temp;
+    temp = nullptr;
+    iter2 = nullptr;
   }
   /* Casos Medio y Final */
   while (iter != nullptr) {
@@ -115,12 +124,13 @@ void ListaHijos::BorrarHoja(ContenedorPrincipal* nodo) {
       }
 
       delete temp;
+      temp = nullptr;
+      iter2 = nullptr;
       break;
     } // end if
     iter = iter->sgtePrincipal;
   }
   this->cantNodos--;
-    this->cantNodos--;
 }
 
 ListaHijos::ContenedorPrincipal* ListaHijos::Raiz() {
@@ -177,7 +187,10 @@ ListaHijos::ContenedorPrincipal* ListaHijos::HermanoDerecho(ListaHijos::Contened
 }
 
 int ListaHijos::Etiqueta(ListaHijos::ContenedorPrincipal* nodo) {
-    return nodo->etiqueta;
+    if (nodo) {
+        return nodo->etiqueta;
+    }
+    return -1;
 }
 
 void ListaHijos::ModificarEtiqueta(ContenedorPrincipal* nodo, int etiqueta) {

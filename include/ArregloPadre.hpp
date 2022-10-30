@@ -17,18 +17,20 @@ public:
     // };
     typedef struct contenedorArreglo {
 //        TipoNodo* nodo;
-        contenedorArreglo(int et, int padre, int nodo_id) : etiqueta(et), padre(padre), nodo_id(nodo_id) {};
+        contenedorArreglo(int et, contenedorArreglo* padre, int nodo_id) : etiqueta(et), nodo_id(nodo_id) {
+            this->padre = padre;
+        };
         // contenedorArreglo() {};
         // Nodo nulo es constructor vacio
         // Nodo_id va a tener la pos del arreglo empezando en 0, pero por fuera, cuando manden nodo_id tengo que restarle
         // 1 porque para el usuario, el arreglo va a empezar en 1.
         int nodo_id;
         int etiqueta;
-        int padre;
+        contenedorArreglo* padre;
     } Nodo;
 
 
-    std::vector<contenedorArreglo> arreglo;
+    std::vector<contenedorArreglo*> arreglo;
 
     ArregloPadre() {};
     ~ArregloPadre() {};
