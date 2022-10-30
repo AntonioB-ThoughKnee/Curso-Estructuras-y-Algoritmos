@@ -91,22 +91,22 @@ ListaHijos::ContenedorPrincipal* ListaHijos::AgregarHijoMasDerecho(ListaHijos::C
 }
 
 void ListaHijos::BorrarHoja(ContenedorPrincipal* nodo) {
-    // TODO: BorrarHoja()
+    // TODO: No tengo que borrar los hijos 
     ContenedorPrincipal* iter = this->pPrimeroPrincipal;
   // Caso Inicio
   if (iter == nodo) {
     ContenedorPrincipal* temp = this->pPrimeroPrincipal;
     this->pPrimeroPrincipal = this->pPrimeroPrincipal->sgtePrincipal;
     // borrar hijos
-    ContenedorSublista* iter2 = temp->primerHijo;
-      while (iter2 != nullptr) { /* BORRAR LOS HIJOS DEL NODO */
-        ContenedorSublista* temp = iter2->sgte;
-        delete iter2;
-        iter2 = temp;
-      }
+    // ContenedorSublista* iter2 = temp->primerHijo;
+    //   while (iter2 != nullptr) { /* BORRAR LOS HIJOS DEL NODO */
+    //     ContenedorSublista* temp = iter2->sgte;
+    //     delete iter2;
+    //     iter2 = temp;
+    //   }
     delete temp;
     temp = nullptr;
-    iter2 = nullptr;
+    // iter2 = nullptr;
   }
   /* Casos Medio y Final */
   while (iter != nullptr) {
@@ -114,18 +114,18 @@ void ListaHijos::BorrarHoja(ContenedorPrincipal* nodo) {
       ContenedorPrincipal* temp = iter->sgtePrincipal;
       iter->sgtePrincipal = iter->sgtePrincipal->sgtePrincipal;
 
-      ContenedorSublista* iter2 = temp->primerHijo;
-      while (iter2 != nullptr) { /* BORRAR LOS HIJOS DEL NODO */
-        // delete &iter2; // ?
-        // iter2 = iter2->sgte;
-        ContenedorSublista* temp = iter2->sgte;
-        delete iter2;
-        iter2 = temp;
-      }
+    //   ContenedorSublista* iter2 = temp->primerHijo;
+    //   while (iter2 != nullptr) { /* BORRAR LOS HIJOS DEL NODO */
+    //     // delete &iter2; // ?
+    //     // iter2 = iter2->sgte;
+    //     ContenedorSublista* temp = iter2->sgte;
+    //     delete iter2;
+    //     iter2 = temp;
+    //   }
 
       delete temp;
       temp = nullptr;
-      iter2 = nullptr;
+    //   iter2 = nullptr;
       break;
     } // end if
     iter = iter->sgtePrincipal;
