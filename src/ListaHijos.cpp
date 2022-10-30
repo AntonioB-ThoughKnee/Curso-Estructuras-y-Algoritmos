@@ -107,30 +107,32 @@ void ListaHijos::BorrarHoja(ContenedorPrincipal* nodo) {
     delete temp;
     temp = nullptr;
     // iter2 = nullptr;
-  }
-  /* Casos Medio y Final */
-  while (iter != nullptr) {
-    if (iter->sgtePrincipal == nodo) {
-      ContenedorPrincipal* temp = iter->sgtePrincipal;
-      iter->sgtePrincipal = iter->sgtePrincipal->sgtePrincipal;
+  } else {
+    /* Casos Medio y Final */
+    while (iter != nullptr) {
+        if (iter->sgtePrincipal == nodo) {
+        ContenedorPrincipal* temp = iter->sgtePrincipal;
+        iter->sgtePrincipal = iter->sgtePrincipal->sgtePrincipal;
 
-    //   ContenedorSublista* iter2 = temp->primerHijo;
-    //   while (iter2 != nullptr) { /* BORRAR LOS HIJOS DEL NODO */
-    //     // delete &iter2; // ?
-    //     // iter2 = iter2->sgte;
-    //     ContenedorSublista* temp = iter2->sgte;
-    //     delete iter2;
-    //     iter2 = temp;
-    //   }
+        //   ContenedorSublista* iter2 = temp->primerHijo;
+        //   while (iter2 != nullptr) { /* BORRAR LOS HIJOS DEL NODO */
+        //     // delete &iter2; // ?
+        //     // iter2 = iter2->sgte;
+        //     ContenedorSublista* temp = iter2->sgte;
+        //     delete iter2;
+        //     iter2 = temp;
+        //   }
 
-      delete temp;
-      temp = nullptr;
-    //   iter2 = nullptr;
-      break;
-    } // end if
-    iter = iter->sgtePrincipal;
-  }
+        delete temp;
+        temp = nullptr;
+        //   iter2 = nullptr;
+        break;
+        } // end if
+        iter = iter->sgtePrincipal;
+    }
   this->cantNodos--;
+
+  }
 }
 
 ListaHijos::ContenedorPrincipal* ListaHijos::Raiz() {
