@@ -111,21 +111,20 @@ void ListaHijos::BorrarHoja(ContenedorPrincipal* nodo) {
         ContenedorSublista* iterHijos = iter->primerHijo;
         // podria comparar con etiquetas.
         /* CASOS INICIALES DE BORRADO (BORRADO DEL PRIMER ELEMENTO) */
-        if (iterHijos->nodo == nodo) {
-          ContenedorSublista* tempPrimerHijo = iter->primerHijo;
-          iter->primerHijo = iter->primerHijo->sgte;
-          
-          iterHijos = tempPrimerHijo->sgte; 
-          borrado = true;
-          delete tempPrimerHijo;
-          tempPrimerHijo = nullptr;
-          // tecnicamente solo lo puede tener como hijo 1 vez.
-          break;
+        if (iterHijos != nullptr) {
+            if (iterHijos->nodo == nodo) {
+            ContenedorSublista* tempPrimerHijo = iter->primerHijo;
+            iter->primerHijo = iter->primerHijo->sgte;
+            
+            iterHijos = tempPrimerHijo->sgte; 
+            borrado = true;
+            delete tempPrimerHijo;
+            tempPrimerHijo = nullptr;
+            // tecnicamente solo lo puede tener como hijo 1 vez.
+            break;
 
+            }
         }
-
-
-
 
         // Ocupo otra vez comparar con el siguiente porque no tengo como devolverme.
         // Necesito borrarlo como hijo de otros nodos.
@@ -151,9 +150,9 @@ void ListaHijos::BorrarHoja(ContenedorPrincipal* nodo) {
                 break;
               }
             }
-          } // end else
-          iterHijos = iterHijos->sgte;
-        } 
+            iterHijos = iterHijos->sgte;
+        } // end else
+        
 
 
         // Si el siguiente principal es el que tengo que borrar. 
@@ -174,6 +173,14 @@ void ListaHijos::BorrarHoja(ContenedorPrincipal* nodo) {
 
   }
 }
+
+
+void ListaHijos::borrarComoHijo(ContenedorPrincipal* nodo) {
+
+}
+
+
+
 
 ListaHijos::ContenedorPrincipal* ListaHijos::Raiz() {
     return this->pPrimeroPrincipal;

@@ -69,6 +69,11 @@ public:
     void ModificarEtiqueta(ContenedorPrincipal* nodo, int etiqueta);
 
     int NumNodos();
+
+//
+
+    void borrarComoHijo(ContenedorPrincipal* nodo);
+
 } Arbol;
 
 #endif //TAREA_PROGRAMADA_LISTAHIJOS_HPP
