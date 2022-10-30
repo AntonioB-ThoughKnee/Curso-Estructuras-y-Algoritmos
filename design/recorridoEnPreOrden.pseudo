@@ -1,16 +1,18 @@
 // Nombre: Listar en preorden
-// Paramentros: Arbol (tipo Arbol)
+// Paramentros: A (tipo Arbol) variable global
 // Efecto: Listar (Imprimir) las etiquetas del árbol haciendo un recorrido
 // en preOrden
-// Requiere: Arbol inicializado
+// Requiere: Arbol inicializado pasado como variable global
 // Modifica: El algoritmo no modifica al arbol
 
-ListarPreOrden(A){
+global A
+
+ListarPreOrden(){
     if !A.Vacío(){
-    ListarPreOrdenR(A.Raíz(),A)
+    ListarPreOrdenR(A.Raíz())
     }
 }
-ListarPreOrdenR(n,A){
+ListarPreOrdenR(n){
     Imprimir(A.Etiq(n))
     n1= A.HMI(n)
     while n1 != nodonulo{

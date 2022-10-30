@@ -1,10 +1,13 @@
 // Nombre: Listar por niveles
 // Paramentros: Arbol (tipo Arbol)
-// Efecto: Listar (Imprimir) las etiquetas del árbol por niveles
-// Requiere: Arbol inicializado 
+// Efecto: Listar (Imprimir) las etiquetas del árbol 
+// haciendo un recorridopor niveles
+// Requiere: Arbol inicializado pasado como variable global
 // Modifica: El algoritmo no modifica al arbol
 
-ListarPorNiveles(A){
+global A
+
+ListarPorNiveles(){
     if !A.Vacío(){
         Cola.Iniciar()
         Cola.Agregar(A.Raíz())

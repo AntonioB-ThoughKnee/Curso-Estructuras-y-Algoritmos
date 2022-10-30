@@ -1,29 +1,33 @@
-// Nombre: Listar Etiquetas de Nivel
+// Nombre: Contar Niveles por Niveles
 // Paramentros: nodoMax (Entero), El algoritmo usa una variable global de 
 // tipo arbol.
-// Efecto: Encontrar cuantos niveles hay en un arbol.
-// Requiere: Arbol inicializado pasado como variable global.
+// Efecto: Encontrar cuantos niveles hay en un arbol haciendo un recorrido por niveles.
+// Requiere: Arbol inicializado, variable nivelMax pasado como variables globales 
+// y Objeto Par que guarda nodos y enteros.
 // Modifica: El algoritmo no modifica al arbol.
 
 global nivelMax=1
 
 global arbol 
 
-contarNiveles(){
-    if(!arbol.vacio()){
-        contarNivelesR(arbol.Raiz(),1)
-    }
-    imprimir (nivelMax);
-}
-
-contarNivelesR(nodo,nivelActual){
-    if(nivelActual>nodoMax){
-        nivelMax=nivelActual
-    }
-    nodo=arbol.hMI(nodo)
-    nivelActual=nivelActual+1
-    while (nodo!=nodoNulo){
-        contarNivelesR(nodo,nivelActual,nivelDeseado)
-        nodo=arbol.hD(nodo)
-    }
+contarNivelesPorNivel(){
+    if (arbol.NumNodos()!=0){
+        cola.Iniciar()
+        declarar Par(arbol.Raiz(),1)
+        cola.Encolar(par)
+        while (cola.NumElem()!=0){
+            par = cola.Desencolar()
+            if(nivelMax<par.nivel){
+                nivelMax=par.nivel
+            }
+            n1=arbol.HijoMasIzquierdo(par.nodo)
+            nuevoNivel = par.nivel + 1
+            while (n1 != nodoNulo){
+                nuevoPar = Par(n1,nuevoNivel)
+                cola.Encolar(nuevoPar)
+                n1 = arbol.HermanoDerecho(n1)
+            }
+        }
+        imprimir(nivelMax);
+        cola.Destruir();
 }
