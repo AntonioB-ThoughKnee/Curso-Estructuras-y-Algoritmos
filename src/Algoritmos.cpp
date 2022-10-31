@@ -2,13 +2,6 @@
 #include <string.h>
 
 #include "../include/Algoritmos.hpp"
-#include "../include/ColaPlantilla.hpp"
-#include "../include/ListaIndexadaPlantilla.hpp"
-// #include "../include/HMIHDConPtrPadreOptimizado.hpp"
-#include "../include/ArregloPadre.hpp"
-// #include "../include/HMIHDConPtrPadreyHI.hpp"
-// #include "../include/ListaHijos.hpp"
-// #include "../include/HMIHDConContador.hpp"
 
 using namespace std;
 
