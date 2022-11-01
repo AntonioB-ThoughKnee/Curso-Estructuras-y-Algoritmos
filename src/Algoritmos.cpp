@@ -94,7 +94,7 @@ void Algoritmos::menu(){
                   cout << "Si existe nodo con esa etiqueta " << endl;
                 }
             break;
-            case 10: //  Borrar sub árbol
+            case 10:
               cout << "Cuál nodo desea borrar?\nDigite la etiqueta del nodo " << endl;
               cin >> accion;
               nodo = BuscarEtiqueta(accion, this->arbol);
@@ -106,7 +106,7 @@ void Algoritmos::menu(){
               }
               this->listarPorNiveles();
             break;
-            case 11: // Construir arbol
+            case 11:
               cout << "Se creará una lista con los números del 1 hasta el número que digite, y estos números formarán parte del nuevo árbol" << endl;
               cout << "La lista creada debe cumplir un tamaño igual a \n(k**i-1) / (k-1)\nDonde 'k' = hijos por nodo e 'i' = nivel de profundidad del arbol " << endl;
               cin >> accion;
@@ -114,7 +114,7 @@ void Algoritmos::menu(){
 
               ListaIndexada<int> lista;
               lista.Iniciar();
-              for(int ii = 1; ii <= accion ; ii++){ //bg
+              for(int ii = 1; ii <= accion ; ii++){
                 lista.Insertar(ii, ii);
               }
 
