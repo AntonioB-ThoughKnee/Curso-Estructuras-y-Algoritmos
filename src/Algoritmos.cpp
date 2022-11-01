@@ -35,8 +35,6 @@ void Algoritmos::inicializarArbol() {
 void Algoritmos::menu(){
     this->inicializarArbol();
     int accion=1;
-    ListaIndexada<int> lista;
-    lista.Iniciar();
     Arbol::Nodo* nodo;
     int etiqueta;
 
@@ -113,6 +111,9 @@ void Algoritmos::menu(){
               cout << "La lista creada debe cumplir un tamaño igual a \n(k**i-1) / (k-1)\nDonde 'k' = hijos por nodo e 'i' = nivel de profundidad del arbol " << endl;
               cin >> accion;
 
+
+              ListaIndexada<int> lista;
+              lista.Iniciar();
               for(int ii = 1; ii <= accion ; ii++){ //bg
                 lista.Insertar(ii, ii);
               }
