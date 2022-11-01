@@ -245,8 +245,6 @@ void Algoritmos::ListarPreOrdenR(Arbol::Nodo* nodo, int nivel, int* nivelRet) {
     }
 }
 
-// ALGORITMO 5: NO FUNCIONA (ARREGLAR)
-
 void Algoritmos::cantidadNivelesPorNiveles(){
     if (this->arbol->NumNodos()!=0){
         Cola<Pares*> cola;

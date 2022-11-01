@@ -33,29 +33,144 @@ Algoritmos();
 void inicializarArbol();
 void menu();
 
+/**
+ * @brief Busca e imprime la etiqueta del hermano izquierdo de un nodo dado
+ * 
+ * @param nodo Nodo al que se va a buscar su hermano
+ * 
+   * @param
+Requiere: 
+   * @param
+Efecto: Imprime la etiqueta del hermano izquierdo de un nodo dado
+   * @param
+Modifica: Nada
+ */
 void hermanoIzquierdo(Arbol::Nodo* nodo);  // Por dentro imprime la etiqueta, no devuelve nada entonces.
+
+/**
+ * @brief Verifica si el árbol contiene etiquetas 
+ * repetidas e imprime verdadero o falso según el caso
+ * 
+   * @param
+Requiere: 
+   * @param
+Efecto: Imprime si el árbol contiene etiquetas repetidas o no
+   * @param
+Modifica:  Nada
+ */
 void contieneEtiquetasRepetidas();  // Imprime por dentro el mensaje de verdadero o falso.
+
+/**
+ * @brief Calcula la profundidad en la que está localizado un nodo 
+ * e imprime la profundidad
+ * 
+ * @param nodoBuscar Nodo al que se va a buscar su profundidad
+ * 
+   * @param
+Requiere: 
+   * @param
+Efecto: Imprime la profundidad del nodo dado en el árbol
+   * @param
+Modifica: Nada
+ */
 void profundidadNodo(Arbol::Nodo* nodoBuscar);  // Imprime por dentro el numero.
+
+/**
+ * @brief  Calcula e imprime la cantidad de niveles del árbol en PreOrden
+ * 
+   * @param
+Requiere: 
+   * @param
+Efecto: Imprimir la cantidad de niveles del árbol
+   * @param
+Modifica: Nada
+ */
 void cantidadNivelesPreOrden();  // Imprime la cantidad de niveles por dentro.
 
-int contarPorNiveles();
-void listaEtiquetasNivel(int nivel);
-void recorridoPreOrden();
-void recorridoPorNiveles();
+int contarPorNiveles(); // No definido. BORRAR si no es importante
+
+void listaEtiquetasNivel(int nivel); // No definido. BORRAR si no es importante
+void recorridoPreOrden(); // No definido. BORRAR si no es importante
+void recorridoPorNiveles(); // No definido. BORRAR si no es importante
+
+/**
+ * @brief  Calcula e imprime la cantidad de niveles del árbol por Niveles
+ * 
+   * @param
+Requiere: 
+   * @param
+Efecto: Imprimir la cantidad de niveles del árbol
+   * @param
+Modifica: Nada
+ */
 void cantidadNivelesPorNiveles();
-void listarPorNivel();
-void contarNivelesR(Arbol::Nodo* nodo,int nivelActual);
+
+void listarPorNivel();// No definido. BORRAR si no es importante
+
+void contarNivelesR(Arbol::Nodo* nodo,int nivelActual); // No definido. BORRAR si no es importante
+
+/**
+ * @brief Imprime las etiquetas de los nodos que se hallan 
+ * en un nivel dado del árbol
+ * 
+ * @param nivel Nivel el cual se desea saber las etiquetas 
+ * 
+   * @param
+Requiere: 
+   * @param
+Efecto: Imprimir las etiquetas de los nodos en un nivel dado del árbol
+   * @param
+Modifica: Nada
+ */
 void listarEtiquetasNivel(int nivelDeseado);
+
+/**
+ * @brief Función auxiliar de la función "listarEtiquetasNivel"
+ * 
+ * @param nodo Nodo actual
+ * @param nivelActual Nivel actual
+ * @param nivelDeseado Nivel el cual se desea conocer las etiquetas
+ */
 void listarEtiquetasNivelR(Arbol::Nodo* nodo, int nivelActual,int nivelDeseado);
+
+/**
+ * @brief Imprime las etiquetas del árbol en un recorrido por Pre Orden
+ * 
+   * @param
+Requiere: 
+   * @param
+Efecto: Imprimir las etiquetas de los nodos en un recorrido por Pre Orden
+   * @param
+Modifica: Nada
+ */
 void listarPreOrden();
+
+/**
+ * @brief Función auxiliar de la función "listarPreOrden"
+ * 
+ * @param nodo Nodo actual
+ * 
+ */
 void listarPreOrdenR(Arbol::Nodo* nodo);
+
+/**
+ * @brief Imprime las etiquetas del árbol en un recorrido por Niveles
+ * 
+   * @param
+Requiere: 
+   * @param
+Efecto: Imprimir las etiquetas de los nodos en un recorrido por Niveles
+   * @param
+Modifica: Nada
+ */
 void listarPorNiveles();
+
 /**
 * @brief Busca una  etiqueta en un árbol dado y regresa el nodo que tenga esa etiqueta si existe ese nodo
 * 
 * @param etiqueta Valor contenido por algún nodo o ninguno
 * @param A Arbol por el cual se realiza la búsqueda
-* @return Arbol::Nodo* Nodo que contiene la etiqueta o nodo nulo
+* @return Arbol::Nodo*  Nodo que contiene la etiqueta o nodo nulo
 * 
    * @param
 Requiere: Etiqueta valida y Arbol inicializado con al menos raíz definida
