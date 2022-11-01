@@ -30,7 +30,6 @@ int nivelMaximo;
 public:
 Algoritmos();
 ~Algoritmos();
-//TODO: Programar este metodo
 void inicializarArbol();
 void menu();
 
@@ -90,7 +89,7 @@ Arbol* HacerArbol(int hijos, ListaIndexada<int> lista);
 * @param A Arbol al que se aplicará la eliminación del subárbol
 * 
    * @param
-Requiere: Nodo válido y Arbol inicializado con al menos raíz definida
+Requiere: Nodo válido diferente a la raíz y Arbol inicializado 
    * @param
 Efecto: Eliminar subárbol contenido en un nodo dado a un árbol dado
    * @param
