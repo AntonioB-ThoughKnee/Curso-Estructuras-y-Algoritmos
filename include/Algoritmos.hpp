@@ -53,7 +53,8 @@ void menu();
  * 
  * @param nodo Nodo al que se va a buscar su hermano
  * 
- * @param Requiere: 
+ * @param Requiere: Nodo válido que contenga hermano izquierdo, que el árbol no contenga
+ * etiquetas repetidas. 
  * @param Efecto: Imprime la etiqueta del hermano izquierdo de un nodo dado
  * @param Modifica: Nada
  */
@@ -63,9 +64,9 @@ void hermanoIzquierdo(Arbol::Nodo* nodo);  // Por dentro imprime la etiqueta, no
  * @brief Verifica si el árbol contiene etiquetas 
  * repetidas e imprime verdadero o falso según el caso
  * 
-* @param Requiere: 
-* @param Efecto: Imprime si el árbol contiene etiquetas repetidas o no
-* @param Modifica:  Nada
+* @param Requiere: Árbol válido e inicializado. 
+* @param Efecto: Imprime si el árbol contiene etiquetas repetidas o no.
+* @param Modifica:  No modifica el árbol.
  */
 void contieneEtiquetasRepetidas();  // Imprime por dentro el mensaje de verdadero o falso.
 
@@ -75,18 +76,19 @@ void contieneEtiquetasRepetidas();  // Imprime por dentro el mensaje de verdader
  * 
  * @param nodoBuscar Nodo al que se va a buscar su profundidad
  * 
- * @param Requiere: 
+ * @param Requiere: Arbol válido e inicializado, nodo válido y perteneciente al
+ * árbol. Árbol no contenga etiquetas repetidas.
  * @param Efecto: Imprime la profundidad del nodo dado en el árbol
- * @param Modifica: Nada
+ * @param Modifica: No modifica el árbol.
  */
 void profundidadNodo(Arbol::Nodo* nodoBuscar);  // Imprime por dentro el numero.
 
 /**
  * @brief  Calcula e imprime la cantidad de niveles del árbol en PreOrden
  * 
- * @param Requiere: 
+ * @param Requiere: Árbol válido e inicializado.
  * @param Efecto: Imprimir la cantidad de niveles del árbol
- * @param Modifica: Nada
+ * @param Modifica: No modifica el árbol.
  */
 void cantidadNivelesPreOrden();  // Imprime la cantidad de niveles por dentro.
 

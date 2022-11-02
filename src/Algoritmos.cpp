@@ -135,67 +135,62 @@ void Algoritmos::menu(){
 // TODO: Clausula requiere: que no se pida con un nodo que no tiene herm izq.
 
 void Algoritmos::hermanoIzquierdo(Arbol::Nodo* nodo) {
-    //TODO: Arreglar caso nodo = 3
-    if (this->arbol->NumNodos() != 0) {
-        Cola<Arbol::Nodo*> C;
-        C.Iniciar();
-        C.Encolar(this->arbol->Raiz());
-        while (C.NumElem() != 0) {
-            Arbol::Nodo* n = C.Desencolar();
-            Arbol::Nodo* nh = this->arbol->HijoMasIzquierdo(n);
-            while (nh != nullptr) {
-                
-                Arbol::Nodo* hermDer = this->arbol->HermanoDerecho(nh);
-                // if (hermDer == nodo) {
-                if (hermDer != nullptr) {
-                    if (this->arbol->Etiqueta(hermDer) == this->arbol->Etiqueta(nodo)) {
-                        // return nh;
-                        // cout << "Si entra" << endl;
-                        std::cout << "El hermano izquierdo del nodo es: " << 
-                            this->arbol->Etiqueta(nh) << std::endl;
-                    }
-                }
-                C.Encolar(nh);
-                nh = this->arbol->HermanoDerecho(nh);
+  if (this->arbol->NumNodos() != 0) {
+    Cola<Arbol::Nodo*> C;
+    C.Iniciar();
+    C.Encolar(this->arbol->Raiz());
+    while (C.NumElem() != 0) {
+      Arbol::Nodo* n = C.Desencolar();
+      Arbol::Nodo* nh = this->arbol->HijoMasIzquierdo(n);
+      while (nh != nullptr) {
+          
+        Arbol::Nodo* hermDer = this->arbol->HermanoDerecho(nh);
+        if (hermDer != nullptr) {
+            if (this->arbol->Etiqueta(hermDer) == this->arbol->Etiqueta(nodo)) {
+              std::cout << "El hermano izquierdo del nodo es: " << 
+                this->arbol->Etiqueta(nh) << std::endl;
             }
         }
+          C.Encolar(nh);
+          nh = this->arbol->HermanoDerecho(nh);
+      }
     }
+  }
 }
 
 // ALGORITMO 2:
 
 void Algoritmos::contieneEtiquetasRepetidas() {
-    if (this->arbol->NumNodos() != 0) {
-        ListaIndexada<Arbol::Nodo*> L;
-        L.Iniciar();
-        L.Insertar(this->arbol->Raiz(), L.NumElem() + 1);
-        int indexSacar = 1;
-        bool repetida = false;
-        while (indexSacar < L.NumElem() +1 && !repetida) {
-            auto n = L.Recuperar(indexSacar);
-            auto nh = this->arbol->HijoMasIzquierdo(n);
-            while (nh != nullptr) {
-                // repetida = BuscarRepetidaEnLista(this->arbol->Etiqueta(nh), &L);
-                for (int i = 0; i < (L.NumElem() + 1); i++) {
-                    if (this->arbol->Etiqueta((L.Recuperar(i))) == this->arbol->Etiqueta(nh)) {
-                        repetida = true; // si es repetida
-                    }
-                }
-                if (repetida) {
-                    break;
-                }
-                L.Insertar(nh, L.NumElem() + 1);
-                nh = this->arbol->HermanoDerecho(nh);
-            }
-            indexSacar++;
+  if (this->arbol->NumNodos() != 0) {
+      ListaIndexada<Arbol::Nodo*> L;
+      L.Iniciar();
+      L.Insertar(this->arbol->Raiz(), L.NumElem() + 1);
+      int indexSacar = 1;
+      bool repetida = false;
+    while (indexSacar < L.NumElem() +1 && !repetida) {
+      auto n = L.Recuperar(indexSacar);
+      auto nh = this->arbol->HijoMasIzquierdo(n);
+      while (nh != nullptr) {
+        for (int i = 0; i < (L.NumElem() + 1); i++) {
+          if (this->arbol->Etiqueta((L.Recuperar(i))) == this->arbol->Etiqueta(nh)) {
+              repetida = true; // si es repetida
+          }
         }
-        L.Destruir();
         if (repetida) {
-            std::cout << "El árbol sí tiene etiquetas repetidas" << endl;
-        } else {
-            std::cout << "El árbol no tiene etiquetas repetidas" << endl;
+          break;
         }
+        L.Insertar(nh, L.NumElem() + 1);
+        nh = this->arbol->HermanoDerecho(nh);
+      }
+      indexSacar++;
     }
+    L.Destruir();
+    if (repetida) {
+        std::cout << "El árbol sí tiene etiquetas repetidas" << endl;
+    } else {
+        std::cout << "El árbol no tiene etiquetas repetidas" << endl;
+    }
+  }
 }
 
 // ALGORITMO 3:
