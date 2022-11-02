@@ -353,19 +353,39 @@ Arbol::Nodo* Algoritmos::BuscarEtiqueta(int etiqueta, Arbol* A)
 
 // ALGORITMO 10:
 
-void  Algoritmos::EliminarSubarbol(Arbol::Nodo* nodo, Arbol* A){
-  Arbol::Nodo* tmp = A->HijoMasIzquierdo(nodo); //Hijo de nodo
-  Arbol::Nodo* tmpHermanoDerecho; // Hermano derecho del hijo de nodo, existe porque se necesita guardar antes de que se elimine tmp al salir de la llamada recursiva en el while loop
-  while(tmp != nullptr){
-    tmpHermanoDerecho = A->HermanoDerecho(tmp);
-    EliminarSubarbol(tmp, A);
-    tmp = tmpHermanoDerecho;
-  } 
+void  Algoritmos::EliminarSubarbol(Arbol::Nodo* hijos, Arbol* A)
+{
+  ListaIndexada<Arbol::Nodo*> auxiliar;
+  auxiliar.Iniciar();
+  Arbol::Nodo* tmp = hijos;
+  Arbol::Nodo* tmpHD; // Utilizado para guardar el hermano derecho de tmp antes de borrarlo
+  auxiliar.Insertar(tmp, auxiliar.NumElem()+1);
+  for(int ii = 0; ii <  auxiliar.NumElem() ; ii++){
 
-  //Si se llegó al final del subárbol, se elimina la hoja y se crea un efecto dominó hacía arriba
-  if(tmp == nullptr){
-    A->BorrarHoja(nodo);
+    tmp = auxiliar.Recuperar(ii+1);
+    tmp = A->HijoMasIzquierdo(tmp);
+    while(tmp != nullptr){
+
+      //Si tmp no tiene hijos entonces se borra de una vez
+      if(A->HijoMasIzquierdo(tmp) == nullptr ){
+        tmpHD = A->HermanoDerecho(tmp);
+        A->BorrarHoja(tmp);
+        tmp = tmpHD;
+      } 
+      
+      else {
+        auxiliar.Insertar(tmp, auxiliar.NumElem()+1);
+        tmp = A->HermanoDerecho(tmp);
+      }
+    }
+
   }
+  //Eliminando los nodos que antes tenían hijos
+  for(int ii = auxiliar.NumElem(); ii > 0 ; ii--){
+    tmp = auxiliar.Recuperar(ii);
+    A->BorrarHoja(tmp);
+  }
+
 }
 
 // ALGORITMO 11:
