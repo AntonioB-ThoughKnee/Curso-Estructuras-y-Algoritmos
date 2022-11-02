@@ -48,6 +48,7 @@ Algoritmos();
 void inicializarArbol();
 void menu();
 
+Algoritmos(Arbol* arbol);
 /**
  * @brief Busca e imprime la etiqueta del hermano izquierdo de un nodo dado
  * 

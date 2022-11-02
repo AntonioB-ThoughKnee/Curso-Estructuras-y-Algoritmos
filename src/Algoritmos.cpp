@@ -4,6 +4,10 @@
 #include "../include/Algoritmos.hpp"
 
 using namespace std;
+Algoritmos::Algoritmos(Arbol* arbol){
+    this->arbol=arbol;
+    this->nivelMaximo=1;
+}
 
 Algoritmos::Algoritmos(){
     this->arbol=new Arbol();
