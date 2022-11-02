@@ -5,12 +5,16 @@
 using namespace std;
  
 ListaIndexada::ListaIndexada(){
+}
+ListaIndexada::~ListaIndexada(){
+}
+void::ListaIndexada::Iniciar(){
 // Se inicializan los atributos de la clase
     this->primero=nullptr;
     this->ultimo=nullptr;
     this->contador=0;
 }
-ListaIndexada::~ListaIndexada(){
+void::ListaIndexada::Destruir(){
 // Se libera la memoria utilizada
     delete this->primero;
 }

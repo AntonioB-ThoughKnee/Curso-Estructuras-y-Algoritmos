@@ -5,6 +5,10 @@
 using namespace std;
 
 Cola::Cola(){
+}
+Cola::~Cola(){
+}
+void Cola::Iniciar(){
 // Se inicializan los atributos de la clase
     this->inicio=0;
     this->final=-1;
@@ -12,8 +16,8 @@ Cola::Cola(){
     this->cola= new int[10];
     this->contador=0;
 }
-Cola::~Cola(){
-// Se dejan en cero todos los atributos de la clase y se libera la memoria utilizada
+void Cola::Destruir(){
+    // Se dejan en cero todos los atributos de la clase y se libera la memoria utilizada
     this->inicio=0;
     this->final=0;
     this->capacidad=10;

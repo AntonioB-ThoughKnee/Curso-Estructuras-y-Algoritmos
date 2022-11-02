@@ -46,18 +46,34 @@ public:
      * @brief Constructor de la lista
      * 
      * @remark Efecto: Crea una lista de tipo Lista Indexada y la guarda en el parámetro dado.
-     * @remark Requiere: Objeto no inicializado de tipo Lista Indexada.
+     * @remark Requiere: Objeto no creado de tipo Lista Indexada.
      * @remark Modifica: La lista.
      */
     ListaIndexada();
     /**
+     * @brief Metodo de inicio de la lista.
+     * 
+     * @remark Efecto: Inicializa los atributos de la lista.
+     * @remark Requiere: Objeto no inicializado de tipo Lista Indexada.
+     * @remark Modifica: La lista.
+     */
+    void Iniciar();
+    /**
      * @brief Destructor de la lista
-     * @remark Efecto: Destruye una lista de tipo lista_indexada.
-     * @remark Requiere: Que la lista indexada ya haya sido creada anteriormente.
-     * @remark Modifica: La lista indexada, ya que el operador básico se dedica a destruirla.
+     * @remark Efecto: Libera la memoria reservada para la clase Lista Indexada.
+     * @remark Requiere: Que la lista indexada ya haya sido destruida anteriormente.
+     * @remark Modifica: La lista indexada, ya que el operador se dedica a destruirla.
      * 
      */
     ~ListaIndexada();
+    /**
+     * @brief Metodo de destruccion de la lista.
+     * 
+     * @remark Efecto: Libera la memoria reservada para los atributos de la clase Lista Indexada.
+     * @remark Requiere: Objeto lista no destruido.
+     * @remark Modifica: La lista.
+     */
+    void Destruir();
     /**
      * @brief Metodo que inserta un elemento en una indice de la lista
      * 
