@@ -1,3 +1,7 @@
+// Creado por todos los integrantes del grupo
+// Algoritmos 1-4 : Jean Paul Chacón González
+// Algoritmos 4-7 : Alejandro Jiménez
+// Algoritmos 7-11: Carlos Sánchez
 #include <iostream>
 #include <string.h>
 
@@ -37,7 +41,7 @@ void Algoritmos::inicializarArbol() {
 }
 
 void Algoritmos::menu(){
-    this->inicializarArbol();
+    // this->inicializarArbol();
     int accion=1;
     Arbol::Nodo* nodo;
     int etiqueta;
