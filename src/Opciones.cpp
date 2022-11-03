@@ -1,3 +1,5 @@
+// Creado entre todos los integrantes.
+
 #include <iostream>
 #include "../include/Opciones.hpp"
 #include "../include/Algoritmos.hpp"

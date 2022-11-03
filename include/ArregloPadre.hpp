@@ -1,7 +1,4 @@
-//
-// Created by jean on 14/10/22.
-//
-
+// Creado por Jean Paul Chacón
 #ifndef TAREA_PROGRAMADA_ARREGLOSENALADORPADRE_H
 #define TAREA_PROGRAMADA_ARREGLOSENALADORPADRE_H
 

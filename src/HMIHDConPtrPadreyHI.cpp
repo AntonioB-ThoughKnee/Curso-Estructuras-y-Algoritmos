@@ -1,6 +1,5 @@
-//
-// Created by Jean C on 10/19/2022.
-//
+// Creado por Carlos Sánchez
+
 
 #include "../include/HMIHDConPtrPadreyHI.hpp"
 // #include "HMIHDConPtrPadreyHI.h"

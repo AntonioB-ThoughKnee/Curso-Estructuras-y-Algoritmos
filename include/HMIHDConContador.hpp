@@ -1,7 +1,4 @@
-//
-// Created by Jean C on 10/19/2022.
-//
-
+// Creado por Carlos Sánchez
 #ifndef UNTITLED_HMIHDCONCONTADOR_HPP
 #define UNTITLED_HMIHDCONCONTADOR_HPP
 

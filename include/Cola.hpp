@@ -1,3 +1,5 @@
+// Creado por Alejandro Jiménez
+
 #ifndef COLAHPP
 #define COLAHPP
 /**

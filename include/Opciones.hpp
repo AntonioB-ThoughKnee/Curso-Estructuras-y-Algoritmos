@@ -1,3 +1,4 @@
+// Creado entre todos los integrantes.
 #ifndef OPCIONESHPP
 #define OPCIONESHPP
 

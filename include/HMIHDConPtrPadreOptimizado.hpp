@@ -1,6 +1,5 @@
-//
-// Created by Jean C on 10/19/2022.
-//
+// Creado por Carlos Sánchez
+
 
 #ifndef UNTITLED_HMIHDCONPTRPADREOPTIMIZADO_HPP
 #define UNTITLED_HMIHDCONPTRPADREOPTIMIZADO_HPP

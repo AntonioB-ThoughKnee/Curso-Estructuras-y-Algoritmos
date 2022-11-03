@@ -1,3 +1,5 @@
+// Creado por Alejandro Jiménez
+
 #ifndef COLAPLANTILLAHPP
 #define COLAPLANTILLAHPP
 #include <iostream>

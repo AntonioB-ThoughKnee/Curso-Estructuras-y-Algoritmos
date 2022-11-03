@@ -1,7 +1,5 @@
 #pragma once
-//
-// Created by jean on 17/10/22.
-//
+// Creado por Jean Paul Chacón
 
 #ifndef TAREA_PROGRAMADA_LISTAHIJOS_HPP
 #define TAREA_PROGRAMADA_LISTAHIJOS_HPP

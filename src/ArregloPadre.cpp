@@ -1,6 +1,5 @@
-//
-// Created by Jean C on 10/19/2022.
-//
+// Creado por Jean Paul Chacón
+
 
 #include "../include/ArregloPadre.hpp"
 #include <iostream>

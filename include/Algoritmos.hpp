@@ -1,3 +1,8 @@
+// Creado por todos los integrantes del grupo
+// Algoritmos 1-4 : Jean Paul Chacón González
+// Algoritmos 4-7 : Alejandro Jiménez
+// Algoritmos 7-11: Carlos Sánchez
+
 #ifndef ALGORITMOSHPP
 #define ALGORITMOSHPP
 

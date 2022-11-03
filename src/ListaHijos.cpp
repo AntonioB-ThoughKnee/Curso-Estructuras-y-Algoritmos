@@ -1,7 +1,5 @@
 #include "../include/ListaHijos.hpp"
-//
-// Created by jean on 17/10/22.
-//
+// Creado por Jean Paul Chacón
 
 
 void ListaHijos::Crear() {
