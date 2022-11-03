@@ -111,7 +111,11 @@ ArregloPadre::contenedorArreglo* ArregloPadre::HermanoDerecho(ArregloPadre::cont
   // std::cout << "Prueba\n";
 //  int papaComun = this->arreglo[nodo_id_hermano_externo->nodo_id-1].padre; // nodo por dentro es 1 valor menos por el arreglo.
   // int papaComun = this->arreglo[nodo_id_hermano_externo->nodo_id].padre; // nodo por dentro es 1 valor menos por el arreglo.
-  int papaComun = nodo_id_hermano_externo->padre->etiqueta;
+  int papaComun = -2;
+  if (nodo_id_hermano_externo->padre) {
+    papaComun = nodo_id_hermano_externo->padre->etiqueta;
+
+  }
 
   // Empieza en nodo_id_hermano porque de esta manera, si a la derecha del arreglo a partir de el encontramos a otro nodo con el mismo
   // papa entonces es el hermano derecho.

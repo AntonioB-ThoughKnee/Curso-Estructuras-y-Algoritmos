@@ -1,13 +1,15 @@
 #ifndef OPCIONESHPP
 #define OPCIONESHPP
 
-#include "ListaIndexada.hpp"
-#include "Cola.hpp"
-//#include "ArregloSenaladorPadre.hpp"
-//#include "HMIHDConPtrPadreOptimizado.hpp"
-//#include "HMIHDConPtrPadreyHI.hpp"
-//#include "ListaHijos.hpp"
+#include "ListaIndexadaPlantilla.hpp"
+#include "ColaPlantilla.hpp"
+// #include "ArregloPadre.hpp"
+// #include "HMIHDConPtrPadreOptimizado.hpp"
+// #include "HMIHDConPtrPadreyHI.hpp"
+// #include "ListaHijos.hpp"
 #include "HMIHDConContador.hpp"
+
+
 /**
  * @brief Clase controladora del programa de pruebas 
  * @param lista puntero a la lista por crear
@@ -17,8 +19,8 @@
  */
 class Opciones{
 private:
-ListaIndexada* lista;
-Cola* cola;
+ListaIndexada<int>* lista;
+Cola<int*>* cola;
 Arbol* arbol;
 public:
 

@@ -179,6 +179,7 @@ HMIHDConPtrPadreOptimizado::Nodo*  HMIHDConPtrPadreOptimizado::HijoMasIzquierdo(
 }
 
 HMIHDConPtrPadreOptimizado::Nodo*  HMIHDConPtrPadreOptimizado::HermanoDerecho(HMIHDConPtrPadreOptimizado::Nodo *nodo) {
+    // if ()
     if(nodo->tienePtrAlPadre) {return nullptr; }
     return nodo->hermano;
 }

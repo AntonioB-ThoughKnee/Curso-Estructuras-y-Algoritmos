@@ -14,9 +14,9 @@ Algoritmos::Algoritmos(){
     this->nivelMaximo=1;
 }
 Algoritmos::~Algoritmos(){
-    if (this->arbol){
-        delete this->arbol;
-    }
+    // if (this->arbol){
+    //     delete this->arbol;
+    // }
 }
 
 void Algoritmos::inicializarArbol() {
@@ -257,7 +257,7 @@ void Algoritmos::cantidadNivelesPorNiveles(){
             }
             Arbol::Nodo* n1= this->arbol->HijoMasIzquierdo(par->nodo);
             int nuevoNivel = par->nivel + 1;
-            delete par;
+            // delete par;
             while (n1 != nullptr){
                 Pares* nuevoPar = new Pares(n1,nuevoNivel);
                 cola.Encolar(nuevoPar);

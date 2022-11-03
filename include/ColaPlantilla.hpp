@@ -1,5 +1,9 @@
 #ifndef COLAPLANTILLAHPP
 #define COLAPLANTILLAHPP
+#include <iostream>
+using namespace std;
+template <typename Elemento>
+
 /**
  * @brief Estructura de datos Cola
  * @remark Esta estructura es implementada por un arreglo circular
@@ -10,8 +14,6 @@
  * @param cola puntero al arreglo circular
  * @param contador cantidad de datos en la cola
  */
-using namespace std;
-template <typename Elemento>
 
 
 class Cola{
@@ -51,7 +53,12 @@ void Destruir(){
     this->final=0;
     this->capacidad=100;
     this->contador=0;
-    delete this->cola;
+    // for (int i = 0; i < 100; i++) {
+    //   if (this->cola[i]) {
+    //     delete this->cola[i];
+    //   } 
+    // }
+    // delete this->cola;
 }
 
 

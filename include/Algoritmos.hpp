@@ -3,11 +3,12 @@
 
 #include "ListaIndexadaPlantilla.hpp"
 #include "ColaPlantilla.hpp"
-#include "ArregloPadre.hpp"
+// #include "ArregloPadre.hpp"
 // #include "HMIHDConPtrPadreOptimizado.hpp"
 // #include "HMIHDConPtrPadreyHI.hpp"
 // #include "ListaHijos.hpp"
-// #include "HMIHDConContador.hpp"
+#include "HMIHDConContador.hpp"
+
 
 /**
  * @brief Struct de pares
