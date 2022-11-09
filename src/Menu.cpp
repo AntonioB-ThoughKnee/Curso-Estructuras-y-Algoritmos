@@ -7,7 +7,7 @@ void Menu::MenuPrincipal() {
 
   int accion = -1;
   while (accion != 0){
-    cout<<"1- Probar Operadores 2-Probar Algoritmos: "<<endl;
+    cout<<"1- Probar Operadores 2-Probar Algoritmos 3-Test: "<<endl;
     cin >> accion;
     switch(accion){
       case 1:
@@ -15,6 +15,10 @@ void Menu::MenuPrincipal() {
       break;
       case 2:
         this->algoritmos->menu();
+      break;
+      case 3:
+        this->test->CrearArboles();
+        cout<<"Los arboles fueron creados"<<endl;
       break;
       default:
           accion=0;

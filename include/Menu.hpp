@@ -12,16 +12,19 @@
 
 #include "Algoritmos.hpp"
 #include "Opciones.hpp"
+#include "Test.hpp"
 
 class Menu {
 public:
   Opciones* opciones;
   Algoritmos* algoritmos;
+  Test* test;
   Arbol* arbol;
   Menu() {
     this->arbol = new Arbol();
     this->algoritmos = new Algoritmos(this->arbol);
     this->opciones = new Opciones(this->arbol);
+    this->test = new Test();
   }
   ~Menu() {
     if(this->opciones!=nullptr){
@@ -35,6 +38,10 @@ public:
     if(this->arbol!=nullptr){
         delete this->arbol;
         this->arbol=nullptr;
+    }
+    if(this->test!=nullptr){
+      delete this->test;
+      this->test=nullptr;
     }
   }
   void MenuPrincipal();
