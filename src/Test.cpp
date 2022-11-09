@@ -30,8 +30,11 @@ Test::Test(){
     this->ngran=1000;
 }
 Test::~Test(){
+        this-> arbolAnchoPeq->Destruir();
         delete this-> arbolAnchoPeq;
+        this-> arbolAnchoMed->Destruir();
         delete this-> arbolAnchoMed;
+        this-> arbolAnchoGrande->Destruir();
         delete this-> arbolAnchoGrande;
 
         delete this-> arbolLargoPeq;
