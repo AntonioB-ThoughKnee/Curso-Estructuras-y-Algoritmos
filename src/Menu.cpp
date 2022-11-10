@@ -19,7 +19,6 @@ void Menu::MenuPrincipal() {
       case 3:
         this->test->CrearArboles();
         this->test->Correr();
-        cout<<"Los arboles fueron creados"<<endl;
       break;
       default:
           accion=0;
