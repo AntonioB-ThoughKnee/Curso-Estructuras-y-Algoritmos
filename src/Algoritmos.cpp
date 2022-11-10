@@ -18,9 +18,10 @@ Algoritmos::Algoritmos(){
     this->nivelMaximo=1;
 }
 Algoritmos::~Algoritmos(){
-    // if (this->arbol){
-    //     delete this->arbol;
-    // }
+  // this->arbol->Destruir();
+  // if (this->arbol){
+  //     delete this->arbol;
+  // }
 }
 
 void Algoritmos::inicializarArbol() {

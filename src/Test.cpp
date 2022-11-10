@@ -58,7 +58,7 @@ void Test::CrearArboles(){
         this->arbolAnchoMed->AgregarHijoMasDerecho(this->arbolAnchoMed->Raiz(),i);
     }
     for(int i=1;i<=this->ngran;++i){
-        this->arbolAnchoGrande->AgregarHijoMasDerecho(this->arbolAnchoMed->Raiz(),i);
+        this->arbolAnchoGrande->AgregarHijoMasDerecho(this->arbolAnchoGrande->Raiz(),i);
     }
 
     ListaIndexada<int> listapeq;
@@ -87,6 +87,7 @@ void Test::CrearArboles(){
     this-> arbolComunMed=algoritmos.HacerArbol(3, listamed);
     this-> arbolComunGrande=algoritmos.HacerArbol(3, listagran);
 }
+
 void Test::Correr(){
     Algoritmos algoritmos1(this->arbolAnchoPeq);
     algoritmos1.listarPreOrden();
