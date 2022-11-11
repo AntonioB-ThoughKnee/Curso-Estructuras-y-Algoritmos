@@ -1,0 +1,1081 @@
+
+```{r}
+print("lal")
+
+soloAlg1 <- analisisAlgortimos$algoritmo == "ListarPreOrden"
+soloAlg1YED1Comun <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+
+analisisAlgortimos[soloAlg1YED1, "tiempo"]
+
+ex <- analisisAlgortimos[soloAlg1YED1, ]
+
+ex
+```
+
+# Definiendo data frame
+```{r}
+
+library(ggplot2)
+# creating a dummy dataset
+tiempo <- 
+c( #Estos valores van alineados con "implementacionDeArbol" 
+  0.000194, 0.00001, 0.02965, 0.00107, 0.00049, 0.00011, 3.79671, 0.02494, 0.00144, 0.00007, 30.12499, 0.11878, 0.00108, 0.00002, 0.02954, 0.00291, 0.00173, 0.00006, 3.90522, 0.02514, 0.00592, 0.00085, 36.82748, 0.10982, 0.00050, 0.00026, 0.02935, 0.00148, 0.00340, 0.00034, 4.08435, 0.03118, 0.00164, 0.00039, 34.79611, 0.11431, 
+  0.000962, 0.00058, 0.03004, 0.00275, 0.02706, 0.02111, 3.81017, 0.06205, 0.12038, 0.09138, 30.18234, 0.26623, 0.00184, 0.00154, 0.03013, 0.00432, 0.04963, 0.04699, 3.92832, 0.11769, 0.18539, 0.19249, 36.65054, 0.48393, 0.00210, 0.00167, 0.02994, 0.00335, 0.04145, 0.03167, 4.08044, 0.09112, 0.18337, 0.21776, 34.16164, 0.48683, 
+  0.000100, 0.00024, 0.02977, 0.00097, 0.00099, 0.00012, 3.70262, 0.02631, 0.00257, 0.00035, 29.46015, 0.13034, 0.00026, 0.00007, 0.02933, 0.00106, 0.00113, 0.00030, 3.67754, 0.02436, 0.00344, 0.00030, 29.44084, 0.11282, 0.00013, 0.00003, 0.02925, 0.00114, 0.00057, 0.00012, 3.68469, 0.02934, 0.00148, 0.00032, 29.43261, 0.12324, 
+  0.000323, 0.00020, 0.02935, 0.00120, 0.00112, 0.00017, 3.65562, 0.02712, 0.00163, 0.00022, 29.16283, 0.18887, 0.00024, 0.00006, 0.02914, 0.00107, 0.00099, 0.00022, 3.63743, 0.03979, 0.00274, 0.00093, 29.14569, 0.11052, 0.00020, 0.00006, 0.02913, 0.00098, 0.00050, 0.00019, 3.63585, 0.03247, 0.00179, 0.00024, 29.27304, 0.16959, 
+  0.005823, 0.00587, 0.03201, 0.01130, 0.23740, 0.20208, 3.83105, 0.33734, 0.72949, 0.68636, 30.35247, 1.06273, 0.01273, 0.00617, 0.03170, 0.01569, 0.17895, 0.18030, 3.99237, 0.32256, 0.79252, 0.70639, 34.63442, 1.22301, 0.00578, 0.00532, 0.03165, 0.01225, 0.17161, 0.15419, 4.42486, 0.34073, 0.66228, 0.49178, 38.86859, 1.08042
+)
+
+algoritmo <- c( 
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",
+
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",
+
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",
+
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",
+
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo",  
+                "ListarPreOrden", "CantidadNivelesPreOrden", "ContieneEtiquetasRepetidas", "ProfundidadNodo"
+)
+ 
+implementacionDeArbol <- c( #cada fila tiene 36 elementos
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", "ListaDeHijos", 
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", "HMIHDConPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamanhoDeN <- c(
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",  
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",  
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",
+                
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",  
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",  
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",
+                
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",  
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",  
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",
+                
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",  
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",  
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",
+                
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",  
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande",  
+                "Pequenho", "Pequenho", "Pequenho", "Pequenho", 
+                "Mediano", "Mediano", "Mediano", "Mediano", 
+                "Grande", "Grande", "Grande", "Grande"
+                
+              )
+
+tipoDeArbol <- c(
+                "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", 
+                "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", 
+                "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", 
+                
+                "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", 
+                "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", 
+                "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", 
+                
+                "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", 
+                "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", 
+                "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", 
+                
+                "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", 
+                "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", 
+                "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", 
+                
+                "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", "Ancho", 
+                "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", "Largo", 
+                "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", "Comun", 
+              )
+
+# creating data frame
+analisisAlgortimos <- data.frame(algoritmo, implementacionDeArbol, tipoDeArbol, tamanhoDeN, tiempo)
+
+# creating plot using the above data
+# ggplot(analisisAlgortimos, aes(tipoArbol, tiempo, fill = tamanhoDeN)) +
+#   geom_bar(stat="identity", position = "dodge") +
+#   labs(title="Analisis de algoritmos para cada arbol\n") + 
+#   theme_gray(base_size = 11, base_family = "Times") +
+#   scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+# GRAFICO 1
+### Algoritmo: "ListarPreOrden", Tipo de Arbol: "Comun"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "ListarPreOrden"
+
+soloAlg1YED1Comun <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Comun, "tiempo"]
+#=====
+
+soloAlg1YED2Comun <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Comun, "tiempo"]
+#=====
+
+soloAlg1YED3Comun <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Comun, "tiempo"]
+#=====
+
+soloAlg1YED4Comun <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Comun, "tiempo"]
+#=====
+
+soloAlg1YED5Comun <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Comun, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: ListarPreOrden \nTipo de Arbol: Comun") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+# GRAFICO 2
+### Algoritmo: "CantidadNivelesPreOrden", Tipo de Arbol: "Comun"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden"
+
+soloAlg1YED1Comun <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Comun, "tiempo"]
+#=====
+
+soloAlg1YED2Comun <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Comun, "tiempo"]
+#=====
+
+soloAlg1YED3Comun <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Comun, "tiempo"]
+#=====
+
+soloAlg1YED4Comun <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Comun, "tiempo"]
+#=====
+
+soloAlg1YED5Comun <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Comun, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: CantidadNivelesPreOrden \nTipo de Arbol: Comun") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+
+# GRAFICO 3
+### Algoritmo: "ContieneEtiquetasRepetidas", Tipo de Arbol: "Comun"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas"
+
+soloAlg1YED1Comun <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Comun, "tiempo"]
+#=====
+
+soloAlg1YED2Comun <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Comun, "tiempo"]
+#=====
+
+soloAlg1YED3Comun <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Comun, "tiempo"]
+#=====
+
+soloAlg1YED4Comun <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Comun, "tiempo"]
+#=====
+
+soloAlg1YED5Comun <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Comun, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: ContieneEtiquetasRepetidas \nTipo de Arbol: Comun") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+
+# GRAFICO 4
+### Algoritmo: "ProfundidadNodo", Tipo de Arbol: "Comun"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "ProfundidadNodo"
+
+soloAlg1YED1Comun <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Comun, "tiempo"]
+#=====
+
+soloAlg1YED2Comun <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Comun, "tiempo"]
+#=====
+
+soloAlg1YED3Comun <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Comun, "tiempo"]
+#=====
+
+soloAlg1YED4Comun <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Comun, "tiempo"]
+#=====
+
+soloAlg1YED5Comun <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Comun"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Comun, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: ProfundidadNodo \nTipo de Arbol: Comun") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+# GRAFICO 5
+### Algoritmo: "ListarPreOrden", Tipo de Arbol: "Ancho"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "ListarPreOrden"
+
+soloAlg1YED1Ancho <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Ancho, "tiempo"]
+#=====
+
+soloAlg1YED2Ancho <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Ancho, "tiempo"]
+#=====
+
+soloAlg1YED3Ancho <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Ancho, "tiempo"]
+#=====
+
+soloAlg1YED4Ancho <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Ancho, "tiempo"]
+#=====
+
+soloAlg1YED5Ancho <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Ancho, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: ListarPreOrden \nTipo de Arbol: Ancho") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+# GRAFICO 6
+### Algoritmo: "CantidadNivelesPreOrden", Tipo de Arbol: "Ancho"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden"
+
+soloAlg1YED1Ancho <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Ancho, "tiempo"]
+#=====
+
+soloAlg1YED2Ancho <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Ancho, "tiempo"]
+#=====
+
+soloAlg1YED3Ancho <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Ancho, "tiempo"]
+#=====
+
+soloAlg1YED4Ancho <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Ancho, "tiempo"]
+#=====
+
+soloAlg1YED5Ancho <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Ancho, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: CantidadNivelesPreOrden \nTipo de Arbol: Ancho") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+
+# GRAFICO 7
+### Algoritmo: "ContieneEtiquetasRepetidas", Tipo de Arbol: "Ancho"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas"
+
+soloAlg1YED1Ancho <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Ancho, "tiempo"]
+#=====
+
+soloAlg1YED2Ancho <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Ancho, "tiempo"]
+#=====
+
+soloAlg1YED3Ancho <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Ancho, "tiempo"]
+#=====
+
+soloAlg1YED4Ancho <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Ancho, "tiempo"]
+#=====
+
+soloAlg1YED5Ancho <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Ancho, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: ContieneEtiquetasRepetidas \nTipo de Arbol: Ancho") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+
+# GRAFICO 8
+### Algoritmo: "ProfundidadNodo", Tipo de Arbol: "Ancho"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "ProfundidadNodo"
+
+soloAlg1YED1Ancho <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Ancho, "tiempo"]
+#=====
+
+soloAlg1YED2Ancho <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Ancho, "tiempo"]
+#=====
+
+soloAlg1YED3Ancho <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Ancho, "tiempo"]
+#=====
+
+soloAlg1YED4Ancho <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Ancho, "tiempo"]
+#=====
+
+soloAlg1YED5Ancho <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Ancho"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Ancho, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: ProfundidadNodo \nTipo de Arbol: Ancho") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+# GRAFICO 9
+### Algoritmo: "ListarPreOrden", Tipo de Arbol: "Largo"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "ListarPreOrden"
+
+soloAlg1YED1Largo <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Largo, "tiempo"]
+#=====
+
+soloAlg1YED2Largo <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Largo, "tiempo"]
+#=====
+
+soloAlg1YED3Largo <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Largo, "tiempo"]
+#=====
+
+soloAlg1YED4Largo <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Largo, "tiempo"]
+#=====
+
+soloAlg1YED5Largo <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Largo, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: ListarPreOrden \nTipo de Arbol: Largo") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+# GRAFICO 10
+### Algoritmo: "CantidadNivelesPreOrden", Tipo de Arbol: "Largo"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden"
+
+soloAlg1YED1Largo <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Largo, "tiempo"]
+#=====
+
+soloAlg1YED2Largo <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Largo, "tiempo"]
+#=====
+
+soloAlg1YED3Largo <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Largo, "tiempo"]
+#=====
+
+soloAlg1YED4Largo <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Largo, "tiempo"]
+#=====
+
+soloAlg1YED5Largo <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Largo, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: CantidadNivelesPreOrden \nTipo de Arbol: Largo") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+
+# GRAFICO 11
+### Algoritmo: "ContieneEtiquetasRepetidas", Tipo de Arbol: "Largo"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas"
+
+soloAlg1YED1Largo <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Largo, "tiempo"]
+#=====
+
+soloAlg1YED2Largo <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Largo, "tiempo"]
+#=====
+
+soloAlg1YED3Largo <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Largo, "tiempo"]
+#=====
+
+soloAlg1YED4Largo <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Largo, "tiempo"]
+#=====
+
+soloAlg1YED5Largo <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Largo, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: ContieneEtiquetasRepetidas \nTipo de Arbol: Largo") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
+
+
+# GRAFICO 12
+### Algoritmo: "ProfundidadNodo", Tipo de Arbol: "Largo"
+```{r}
+library(ggplot2)
+
+#===============  Configurando datos para tmp
+soloAlg1 <- analisisAlgortimos$algoritmo == "ProfundidadNodo"
+
+soloAlg1YED1Largo <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConContador" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED1 <- analisisAlgortimos[soloAlg1YED1Largo, "tiempo"]
+#=====
+
+soloAlg1YED2Largo <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "ListaDeHijos" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED2 <- analisisAlgortimos[soloAlg1YED2Largo, "tiempo"]
+#=====
+
+soloAlg1YED3Largo <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreyHI" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED3 <- analisisAlgortimos[soloAlg1YED3Largo, "tiempo"]
+#=====
+
+soloAlg1YED4Largo <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "HMIHDConPtrPadreOptimizado" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED4 <- analisisAlgortimos[soloAlg1YED4Largo, "tiempo"]
+#=====
+
+soloAlg1YED5Largo <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
+  analisisAlgortimos$implementacionDeArbol == "ArregloPadre" &
+  analisisAlgortimos$tipoDeArbol == "Largo"
+  
+tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Largo, "tiempo"]
+#=====
+
+tmp <- c(tiemposParaGrafico1ED1,
+ tiemposParaGrafico1ED2,
+ tiemposParaGrafico1ED3,
+ tiemposParaGrafico1ED4, 
+ tiemposParaGrafico1ED5)
+
+implArbol <- c(
+  "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
+  "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
+  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
+  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "ArregloPadre", "ArregloPadre", "ArregloPadre"
+  )
+ 
+tamN <- c("Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande", 
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande",
+                "Peque", "Mediano", "Grande"
+              )
+
+# creating data frame
+dataaa <- data.frame(implArbol,tamN,tmp)
+
+# creating plot using the above data
+ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+  geom_bar(stat="identity", position = "dodge") +
+  labs(title="Algoritmo: ProfundidadNodo \nTipo de Arbol: Largo") + 
+  theme_gray(base_size = 11, base_family = "Times") +
+  scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+```
