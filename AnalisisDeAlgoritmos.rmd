@@ -1,4 +1,9 @@
 # Definiendo data frame
+
+```{r}
+ex <- c(2, 3) - c(7, 1)
+ex
+```
 ```{r}
 
 library(ggplot2)
@@ -204,8 +209,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -220,11 +225,12 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ListarPreOrden \nTipo de Arbol: Comun") + 
   theme_gray(base_size = 11, base_family = "Times") +
   scale_fill_manual(values=c('#1c1c1c', '#807f80', '#c3c0c0')) 
+
 ```
 
 # GRAFICO 2
@@ -279,8 +285,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -295,7 +301,7 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: CantidadNivelesPreOrden \nTipo de Arbol: Comun") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -355,8 +361,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -371,7 +377,7 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ContieneEtiquetasRepetidas \nTipo de Arbol: Comun") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -431,8 +437,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -447,7 +453,7 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ProfundidadNodo \nTipo de Arbol: Comun") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -506,8 +512,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -522,7 +528,7 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ListarPreOrden \nTipo de Arbol: Ancho") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -581,8 +587,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -597,7 +603,7 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: CantidadNivelesPreOrden \nTipo de Arbol: Ancho") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -657,8 +663,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -673,7 +679,7 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ContieneEtiquetasRepetidas \nTipo de Arbol: Ancho") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -733,8 +739,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -749,7 +755,7 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ProfundidadNodo \nTipo de Arbol: Ancho") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -808,8 +814,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -824,7 +830,7 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ListarPreOrden \nTipo de Arbol: Largo") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -883,8 +889,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -899,7 +905,7 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: CantidadNivelesPreOrden \nTipo de Arbol: Largo") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -959,8 +965,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -975,7 +981,7 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ContieneEtiquetasRepetidas \nTipo de Arbol: Largo") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -1035,8 +1041,8 @@ Tiempo <- c(tiemposParaGrafico1ED1,
 EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
-  "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
-  "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", "HMIHDPtrPadreOptimizado", 
+  "PtrPadreYHI", "PtrPadreYHI", "PtrPadreYHI", 
+  "PtrPadreOptim", "PtrPadreOptim", "PtrPadreOptim", 
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
@@ -1051,7 +1057,7 @@ tamanosDeN <- c("Peque", "Mediano", "Grande",
 dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
+ggplot(dataaa, aes(EstructuraDatosUsada, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ProfundidadNodo \nTipo de Arbol: Largo") + 
   theme_gray(base_size = 11, base_family = "Times") +
