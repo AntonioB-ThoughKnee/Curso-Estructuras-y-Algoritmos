@@ -157,7 +157,7 @@ analisisAlgortimos <- data.frame(algoritmo, implementacionDeArbol, tipoDeArbol, 
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "ListarPreOrden"
 
 soloAlg1YED1Comun <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
@@ -195,13 +195,13 @@ soloAlg1YED5Comun <- analisisAlgortimos$algoritmo == "ListarPreOrden" &
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Comun, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -209,7 +209,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -217,10 +217,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ListarPreOrden \nTipo de Arbol: Comun") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -232,7 +232,7 @@ ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden"
 
 soloAlg1YED1Comun <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
@@ -270,13 +270,13 @@ soloAlg1YED5Comun <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" &
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Comun, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -284,7 +284,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -292,10 +292,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: CantidadNivelesPreOrden \nTipo de Arbol: Comun") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -308,7 +308,7 @@ ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas"
 
 soloAlg1YED1Comun <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
@@ -346,13 +346,13 @@ soloAlg1YED5Comun <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Comun, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -360,7 +360,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -368,10 +368,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ContieneEtiquetasRepetidas \nTipo de Arbol: Comun") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -384,7 +384,7 @@ ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "ProfundidadNodo"
 
 soloAlg1YED1Comun <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
@@ -422,13 +422,13 @@ soloAlg1YED5Comun <- analisisAlgortimos$algoritmo == "ProfundidadNodo" &
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Comun, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -436,7 +436,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -444,10 +444,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ProfundidadNodo \nTipo de Arbol: Comun") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -459,7 +459,7 @@ ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "ListarPreOrden"
 
 soloAlg1YED1Ancho <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
@@ -497,13 +497,13 @@ soloAlg1YED5Ancho <- analisisAlgortimos$algoritmo == "ListarPreOrden" &
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Ancho, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -511,7 +511,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -519,10 +519,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ListarPreOrden \nTipo de Arbol: Ancho") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -534,7 +534,7 @@ ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden"
 
 soloAlg1YED1Ancho <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
@@ -572,13 +572,13 @@ soloAlg1YED5Ancho <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" &
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Ancho, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -586,7 +586,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -594,10 +594,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: CantidadNivelesPreOrden \nTipo de Arbol: Ancho") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -610,7 +610,7 @@ ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas"
 
 soloAlg1YED1Ancho <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
@@ -648,13 +648,13 @@ soloAlg1YED5Ancho <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Ancho, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -662,7 +662,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -670,10 +670,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ContieneEtiquetasRepetidas \nTipo de Arbol: Ancho") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -686,7 +686,7 @@ ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "ProfundidadNodo"
 
 soloAlg1YED1Ancho <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
@@ -724,13 +724,13 @@ soloAlg1YED5Ancho <- analisisAlgortimos$algoritmo == "ProfundidadNodo" &
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Ancho, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -738,7 +738,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -746,10 +746,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ProfundidadNodo \nTipo de Arbol: Ancho") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -761,7 +761,7 @@ ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "ListarPreOrden"
 
 soloAlg1YED1Largo <- analisisAlgortimos$algoritmo == "ListarPreOrden" & 
@@ -799,13 +799,13 @@ soloAlg1YED5Largo <- analisisAlgortimos$algoritmo == "ListarPreOrden" &
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Largo, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -813,7 +813,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -821,10 +821,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ListarPreOrden \nTipo de Arbol: Largo") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -836,7 +836,7 @@ ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden"
 
 soloAlg1YED1Largo <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" & 
@@ -874,13 +874,13 @@ soloAlg1YED5Largo <- analisisAlgortimos$algoritmo == "CantidadNivelesPreOrden" &
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Largo, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -888,7 +888,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -896,10 +896,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: CantidadNivelesPreOrden \nTipo de Arbol: Largo") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -912,7 +912,7 @@ ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas"
 
 soloAlg1YED1Largo <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas" & 
@@ -950,13 +950,13 @@ soloAlg1YED5Largo <- analisisAlgortimos$algoritmo == "ContieneEtiquetasRepetidas
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Largo, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -964,7 +964,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -972,10 +972,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ContieneEtiquetasRepetidas \nTipo de Arbol: Largo") + 
   theme_gray(base_size = 11, base_family = "Times") +
@@ -988,7 +988,7 @@ ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
 ```{r}
 library(ggplot2)
 
-#===============  Configurando datos para tmp
+#===============  Configurando datos para Tiempo
 soloAlg1 <- analisisAlgortimos$algoritmo == "ProfundidadNodo"
 
 soloAlg1YED1Largo <- analisisAlgortimos$algoritmo == "ProfundidadNodo" & 
@@ -1026,13 +1026,13 @@ soloAlg1YED5Largo <- analisisAlgortimos$algoritmo == "ProfundidadNodo" &
 tiemposParaGrafico1ED5 <- analisisAlgortimos[soloAlg1YED5Largo, "tiempo"]
 #=====
 
-tmp <- c(tiemposParaGrafico1ED1,
+Tiempo <- c(tiemposParaGrafico1ED1,
  tiemposParaGrafico1ED2,
  tiemposParaGrafico1ED3,
  tiemposParaGrafico1ED4, 
  tiemposParaGrafico1ED5)
 
-implArbol <- c(
+EstructuraDatosUsada <- c(
   "HMIHDConContador", "HMIHDConContador", "HMIHDConContador", 
   "ListaDeHijos", "ListaDeHijos", "ListaDeHijos",
   "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", "HMIHDConPtrPadreyHI", 
@@ -1040,7 +1040,7 @@ implArbol <- c(
   "ArregloPadre", "ArregloPadre", "ArregloPadre"
   )
  
-tamN <- c("Peque", "Mediano", "Grande", 
+tamanosDeN <- c("Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande", 
                 "Peque", "Mediano", "Grande",
                 "Peque", "Mediano", "Grande",
@@ -1048,10 +1048,10 @@ tamN <- c("Peque", "Mediano", "Grande",
               )
 
 # creating data frame
-dataaa <- data.frame(implArbol,tamN,tmp)
+dataaa <- data.frame(EstructuraDatosUsada,tamanosDeN,Tiempo)
 
 # creating plot using the above data
-ggplot(dataaa, aes(tipoArbol, tmp, fill = tamN)) +
+ggplot(dataaa, aes(tipoArbol, Tiempo, fill = tamanosDeN)) +
   geom_bar(stat="identity", position = "dodge") +
   labs(title="Algoritmo: ProfundidadNodo \nTipo de Arbol: Largo") + 
   theme_gray(base_size = 11, base_family = "Times") +
