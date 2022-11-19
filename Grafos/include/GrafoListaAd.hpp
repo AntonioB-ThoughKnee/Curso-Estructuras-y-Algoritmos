@@ -2,7 +2,7 @@
 #define GRAFO_LA_H_
 #include <iostream>
 #include <string>
-#include <vector>
+#include "../include/ListaIndexadaPlantilla.hpp"
 #include "VerticeListaAd.hpp"
 // enum Estado {
 // 	VISITADO, NO_VISITADO
@@ -10,7 +10,7 @@
 
 class GrafoListaAd{
 public:
-	std::vector<VerticeListaAd*> vertices;
+	ListaIndexada<VerticeListaAd*> vertices;
 
 	// unsigned int tam;
 	GrafoListaAd();

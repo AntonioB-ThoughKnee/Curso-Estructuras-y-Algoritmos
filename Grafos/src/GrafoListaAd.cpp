@@ -1,109 +1,115 @@
 #include "../include/GrafoListaAd.hpp"
+#include "../include/ListaIndexadaPlantilla.hpp"
+
 using namespace std;
+
+
+/*
+ * Esta función devuelve el indice en el que se encuentra la arista hacía vértice2 en la lista de adyacenia del vértice1, y en el proceso pasa el contenedor en el tercer argumento en el caso que se quiera modificar
+ */
+int obtenerIndiceEnAdyacentes(VerticeListaAd* vertice1, VerticeListaAd* vertice2, VerticeListaAd::ContenedorAristas*& tmpP){
+	int indice = 1;
+	VerticeListaAd* tmp = nullptr; // Procurar que todo este lo mas controlado posible
+	while(tmp != vertice2){
+		tmp = vertice1->adyacentes.recuperar(indice)->vertice;
+		indice++;
+	}
+	indice--;
+	tmpP = vertice1->adyacentes.recuperar(indice);
+
+	return indice;
+}
 
 GrafoListaAd::GrafoListaAd() {
 	// this->vertices = new Lista<Vertice*>();
 	// this->tam = 0;
+	this->vertices.iniciar();
+	this->vertices.insertar(nullptr, 1);
+
 }
 
 VerticeListaAd* GrafoListaAd::agregarVertice(string etiqueta){
 	VerticeListaAd* nuevoV = new VerticeListaAd(etiqueta);
-	this->vertices.push_back(nuevoV);
+	this->vertices.insertar(nuevoV, 1);
 	return nuevoV;
 
 }
+
 void GrafoListaAd::eliminarVertice(string etiqueta){
 	// VerticeListaAd* nuevoV = vertices[0];
 
 	 
 }
+
 void GrafoListaAd::modificarEtiqueta(VerticeListaAd* vertice, string etiqueta){
 	vertice->etiqueta = etiqueta;
 }
+
 string GrafoListaAd::etiqueta(VerticeListaAd* vertice){
 	return vertice->etiqueta;
 }
+
 void GrafoListaAd::agregarArista(VerticeListaAd* vertice1, VerticeListaAd* vertice2, int peso){
 	VerticeListaAd::ContenedorAristas* nuevaArista = new VerticeListaAd::ContenedorAristas(vertice2, peso);
-	vertice1->adyacentes.push_back((nuevaArista));
+	vertice1->adyacentes.insertar(nuevaArista, 1);
 
 	VerticeListaAd::ContenedorAristas* nuevaArista2 = new VerticeListaAd::ContenedorAristas(vertice1, peso);
-	vertice2->adyacentes.push_back((nuevaArista2));
+	vertice2->adyacentes.insertar(nuevaArista2, 1);
 }
+
 void GrafoListaAd::eliminarArista(VerticeListaAd* vertice1, VerticeListaAd* vertice2){
-	VerticeListaAd* tmp;
-	vector<VerticeListaAd::ContenedorAristas*>::iterator it = vertice1->adyacentes.begin();
-	while(tmp != vertice2){
-		tmp = (*it)->vertice;
-		// vertice1->adyacentes[it]->vertice;
-		it++;
-	}
-	vertice1->adyacentes.erase(it);
+	VerticeListaAd::ContenedorAristas* tmp;
+
+	vertice1->adyacentes.borrar(obtenerIndiceEnAdyacentes(vertice1, vertice2, tmp));
 	delete tmp;
 
-	it = vertice2->adyacentes.begin();
-	tmp = nullptr;
-	while(tmp != vertice1){
-		tmp = (*it)->vertice;
-		// vertice1->adyacentes[it]->vertice;
-		it++;
-	}
-	vertice1->adyacentes.erase(it);
+	vertice2->adyacentes.borrar(obtenerIndiceEnAdyacentes(vertice2, vertice1, tmp));
 	delete tmp;
 }
+
 void GrafoListaAd::modificarArtista(VerticeListaAd* vertice1, VerticeListaAd* vertice2, int peso){
-	VerticeListaAd* tmp;
-	vector<VerticeListaAd::ContenedorAristas*>::iterator it = vertice1->adyacentes.begin();
-	while(tmp != vertice2){
-		tmp = (*it)->vertice;
-		it++;
-	}
-	(*it)->peso = peso;
+	VerticeListaAd::ContenedorAristas* tmp;
 
-	it = vertice2->adyacentes.begin();
-	tmp = nullptr;
-	while(tmp != vertice1){
-		tmp = (*it)->vertice;
-		it++;
-	}
-	(*it)->peso = peso;
-}
-int GrafoListaAd::peso(VerticeListaAd* vertice1, VerticeListaAd* vertice2){
-	VerticeListaAd* tmp;
-	vector<VerticeListaAd::ContenedorAristas*>::iterator it = vertice1->adyacentes.begin();
-	while(tmp != vertice2){
-		tmp = (*it)->vertice;
-		it++;
-	}
-	return (*it)->peso;
+	obtenerIndiceEnAdyacentes(vertice1, vertice2, tmp);
+	tmp->peso = peso;
 
-}
-VerticeListaAd* GrafoListaAd::primerVertice(){
-	return vertices[0];
-}
-VerticeListaAd* GrafoListaAd::siguienteVertice(VerticeListaAd* vertice){
-	VerticeListaAd* tmp;
-	vector<VerticeListaAd*>::iterator it = this->vertices.begin();
-	while(tmp != vertice){
-		tmp = (*it);
-		it++;
-	}
-	it++;
-	return (*it);
-}
-VerticeListaAd* GrafoListaAd::primerVerticeAdyacente(VerticeListaAd* vertice){
-	return vertice->adyacentes[0]->vertice;
-	}
-VerticeListaAd* GrafoListaAd::siguienteVerticeAdyacente(VerticeListaAd* vertice1, VerticeListaAd* vertice2){
+	obtenerIndiceEnAdyacentes(vertice2, vertice1, tmp);
+	tmp->peso = peso;
 	
+}
+
+int GrafoListaAd::peso(VerticeListaAd* vertice1, VerticeListaAd* vertice2){
+	VerticeListaAd::ContenedorAristas* tmp;
+
+	obtenerIndiceEnAdyacentes(vertice1, vertice2, tmp);
+	return tmp->peso;
+}
+
+VerticeListaAd* GrafoListaAd::primerVertice(){
+	return vertices.recuperar(1);
+}
+
+VerticeListaAd* GrafoListaAd::siguienteVertice(VerticeListaAd* vertice){
+
 	VerticeListaAd* tmp;
-	vector<VerticeListaAd::ContenedorAristas*>::iterator it = vertice1->adyacentes.begin();
-	while(tmp != vertice2){
-		tmp = (*it)->vertice;
-		it++;
+	int ii = 1;
+	while(tmp != vertice){
+		tmp = this->vertices.recuperar(ii);
+		ii++;
 	}
-	it++;
-	return (*it)->vertice;
+	tmp = this->vertices.recuperar(ii);
+	return tmp;
+}
+
+VerticeListaAd* GrafoListaAd::primerVerticeAdyacente(VerticeListaAd* vertice){
+	return vertice->adyacentes.recuperar(1)->vertice;
+}
+
+VerticeListaAd* GrafoListaAd::siguienteVerticeAdyacente(VerticeListaAd* vertice1, VerticeListaAd* vertice2){
+	VerticeListaAd::ContenedorAristas* tmp;
+
+	return vertice1->adyacentes
+		.recuperar(obtenerIndiceEnAdyacentes(vertice1, vertice2, tmp)+1)->vertice;
 }
 
 
