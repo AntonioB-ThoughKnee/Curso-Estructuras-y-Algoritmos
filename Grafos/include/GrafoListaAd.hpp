@@ -4,11 +4,7 @@
 #include <string>
 #include "../include/ListaIndexadaPlantilla.hpp"
 #include "VerticeListaAd.hpp"
-// enum Estado {
-// 	VISITADO, NO_VISITADO
-// };
-
-class GrafoListaAd{
+typedef class GrafoListaAd{
 public:
 	ListaIndexada<VerticeListaAd*> vertices;
 
@@ -29,7 +25,7 @@ public:
 	VerticeListaAd* primerVerticeAdyacente(VerticeListaAd* vertice);
 	VerticeListaAd* siguienteVerticeAdyacente(VerticeListaAd* vertice1, VerticeListaAd* vertice2);
 
-};
+} Grafo;
 
 
 #endif /* GRAFO_LA_H_ */

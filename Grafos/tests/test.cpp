@@ -35,10 +35,29 @@ void printMatrix(Pmatrix& matrix, int rows, int columns){
 	}
 }
 
+template <typename Pmatrix>
+void setRowAndColumn(Pmatrix& matrix, int rows, int columns){
+	int value;
+	for(int ii = 0; ii < rows ; ii++){
+		matrix[1][ii] = 0;
+		matrix[ii][1] = 0;
+	}
+}
+
 //=====  
 
 int main(){
 
+	//===========================  Test for matrices and map
+	int matrix[5][5] = {1, 2, 3, 4, 5,
+											2, 4, 6, 8, 10,
+											3, 6, 9, 12, 15,
+											4, 8, 12,16, 20,
+											5, 10,15,20, 25};
+	setRowAndColumn(matrix, 5, 5);
+	printMatrix(matrix, 5, 5);
+
+	//=====  
 
 	Grafo* g = new Grafo();
 	Vertice* vtmp;
@@ -62,12 +81,12 @@ int main(){
 	g->eliminarArista(va, vc);
 	g->eliminarArista(vb, va);
 
-	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
+	printMatrix(g->matrizVertices, 10, 10);
 
 	vtmp = g->primerVertice();
 	vtmp = g->siguienteVertice(vtmp);
 	vtmp = g->primerVerticeAdyacente(vtmp);
-	vtmp = g->siguienteVerticeAdyacente(vtmp, vb);
+	vtmp = g->siguienteVerticeAdyacente(vtmp, vc);
 	
 
 	return 0;
