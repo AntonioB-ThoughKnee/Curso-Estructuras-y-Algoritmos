@@ -1,5 +1,6 @@
 #include "../include/GrafoMatrizAd.hpp"
 #include "../include/ListaIndexadaPlantilla.hpp"
+#include <map>
 
 using namespace std;
 

@@ -7,6 +7,7 @@
 typedef class GrafoListaAd{
 public:
 	ListaIndexada<VerticeListaAd*> vertices;
+	int numV;
 
 	// unsigned int tam;
 	GrafoListaAd();
@@ -24,6 +25,7 @@ public:
 	VerticeListaAd* siguienteVertice(VerticeListaAd* vertice);
 	VerticeListaAd* primerVerticeAdyacente(VerticeListaAd* vertice);
 	VerticeListaAd* siguienteVerticeAdyacente(VerticeListaAd* vertice1, VerticeListaAd* vertice2);
+	int numVertices();
 
 } Grafo;
 

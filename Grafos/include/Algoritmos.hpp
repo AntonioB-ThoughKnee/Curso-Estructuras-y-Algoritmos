@@ -3,11 +3,12 @@
 #include "ListaIndexadaPlantilla.hpp"
 #include "ColaConPrioridad.hpp"
 #include "SeleccionDeGrafo.hpp"
+#include <map>
 
 struct ContenedorDijkstra;
 
 namespace Algoritmos{
-  ListaIndexada<ContenedorDijkstra> Dijkstra(Grafo* g, Vertice* v);
+  void Dijkstra(Grafo* g, Vertice* v, ListaIndexada<ContenedorDijkstra>* lista);
 }
 
 #endif /* ALGORITMOS_GRAFO */

@@ -12,6 +12,7 @@ int obtenerIndiceEnAdyacentes(VerticeListaAd* vertice1, VerticeListaAd* vertice2
 	VerticeListaAd* tmp = nullptr; // Procurar que todo este lo mas controlado posible
 	while(tmp != vertice2){
 		tmp = vertice1->adyacentes.recuperar(indice)->vertice;
+		if(tmp == nullptr){ return -1; }
 		indice++;
 	}
 	indice--;
@@ -25,6 +26,7 @@ GrafoListaAd::GrafoListaAd() {
 	// this->tam = 0;
 	this->vertices.iniciar();
 	this->vertices.insertar(nullptr, 1);
+	this->numV = 0;
 
 }
 
@@ -32,6 +34,7 @@ VerticeListaAd* GrafoListaAd::agregarVertice(string etiqueta){
 	// TODO: Agregar "numNodos"
 	VerticeListaAd* nuevoV = new VerticeListaAd(etiqueta);
 	this->vertices.insertar(nuevoV, 1);
+	this->numV++;
 	return nuevoV;
 
 }
@@ -80,8 +83,9 @@ void GrafoListaAd::modificarArtista(VerticeListaAd* vertice1, VerticeListaAd* ve
 
 int GrafoListaAd::peso(VerticeListaAd* vertice1, VerticeListaAd* vertice2){
 	VerticeListaAd::ContenedorAristas* tmp;
+	int indice = obtenerIndiceEnAdyacentes(vertice1, vertice2, tmp);
+	if(indice == -1){ return indice; }
 
-	obtenerIndiceEnAdyacentes(vertice1, vertice2, tmp);
 	return tmp->peso;
 }
 
@@ -107,11 +111,17 @@ VerticeListaAd* GrafoListaAd::primerVerticeAdyacente(VerticeListaAd* vertice){
 
 VerticeListaAd* GrafoListaAd::siguienteVerticeAdyacente(VerticeListaAd* vertice1, VerticeListaAd* vertice2){
 	VerticeListaAd::ContenedorAristas* tmp;
+	int indice = (obtenerIndiceEnAdyacentes(vertice1, vertice2, tmp))+1;
+
+	if(indice == -1) { return nullptr; }
 
 	return vertice1->adyacentes
-		.recuperar(obtenerIndiceEnAdyacentes(vertice1, vertice2, tmp)+1)->vertice;
+		.recuperar(indice)->vertice;
 }
 
+int GrafoListaAd::numVertices(){
+	return this->numV;
+}
 
 GrafoListaAd::~GrafoListaAd() {
 	// this->vertices->iniciarCursor();

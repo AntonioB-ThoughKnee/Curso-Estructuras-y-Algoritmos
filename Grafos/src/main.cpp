@@ -59,19 +59,23 @@ ccp.acolar(1, 1);
 	Vertice* ve = g->agregarVertice("e");
 	Vertice* vf = g->agregarVertice("f");
 
-	g->agregarArista(va, vb, 8);
+	g->agregarArista(va, vb, 1);
+	// g->agregarArista(va, vb, 8);
 	g->agregarArista(va, vc, 1);
 	g->agregarArista(vc, vb, 9);
 	g->agregarArista(vd, vb, 8);
 	g->agregarArista(vf, vb, 2);
 	g->agregarArista(vc, ve, 5);
 	g->agregarArista(vd, vf, 3);
-	g->agregarArista(va, vf, 5);
+	g->agregarArista(va, vf, 1);
+	// g->agregarArista(va, vf, 5);
 	g->agregarArista(ve, vb, 8);
 
-	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
+	// printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 
-	Dijkstra(g, va);
+
+  ListaIndexada<ContenedorDijkstra>* lista;
+	Dijkstra(g, va, lista);
 
 	vtmp = g->primerVertice();
 	vtmp = g->siguienteVertice(vtmp);
