@@ -73,9 +73,7 @@ VerticeMatrizAd* GrafoMatrizAd::primerVertice(){
 
 VerticeMatrizAd* GrafoMatrizAd::siguienteVertice(VerticeMatrizAd* vertice){	
 	VerticeMatrizAd* tmp = this->verticesActuales[vertice->numVertice + 1];
-	if(this->vertices[tmp->numVertice] == "nullptr"){
-		return nullptr;
-	}
+	// if(this->vertices[tmp->numVertice] == "nullptr"){
 	return tmp;
 }
 
@@ -102,6 +100,10 @@ VerticeMatrizAd* GrafoMatrizAd::siguienteVerticeAdyacente(VerticeMatrizAd* verti
 		
 	}
 	return nullptr;
+}
+
+int GrafoMatrizAd::numVertices(){
+	return this->numNodos;
 }
 
 

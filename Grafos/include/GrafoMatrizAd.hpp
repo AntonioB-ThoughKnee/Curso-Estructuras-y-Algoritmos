@@ -32,6 +32,7 @@ public:
 	VerticeMatrizAd* siguienteVertice(VerticeMatrizAd* vertice);
 	VerticeMatrizAd* primerVerticeAdyacente(VerticeMatrizAd* vertice);
 	VerticeMatrizAd* siguienteVerticeAdyacente(VerticeMatrizAd* vertice1, VerticeMatrizAd* vertice2);
+	int numVertices();
 
 } Grafo;
 

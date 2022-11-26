@@ -1,11 +1,13 @@
 #include <iostream>
-// #include "../include/GrafoListaAd.hpp"
-#include "../include/GrafoMatrizAd.hpp"
 #include "../include/ListaIndexadaPlantilla.hpp"
+#include "../include/SeleccionDeGrafo.hpp"
+#include "../include/ColaConPrioridad.hpp"
+#include "../include/Algoritmos.hpp"
+using namespace Algoritmos;
 using namespace std;
 
 //===========================  testing functions
-template <typename Pmatrix>//It is the easiest way to make a function with templates to pass it as an argument a matrix
+template <typename Pmatrix>// This is the easiest way to make a function with templates to pass as an argument a matrix
 void printMatrix(Pmatrix& matrix, int rows, int columns){
 	cout << "\n# Copiar y pegar este resultado a un archivo markdown para una mejor visualización " << endl;
 	int value;
@@ -40,6 +42,14 @@ void printMatrix(Pmatrix& matrix, int rows, int columns){
 int main(){
 
 
+ColaPrioridad<int> ccp;
+ccp.acolar(5, 5);
+ccp.acolar(8, 8);
+ccp.acolar(1, 1);
+
+
+//ーーーーーーーーーーーーーーーーーーー   
+
 	Grafo* g = new Grafo();
 	Vertice* vtmp;
 	Vertice* va = g->agregarVertice("a");
@@ -49,7 +59,7 @@ int main(){
 	Vertice* ve = g->agregarVertice("e");
 	Vertice* vf = g->agregarVertice("f");
 
-	g->agregarArista(va, vb, 5);
+	g->agregarArista(va, vb, 8);
 	g->agregarArista(va, vc, 1);
 	g->agregarArista(vc, vb, 9);
 	g->agregarArista(vd, vb, 8);
@@ -59,10 +69,9 @@ int main(){
 	g->agregarArista(va, vf, 5);
 	g->agregarArista(ve, vb, 8);
 
-	g->eliminarArista(va, vc);
-	g->eliminarArista(vb, va);
-
 	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
+
+	Dijkstra(g, va);
 
 	vtmp = g->primerVertice();
 	vtmp = g->siguienteVertice(vtmp);

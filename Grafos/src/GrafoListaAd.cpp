@@ -29,6 +29,7 @@ GrafoListaAd::GrafoListaAd() {
 }
 
 VerticeListaAd* GrafoListaAd::agregarVertice(string etiqueta){
+	// TODO: Agregar "numNodos"
 	VerticeListaAd* nuevoV = new VerticeListaAd(etiqueta);
 	this->vertices.insertar(nuevoV, 1);
 	return nuevoV;
@@ -36,8 +37,7 @@ VerticeListaAd* GrafoListaAd::agregarVertice(string etiqueta){
 }
 
 void GrafoListaAd::eliminarVertice(string etiqueta){
-	// VerticeListaAd* nuevoV = vertices[0];
-
+// TODO: Hacer algoritmo
 	 
 }
 
