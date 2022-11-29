@@ -37,6 +37,8 @@ void printMatrix(Pmatrix& matrix, int rows, int columns){
 	}
 }
 
+
+
 //=====  
 
 int main(){
@@ -59,23 +61,31 @@ ccp.acolar(1, 1);
 	Vertice* ve = g->agregarVertice("e");
 	Vertice* vf = g->agregarVertice("f");
 
-	g->agregarArista(va, vb, 1);
-	// g->agregarArista(va, vb, 8);
+	g->agregarArista(va, vb, 8);
 	g->agregarArista(va, vc, 1);
 	g->agregarArista(vc, vb, 9);
 	g->agregarArista(vd, vb, 8);
 	g->agregarArista(vf, vb, 2);
 	g->agregarArista(vc, ve, 5);
 	g->agregarArista(vd, vf, 3);
-	g->agregarArista(va, vf, 1);
-	// g->agregarArista(va, vf, 5);
+	g->agregarArista(va, vf, 5);
 	g->agregarArista(ve, vb, 8);
 
-	// printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
+	//EXTRA
+	g->agregarArista(va, vd, 1);
+	g->agregarArista(va, ve, 1);
+	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 
 
   ListaIndexada<ContenedorDijkstra>* lista;
 	Dijkstra(g, va, lista);
+
+	int mAdj[6][6];
+	int mVert[9][6];
+
+	//Floyd(g, va, mAdj, mVert);
+	Coloreo(g);
+
 
 	vtmp = g->primerVertice();
 	vtmp = g->siguienteVertice(vtmp);
