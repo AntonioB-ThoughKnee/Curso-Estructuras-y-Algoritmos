@@ -85,6 +85,7 @@ ccp.acolar(1, 1);
 
 	//Floyd(g, va, mAdj, mVert);
 	Coloreo(g);
+	Hamilton(g);
 
 
 	vtmp = g->primerVertice();

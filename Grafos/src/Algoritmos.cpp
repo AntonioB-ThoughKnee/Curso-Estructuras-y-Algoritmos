@@ -18,6 +18,16 @@ struct ContenedorDijkstra{
 
 //=====  
 
+Vertice* conseguirVertice(Grafo* g, int indice){
+  Vertice* v = g->primerVertice();
+  for(int ii = 0; ii < g->numVertices() ; ii++){
+    if(indice == ii) return v;
+    v = g->siguienteVertice(v);
+  }
+  return nullptr;
+}
+
+static std::map<Vertice*, int> relacionVacia; //Usado para "limpiar" variables de este tipo para usarlas nuevamente 
 
 /**
  * @brief Toma como argumento un grafo, el vértice deseado y una lista la cual sera modificada, en la misma se encontrará el resultado del algoritmo
@@ -103,29 +113,23 @@ static int colorDeVertice[NN]; //int para mostrar de que coolor es cada vértice
 static std::map<Vertice*, int> relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
 //=====  
 template <typename Pmatrix>// This is the easiest way to make a function with templates to pass as an argument a matrix
-void ColoreoR(Vertice* v, Grafo* g, Pmatrix& CCColoreadosP){
+void ColoreoR(Vertice* v, Grafo* g, Pmatrix& CCColoreadosP){ //TODO BORRAR tercer parámetro
   if(v == nullptr) return;
   int coloresUsadosR = 6;
   int numVertice = relacion1a1[v];
   bool esFactible = true;
-  bool CCColoreadosR[NN][NN];
 
-  for(int ii = 0; ii < NN ; ii++){
-    for(int iii = 0; iii < NN ; iii++){
-      CCColoreadosR[NN][NN] = CCColoreadosP[NN][NN]; // Hay que hacer un CCColores local para mantener el estado
-    }
-  }
 
   for(int ii = 0; ii < NN ; ii++){ // "ii" serán los "colores"
 
     //===========================  Lógica para verificar si existe un vértice que sea adyacente a "v" Y ADEMÁS sea del color actual(ii)
     for(int iii = 0; iii < NN ; iii++){
       if(iii == numVertice) iii++;
-      if(CCAdyacentes[numVertice][iii] && CCColoreados[ii][iii] && ii < NN){
-        ii++;
-        iii = 0;
-      }
-      if(CCAdyacentes[numVertice][iii] && CCColoreados[ii][iii] && ii >= NN){
+      // if(CCAdyacentes[numVertice][iii] && CCColoreados[ii][iii] && ii < NN){
+      //   ii++;
+      //   iii = 0;
+      // }
+      if(CCAdyacentes[numVertice][iii] && CCColoreados[ii][iii]){
         esFactible = false;
         iii = NN;
       }
@@ -135,41 +139,44 @@ void ColoreoR(Vertice* v, Grafo* g, Pmatrix& CCColoreadosP){
       colorDeVerticeR[numVertice] = ii;
       CCColoreados[ii][numVertice] = true;
       coloresUsadosR++;
-    }
-
-    //Se inicia en el final porque se deduce que ese sera el número máximo de colores usados
-    for(int iii = NN; iii >= 0 ; iii--){
-      for(int iv = 0; iv < NN ; iv++){
-        if(CCColoreados[iii][iv]){
-          iv = NN;
-          coloresUsadosR = iii;
-          coloresUsadosR++;
-          iii = -1;
-        }
-      }
-    }
     
-    if(g->siguienteVertice(v) == nullptr){
 
-      if(coloresUsados > coloresUsadosR){
-        coloresUsados = coloresUsadosR;
-        for(int iii = 0; iii < NN ; iii++){
-          colorDeVertice[iii] = colorDeVerticeR[iii]; 
+      //Calculando los colores usados
+      //Se inicia en el final porque se deduce que ese sera el número máximo de colores usados
+      for(int iii = NN; iii >= 0 ; iii--){
+        for(int iv = 0; iv < NN ; iv++){
+          if(CCColoreados[iii][iv]){
+            iv = NN;
+            coloresUsadosR = iii;
+            coloresUsadosR++;
+            iii = -1;
+          }
         }
       }
-    } else {
-      ColoreoR(g->siguienteVertice(v), g, CCColoreados);
+      
+      if(g->siguienteVertice(v) == nullptr){
+
+        if(coloresUsados > coloresUsadosR){
+          coloresUsados = coloresUsadosR;
+          for(int iii = 0; iii < NN ; iii++){
+            colorDeVertice[iii] = colorDeVerticeR[iii]; 
+          }
+        }
+      } else {
+        ColoreoR(g->siguienteVertice(v), g, CCColoreados);
+      }
+
+      colorDeVerticeR[numVertice] = -1;
+      CCColoreados[ii][numVertice] = false;
     }
+
     esFactible = true;
-
-    colorDeVerticeR[numVertice] = -1;
-    CCColoreados[ii][numVertice] = false;
-
   }
 }
 
 void Algoritmos::Coloreo(Grafo* g){
 
+  relacion1a1 = relacionVacia;
   //===========================  Armando relación 1a1
   Vertice* tmp = g->primerVertice();
   Vertice* tmpAd = g->primerVerticeAdyacente(tmp);
@@ -196,11 +203,47 @@ void Algoritmos::Coloreo(Grafo* g){
   }
   //=====  
 
-  //Coloreando
-  //Se pasa como "coloresUsadosR" 1 porque el algoritmo al principio piensa que todos los vértices estén pintados de un color ya
   ColoreoR(g->primerVertice(), g, CCColoreados);
   
   return;
 }
 
+//===========================  Variables globales para "Hamilton"
+//#define NN 6 //Número de vértices en el grafo
+// static std::map<Vertice*, int> relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
+static std::map<Vertice*, bool> visitadosHam;
+//=====  
 
+void HamiltonR(Grafo* g){
+  Vertice* tmp;
+  Vertice* tmpAd;
+  bool esFactible = false;
+
+  for(int ii = 0; ii < g->numVertices() ; ii++){ //Cada "ii" es un "vértice"
+    tmp = conseguirVertice(g, ii);
+    tmpAd = g->primerVerticeAdyacente(tmp);
+
+    // Ciclo que revisa si el vértice actual tiene vértices adyacentes factibles 
+    while(tmpAd != nullptr && visitadosHam[tmpAd]){
+      tmpAd = g->siguienteVerticeAdyacente(tmp, tmpAd);
+    }
+
+    if(tmpAd != nullptr){ //Es factible
+      ;
+    }
+    
+  }
+}
+
+void  Algoritmos::Hamilton(Grafo* g){
+  relacion1a1 = relacionVacia;
+  Vertice* tmp = g->primerVertice();
+  for(int ii = 0; ii < g->numVertices() ; ii++){
+    visitadosHam.insert(pair<Vertice*, bool>(tmp, false));
+    relacion1a1.insert(pair<Vertice*, int>(tmp, ii));
+    tmp = g->siguienteVertice(tmp);
+  }
+
+  HamiltonR(g);
+
+}
