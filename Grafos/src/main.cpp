@@ -43,15 +43,6 @@ void printMatrix(Pmatrix& matrix, int rows, int columns){
 
 int main(){
 
-
-ColaPrioridad<int> ccp;
-ccp.acolar(5, 5);
-ccp.acolar(8, 8);
-ccp.acolar(1, 1);
-
-
-//ーーーーーーーーーーーーーーーーーーー   
-
 	Grafo* g = new Grafo();
 	Vertice* vtmp;
 	Vertice* va = g->agregarVertice("a");
@@ -72,8 +63,6 @@ ccp.acolar(1, 1);
 	g->agregarArista(ve, vb, 8);
 
 	//EXTRA
-	g->agregarArista(va, vd, 1);
-	g->agregarArista(va, ve, 1);
 	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 
 

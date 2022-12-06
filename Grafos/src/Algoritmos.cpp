@@ -121,11 +121,11 @@ void ColoreoR(Vertice* v, Grafo* g, Pmatrix& CCColoreadosP){
     //===========================  Lógica para verificar si existe un vértice que sea adyacente a "v" Y ADEMÁS sea del color actual(ii)
     for(int iii = 0; iii < NN ; iii++){
       if(iii == numVertice) iii++;
-      if(CCAdyacentes[numVertice][iii] && CCColoreados[ii][iii] && ii < NN){
-        ii++;
-        iii = 0;
-      }
-      if(CCAdyacentes[numVertice][iii] && CCColoreados[ii][iii] && ii >= NN){
+      // if(CCAdyacentes[numVertice][iii] && CCColoreados[ii][iii] && ii < NN){
+      //   ii++;
+      //   iii = 0;
+      // }
+      if(CCAdyacentes[numVertice][iii] && CCColoreados[ii][iii]){
         esFactible = false;
         iii = NN;
       }
@@ -135,36 +135,38 @@ void ColoreoR(Vertice* v, Grafo* g, Pmatrix& CCColoreadosP){
       colorDeVerticeR[numVertice] = ii;
       CCColoreados[ii][numVertice] = true;
       coloresUsadosR++;
-    }
-
-    //Se inicia en el final porque se deduce que ese sera el número máximo de colores usados
-    for(int iii = NN; iii >= 0 ; iii--){
-      for(int iv = 0; iv < NN ; iv++){
-        if(CCColoreados[iii][iv]){
-          iv = NN;
-          coloresUsadosR = iii;
-          coloresUsadosR++;
-          iii = -1;
-        }
-      }
-    }
     
-    if(g->siguienteVertice(v) == nullptr){
 
-      if(coloresUsados > coloresUsadosR){
-        coloresUsados = coloresUsadosR;
-        for(int iii = 0; iii < NN ; iii++){
-          colorDeVertice[iii] = colorDeVerticeR[iii]; 
+      //Calculando los colores usados
+      //Se inicia en el final porque se deduce que ese sera el número máximo de colores usados
+      for(int iii = NN; iii >= 0 ; iii--){
+        for(int iv = 0; iv < NN ; iv++){
+          if(CCColoreados[iii][iv]){
+            iv = NN;
+            coloresUsadosR = iii;
+            coloresUsadosR++;
+            iii = -1;
+          }
         }
       }
-    } else {
-      ColoreoR(g->siguienteVertice(v), g, CCColoreados);
+      
+      if(g->siguienteVertice(v) == nullptr){
+
+        if(coloresUsados > coloresUsadosR){
+          coloresUsados = coloresUsadosR;
+          for(int iii = 0; iii < NN ; iii++){
+            colorDeVertice[iii] = colorDeVerticeR[iii]; 
+          }
+        }
+      } else {
+        ColoreoR(g->siguienteVertice(v), g, CCColoreados);
+      }
+
+      colorDeVerticeR[numVertice] = -1;
+      CCColoreados[ii][numVertice] = false;
     }
+
     esFactible = true;
-
-    colorDeVerticeR[numVertice] = -1;
-    CCColoreados[ii][numVertice] = false;
-
   }
 }
 
