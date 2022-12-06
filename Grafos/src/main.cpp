@@ -77,7 +77,7 @@ ccp.acolar(1, 1);
 	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 
 
-  ListaIndexada<ContenedorDijkstra>* lista;
+  ListaIndexada<ContenedorDijkstra>* lista; //FIXME crear en heap
 	Dijkstra(g, va, lista);
 
 	int mAdj[6][6];

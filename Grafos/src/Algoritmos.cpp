@@ -34,7 +34,7 @@ static std::map<Vertice*, int> relacionVacia; //Usado para "limpiar" variables d
  * @brief Toma como argumento un grafo, el vértice deseado y una lista la cual sera modificada, en la misma se encontrará el resultado del algoritmo
  * Supone/Requiere: 
  *  Grafo con mas de 1 vértice
- * lista pasada como argumento NO inicializada
+ * lista pasada como argumento N O inicializada
  * IMPORTANTE: Debe probarse que el algoritmo funcione con varios nodos y pocos aristas(O sea verificar que no ocurra ningún error con la cola de prioridad de desencolar cuando la cola esta vacía)
  * 
  * @param g 
@@ -246,14 +246,17 @@ void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
       }
 
       //Verificando si se llegó a una solución
-      while(profundidad == g->numVertices()-1 && tmpAd != nullptr){
+      while(profundidad == g->numVertices()-2 && tmpAd != nullptr){
         if(tmpAd == conseguirVertice(g, recorridoR[0])){ //Si se encontró solución...
+          pesoDelrecorridoR += g->peso(tmpAd2, conseguirVertice(g, recorridoR[0]));
           if(pesoDelrecorrido > pesoDelrecorridoR){ //Verificar si es mejor que la anterior
             pesoDelrecorrido = pesoDelrecorridoR;
             for(int iii = 0; iii < g->numVertices()+1 ; iii++){
               recorrido[iii] = recorridoR[iii];
             }
           }
+          pesoDelrecorridoR -= g->peso(tmpAd2, conseguirVertice(g, recorridoR[0]));
+
         }
         tmpAd = g->siguienteVerticeAdyacente(vertProcedente, tmpAd);
       }
