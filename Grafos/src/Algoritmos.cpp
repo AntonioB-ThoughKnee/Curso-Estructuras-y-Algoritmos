@@ -18,6 +18,7 @@ struct ContenedorDijkstra{
 
 //=====  
 
+//Función que devuelve el vértice según un "índice" de acuerdo a la relación 1 a 1
 Vertice* conseguirVertice(Grafo* g, int indice){
   Vertice* v = g->primerVertice();
   for(int ii = 0; ii < g->numVertices() ; ii++){
@@ -212,24 +213,58 @@ void Algoritmos::Coloreo(Grafo* g){
 //#define NN 6 //Número de vértices en el grafo
 // static std::map<Vertice*, int> relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
 static std::map<Vertice*, bool> visitadosHam;
+static int recorridoR[NN+1]; //el primer valor es el inicio y el que le sigue es el vértice adyacente elegido como camino
+static int recorrido[NN+1]; //Recorrido solución
+static int pesoDelrecorrido = 999999; // "infinito"
+static int pesoDelrecorridoR = 0;
 //=====  
 
-void HamiltonR(Grafo* g){
-  Vertice* tmp;
+void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
+  Vertice* tmpAd2;//Guarda el estado verdadero de tmpAd porque luego tmpAd se usa para verificar si se llegó a una solución
   Vertice* tmpAd;
+  // int pesoDelrecorridoR = 0;
   bool esFactible = false;
 
   for(int ii = 0; ii < g->numVertices() ; ii++){ //Cada "ii" es un "vértice"
-    tmp = conseguirVertice(g, ii);
-    tmpAd = g->primerVerticeAdyacente(tmp);
 
-    // Ciclo que revisa si el vértice actual tiene vértices adyacentes factibles 
-    while(tmpAd != nullptr && visitadosHam[tmpAd]){
-      tmpAd = g->siguienteVerticeAdyacente(tmp, tmpAd);
-    }
+    tmpAd = conseguirVertice(g, ii );
 
-    if(tmpAd != nullptr){ //Es factible
+    // if(tmpAd != nullptr){ //Es factible
+    if(g->peso(vertProcedente, tmpAd) != -1 && !visitadosHam[tmpAd]){ //Es factible
       ;
+      visitadosHam[vertProcedente] = true;
+      visitadosHam[tmpAd] = true;
+      recorridoR[profundidad+1] = relacion1a1[tmpAd];
+      recorridoR[profundidad] = relacion1a1[vertProcedente];
+      pesoDelrecorridoR += g->peso(vertProcedente, tmpAd);
+
+      tmpAd2 = tmpAd;
+      tmpAd = g->primerVerticeAdyacente(vertProcedente);
+
+      if(profundidad > 3){
+        int hhhgg = 777;
+      }
+
+      //Verificando si se llegó a una solución
+      while(profundidad == g->numVertices()-1 && tmpAd != nullptr){
+        if(tmpAd == conseguirVertice(g, recorridoR[0])){ //Si se encontró solución...
+          if(pesoDelrecorrido > pesoDelrecorridoR){ //Verificar si es mejor que la anterior
+            pesoDelrecorrido = pesoDelrecorridoR;
+            for(int iii = 0; iii < g->numVertices()+1 ; iii++){
+              recorrido[iii] = recorridoR[iii];
+            }
+          }
+        }
+        tmpAd = g->siguienteVerticeAdyacente(vertProcedente, tmpAd);
+      }
+      if(profundidad < g->numVertices()-1){
+        HamiltonR(g, profundidad+1, tmpAd2);
+      }
+
+      pesoDelrecorridoR -= g->peso(vertProcedente,tmpAd2);
+      visitadosHam[vertProcedente] = false;
+      visitadosHam[tmpAd2] = false;
+
     }
     
   }
@@ -244,6 +279,6 @@ void  Algoritmos::Hamilton(Grafo* g){
     tmp = g->siguienteVertice(tmp);
   }
 
-  HamiltonR(g);
+  HamiltonR(g, 0, g->primerVertice());
 
 }

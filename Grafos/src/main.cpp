@@ -84,7 +84,7 @@ ccp.acolar(1, 1);
 	int mVert[9][6];
 
 	//Floyd(g, va, mAdj, mVert);
-	Coloreo(g);
+	// Coloreo(g);
 	Hamilton(g);
 
 
