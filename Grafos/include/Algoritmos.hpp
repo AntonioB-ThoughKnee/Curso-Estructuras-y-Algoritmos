@@ -4,7 +4,9 @@
 #include "ColaConPrioridad.hpp"
 #include "SeleccionDeGrafo.hpp"
 #include <map>
-
+#include <vector>
+#include <queue>
+#include <iostream>
 struct ContenedorDijkstra;
 
 namespace Algoritmos{
@@ -41,7 +43,9 @@ namespace Algoritmos{
   // }
 
   void Coloreo(Grafo* g);
-  
+  void Prim(Grafo* g); // nada mas retorno la lista indexada, no me la tienen que
+  // dar como argumento.
+  void Kruskal(Grafo* g);
 }
 
 //===========================  Usar este código para Floyd
