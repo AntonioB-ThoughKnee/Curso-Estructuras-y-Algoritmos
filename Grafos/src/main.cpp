@@ -6,6 +6,8 @@
 using namespace Algoritmos;
 using namespace std;
 
+#define ORIGINAL  // KRUSKAL, PRIM
+
 //===========================  testing functions
 template <typename Pmatrix>// This is the easiest way to make a function with templates to pass as an argument a matrix
 void printMatrix(Pmatrix& matrix, int rows, int columns){
@@ -52,6 +54,7 @@ int main(){
 	Vertice* ve = g->agregarVertice("e");
 	Vertice* vf = g->agregarVertice("f");
 
+#ifdef ORIGINAL
 	g->agregarArista(va, vb, 8);
 	g->agregarArista(va, vc, 1);
 	g->agregarArista(vc, vb, 9);
@@ -61,13 +64,45 @@ int main(){
 	g->agregarArista(vd, vf, 3);
 	g->agregarArista(va, vf, 5);
 	g->agregarArista(ve, vb, 8);
+#endif
+
+#ifdef PRIM
+	g->agregarArista(va, vb, 2);
+	g->agregarArista(va, vc, 8);
+	g->agregarArista(vc, vb, 3);
+	g->agregarArista(vc, ve, 1);
+	g->agregarArista(va, ve, 7);
+	g->agregarArista(ve, vf, 4);
+	g->agregarArista(va, vf, 3);
+	g->agregarArista(vf, vd, 9);
+	g->agregarArista(va, vd, 6);
+	g->agregarArista(vb, vd, 9);
+	g->agregarArista(vc, vf, 6);
+	g->agregarArista(vb, vf, 5);
+#endif
+
+#ifdef KRUSKAL
+	g->agregarArista(va, vb, 3);
+	g->agregarArista(vb, vc, 9);
+	g->agregarArista(vc, va, 7);
+	g->agregarArista(va, vd, 6);
+	g->agregarArista(va, ve, 8);
+	g->agregarArista(vd, ve, 2);
+	g->agregarArista(vd, vf, 4);
+	g->agregarArista(ve, vf, 5);
+	g->agregarArista(vc, ve, 10);
+#endif
 
 	//Floyd(g, va, mAdj, mVert);
 	// Coloreo(g);
 	// Hamilton(g);
 	// HamiltonBERA(g);
-  // Prim(g);
+  #ifdef PRIM
+  Prim(g);
+  #endif
+  #ifdef KRUSKAL
   Kruskal(g);
+  #endif
 	// g->eliminarVertice("e");
 	// printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 

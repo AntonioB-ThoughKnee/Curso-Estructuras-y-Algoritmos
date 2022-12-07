@@ -277,7 +277,7 @@ int Algoritmos::Hamilton(Grafo* g){
 }
 
 // ----------------------------------------------------------------------------
-void Algoritmos::Prim(Grafo* g) {
+std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Prim(Grafo* g) {
   // Declaraciones e inicalizaciones.
   map<int, Vertice*> identificador;
   int id = 0;
@@ -287,6 +287,9 @@ void Algoritmos::Prim(Grafo* g) {
     G[i].resize(g->numVertices());
     fill(G[i].begin(), G[i].end(), 99999);
   }
+  // Vector de devolucion
+  vector<pair<Vertice*, Vertice*>> toRet;
+  toRet.resize(g->numVertices() - 1);
   // Llenar map
   Vertice* v = g->primerVertice();
   while (v != nullptr) {
@@ -361,14 +364,16 @@ void Algoritmos::Prim(Grafo* g) {
         }
       }
     }
-    cout << x << " - " << y << " :  " << G[x][y];
+    cout << g->etiqueta(identificador.find(x)->second) << " - " << g->etiqueta(identificador.find(y)->second) << " :  " << G[x][y];
     cout << endl;
     selected[y] = true;
     no_edge++;
+    toRet.push_back(pair<Vertice*, Vertice*>(identificador.find(x)->second, identificador.find(y)->second));
   }
+  return toRet;
 }
 
-void Algoritmos::Kruskal(Grafo* g) {
+std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Kruskal(Grafo* g) {
   // Declaraciones e inicializaciones
   priority_queue<pair<int, int>, std::vector<pair<int,int>>,
     std::greater<pair<int,int>>> queue; // APO(peso, keyMap)
@@ -376,7 +381,10 @@ void Algoritmos::Kruskal(Grafo* g) {
   vector<pair<Vertice*, Vertice*>> agregados;
   vector<vector<Vertice*>> CC;
   CC.resize(g->numVertices());
-  
+  // Vector de devolucion
+  std::vector<std::pair<Vertice*, Vertice*>> toRet;
+  toRet.resize(g->numVertices());
+
   // Recorrido de Kruskal
   Vertice* v = g->primerVertice();
   int indiceCC = 0;
@@ -409,9 +417,10 @@ void Algoritmos::Kruskal(Grafo* g) {
       cout << g->etiqueta(arista.first) << " - " << g->etiqueta(arista.second) << std::endl;
       aristasElegidas++;
       CC = unir(CC, ident1, ident2);
+      toRet.push_back(pair<Vertice*, Vertice*>(arista.first, arista.second));
     }
   }
-
+  return toRet;
 }
 
 bool existePar(vector<pair<Vertice*, Vertice*>> vec, Vertice* v1, Vertice* v2) {

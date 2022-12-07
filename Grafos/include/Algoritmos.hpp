@@ -60,9 +60,9 @@ namespace Algoritmos{
   //   }
   // }
 
-  void Prim(Grafo* g); // nada mas retorno la lista indexada, no me la tienen que
+  std::vector<std::pair<Vertice*, Vertice*>> Prim(Grafo* g); // nada mas retorno la lista indexada, no me la tienen que
   // dar como argumento.
-  void Kruskal(Grafo* g);
+  std::vector<std::pair<Vertice*, Vertice*>> Kruskal(Grafo* g);
   /**
    * @brief Algoritmo de bÃºsqueda Exhaustiva Pura con RamificaciÃ³n y Acotamiento para resolver el problema de los circuitos Hamilton en un grafo no dirigido, la soluciÃ³n se encuentra en la variable global "recorrido" el cual es un arreglo donde los Ã­ndices indican el orden en el que se recorren los vÃ©rtices, y los valores son los vÃ©rtices de acuerdo a la relaciÃ³n1a1 
    * Se hace un Ã¡rbol n-ario para la RamificaciÃ³n y Acotamiento 
