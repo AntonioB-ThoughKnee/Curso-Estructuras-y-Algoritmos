@@ -63,11 +63,12 @@ int main(){
 	g->agregarArista(ve, vb, 8);
 
 	//Floyd(g, va, mAdj, mVert);
-	Coloreo(g);
-	Hamilton(g);
-	HamiltonBERA(g);
-
-	g->eliminarVertice("e");
+	// Coloreo(g);
+	// Hamilton(g);
+	// HamiltonBERA(g);
+  // Prim(g);
+  Kruskal(g);
+	// g->eliminarVertice("e");
 	// printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 
 
