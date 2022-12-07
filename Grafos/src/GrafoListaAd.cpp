@@ -9,7 +9,7 @@ using namespace std;
  */
 int obtenerIndiceEnAdyacentes(VerticeListaAd* vertice1, VerticeListaAd* vertice2, VerticeListaAd::ContenedorAristas*& tmpP){
 	int indice = 1;
-	VerticeListaAd* tmp = nullptr; // Procurar que todo este lo mas controlado posible
+	VerticeListaAd* tmp = nullptr;
 	while(tmp != vertice2){
 		tmp = vertice1->adyacentes.recuperar(indice)->vertice;
 		if(tmp == nullptr){ return -1; }
@@ -22,8 +22,6 @@ int obtenerIndiceEnAdyacentes(VerticeListaAd* vertice1, VerticeListaAd* vertice2
 }
 
 GrafoListaAd::GrafoListaAd() {
-	// this->vertices = new Lista<Vertice*>();
-	// this->tam = 0;
 	this->vertices.iniciar();
 	this->vertices.insertar(nullptr, 1);
 	this->numV = 0;
@@ -31,7 +29,6 @@ GrafoListaAd::GrafoListaAd() {
 }
 
 VerticeListaAd* GrafoListaAd::agregarVertice(string etiqueta){
-	// TODO: Agregar "numNodos"
 	VerticeListaAd* nuevoV = new VerticeListaAd(etiqueta);
 	this->vertices.insertar(nuevoV, 1);
 	this->numV++;
@@ -40,7 +37,16 @@ VerticeListaAd* GrafoListaAd::agregarVertice(string etiqueta){
 }
 
 void GrafoListaAd::eliminarVertice(string etiqueta){
-// TODO: Hacer algoritmo
+	VerticeListaAd* tmp;
+	for(int ii = 1; ii <= this->numV ; ii++){
+		if(tmp->etiqueta == etiqueta){
+			this->numV--;
+			this->vertices.borrar(ii-1);
+			delete tmp;
+			break;
+		}
+		tmp = this->vertices.recuperar(ii);
+	}
 	 
 }
 

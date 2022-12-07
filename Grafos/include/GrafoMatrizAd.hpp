@@ -15,11 +15,8 @@ public:
   std::map<int, std::string> relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
 	int numNodos;
 
-	// unsigned int tam;
 	GrafoMatrizAd();
 	~GrafoMatrizAd();
-  //「 map(pairs<string, vector>) 」[vector[(index Of String)]] = vector
-	// unsigned int obtenerTam();
 	VerticeMatrizAd* agregarVertice(std::string etiqueta);
 	void eliminarVertice(std::string etiqueta);
 	void modificarEtiqueta(VerticeMatrizAd* vertice, std::string etiqueta);

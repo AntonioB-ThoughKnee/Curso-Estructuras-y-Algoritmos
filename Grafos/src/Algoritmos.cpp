@@ -2,7 +2,7 @@
 #include "../include/Algoritmos.hpp"
 #include <cstring>
 using namespace std;
-
+#define NN 6 //Número de vértices en el grafo
 
 
 //===========================  Estructuras auxiliares
@@ -38,19 +38,6 @@ Vertice* conseguirVertice(Grafo* g, int indice){
   return nullptr;
 }
 
-static std::map<Vertice*, int> relacionVacia; //Usado para "limpiar" variables de este tipo para usarlas nuevamente 
-
-/**
- * @brief Toma como argumento un grafo, el vértice deseado y una lista la cual sera modificada, en la misma se encontrará el resultado del algoritmo
- * Supone/Requiere: 
- *  Grafo con mas de 1 vértice
- * lista pasada como argumento N O inicializada
- * IMPORTANTE: Debe probarse que el algoritmo funcione con varios nodos y pocos aristas(O sea verificar que no ocurra ningún error con la cola de prioridad de desencolar cuando la cola esta vacía)
- * 
- * @param g 
- * @param v 
- * @return ListaIndexada<ContenedorDijkstra> 
- */
 void Algoritmos::Dijkstra(Grafo* g, Vertice* v, ListaIndexada<ContenedorDijkstra>* lista){
   map<Vertice*, bool> visitados; 
   ColaPrioridad<ContenedorDijkstra> cola;
@@ -115,7 +102,6 @@ void Algoritmos::Dijkstra(Grafo* g, Vertice* v, ListaIndexada<ContenedorDijkstra
 }
 
 //===========================  Variables globales para "Coloreo"
-#define NN 6 //Número de vértices en el grafo
 static int coloresUsados = NN; //Usado para comparar las soluciones
 static bool CCAdyacentes[NN][NN]; //Lo mismo que una matriz de adyacencia
 static bool CCColoreados[NN][NN]; //La fila es un "color" y cada columna representa el "número de vértice"
@@ -123,7 +109,7 @@ static int colorDeVerticeR[NN]; //int para mostrar de que coolor es cada vértic
 static int colorDeVertice[NN]; //int para mostrar de que coolor es cada vértice
 static std::map<Vertice*, int> relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
 //=====  
-void ColoreoR(Vertice* v, Grafo* g){ //TODO BORRAR tercer parámetro
+void ColoreoR(Vertice* v, Grafo* g){
   if(v == nullptr) return;
   int coloresUsadosR = 6;
   int numVertice = relacion1a1[v];
@@ -227,16 +213,12 @@ static int pesoDelrecorridoR = 0;
 void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
   Vertice* tmpAd2;//Guarda el estado verdadero de tmpAd porque luego tmpAd se usa para verificar si se llegó a una solución
   Vertice* tmpAd;
-  // int pesoDelrecorridoR = 0;
-  bool esFactible = false;
 
   for(int ii = 0; ii < g->numVertices() ; ii++){ //Cada "ii" es un "vértice"
 
     tmpAd = conseguirVertice(g, ii );
 
-    // if(tmpAd != nullptr){ //Es factible
     if(g->peso(vertProcedente, tmpAd) != -1 && !visitadosHam[tmpAd]){ //Es factible
-      ;
       visitadosHam[vertProcedente] = true;
       visitadosHam[tmpAd] = true;
       recorridoR[profundidad+1] = relacion1a1[tmpAd];
@@ -331,9 +313,7 @@ void HamiltonBERAR(Grafo* g, int profundidad, Vertice* vertProcedente){
       obligatorioTomado[relacion1a1[vertProcedente]] = true;
 
       //===========================  Calculando cota
-
       for(int i2 = 0; i2 < NN ; i2++){
-        ;
         if(!obligatorioTomado[i2]){
           minimoArista = matrizAd[i2][0];
           for(int i3 = 0; i3 < NN ; i3++){
@@ -346,9 +326,7 @@ void HamiltonBERAR(Grafo* g, int profundidad, Vertice* vertProcedente){
           cotaActual += matrizAd[x][y];
 
         }
-
       }
-
       //=====  
 
       tmpAd2 = tmpAd;
@@ -414,7 +392,7 @@ int Algoritmos::HamiltonBERA(Grafo* g){
   //Ciclo para limpiar la matriz
   for(int ii = 0; ii < NN ; ii++){
     for(int iii = 0; iii < NN ; iii++){
-       matrizAd[ii][iii] = -1;
+      matrizAd[ii][iii] = -1;
     }
   }
 
@@ -422,7 +400,7 @@ int Algoritmos::HamiltonBERA(Grafo* g){
   for(int ii = 0; ii < NN ; ii++){
     for(int iii = 0; iii < NN ; iii++){
       if(tmpAd != nullptr){
-         matrizAd[ii][relacion1a1[tmpAd]] = g->peso(tmp, tmpAd);
+        matrizAd[ii][relacion1a1[tmpAd]] = g->peso(tmp, tmpAd);
         tmpAd = g->siguienteVerticeAdyacente(tmp, tmpAd);
       }
     }

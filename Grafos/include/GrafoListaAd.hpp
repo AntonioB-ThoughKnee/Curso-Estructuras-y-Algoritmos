@@ -9,11 +9,14 @@ public:
 	ListaIndexada<VerticeListaAd*> vertices;
 	int numV;
 
-	// unsigned int tam;
 	GrafoListaAd();
 	~GrafoListaAd();
-	// unsigned int obtenerTam();
 	VerticeListaAd* agregarVertice(std::string etiqueta);
+	/**
+	 * @brief Requiere vértice aislado
+	 * 
+	 * @param etiqueta 
+	 */
 	void eliminarVertice(std::string etiqueta);
 	void modificarEtiqueta(VerticeListaAd* vertice, std::string etiqueta);
 	std::string etiqueta(VerticeListaAd* vertice);

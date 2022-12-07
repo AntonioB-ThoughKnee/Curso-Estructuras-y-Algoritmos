@@ -18,24 +18,70 @@ VerticeMatrizAd* GrafoMatrizAd::agregarVertice(string etiqueta){
 		cout << "NO se puede agregar un vértice con esa etiqueta " << endl;
 		return nullptr;
 	}
-	VerticeMatrizAd* nuevoV = new VerticeMatrizAd(numNodos);
-	this->relacion1a1.insert(pair<int, string>(numNodos, etiqueta));
+	int numN = this->numNodos;
+	VerticeMatrizAd* nuevoV = new VerticeMatrizAd(numN);
+	this->relacion1a1.insert(pair<int, string>(numN, etiqueta));
 	for(int ii = 0; ii < this->M ; ii++){
-		this->matrizVertices[numNodos][ii] = -1;
-		this->matrizVertices[ii][numNodos] = -1;
+		this->matrizVertices[numN][ii] = -1;
+		this->matrizVertices[ii][numN] = -1;
 	}
-	vertices[numNodos] = etiqueta;
-	verticesActuales[numNodos] = nuevoV;
-	numNodos++;
+	vertices[numN] = etiqueta;
+	verticesActuales[numN] = nuevoV;
+	this->numNodos++;
 	return nuevoV; 
 
 }
 
 void GrafoMatrizAd::eliminarVertice(string etiqueta){
-	// VerticeMatrizAd* nuevoV = vertices[0];
-	
+	int indiceEliminado;
+	VerticeMatrizAd* tmp;
 
-	 
+	bool subirValores = false;
+	bool moverValores = false;
+	bool valorEncontrado = false;
+
+	//Borrando de los arreglos
+	for(int ii = 0; ii < this->M ; ii++){
+		if((this->vertices[ii] == etiqueta || valorEncontrado) && ii < this->M-1){
+			if(!valorEncontrado) indiceEliminado = ii;
+			valorEncontrado = true;
+			
+			this->vertices[ii] = this->vertices[ii+1]; 
+			tmp = this->verticesActuales[ii];
+			this->verticesActuales[ii] = this->verticesActuales[ii+1];
+		}
+		else if(valorEncontrado && ii == this->M-1){
+			this->vertices[ii] = "nullptr";
+			this->verticesActuales[ii] = nullptr;
+		}
+	}
+	relacion1a1.erase(indiceEliminado);
+	delete tmp;
+
+	//Borrando de la matriz de adyacencia
+	for(int ii = 0; ii < this->M  ; ii++){
+		if(ii == indiceEliminado) subirValores = true;
+		for(int iii = 0; iii < this->M  ; iii++){
+			if(iii == indiceEliminado) moverValores = true;
+
+			if(moverValores && !subirValores && iii < this->M-1){
+				this->matrizVertices[ii][iii] = matrizVertices[ii][iii+1];
+			}
+			else if(moverValores && subirValores && iii < this->M-1 && ii < this->M-1){
+				this->matrizVertices[ii][iii] = matrizVertices[ii+1][iii];
+				this->matrizVertices[ii][iii] = matrizVertices[ii][iii+1];
+			}
+			else if(subirValores && iii < this->M-1){
+				this->matrizVertices[ii][iii] = matrizVertices[ii+1][iii];
+			}
+			if(iii == this->M-1) this->matrizVertices[ii][iii] = -1;
+			if(ii == this->M-1) this->matrizVertices[ii][iii] = -1;
+		}
+		moverValores = false;
+	}
+
+	this->numNodos--;
+	return;	 
 }
 
 void GrafoMatrizAd::modificarEtiqueta(VerticeMatrizAd* vertice, string etiqueta){

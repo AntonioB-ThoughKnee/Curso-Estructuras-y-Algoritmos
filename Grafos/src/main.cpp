@@ -41,16 +41,7 @@ void printMatrix(Pmatrix& matrix, int rows, int columns){
 
 //=====  
 
-int main(){
-
-
-ColaPrioridad<int> ccp;
-ccp.acolar(5, 5);
-ccp.acolar(8, 8);
-ccp.acolar(1, 1);
-
-
-//ーーーーーーーーーーーーーーーーーーー   
+int main(){ 
 
 	Grafo* g = new Grafo();
 	Vertice* vtmp;
@@ -75,7 +66,7 @@ ccp.acolar(1, 1);
 	g->agregarArista(va, vd, 1);
 	g->agregarArista(va, ve, 1);
 	g->agregarArista(vd, ve, 9);
-	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
+	// printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 
 
   ListaIndexada<ContenedorDijkstra>* lista; //FIXME crear en heap
@@ -88,6 +79,9 @@ ccp.acolar(1, 1);
 	// Coloreo(g);
 	Hamilton(g);
 	HamiltonBERA(g);
+
+	g->eliminarVertice("e");
+	// printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 
 
 	vtmp = g->primerVertice();
