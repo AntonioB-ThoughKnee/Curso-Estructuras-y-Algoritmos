@@ -6,12 +6,13 @@
 #include "VerticeListaAd.hpp"
 typedef class GrafoListaAd{
 public:
-	ListaIndexada<VerticeListaAd*> vertices;
-	int numV;
+	ListaIndexada<VerticeListaAd*> vertices; /** L. S. E. de todos los vértices, cada vértice tiene otra L. S. E. con los vértices adyacentes*/
+	int numV; /** Contador*/
 
 	GrafoListaAd();
 	~GrafoListaAd();
 	VerticeListaAd* agregarVertice(std::string etiqueta);
+	
 	/**
 	 * @brief Requiere vértice aislado
 	 * 

@@ -62,21 +62,8 @@ int main(){
 	g->agregarArista(va, vf, 5);
 	g->agregarArista(ve, vb, 8);
 
-	//EXTRA
-	g->agregarArista(va, vd, 1);
-	g->agregarArista(va, ve, 1);
-	g->agregarArista(vd, ve, 9);
-	// printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
-
-
-  ListaIndexada<ContenedorDijkstra>* lista; //FIXME crear en heap
-	Dijkstra(g, va, lista);
-
-	int mAdj[6][6];
-	int mVert[9][6];
-
 	//Floyd(g, va, mAdj, mVert);
-	// Coloreo(g);
+	Coloreo(g);
 	Hamilton(g);
 	HamiltonBERA(g);
 
