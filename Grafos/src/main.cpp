@@ -74,6 +74,7 @@ ccp.acolar(1, 1);
 	//EXTRA
 	g->agregarArista(va, vd, 1);
 	g->agregarArista(va, ve, 1);
+	g->agregarArista(vd, ve, 9);
 	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 
 
@@ -86,6 +87,7 @@ ccp.acolar(1, 1);
 	//Floyd(g, va, mAdj, mVert);
 	// Coloreo(g);
 	Hamilton(g);
+	HamiltonBERA(g);
 
 
 	vtmp = g->primerVertice();

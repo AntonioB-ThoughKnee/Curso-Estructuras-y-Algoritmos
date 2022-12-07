@@ -16,6 +16,16 @@ struct ContenedorDijkstra{
   int pesoAcumulado; //Peso total para llegar hasta al vértice de llegada
 };
 
+//Guardara individualmente una arista que se considera como obligatoria al calcular la  cota
+struct ContenedorBERA{
+  ContenedorBERA(int x, int y) 
+    : fila(x), columna(y) {}
+  ContenedorBERA(){}
+
+  int fila;  
+  int columna;
+};
+
 //=====  
 
 //Función que devuelve el vértice según un "índice" de acuerdo a la relación 1 a 1
@@ -45,7 +55,7 @@ void Algoritmos::Dijkstra(Grafo* g, Vertice* v, ListaIndexada<ContenedorDijkstra
   map<Vertice*, bool> visitados; 
   ColaPrioridad<ContenedorDijkstra> cola;
   ContenedorDijkstra contenedor;
-  int pesoDijkstra; //Peso de la arista entre 2 vértices, si no existe conexión entnces sera igual a 1000000(será usado como el infinito )
+  int pesoDijkstra; //Peso de la arista entre 2 vértices, 
   lista->iniciar();
 
   //===========================  Iniciando valores en el mapa para los "visitados" y la lista resultado del algoritmo y Se hace el primer paso de Dijkstra
@@ -113,8 +123,7 @@ static int colorDeVerticeR[NN]; //int para mostrar de que coolor es cada vértic
 static int colorDeVertice[NN]; //int para mostrar de que coolor es cada vértice
 static std::map<Vertice*, int> relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
 //=====  
-template <typename Pmatrix>// This is the easiest way to make a function with templates to pass as an argument a matrix
-void ColoreoR(Vertice* v, Grafo* g, Pmatrix& CCColoreadosP){ //TODO BORRAR tercer parámetro
+void ColoreoR(Vertice* v, Grafo* g){ //TODO BORRAR tercer parámetro
   if(v == nullptr) return;
   int coloresUsadosR = 6;
   int numVertice = relacion1a1[v];
@@ -126,10 +135,6 @@ void ColoreoR(Vertice* v, Grafo* g, Pmatrix& CCColoreadosP){ //TODO BORRAR terce
     //===========================  Lógica para verificar si existe un vértice que sea adyacente a "v" Y ADEMÁS sea del color actual(ii)
     for(int iii = 0; iii < NN ; iii++){
       if(iii == numVertice) iii++;
-      // if(CCAdyacentes[numVertice][iii] && CCColoreados[ii][iii] && ii < NN){
-      //   ii++;
-      //   iii = 0;
-      // }
       if(CCAdyacentes[numVertice][iii] && CCColoreados[ii][iii]){
         esFactible = false;
         iii = NN;
@@ -164,7 +169,7 @@ void ColoreoR(Vertice* v, Grafo* g, Pmatrix& CCColoreadosP){ //TODO BORRAR terce
           }
         }
       } else {
-        ColoreoR(g->siguienteVertice(v), g, CCColoreados);
+        ColoreoR(g->siguienteVertice(v), g);
       }
 
       colorDeVerticeR[numVertice] = -1;
@@ -175,9 +180,9 @@ void ColoreoR(Vertice* v, Grafo* g, Pmatrix& CCColoreadosP){ //TODO BORRAR terce
   }
 }
 
-void Algoritmos::Coloreo(Grafo* g){
+int Algoritmos::Coloreo(Grafo* g){
 
-  relacion1a1 = relacionVacia;
+  relacion1a1.clear();
   //===========================  Armando relación 1a1
   Vertice* tmp = g->primerVertice();
   Vertice* tmpAd = g->primerVerticeAdyacente(tmp);
@@ -204,9 +209,9 @@ void Algoritmos::Coloreo(Grafo* g){
   }
   //=====  
 
-  ColoreoR(g->primerVertice(), g, CCColoreados);
+  ColoreoR(g->primerVertice(), g);
   
-  return;
+  return coloresUsados;
 }
 
 //===========================  Variables globales para "Hamilton"
@@ -241,10 +246,6 @@ void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
       tmpAd2 = tmpAd;
       tmpAd = g->primerVerticeAdyacente(vertProcedente);
 
-      if(profundidad > 3){
-        int hhhgg = 777;
-      }
-
       //Verificando si se llegó a una solución
       while(profundidad == g->numVertices()-2 && tmpAd != nullptr){
         if(tmpAd == conseguirVertice(g, recorridoR[0])){ //Si se encontró solución...
@@ -273,8 +274,9 @@ void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
   }
 }
 
-void  Algoritmos::Hamilton(Grafo* g){
-  relacion1a1 = relacionVacia;
+int Algoritmos::Hamilton(Grafo* g){
+  relacion1a1.clear();
+  visitadosHam.clear();
   Vertice* tmp = g->primerVertice();
   for(int ii = 0; ii < g->numVertices() ; ii++){
     visitadosHam.insert(pair<Vertice*, bool>(tmp, false));
@@ -284,4 +286,152 @@ void  Algoritmos::Hamilton(Grafo* g){
 
   HamiltonR(g, 0, g->primerVertice());
 
+  return pesoDelrecorrido;
+
+}
+
+//===========================  Variables globales para "HamiltonBERA" 
+//#define NN 6 //Número de vértices en el grafo
+// static std::map<Vertice*, int> relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
+// static std::map<Vertice*, bool> visitadosHam;
+// static int recorridoR[NN+1]; //el primer valor es el inicio y el que le sigue es el vértice adyacente elegido como camino
+// static int recorrido[NN+1]; //Recorrido solución
+// static int pesoDelrecorrido = 999999; // "infinito"
+// static int pesoDelrecorridoR = 0;
+
+static int matrizAd[NN][NN]; //matriz de adyacencia con pesos
+static bool solucionEncontrada = false;
+static bool obligatorioTomado[NN]; //Indica que el vértice "índice"(relación1a1) tiene asignado ya un vértice al cual dirigirse, o sea ya tiene arista definida
+static std::map<int, ContenedorBERA> obligatorios; //Indica a que vértice en específico se dirige
+//=====  
+
+void HamiltonBERAR(Grafo* g, int profundidad, Vertice* vertProcedente){
+  Vertice* tmpAd2;//Guarda el estado verdadero de tmpAd porque luego tmpAd se usa para verificar si se llegó a una solución
+  Vertice* tmpAd;
+  int x;
+  int y;
+  int minimoArista;
+  ContenedorBERA contenedor;
+  double cotaActual = 0;
+
+  for(int ii = 0; ii < g->numVertices() ; ii++){ //Cada "ii" es un "vértice"
+
+    tmpAd = conseguirVertice(g, ii );
+
+    if(g->peso(vertProcedente, tmpAd) != -1 && !visitadosHam[tmpAd]){ //Es factible
+      ;
+      visitadosHam[vertProcedente] = true;
+      visitadosHam[tmpAd] = true;
+      recorridoR[profundidad+1] = relacion1a1[tmpAd];
+      recorridoR[profundidad] = relacion1a1[vertProcedente];
+      pesoDelrecorridoR += g->peso(vertProcedente, tmpAd);
+
+      contenedor = ContenedorBERA(relacion1a1[vertProcedente], relacion1a1[tmpAd]);
+      obligatorios[relacion1a1[vertProcedente]] = contenedor;
+      obligatorioTomado[relacion1a1[vertProcedente]] = true;
+
+      //===========================  Calculando cota
+
+      for(int i2 = 0; i2 < NN ; i2++){
+        ;
+        if(!obligatorioTomado[i2]){
+          minimoArista = matrizAd[i2][0];
+          for(int i3 = 0; i3 < NN ; i3++){
+            if(minimoArista > matrizAd[i2][i3] && matrizAd[i2][i3] != -1) minimoArista = matrizAd[i2][i3];
+          }
+          cotaActual += minimoArista;
+        } else {
+          x = obligatorios[i2].fila;
+          y = obligatorios[i2].columna;
+          cotaActual += matrizAd[x][y];
+
+        }
+
+      }
+
+      //=====  
+
+      tmpAd2 = tmpAd;
+      tmpAd = g->primerVerticeAdyacente(vertProcedente);
+
+      //Verificando si se llegó a una solución
+      while(profundidad == g->numVertices()-2 && tmpAd != nullptr){
+        if(tmpAd == conseguirVertice(g, recorridoR[0])){ //Si se encontró solución...
+          pesoDelrecorridoR += g->peso(tmpAd2, conseguirVertice(g, recorridoR[0]));
+          if(pesoDelrecorrido > pesoDelrecorridoR){ //Verificar si es mejor que la anterior
+            pesoDelrecorrido = pesoDelrecorridoR;
+            solucionEncontrada = true;
+            for(int iii = 0; iii < g->numVertices()+1 ; iii++){
+              recorrido[iii] = recorridoR[iii];
+            }
+          }
+          pesoDelrecorridoR -= g->peso(tmpAd2, conseguirVertice(g, recorridoR[0]));
+
+        }
+        tmpAd = g->siguienteVerticeAdyacente(vertProcedente, tmpAd);
+      }
+      if(profundidad < g->numVertices()-1 && !solucionEncontrada ){
+        HamiltonBERAR(g, profundidad+1, tmpAd2);
+      }
+      else if(solucionEncontrada && pesoDelrecorrido >= cotaActual ){
+        HamiltonBERAR(g, profundidad+1, tmpAd2);  
+      }
+      pesoDelrecorridoR -= g->peso(vertProcedente,tmpAd2);
+      visitadosHam[vertProcedente] = false;
+      visitadosHam[tmpAd2] = false;
+
+      obligatorioTomado[relacion1a1[vertProcedente]] = false;
+
+
+    }
+    
+    cotaActual = 0;
+  }
+}
+
+/**
+ * @brief 
+ * Especificaciones: 
+ * Se hace un árbol n-ario, donde cada "nodo" calcula su cota con solo el recorrido que se vaya haciendo
+ * 
+ * @param g 
+ */
+int Algoritmos::HamiltonBERA(Grafo* g){
+  relacion1a1.clear();
+  visitadosHam.clear();
+  Vertice* tmp = g->primerVertice();
+  Vertice* tmpAd = g->primerVerticeAdyacente(tmp);
+  ContenedorBERA contenedor = ContenedorBERA(0, 0);
+  for(int ii = 0; ii < g->numVertices() ; ii++){
+    visitadosHam.insert(pair<Vertice*, bool>(tmp, false));
+    relacion1a1.insert(pair<Vertice*, int>(tmp, ii));
+    obligatorios.insert(pair<int, ContenedorBERA>(ii, contenedor));
+    tmp = g->siguienteVertice(tmp);
+  }
+
+  //===========================  Armando la "matriz de adyacencia"
+
+  //Ciclo para limpiar la matriz
+  for(int ii = 0; ii < NN ; ii++){
+    for(int iii = 0; iii < NN ; iii++){
+       matrizAd[ii][iii] = -1;
+    }
+  }
+
+  tmp = g->primerVertice();
+  for(int ii = 0; ii < NN ; ii++){
+    for(int iii = 0; iii < NN ; iii++){
+      if(tmpAd != nullptr){
+         matrizAd[ii][relacion1a1[tmpAd]] = g->peso(tmp, tmpAd);
+        tmpAd = g->siguienteVerticeAdyacente(tmp, tmpAd);
+      }
+    }
+
+    tmp = g->siguienteVertice(tmp);
+    if(tmp != nullptr) tmpAd = g->primerVerticeAdyacente(tmp);
+  }
+  //=====  
+
+  HamiltonBERAR(g, 0, g->primerVertice());
+  return pesoDelrecorrido;
 }

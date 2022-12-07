@@ -33,6 +33,7 @@ VerticeMatrizAd* GrafoMatrizAd::agregarVertice(string etiqueta){
 
 void GrafoMatrizAd::eliminarVertice(string etiqueta){
 	// VerticeMatrizAd* nuevoV = vertices[0];
+	
 
 	 
 }
