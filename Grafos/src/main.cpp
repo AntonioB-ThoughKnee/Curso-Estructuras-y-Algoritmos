@@ -41,7 +41,7 @@ void printMatrix(Pmatrix& matrix, int rows, int columns){
 
 //=====  
 
-int main(){
+int main(){ 
 
 	Grafo* g = new Grafo();
 	Vertice* vtmp;
@@ -62,18 +62,13 @@ int main(){
 	g->agregarArista(va, vf, 5);
 	g->agregarArista(ve, vb, 8);
 
-	//EXTRA
-	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
-
-
-  ListaIndexada<ContenedorDijkstra>* lista;
-	Dijkstra(g, va, lista);
-
-	int mAdj[6][6];
-	int mVert[9][6];
-
 	//Floyd(g, va, mAdj, mVert);
 	Coloreo(g);
+	Hamilton(g);
+	HamiltonBERA(g);
+
+	g->eliminarVertice("e");
+	// printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 
 
 	vtmp = g->primerVertice();
