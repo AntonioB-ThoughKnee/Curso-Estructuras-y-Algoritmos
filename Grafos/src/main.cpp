@@ -3,6 +3,8 @@
 #include "../include/SeleccionDeGrafo.hpp"
 #include "../include/ColaConPrioridad.hpp"
 #include "../include/Algoritmos.hpp"
+#include <map>
+
 using namespace Algoritmos;
 using namespace std;
 
@@ -66,6 +68,10 @@ int main(){
 	g->agregarArista(ve, vb, 8);
 #endif
 
+
+	Relacion1A1* relacion1a1=new Relacion1A1;
+	int ** matrizPesos=new int *[g->numVertices()];
+	Vertice *** matrizVertices=new Vertice **[g->numVertices()];
 #ifdef PRIM
 	g->agregarArista(va, vb, 2);
 	g->agregarArista(va, vc, 8);
@@ -81,6 +87,12 @@ int main(){
 	g->agregarArista(vb, vf, 5);
 #endif
 
+	relacion1a1->insertar(va,0);
+	relacion1a1->insertar(vb,1);
+	relacion1a1->insertar(vc,2);
+
+	Floyd(g,matrizPesos,matrizVertices,relacion1a1);
+
 #ifdef KRUSKAL
 	g->agregarArista(va, vb, 3);
 	g->agregarArista(vb, vc, 9);
@@ -94,7 +106,7 @@ int main(){
 #endif
 
 	//Floyd(g, va, mAdj, mVert);
-	// Coloreo(g);
+  	// Coloreo(g);
 	// Hamilton(g);
 	// HamiltonBERA(g);
   #ifdef PRIM
@@ -103,15 +115,16 @@ int main(){
   #ifdef KRUSKAL
   Kruskal(g);
   #endif
-	// g->eliminarVertice("e");
-	// printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
+	Coloreo(g);
 
 
-	vtmp = g->primerVertice();
-	vtmp = g->siguienteVertice(vtmp);
-	vtmp = g->primerVerticeAdyacente(vtmp);
-	vtmp = g->siguienteVerticeAdyacente(vtmp, vb);
-	
+	for(int i = 0; i < g->numVertices(); ++i){
+		delete[] matrizPesos[i];//deletes an inner array of integer;
+		delete[] matrizVertices[i];
+	}
+
+	delete[] matrizPesos; //delete pointer holding array of pointers;
+	delete[] matrizVertices; //delete pointer holding array of pointers;
 
 	return 0;
 }
