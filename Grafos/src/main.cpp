@@ -115,7 +115,7 @@ int main(){
   #ifdef KRUSKAL
   Kruskal(g);
   #endif
-	Coloreo(g);
+	// Coloreo(g);
 
 
 	for(int i = 0; i < g->numVertices(); ++i){
