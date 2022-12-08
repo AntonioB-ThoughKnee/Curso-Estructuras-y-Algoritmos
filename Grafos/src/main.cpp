@@ -121,9 +121,9 @@ int main(){
 	// Coloreo(g);
 
   // g->agregarArista(vc, va, 12);
-  Pruebas prueba;
-  prueba.test();
-
+  Pruebas* prueba=new Pruebas;
+  // prueba.test();
+  delete prueba;
 
 	// for(int i = 0; i < g->numVertices(); ++i){
 	// 	delete[] matrizPesos[i];//deletes an inner array of integer;

@@ -11,19 +11,19 @@ Pruebas::Pruebas() {
   map<int, Vertice*> mapGrafo4;
   // GRAFO 1
   this->grafo1 = new Grafo();
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 10; i++) {
     this->grafo1->agregarVertice(std::to_string(i));
   }
 
   // GRAFO 2
   this->grafo2 = new Grafo();
-  for (int i = 0; i < 1000; i++) {
+  for (int i = 0; i < 50; i++) {
     this->grafo2->agregarVertice(std::to_string(i));
   }
 
   // GRAFO 3
   this->grafo3 = new Grafo();
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 10; i++) {
     Vertice* vertAgregado = this->grafo3->agregarVertice(std::to_string(i));
     mapGrafo3.insert({i, vertAgregado});
   }
@@ -38,7 +38,7 @@ Pruebas::Pruebas() {
 
   // GRAFO 4
   this->grafo4 = new Grafo();
-  for (int i = 0; i < 1000; i++) {
+  for (int i = 0; i < 50; i++) {
     Vertice* vertAgregado1 = this->grafo4->agregarVertice(std::to_string(i));
     mapGrafo4.insert({i, vertAgregado1});
   }

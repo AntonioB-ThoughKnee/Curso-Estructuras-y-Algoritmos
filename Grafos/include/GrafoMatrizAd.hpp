@@ -8,11 +8,11 @@
 
 typedef class GrafoMatrizAd{
 public:
-	static int const M = 10; /** Cantidad máxima de vértices para el grafo*/
+	static int const M = 60; /** Cantidad máxima de vértices para el grafo*/
 	int matrizVertices[M][M]; /** Matriz de adyacentcia con pesos*/
 	std::string vertices[M];  /** Arreglo con las etiquetas de cada vértice, cada índice se refiere al vértice según la relación1a1*/
 	VerticeMatrizAd* verticesActuales[M]; /** Arreglo con punteros a los verdaderos vértices, cada índice se refiere al vértice según la relación1a1*/
-  std::map<int, std::string> relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
+  	std::map<int, std::string>* relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
 	int numNodos; /** Contador*/
 
 	GrafoMatrizAd();

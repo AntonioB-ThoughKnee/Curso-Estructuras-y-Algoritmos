@@ -5,12 +5,16 @@
 using namespace std;
 
 GrafoMatrizAd::GrafoMatrizAd() {
+	this->relacion1a1=new std::map<int, std::string>;
 	// this->vertices = new Lista<Vertice*>();
 	this->numNodos = 0;
 	for(int ii = 0; ii < this->M ; ii++){
 		this->vertices[ii] = "nullptr";
 	}
 	
+}
+GrafoMatrizAd::~GrafoMatrizAd(){
+	delete this->relacion1a1;
 }
 
 VerticeMatrizAd* GrafoMatrizAd::agregarVertice(string etiqueta){
@@ -20,7 +24,7 @@ VerticeMatrizAd* GrafoMatrizAd::agregarVertice(string etiqueta){
 	}
 	int numN = this->numNodos;
 	VerticeMatrizAd* nuevoV = new VerticeMatrizAd(numN);
-	this->relacion1a1.insert(pair<int, string>(numN, etiqueta));
+	this->relacion1a1->insert(pair<int, string>(numN, etiqueta));
 	for(int ii = 0; ii < this->M ; ii++){
 		this->matrizVertices[numN][ii] = -1;
 		this->matrizVertices[ii][numN] = -1;
@@ -55,7 +59,7 @@ void GrafoMatrizAd::eliminarVertice(string etiqueta){
 			this->verticesActuales[ii] = nullptr;
 		}
 	}
-	relacion1a1.erase(indiceEliminado);
+	relacion1a1->erase(indiceEliminado);
 	delete tmp;
 
 	//Borrando de la matriz de adyacencia
@@ -152,14 +156,5 @@ VerticeMatrizAd* GrafoMatrizAd::siguienteVerticeAdyacente(VerticeMatrizAd* verti
 
 int GrafoMatrizAd::numVertices(){
 	return this->numNodos;
-}
-
-
-GrafoMatrizAd::~GrafoMatrizAd() {
-	// this->vertices->iniciarCursor();
-	// while (vertices->avanzarCursor()) {
-	// 	delete this->vertices->obtenerCursor();
-	// }
-	// delete vertices;
 }
 
