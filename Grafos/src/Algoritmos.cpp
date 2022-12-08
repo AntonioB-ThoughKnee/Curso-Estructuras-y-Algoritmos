@@ -1,6 +1,7 @@
 
 #include "../include/Algoritmos.hpp"
 #include <cstring>
+#include <iostream>
 using namespace std;
 
 
@@ -87,11 +88,113 @@ void Algoritmos::Dijkstra(Grafo* g, Vertice* v, ListaIndexada<ContenedorDijkstra
       }
     } else{
       ii--;
-    
     }
-    
   }
 }
+
+void Algoritmos::Floyd(Grafo* g,int**& matrizPesos,Vertice***& matrizVertices,Relacion1A1* relacion1a1){
+  Vertice * v= g->primerVertice();
+  int contador =0;
+  // Se carga la relacion 1 a 1 con los vertices 
+  // y los indices a los que corresponden.
+  while (v!=nullptr)
+  {
+    relacion1a1->insertar(v,contador++);
+    v=g->siguienteVertice(v);
+  }
+  v=g->primerVertice();
+  // Se cargan las matrices con los valores 
+  // iniciales.
+  for(int i =0;i<g->numVertices();++i){
+    matrizPesos[i]=new int[g->numVertices()];
+    matrizVertices[i]=new Vertice*[g->numVertices()];
+    for(int j=0;j<g->numVertices();++j){
+      matrizPesos[i][j]=99999;
+      matrizVertices[i][j]=nullptr;
+    }
+  }
+  // Se carga la matriz de pesos con los 
+  // pesos del grafo. 
+  v=g->primerVertice();
+  int numero= relacion1a1->getDerecha(v);
+  while (v!=nullptr){
+    Vertice * va=g->primerVerticeAdyacente(v);
+    while (va!=nullptr){
+      int fila = relacion1a1->getDerecha(v);
+      int columna = relacion1a1->getDerecha(va);
+      matrizPesos[fila][columna]=g->peso(v,va);
+      va=g->siguienteVerticeAdyacente(v,va);
+    }
+    v=g->siguienteVertice(v);
+  }
+
+	for(int i =0;i<g->numVertices();++i){
+		cout<<endl;
+		for(int j=0;j<g->numVertices();++j){
+			if (matrizPesos[i][j]==99999){
+				cout<<0<<" ";				
+			}else{
+				cout<<matrizPesos[i][j]<<" ";
+			}
+
+		}
+	}
+
+  cout<<endl;
+  cout<<endl;
+
+
+
+
+  //Se corre el algoritmo de Floyd
+  for(int pivote =0;pivote<g->numVertices();++pivote){
+
+    for(int fila=0;fila<g->numVertices();++fila){
+      if(fila!=pivote && matrizPesos[fila][pivote]<99999){
+        for(int columna=0;columna<g->numVertices();++columna){
+          int valorActual=matrizPesos[fila][columna];
+          int temp1 = matrizPesos[fila][pivote];
+          int temp2 = matrizPesos[pivote][columna];
+          int valorNuevo=matrizPesos[fila][pivote]+matrizPesos[pivote][columna];
+          if (fila!=columna && matrizPesos[fila][columna]>(matrizPesos[fila][pivote]+matrizPesos[pivote][columna])){
+            matrizPesos[fila][columna]=valorNuevo;
+            matrizVertices[fila][columna]=relacion1a1->getIzquierda(pivote);
+          }
+        }
+      }
+    }
+    cout <<"pivote: "<<pivote<<endl;
+    for(int i =0;i<g->numVertices();++i){
+      cout<<endl;
+      for(int j=0;j<g->numVertices();++j){
+        if (matrizPesos[i][j]==99999){
+          cout<<0<<" ";				
+        }else{
+          cout<<matrizPesos[i][j]<<" ";
+        }
+
+      }
+    }
+    cout<<endl;
+    cout<<endl;
+  }
+  int valorUltimo = matrizPesos[5][0];
+}
+
+
+
+void Algoritmos::NDijkstra(Grafo* g,ListaIndexada<ContenedorDijkstra>* lista){
+  lista=new ListaIndexada<ContenedorDijkstra>[g->numVertices()];
+  Vertice * v= g->primerVertice();
+  int contador =0;
+  // Se carga la relacion 1 a 1 con los vertices 
+  // y los indices a los que corresponden.
+  while (v!=nullptr)
+  {
+    Algoritmos::Dijkstra(g,v,&(lista[contador++]));
+    v=g->siguienteVertice(v);
+  }
+};
 
 //===========================  Variables globales para "Coloreo"
 #define NN 6 //Número de vértices en el grafo

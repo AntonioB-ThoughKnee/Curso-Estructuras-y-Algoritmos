@@ -3,77 +3,43 @@
 #include "ListaIndexadaPlantilla.hpp"
 #include "ColaConPrioridad.hpp"
 #include "SeleccionDeGrafo.hpp"
+#include "relacion1A1.hpp"
 #include <map>
+#include <vector>
+
 
 struct ContenedorDijkstra;
 
 namespace Algoritmos{
   void Dijkstra(Grafo* g, Vertice* v, ListaIndexada<ContenedorDijkstra>* lista);
-
   /**
-   * @brief 
-   * Requiere:
-   * Las 2 matrices deben tener dimensiones M*M, M = cantidad de vértices
-   * @param g 
-   * @param v 
-   * @param mAdj 
-   * @param mVert 
-   */
-  // template <typename IntM, typename StrM>
-  // void Floyd(Grafo* g, IntM& mAdj, StrM& mVert){
-  //   std::map<int, Vertice*> relacion1a1;
-  //   mAdj[1][1] = 77777;
-  //   mVert[1][1] = 88888;
-  //   int numVertices = g->numVertices();
-  //   Vertice tmp = g->primerVertice();
-  //   Vertice tmpAd = g->primerVerticeAdyacente(tmp);
-
-
-  //   for(int ii = 0; ii < numVertices ; ii++){
-  //     for(int iii = 0; iii < numVertices ; iii++){
-  //       if(ii == iii) iii++;
-        
-  //       mAdj[ii][iii] = g->peso(tmp, tmpAd);
-  //       tmpAd = g->siguienteVerticeAdyacente(tmp, tmpAd);
-  //     }
-  //     tmp = g->siguienteVertice(tmp);
-  //   }
-  // }
-
+   * @brief Implementacion del algoritmo de Floyd.
+   * EFECTO: Encuentra el camino mas corto entre todo par de vertices.
+   * REQUIERE: Grafo inicializado, no vacio, matriz de pesos, matriz de vertices y relacion1a1
+   * ademas, requiere que ningun peso del grafo sea mayor a 99998.
+   * MODIFICA: matriz de pesos, matriz de vertices y relacion1a1.
+   * @param g grafo a utilizar.
+   * @param matrizPesos puntero a puntero de int(matriz de int) que contiene
+   * los pesos de las aristas, termina conteniendo el valor de las distancias
+   * entre aristas.
+   * @param matrizVertices puntero a puntero a puntero de Vertices(matriz de punteros
+   * a Vertices) contiene los vertices intermedios por los que se pasa para llegar de un 
+   * vertice al otro.
+   * @param relacion1a1 Relacion1a1 entre los vertices y el indice que los representa en 
+   * las matrices
+  */
+  void Floyd(Grafo* g,int**& matrizPesos,Vertice***& matrizVertices,Relacion1A1* relacion1a1);
+  /**
+   * @brief Implementacion del algoritmo de Dijkstra n veces.
+   * EFECTO: Encuentra el camino mas corto entre todo par de vertices.
+   * REQUIERE: grafo inicializado no vacio. +Req de Dijkstra
+   * MODIFICA: Arreglo de listas
+   * @param g grafo a utilizar.
+   * @param arregloListas puntero a ListaIndexada<ContenedorDijkstra>
+   * (arreglo de listas) termina conteniendo las listas con los caminos 
+   * mas cortos entre todos los vertices.
+  */
+  void NDijkstra(Grafo* g,ListaIndexada<ContenedorDijkstra>* arregloListas);
   void Coloreo(Grafo* g);
-  
 }
-
-//===========================  Usar este código para Floyd
-//Crea 2 matrices, una es de adyacencia pero la otra estara vacia
-
-  // std::map<Vertice*, int> relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
-
-  // Vertice* tmp = g->primerVertice();
-  // Vertice* tmpAd = g->primerVerticeAdyacente(tmp);
-  // for(int ii = 0; ii < NN ; ii++){
-  //   relacion1a1.insert(pair<Vertice*, int>(tmp, ii));
-  //   tmp = g->siguienteVertice(tmp);
-  // }
-
-  // tmp = g->primerVertice();
-  // for(int ii = 0; ii < NN ; ii++){
-  //   for(int iii = 0; iii < NN ; iii++){
-  //     CCColoreados[ii][iii] = false;
-  //     if(tmpAd != nullptr){
-  //       CCAdyacentes[ii][relacion1a1[tmpAd]] = true;
-  //       tmpAd = g->siguienteVerticeAdyacente(tmp, tmpAd);
-  //     }
-
-  //   }
-
-  //   tmp = g->siguienteVertice(tmp);
-  //   if(tmp != nullptr) tmpAd = g->primerVerticeAdyacente(tmp);
-  // }
-
-  // cout << "Imprimiendo matriz construida de adyacencia\n " << endl;
-  // printMatrix(CCAdyacentes,6, 6)
-//=====  
-
-
 #endif /* ALGORITMOS_GRAFO */

@@ -3,6 +3,8 @@
 #include "../include/SeleccionDeGrafo.hpp"
 #include "../include/ColaConPrioridad.hpp"
 #include "../include/Algoritmos.hpp"
+#include <map>
+
 using namespace Algoritmos;
 using namespace std;
 
@@ -62,25 +64,37 @@ int main(){
 	g->agregarArista(va, vf, 5);
 	g->agregarArista(ve, vb, 8);
 
-	//EXTRA
-	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
+
+	Relacion1A1* relacion1a1=new Relacion1A1;
+	int ** matrizPesos=new int *[g->numVertices()];
+	Vertice *** matrizVertices=new Vertice **[g->numVertices()];
+
+	relacion1a1->insertar(va,0);
+	relacion1a1->insertar(vb,1);
+	relacion1a1->insertar(vc,2);
+
+	Floyd(g,matrizPesos,matrizVertices,relacion1a1);
 
 
-  ListaIndexada<ContenedorDijkstra>* lista;
-	Dijkstra(g, va, lista);
+	for(int i =0;i<g->numVertices();++i){
+		cout<<endl;
+		for(int j=0;j<g->numVertices();++j){
+			if (matrizPesos[i][j]==99999){
+				cout<<0<<" ";				
+			}else{
+				cout<<matrizPesos[i][j]<<" ";
+			}
 
-	int mAdj[6][6];
-	int mVert[9][6];
-
-	//Floyd(g, va, mAdj, mVert);
-	Coloreo(g);
-
-
-	vtmp = g->primerVertice();
-	vtmp = g->siguienteVertice(vtmp);
-	vtmp = g->primerVerticeAdyacente(vtmp);
-	vtmp = g->siguienteVerticeAdyacente(vtmp, vb);
+		}
+	}
 	
+	for(int i = 0; i < g->numVertices(); ++i){
+		delete[] matrizPesos[i];//deletes an inner array of integer;
+		delete[] matrizVertices[i];
+	}
+
+	delete[] matrizPesos; //delete pointer holding array of pointers;
+	delete[] matrizVertices; //delete pointer holding array of pointers;
 
 	return 0;
 }
