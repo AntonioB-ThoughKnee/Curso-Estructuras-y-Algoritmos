@@ -122,7 +122,7 @@ int main(){
 
   // g->agregarArista(vc, va, 12);
   Pruebas* prueba=new Pruebas;
-  // prueba.test();
+  prueba->test();
   delete prueba;
 
 	// for(int i = 0; i < g->numVertices(); ++i){

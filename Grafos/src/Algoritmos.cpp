@@ -190,7 +190,6 @@ void Algoritmos::Floyd(Grafo* g,int**& matrizPesos,Vertice***& matrizVertices,Re
     cout<<endl;
     cout<<endl;
   }
-  int valorUltimo = matrizPesos[5][0];
 }
 
 
@@ -479,7 +478,8 @@ std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Prim(Grafo* g) {
 std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Kruskal(Grafo* g) {
   // Declaraciones e inicializaciones
   priority_queue<pair<int, int>, std::vector<pair<int,int>>,
-    std::greater<pair<int,int>>> queue; // APO(peso, keyMap)
+    std::greater<pair<int,int>>>* queue= new priority_queue<pair<int, int>, std::vector<pair<int,int>>,
+    std::greater<pair<int,int>>>; // APO(peso, keyMap)
   // map<int, pair<Vertice*, Vertice*>> mapa; // map(key, (v, va))
   vector<pair<Vertice*, Vertice*>> agregados;
   vector<vector<Vertice*>> CC;
@@ -499,7 +499,7 @@ std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Kruskal(Grafo* g) {
     Vertice* va = g->primerVerticeAdyacente(v);
     while (va != nullptr) {
       if (!existePar(agregados, v, va)) {
-        queue.push(pair<int, int>(g->peso(v, va), indiceAgregados));
+        queue->push(pair<int, int>(g->peso(v, va), indiceAgregados));
         agregados.push_back(pair<Vertice*, Vertice*>(v, va));
         indiceAgregados++;
       }
@@ -511,8 +511,8 @@ std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Kruskal(Grafo* g) {
   int n = g->numVertices();
   int aristasElegidas = 0;
   while (aristasElegidas < (n-1)) {
-    pair<int, int> parApo = queue.top(); // peso, key
-    queue.pop();
+    pair<int, int> parApo = queue->top(); // peso, key
+    queue->pop();
     pair<Vertice*, Vertice*> arista = agregados[parApo.second];
     int ident1 = encontrarPosCCDeVertice(CC, arista.first);
     int ident2 = encontrarPosCCDeVertice(CC, arista.second);
@@ -523,6 +523,7 @@ std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Kruskal(Grafo* g) {
       toRet.push_back(pair<Vertice*, Vertice*>(arista.first, arista.second));
     }
   }
+  delete queue;
   return toRet;
 }
 
