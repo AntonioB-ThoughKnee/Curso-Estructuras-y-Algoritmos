@@ -3,6 +3,7 @@
 #include "../include/SeleccionDeGrafo.hpp"
 #include "../include/ColaConPrioridad.hpp"
 #include "../include/Algoritmos.hpp"
+#include "../include/pruebas.hpp"
 #include <map>
 
 using namespace Algoritmos;
@@ -69,9 +70,7 @@ int main(){
 #endif
 
 
-	Relacion1A1* relacion1a1=new Relacion1A1;
-	int ** matrizPesos=new int *[g->numVertices()];
-	Vertice *** matrizVertices=new Vertice **[g->numVertices()];
+
 #ifdef PRIM
 	g->agregarArista(va, vb, 2);
 	g->agregarArista(va, vc, 8);
@@ -86,12 +85,16 @@ int main(){
 	g->agregarArista(vc, vf, 6);
 	g->agregarArista(vb, vf, 5);
 #endif
+	// Relacion1A1* relacion1a1=new Relacion1A1;
+	// int ** matrizPesos=new int *[g->numVertices()];
+	// Vertice *** matrizVertices=new Vertice **[g->numVertices()];
+	// relacion1a1->insertar(va,0);
+	// relacion1a1->insertar(vb,1);
+	// relacion1a1->insertar(vc,2);
 
-	relacion1a1->insertar(va,0);
-	relacion1a1->insertar(vb,1);
-	relacion1a1->insertar(vc,2);
+	// Floyd(g,matrizPesos,matrizVertices,relacion1a1);
 
-	Floyd(g,matrizPesos,matrizVertices,relacion1a1);
+
 
 #ifdef KRUSKAL
 	g->agregarArista(va, vb, 3);
@@ -117,14 +120,18 @@ int main(){
   #endif
 	// Coloreo(g);
 
+  // g->agregarArista(vc, va, 12);
+  Pruebas prueba;
+  prueba.test();
 
-	for(int i = 0; i < g->numVertices(); ++i){
-		delete[] matrizPesos[i];//deletes an inner array of integer;
-		delete[] matrizVertices[i];
-	}
 
-	delete[] matrizPesos; //delete pointer holding array of pointers;
-	delete[] matrizVertices; //delete pointer holding array of pointers;
+	// for(int i = 0; i < g->numVertices(); ++i){
+	// 	delete[] matrizPesos[i];//deletes an inner array of integer;
+	// 	delete[] matrizVertices[i];
+	// }
+
+	// delete[] matrizPesos; //delete pointer holding array of pointers;
+	// delete[] matrizVertices; //delete pointer holding array of pointers;
 
 	return 0;
 }
