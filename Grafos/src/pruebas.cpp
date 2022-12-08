@@ -17,7 +17,7 @@ Pruebas::Pruebas() {
 
   // GRAFO 2
   this->grafo2 = new Grafo();
-  for (int i = 0; i < 50; i++) {
+  for (int i = 0; i < 15; i++) {
     this->grafo2->agregarVertice(std::to_string(i));
   }
 
@@ -27,7 +27,7 @@ Pruebas::Pruebas() {
     Vertice* vertAgregado = this->grafo3->agregarVertice(std::to_string(i));
     mapGrafo3.insert({i, vertAgregado});
   }
-  for (int i = 0; i < grafo3->numVertices(); i++) {
+  for (int i = 0; i < grafo3->numVertices()-1; i++) {
     for (int m = (i); m < grafo3->numVertices(); m++) {
       if (i != m) {
         grafo3->agregarArista(mapGrafo3[i], mapGrafo3[m], m*i);
@@ -42,7 +42,7 @@ Pruebas::Pruebas() {
     Vertice* vertAgregado1 = this->grafo4->agregarVertice(std::to_string(i));
     mapGrafo4.insert({i, vertAgregado1});
   }
-    for (int i = 0; i < grafo4->numVertices(); i++) {
+    for (int i = 0; i < grafo4->numVertices()-1; i++) {
     for (int m = (i); m < grafo4->numVertices(); m++) {
       if (i != m) {
         grafo4->agregarArista(mapGrafo4[i], mapGrafo4[m], m*i);
@@ -140,8 +140,8 @@ void Pruebas::test() {
 
   // Kruskal(grafo1);
   // Kruskal(grafo2);
-  // Kruskal(grafo3);
-  // Kruskal(grafo4);
+  Kruskal(grafo3);
+  Kruskal(grafo4);
   
   // ALGORITMOS F Y H
   Hamilton(grafo1);
@@ -153,4 +153,8 @@ void Pruebas::test() {
   HamiltonBERA(grafo3);
   HamiltonBERA(grafo4);
 
+  Coloreo(grafo1);
+  Coloreo(grafo2);
+  Coloreo(grafo3);
+  Coloreo(grafo4);
 }
