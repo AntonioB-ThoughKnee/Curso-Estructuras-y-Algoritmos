@@ -1,11 +1,11 @@
 #ifndef ALGORITMOS_GRAFO
 #define ALGORITMOS_GRAFO
 #include "ListaIndexadaPlantilla.hpp"
-#include "ColaConPrioridad.hpp"
 #include "SeleccionDeGrafo.hpp"
 #include <map>
 #include <vector>
-
+#include <queue>
+#include <iostream>
 struct ContenedorDijkstra;
 
 namespace Algoritmos{
@@ -26,7 +26,7 @@ namespace Algoritmos{
    * La soluciÃ³n se encuentra en la variable global "colorDeVÃ©rtice", el cual es un arreglo donde cada Ã­ndice representa un vÃ©rtice(por medio de la variable global "relaciÃ³n1a1") y el valor en el arreglo representa el color del que estÃ¡ pintado,  retorna el menor nÃºmero de colores para pintar el grafo  
    * 
    * IMPORTANTE: Existe un "#define NN" en "Algoritmos.cpp" el cual debe ser modificado de acuerdo al nÃºmero de vÃ©rtices en en grafo  
-   * @remark Requiere: Grafo con al menos un vÃ©rtice  
+   * @remark Requiere: Grafo con al menos un vÃ©rtice y al menos una solución
    * @remark Efecto: Resuelve el problema de coloreo en un grafo dado  
    * @remark Modifica: Variables globales
    * 
@@ -37,7 +37,7 @@ namespace Algoritmos{
 
   /**
    * @brief Algoritmo de bÃºsqueda Exhaustiva Pura para resolver el problema de los circuitos Hamilton en un grafo no dirigido, la soluciÃ³n se encuentra en la variable global "recorrido" el cual es un arreglo donde los Ã­ndices indican el orden en el que se recorren los vÃ©rtices, y los valores son los vÃ©rtices de acuerdo a la relaciÃ³n1a1  
-   * @remark Requiere: Grafo con al menos un vÃ©rtice  
+   * @remark Requiere: Grafo con al menos un vÃ©rtice y al menos una solución
    * @remark Efecto: Retornar el peso total del circuito Hamilton de menor costo  
    * @remark Modifica: Nada
    * 
@@ -48,10 +48,24 @@ namespace Algoritmos{
    */
   int Hamilton(Grafo* g);
 
+  //   for(int ii = 0; ii < numVertices ; ii++){
+  //     for(int iii = 0; iii < numVertices ; iii++){
+  //       if(ii == iii) iii++;
+        
+  //       mAdj[ii][iii] = g->peso(tmp, tmpAd);
+  //       tmpAd = g->siguienteVerticeAdyacente(tmp, tmpAd);
+  //     }
+  //     tmp = g->siguienteVertice(tmp);
+  //   }
+  // }
+
+  void Prim(Grafo* g); // nada mas retorno la lista indexada, no me la tienen que
+  // dar como argumento.
+  void Kruskal(Grafo* g);
   /**
    * @brief Algoritmo de bÃºsqueda Exhaustiva Pura con RamificaciÃ³n y Acotamiento para resolver el problema de los circuitos Hamilton en un grafo no dirigido, la soluciÃ³n se encuentra en la variable global "recorrido" el cual es un arreglo donde los Ã­ndices indican el orden en el que se recorren los vÃ©rtices, y los valores son los vÃ©rtices de acuerdo a la relaciÃ³n1a1 
-   * Se hace un Ã¡rbol n-ario para la RamificaciÃ³n y Acotamiento 
-   * @remark Requiere: Grafo con al menos un vÃ©rtice 
+   * Se hace un Ã¡rbol n-ario para la RamificaciÃ³n y el Acotamiento 
+   * @remark Requiere: Grafo con al menos un vÃ©rtice  y al menos una solución
    * @remark Efecto: Retornar el peso total del circuito Hamilton de menor costo 
    * @remark Modifica: Nada
    * 

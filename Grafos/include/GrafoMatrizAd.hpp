@@ -17,6 +17,7 @@ public:
 
 	GrafoMatrizAd();
 	~GrafoMatrizAd();
+	void iniciar();
 	VerticeMatrizAd* agregarVertice(std::string etiqueta);
 	void eliminarVertice(std::string etiqueta);
 	void modificarEtiqueta(VerticeMatrizAd* vertice, std::string etiqueta);
@@ -30,6 +31,7 @@ public:
 	VerticeMatrizAd* primerVerticeAdyacente(VerticeMatrizAd* vertice);
 	VerticeMatrizAd* siguienteVerticeAdyacente(VerticeMatrizAd* vertice1, VerticeMatrizAd* vertice2);
 	int numVertices();
+	void destruir();
 
 } Grafo;
 

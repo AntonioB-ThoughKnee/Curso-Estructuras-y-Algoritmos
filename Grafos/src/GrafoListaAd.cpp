@@ -21,6 +21,15 @@ int obtenerIndiceEnAdyacentes(VerticeListaAd* vertice1, VerticeListaAd* vertice2
 	return indice;
 }
 
+void GrafoListaAd:: iniciar(){
+	if(this->numV != 0){
+		this->vertices.iniciar();
+		this->vertices.insertar(nullptr, 1);
+		this->numV = 0;
+	}
+
+}
+
 GrafoListaAd::GrafoListaAd() {
 	this->vertices.iniciar();
 	this->vertices.insertar(nullptr, 1);
@@ -39,13 +48,13 @@ VerticeListaAd* GrafoListaAd::agregarVertice(string etiqueta){
 void GrafoListaAd::eliminarVertice(string etiqueta){
 	VerticeListaAd* tmp;
 	for(int ii = 1; ii <= this->numV ; ii++){
+		tmp = this->vertices.recuperar(ii);
 		if(tmp->etiqueta == etiqueta){
 			this->numV--;
 			this->vertices.borrar(ii-1);
 			delete tmp;
 			break;
 		}
-		tmp = this->vertices.recuperar(ii);
 	}
 	 
 }
@@ -121,13 +130,26 @@ VerticeListaAd* GrafoListaAd::siguienteVerticeAdyacente(VerticeListaAd* vertice1
 
 	if(indice == -1) { return nullptr; }
 
-	return vertice1->adyacentes
-		.recuperar(indice)->vertice;
+	return vertice1->adyacentes.recuperar(indice)->vertice;
 }
 
 int GrafoListaAd::numVertices(){
 	return this->numV;
 }
+
+void GrafoListaAd::destruir(){
+	VerticeListaAd* tmp = nullptr;
+	for(int ii = 1; ii <= this->numV ; ii++){
+		tmp = this->vertices.recuperar(ii);
+		for(int iii = 1; iii <= tmp->adyacentes.numElem() ; iii++){
+			delete tmp->adyacentes.recuperar(iii);
+		}
+		tmp->adyacentes.destruir();
+		delete tmp;
+	}
+	this->vertices.destruir();
+}
+
 
 GrafoListaAd::~GrafoListaAd() {
 	// this->vertices->iniciarCursor();

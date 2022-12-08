@@ -13,6 +13,16 @@ GrafoMatrizAd::GrafoMatrizAd() {
 	
 }
 
+void GrafoMatrizAd::iniciar(){
+	;
+	if(this->numNodos != 0){
+		this->numNodos = 0;
+		for(int ii = 0; ii < this->M ; ii++){
+			this->vertices[ii] = "nullptr";
+		}
+	}
+}
+
 VerticeMatrizAd* GrafoMatrizAd::agregarVertice(string etiqueta){
 	if(etiqueta.compare("nullptr") == 0) {
 		cout << "NO se puede agregar un vértice con esa etiqueta " << endl;
@@ -152,6 +162,13 @@ VerticeMatrizAd* GrafoMatrizAd::siguienteVerticeAdyacente(VerticeMatrizAd* verti
 
 int GrafoMatrizAd::numVertices(){
 	return this->numNodos;
+}
+
+void GrafoMatrizAd::destruir(){
+	for(int ii = 0; ii < this->M ; ii++){
+		delete this->verticesActuales[ii];
+	}
+	this->~GrafoMatrizAd();
 }
 
 

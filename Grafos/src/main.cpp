@@ -1,7 +1,6 @@
 #include <iostream>
 #include "../include/ListaIndexadaPlantilla.hpp"
 #include "../include/SeleccionDeGrafo.hpp"
-#include "../include/ColaConPrioridad.hpp"
 #include "../include/Algoritmos.hpp"
 using namespace Algoritmos;
 using namespace std;
@@ -44,6 +43,7 @@ void printMatrix(Pmatrix& matrix, int rows, int columns){
 int main(){ 
 
 	Grafo* g = new Grafo();
+	// g->iniciar();
 	Vertice* vtmp;
 	Vertice* va = g->agregarVertice("a");
 	Vertice* vb = g->agregarVertice("b");
@@ -63,11 +63,18 @@ int main(){
 	g->agregarArista(ve, vb, 8);
 
 	//Floyd(g, va, mAdj, mVert);
-	Coloreo(g);
-	Hamilton(g);
-	HamiltonBERA(g);
-
-	g->eliminarVertice("e");
+	ListaIndexada<ContenedorDijkstra>* lista = new ListaIndexada<ContenedorDijkstra>();
+	Dijkstra(g, va, lista);
+	// Coloreo(g);
+	// Hamilton(g);
+	// HamiltonBERA(g);
+	// g->agregarVertice("r");
+	// Hamilton(g);
+	// HamiltonBERA(g);
+	// Coloreo(g);
+  // Prim(g);
+  // Kruskal(g);
+	// g->eliminarVertice("e");
 	// printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 
 
@@ -75,7 +82,8 @@ int main(){
 	vtmp = g->siguienteVertice(vtmp);
 	vtmp = g->primerVerticeAdyacente(vtmp);
 	vtmp = g->siguienteVerticeAdyacente(vtmp, vb);
-	
+
+	g->destruir();
 
 	return 0;
 }
