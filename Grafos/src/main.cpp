@@ -43,11 +43,13 @@ void printMatrix(Pmatrix& matrix, int rows, int columns){
 int main(){ 
 
 	Grafo* g = new Grafo();
+	Grafo* gg = new Grafo();
 	// g->iniciar();
 	Vertice* vtmp;
 	Vertice* va = g->agregarVertice("a");
 	Vertice* vb = g->agregarVertice("b");
 	Vertice* vc = g->agregarVertice("c");
+
 	Vertice* vd = g->agregarVertice("d");
 	Vertice* ve = g->agregarVertice("e");
 	Vertice* vf = g->agregarVertice("f");
@@ -63,9 +65,16 @@ int main(){
 	g->agregarArista(ve, vb, 8);
 
 	//Floyd(g, va, mAdj, mVert);
+
+	Vertice* vva = gg->agregarVertice("a");
+	Vertice* vvb = gg->agregarVertice("b");
+	Vertice* vvc = gg->agregarVertice("c");
+	gg->agregarArista(va, vc, 5);
+	gg->agregarArista(va, vb, 7);
+	gg->agregarArista(vc, vb, 1);
 	ListaIndexada<ContenedorDijkstra>* lista = new ListaIndexada<ContenedorDijkstra>();
-	Dijkstra(g, va, lista);
-	// Coloreo(g);
+	Dijkstra(gg, va, lista);
+	Coloreo(g);
 	// Hamilton(g);
 	// HamiltonBERA(g);
 	Vertice* vr = g->agregarVertice("r");
@@ -74,11 +83,20 @@ int main(){
 	g->agregarArista(vr, ve, 1);
 	g->agregarArista(vr, vd, 4);
 	g->agregarArista(vr, va, 3);
-	// Hamilton(g);
-	// HamiltonBERA(g);
-	// Coloreo(g);
+	Hamilton(g);
+	HamiltonBERA(g);
+	Coloreo(g);
+	Vertice* vl = g->agregarVertice("l");
+	g->agregarArista(vl, vb, 3);
+	g->agregarArista(vl, vf, 2);
+	g->agregarArista(vl, ve, 7);
+	g->agregarArista(vl, vd, 4);
+	g->agregarArista(vl, va, 3);
+	Hamilton(g);
+	HamiltonBERA(g);
+	Coloreo(g);
 	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
-	g->eliminarVertice("a");
+	// g->eliminarVertice("a");
   // Prim(g);
   // Kruskal(g);
 	// g->eliminarVertice("e");
