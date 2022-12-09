@@ -312,9 +312,10 @@ void Menu::menuDijkstra(std::string etInicial){
 
 	Dijkstra(this->grafo, v1, lista);
   cout << "Resultado de recorrido Dijkstra: " << endl;
-  for (int i = 0; i < lista->numElem(); i++)  {
-    ContenedorDijkstra vert = lista->recuperar(i);
-    cout << this->grafo->etiqueta(vert.vertice) << " ";
+  ContenedorDijkstra vert;
+  for (int i = 1; i <= lista->numElem(); i++)  {
+    vert = lista->recuperar(i);
+    cout << this->grafo->etiqueta(vert.vertice)<<": "<<vert.pesoAcumulado <<endl;
   }
   cout << endl;
   delete lista;
@@ -354,10 +355,12 @@ void Menu::menuNDijkstra(){
   ListaIndexada<ContenedorDijkstra>* listaG1=new 
     ListaIndexada<ContenedorDijkstra>[this->grafo->numVertices()];
   NDijkstra(this->grafo, listaG1);
+  ContenedorDijkstra vert;
   for (int i =0; i < this->grafo->numVertices(); i++) {
     cout << endl << "Ejecucion #" << i << endl;
-    for (int m = 0; listaG1[i].numElem(); m++) {
-      cout << this->grafo->etiqueta(listaG1[i].recuperar(m).vertice) << " ";
+    for (int m = 1; m<=listaG1[i].numElem(); m++) {
+      vert = listaG1[i].recuperar(m);
+      cout << this->grafo->etiqueta(vert.vertice)<<": "<<vert.pesoAcumulado <<endl;
     }
   }
   cout << endl;

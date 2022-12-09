@@ -195,7 +195,6 @@ void Algoritmos::Floyd(Grafo* g,int**& matrizPesos,Vertice***& matrizVertices,Re
 
 
 void Algoritmos::NDijkstra(Grafo* g,ListaIndexada<ContenedorDijkstra>* lista){
-  lista=new ListaIndexada<ContenedorDijkstra>[g->numVertices()];
   Vertice * v= g->primerVertice();
   int contador =0;
   // Se carga la relacion 1 a 1 con los vertices 
