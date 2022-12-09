@@ -139,25 +139,6 @@ void Algoritmos::Floyd(Grafo* g,int**& matrizPesos,Vertice***& matrizVertices,Re
     }
     v=g->siguienteVertice(v);
   }
-
-	for(int i =0;i<g->numVertices();++i){
-		cout<<endl;
-		for(int j=0;j<g->numVertices();++j){
-			if (matrizPesos[i][j]==99999){
-				cout<<0<<" ";				
-			}else{
-				cout<<matrizPesos[i][j]<<" ";
-			}
-
-		}
-	}
-
-  cout<<endl;
-  cout<<endl;
-
-
-
-
   //Se corre el algoritmo de Floyd
   for(int pivote =0;pivote<g->numVertices();++pivote){
 
@@ -177,7 +158,6 @@ void Algoritmos::Floyd(Grafo* g,int**& matrizPesos,Vertice***& matrizVertices,Re
     }
   }
 }
-
 
 
 void Algoritmos::NDijkstra(Grafo* g,ListaIndexada<ContenedorDijkstra>* lista){
@@ -373,8 +353,8 @@ void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
 }
 
 int Algoritmos::Hamilton(Grafo* g){
-  pesoDelrecorrido = 99999;
   pesoDelrecorridoR = 0;
+  pesoDelrecorrido = 99999;
   solucionAlcanzada = false;
   recorrido = new int[g->numVertices()+1];
   recorridoR = new int[g->numVertices()+1];
@@ -577,8 +557,8 @@ std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Kruskal(Grafo* g) {
 //===========================  Variables globales para "HamiltonBERA" 
 // static std::map<Vertice*, int> relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
 // static std::map<Vertice*, bool> visitadosHam;
-// static int recorridoR; //el primer valor es el inicio y el que le sigue es el vértice adyacente elegido como camino
-// static int recorrido; //Recorrido solución
+// static int* recorridoR; //el primer valor es el inicio y el que le sigue es el vértice adyacente elegido como camino
+// static int* recorrido; //Recorrido solución
 
 typedef std::vector<std::vector<int>> CCint;
 CCint matrizAd; //matriz de adyacencia con pesos
@@ -720,7 +700,7 @@ int Algoritmos::HamiltonBERA(Grafo* g){
   relacion1a1.clear();
   visitadosHam.clear();
   delete obligatorioTomado;
-  delete recorrido;
-  delete recorridoR;
+  delete [] recorrido;
+  delete [] recorridoR;
   return pesoDelrecorrido;
 }

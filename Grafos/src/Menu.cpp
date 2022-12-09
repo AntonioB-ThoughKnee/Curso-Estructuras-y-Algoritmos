@@ -8,30 +8,6 @@ using namespace std;
 
 Menu::Menu(){
   this->grafo=new Grafo();
-  // QUITAR!!
-  this->grafo->iniciar();
-  Vertice* va = this->grafo->agregarVertice("a");
-  this->idVertice.insert({"a",va});
-	Vertice* vb = this->grafo->agregarVertice("b");
-  this->idVertice.insert({"b",vb});
-	Vertice* vc = this->grafo->agregarVertice("c");
-  this->idVertice.insert({"c",vc});
-	Vertice* vd = this->grafo->agregarVertice("d");
-  this->idVertice.insert({"d",vd});
-	Vertice* ve = this->grafo->agregarVertice("e");
-  this->idVertice.insert({"e",ve});
-	Vertice* vf = this->grafo->agregarVertice("f");
-  this->idVertice.insert({"f",vf});
-
-  this->grafo->agregarArista(va, vb, 8);
-	this->grafo->agregarArista(va, vc, 1);
-	this->grafo->agregarArista(vc, vb, 9);
-	this->grafo->agregarArista(vd, vb, 8);
-	this->grafo->agregarArista(vf, vb, 2);
-	this->grafo->agregarArista(vc, ve, 5);
-	this->grafo->agregarArista(vd, vf, 3);
-	this->grafo->agregarArista(va, vf, 5);
-	this->grafo->agregarArista(ve, vb, 8);
 }
 Menu::~Menu(){
   if (this->grafo){
@@ -44,7 +20,7 @@ cout<<"\nBienvenid@ al programa de pruebas! \n"<<endl;
 bool loopPrincipal = true;
 
 while(loopPrincipal){
-  cout<<"Por favor, seleccione una opcion: 1-Operadores 2-Algoritmos \n"<<endl;
+  cout<<"\nPor favor, seleccione una opcion: 1-Operadores 2-Algoritmos OTRO-Salir\n"<<endl;
   int opcionPrincipal;
   cin>> opcionPrincipal;
   switch (opcionPrincipal)
@@ -231,7 +207,7 @@ void Menu::menuAlgoritmos() {
   bool loopAlgoritmos = true;
 
   while(loopAlgoritmos){
-    string opciones="Por favor, seleccione una opcion:\n" 
+    string opciones="\nPor favor, seleccione una opcion:\n" 
     "1-Dijkstra 2-Floyd 3-N Veces Dijkstra 4-Prim \n5-Kruskal 6-Circuito Hamilton\n"
     "7-Coloreo 8-HamiltonBERA OTRO-SALIR \n";
     int opcionAlgoritmos;

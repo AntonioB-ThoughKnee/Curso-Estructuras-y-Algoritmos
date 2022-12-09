@@ -12,7 +12,7 @@ Pruebas::Pruebas() {
   // GRAFO 1
   this->grafo1 = new Grafo();
   this->grafo1->iniciar();
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 4; i++) {
     this->grafo1->agregarVertice(std::to_string(i));
   }
 
@@ -26,7 +26,7 @@ Pruebas::Pruebas() {
   // GRAFO 3
   this->grafo3 = new Grafo();
   this->grafo3->iniciar();
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 4; i++) {
     Vertice* vertAgregado = this->grafo3->agregarVertice(std::to_string(i));
     mapGrafo3.insert({i, vertAgregado});
   }
@@ -42,7 +42,7 @@ Pruebas::Pruebas() {
   // GRAFO 4
   this->grafo4 = new Grafo();
   this->grafo4->iniciar();
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i <8; i++) {
     Vertice* vertAgregado1 = this->grafo4->agregarVertice(std::to_string(i));
     mapGrafo4.insert({i, vertAgregado1});
   }
@@ -208,55 +208,55 @@ void Pruebas::test() {
   double test15 = double(end - start) / double(CLOCKS_PER_SEC);
   
   // // ALGORITMOS F Y H
-  // start = clock();
-  // Hamilton(grafo1);
-  // end = clock();
-  // double test16 = double(end - start) / double(CLOCKS_PER_SEC);
-  // start = clock();
-  // Hamilton(grafo2);
-  // end = clock();
-  // double test17 = double(end - start) / double(CLOCKS_PER_SEC);
-  // start = clock();
-  // Hamilton(grafo3);
-  // end = clock();
-  // double test18 = double(end - start) / double(CLOCKS_PER_SEC);
-  // start = clock();
-  // Hamilton(grafo4);
-  // end = clock();
-  // double test19 = double(end - start) / double(CLOCKS_PER_SEC);
-  // start = clock();
-  // HamiltonBERA(grafo1);
-  // end = clock();
-  // double test20 = double(end - start) / double(CLOCKS_PER_SEC);
-  // start = clock();
-  // HamiltonBERA(grafo2);
-  // end = clock();
-  // double test21 = double(end - start) / double(CLOCKS_PER_SEC);
-  // start = clock();
-  // HamiltonBERA(grafo3);
-  // end = clock();
-  // double test22 = double(end - start) / double(CLOCKS_PER_SEC);
-  // start = clock();
-  // HamiltonBERA(grafo4);
-  // end = clock();
-  // double test23 = double(end - start) / double(CLOCKS_PER_SEC);
+  start = clock();
+  Hamilton(grafo1);
+  end = clock();
+  double test16 = double(end - start) / double(CLOCKS_PER_SEC);
+  start = clock();
+  Hamilton(grafo2);
+  end = clock();
+  double test17 = double(end - start) / double(CLOCKS_PER_SEC);
+  start = clock();
+  Hamilton(grafo3);
+  end = clock();
+  double test18 = double(end - start) / double(CLOCKS_PER_SEC);
+  start = clock();
+  Hamilton(grafo4);
+  end = clock();
+  double test19 = double(end - start) / double(CLOCKS_PER_SEC);
+  start = clock();
+  HamiltonBERA(grafo1);
+  end = clock();
+  double test20 = double(end - start) / double(CLOCKS_PER_SEC);
+  start = clock();
+  HamiltonBERA(grafo2);
+  end = clock();
+  double test21 = double(end - start) / double(CLOCKS_PER_SEC);
+  start = clock();
+  HamiltonBERA(grafo3);
+  end = clock();
+  double test22 = double(end - start) / double(CLOCKS_PER_SEC);
+  start = clock();
+  HamiltonBERA(grafo4);
+  end = clock();
+  double test23 = double(end - start) / double(CLOCKS_PER_SEC);
 
-  start = clock();
-  Coloreo(grafo1);
-  end = clock();
-  double test24 = double(end - start) / double(CLOCKS_PER_SEC);
-  start = clock();
-  Coloreo(grafo2);
-  end = clock();
-  double test25 = double(end - start) / double(CLOCKS_PER_SEC);
-  start = clock();
-  Coloreo(grafo3);
-  end = clock();
-  double test26 = double(end - start) / double(CLOCKS_PER_SEC);
-  start = clock();
-  Coloreo(grafo4);
-  end = clock();
-  double test27 = double(end - start) / double(CLOCKS_PER_SEC);
+  // start = clock();
+  // Coloreo(grafo1);
+  // end = clock();
+  // double test24 = double(end - start) / double(CLOCKS_PER_SEC);
+  // start = clock();
+  // Coloreo(grafo2);
+  // end = clock();
+  // double test25 = double(end - start) / double(CLOCKS_PER_SEC);
+  // start = clock();
+  // Coloreo(grafo3);
+  // end = clock();
+  // double test26 = double(end - start) / double(CLOCKS_PER_SEC);
+  // start = clock();
+  // Coloreo(grafo4);
+  // end = clock();
+  // double test27 = double(end - start) / double(CLOCKS_PER_SEC);
 
     cout << "Floyd grafo pequenho no conexo: " << fixed 
          << test1 << setprecision(5);
@@ -322,52 +322,52 @@ void Pruebas::test() {
          << test15 << setprecision(5);
     cout << " sec " << endl;
 
-    // cout << "Hamilton grafo pequenho no conexo: " << fixed 
-    //      << test16 << setprecision(5);
-    // cout << " sec " << endl;
-
-    // cout << "Hamilton grafo grande no conexo: " << fixed 
-    //      << test17 << setprecision(5);
-    // cout << " sec " << endl;
-
-    // cout << "Hamilton grafo pequenho conexo: " << fixed 
-    //      << test18 << setprecision(5);
-    // cout << " sec " << endl;
-
-    // cout << "Hamilton grafo grande conexo: " << fixed 
-    //      << test19 << setprecision(5);
-    // cout << " sec " << endl;
-
-    // cout << "HamiltonBERA grafo pequenho no conexo: " << fixed 
-    //      << test20 << setprecision(5);
-    // cout << " sec " << endl;
-
-    // cout << "HamiltonBERA grafo grande no conexo: " << fixed 
-    //      << test21 << setprecision(5);
-    // cout << " sec " << endl;
-
-    // cout << "HamiltonBERA grafo pequenho conexo: " << fixed 
-    //      << test22 << setprecision(5);
-    // cout << " sec " << endl;
-
-    // cout << "HamiltonBERA grafo grande conexo: " << fixed 
-    //      << test23 << setprecision(5);
-    // cout << " sec " << endl;
-
-    cout << "Coloreo grafo pequenho no conexo: " << fixed 
-         << test24 << setprecision(5);
+    cout << "Hamilton grafo pequenho no conexo: " << fixed 
+         << test16 << setprecision(5);
     cout << " sec " << endl;
 
-    cout << "Coloreo grafo grande no conexo: " << fixed 
-         << test25 << setprecision(5);
+    cout << "Hamilton grafo grande no conexo: " << fixed 
+         << test17 << setprecision(5);
     cout << " sec " << endl;
 
-    cout << "Coloreo grafo pequenho conexo: " << fixed 
-         << test26 << setprecision(5);
+    cout << "Hamilton grafo pequenho conexo: " << fixed 
+         << test18 << setprecision(5);
     cout << " sec " << endl;
 
-    cout << "Coloreo grafo grande conexo: " << fixed 
-         << test27 << setprecision(5);
+    cout << "Hamilton grafo grande conexo: " << fixed 
+         << test19 << setprecision(5);
     cout << " sec " << endl;
+
+    cout << "HamiltonBERA grafo pequenho no conexo: " << fixed 
+         << test20 << setprecision(5);
+    cout << " sec " << endl;
+
+    cout << "HamiltonBERA grafo grande no conexo: " << fixed 
+         << test21 << setprecision(5);
+    cout << " sec " << endl;
+
+    cout << "HamiltonBERA grafo pequenho conexo: " << fixed 
+         << test22 << setprecision(5);
+    cout << " sec " << endl;
+
+    cout << "HamiltonBERA grafo grande conexo: " << fixed 
+         << test23 << setprecision(5);
+    cout << " sec " << endl;
+
+    // cout << "Coloreo grafo pequenho no conexo: " << fixed 
+    //      << test24 << setprecision(5);
+    // cout << " sec " << endl;
+
+    // cout << "Coloreo grafo grande no conexo: " << fixed 
+    //      << test25 << setprecision(5);
+    // cout << " sec " << endl;
+
+    // cout << "Coloreo grafo pequenho conexo: " << fixed 
+    //      << test26 << setprecision(5);
+    // cout << " sec " << endl;
+
+    // cout << "Coloreo grafo grande conexo: " << fixed 
+    //      << test27 << setprecision(5);
+    // cout << " sec " << endl;
 
 }
