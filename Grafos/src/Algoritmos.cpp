@@ -318,6 +318,7 @@ static int* recorridoR; //el primer valor es el inicio y el que le sigue es el v
 static int* recorrido; //Recorrido solución
 static int pesoDelrecorrido; // "infinito"
 static int pesoDelrecorridoR = 0;
+static bool solucionAlcanzada;
 //=====  
 
 void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
@@ -327,8 +328,11 @@ void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
   for(int ii = 0; ii < g->numVertices() ; ii++){ //Cada "ii" es un "vértice"
 
     tmpAd = conseguirVertice(g, ii );
+    if(tmpAd == conseguirVertice(g, recorridoR[0]) 
+    && profundidad >= g->numVertices()-1
+    && g->peso(vertProcedente, tmpAd) != -1 ) solucionAlcanzada = true;
 
-    if(g->peso(vertProcedente, tmpAd) != -1 && !visitadosHam[tmpAd]){ //Es factible
+    if(g->peso(vertProcedente, tmpAd) != -1 && (!visitadosHam[tmpAd] || solucionAlcanzada)){ //Es factible
       visitadosHam[vertProcedente] = true;
       visitadosHam[tmpAd] = true;
       recorridoR[profundidad+1] = relacion1a1[tmpAd];
@@ -338,17 +342,18 @@ void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
       tmpAd2 = tmpAd;
       tmpAd = g->primerVerticeAdyacente(vertProcedente);
 
+
       //Verificando si se llegó a una solución
-      while(profundidad == g->numVertices()-2 && tmpAd != nullptr){
-        if(tmpAd == conseguirVertice(g, recorridoR[0])){ //Si se encontró solución...
-          pesoDelrecorridoR += g->peso(tmpAd2, conseguirVertice(g, recorridoR[0]));
+      while(profundidad >= g->numVertices()-1 && tmpAd != nullptr){
+
+        if(solucionAlcanzada){ //Si se encontró solución...
+          solucionAlcanzada = false;
           if(pesoDelrecorrido > pesoDelrecorridoR){ //Verificar si es mejor que la anterior
             pesoDelrecorrido = pesoDelrecorridoR;
             for(int iii = 0; iii < g->numVertices()+1 ; iii++){
               recorrido[iii] = recorridoR[iii];
             }
           }
-          pesoDelrecorridoR -= g->peso(tmpAd2, conseguirVertice(g, recorridoR[0]));
 
         }
         tmpAd = g->siguienteVerticeAdyacente(vertProcedente, tmpAd);
@@ -359,15 +364,17 @@ void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
 
       pesoDelrecorridoR -= g->peso(vertProcedente,tmpAd2);
       visitadosHam[vertProcedente] = false;
-      visitadosHam[tmpAd2] = false;
+      if(relacion1a1[tmpAd2] != recorrido[0]) visitadosHam[tmpAd2] = false;
 
     }
+    solucionAlcanzada = false;
     
   }
 }
 
 int Algoritmos::Hamilton(Grafo* g){
   pesoDelrecorrido = 99999;
+  solucionAlcanzada = false;
   recorrido = new int[g->numVertices()+1];
   recorridoR = new int[g->numVertices()+1];
   Vertice* tmp = g->primerVertice();
@@ -381,8 +388,8 @@ int Algoritmos::Hamilton(Grafo* g){
 
   relacion1a1.clear();
   visitadosHam.clear();
+  delete recorridoR;
   delete recorrido;
-  // delete recorridoR;
 
   return pesoDelrecorrido;
 }
@@ -571,7 +578,9 @@ std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Kruskal(Grafo* g) {
 // static int recorridoR; //el primer valor es el inicio y el que le sigue es el vértice adyacente elegido como camino
 // static int recorrido; //Recorrido solución
 
-static CC matrizAd; //matriz de adyacencia con pesos
+typedef std::vector<std::vector<int>> CCint;
+CCint matrizAd; //matriz de adyacencia con pesos
+typedef std::vector<int> Filaint;
 static bool solucionEncontrada;
 static bool* obligatorioTomado; //Indica que el vértice "índice"(relación1a1) tiene asignado ya un vértice al cual dirigirse, o sea ya tiene arista definida
 static std::map<int, ContenedorBERA> obligatorios; //Indica a que vértice en específico se dirige
@@ -589,9 +598,11 @@ void HamiltonBERAR(Grafo* g, int profundidad, Vertice* vertProcedente){
   for(int ii = 0; ii < g->numVertices() ; ii++){ //Cada "ii" es un "vértice"
 
     tmpAd = conseguirVertice(g, ii );
+    if(tmpAd == conseguirVertice(g, recorridoR[0]) 
+    && profundidad >= g->numVertices()-1
+    && g->peso(vertProcedente, tmpAd) != -1 ) solucionAlcanzada = true;
 
-    if(g->peso(vertProcedente, tmpAd) != -1 && !visitadosHam[tmpAd]){ //Es factible
-      ;
+    if(g->peso(vertProcedente, tmpAd) != -1 && (!visitadosHam[tmpAd] || solucionAlcanzada)){ //Es factible
       visitadosHam[vertProcedente] = true;
       visitadosHam[tmpAd] = true;
       recorridoR[profundidad+1] = relacion1a1[tmpAd];
@@ -605,7 +616,7 @@ void HamiltonBERAR(Grafo* g, int profundidad, Vertice* vertProcedente){
       //===========================  Calculando cota
       for(int i2 = 0; i2 < g->numVertices() ; i2++){
         if(!obligatorioTomado[i2]){
-          minimoArista = matrizAd[i2][0];
+          minimoArista = 99999;
           for(int i3 = 0; i3 < g->numVertices() ; i3++){
             if(minimoArista > matrizAd[i2][i3] && matrizAd[i2][i3] != -1) minimoArista = matrizAd[i2][i3];
           }
@@ -617,15 +628,16 @@ void HamiltonBERAR(Grafo* g, int profundidad, Vertice* vertProcedente){
 
         }
       }
+      cotaActual += minimoArista;
       //=====  
 
       tmpAd2 = tmpAd;
       tmpAd = g->primerVerticeAdyacente(vertProcedente);
 
       //Verificando si se llegó a una solución
-      while(profundidad == g->numVertices()-2 && tmpAd != nullptr){
-        if(tmpAd == conseguirVertice(g, recorridoR[0])){ //Si se encontró solución...
-          pesoDelrecorridoR += g->peso(tmpAd2, conseguirVertice(g, recorridoR[0]));
+      while(profundidad >= g->numVertices()-1 && tmpAd != nullptr){
+        if(solucionAlcanzada){ //Si se encontró solución...
+          solucionAlcanzada = false;
           if(pesoDelrecorrido > pesoDelrecorridoR){ //Verificar si es mejor que la anterior
             pesoDelrecorrido = pesoDelrecorridoR;
             solucionEncontrada = true;
@@ -633,7 +645,6 @@ void HamiltonBERAR(Grafo* g, int profundidad, Vertice* vertProcedente){
               recorrido[iii] = recorridoR[iii];
             }
           }
-          pesoDelrecorridoR -= g->peso(tmpAd2, conseguirVertice(g, recorridoR[0]));
 
         }
         tmpAd = g->siguienteVerticeAdyacente(vertProcedente, tmpAd);
@@ -646,7 +657,7 @@ void HamiltonBERAR(Grafo* g, int profundidad, Vertice* vertProcedente){
       }
       pesoDelrecorridoR -= g->peso(vertProcedente,tmpAd2);
       visitadosHam[vertProcedente] = false;
-      visitadosHam[tmpAd2] = false;
+      if(relacion1a1[tmpAd2] != recorrido[0]) visitadosHam[tmpAd2] = false;
 
       obligatorioTomado[relacion1a1[vertProcedente]] = false;
 
@@ -660,7 +671,10 @@ void HamiltonBERAR(Grafo* g, int profundidad, Vertice* vertProcedente){
 int Algoritmos::HamiltonBERA(Grafo* g){
   pesoDelrecorridoR = 0;
   pesoDelrecorrido = 999999; // "infinito"
+  solucionAlcanzada = false;
   obligatorioTomado = new bool[g->numVertices()];
+  recorrido = new int[g->numVertices()+1];
+  recorridoR = new int[g->numVertices()+1];
   solucionEncontrada = false;
 
   Vertice* tmp = g->primerVertice();
@@ -675,7 +689,7 @@ int Algoritmos::HamiltonBERA(Grafo* g){
 
   //===========================  Armando la "matriz de adyacencia"
 
-  Fila fila(g->numVertices());
+  Filaint fila(g->numVertices());
 
   //Ciclo para limpiar la matriz
   for(int ii = 0; ii < g->numVertices() ; ii++){
@@ -700,8 +714,11 @@ int Algoritmos::HamiltonBERA(Grafo* g){
   //=====  
 
   HamiltonBERAR(g, 0, g->primerVertice());
+
   relacion1a1.clear();
   visitadosHam.clear();
   delete obligatorioTomado;
+  delete recorrido;
+  delete recorridoR;
   return pesoDelrecorrido;
 }

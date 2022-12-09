@@ -34,6 +34,41 @@ VerticeMatrizAd* GrafoMatrizAd::agregarVertice(string etiqueta){
 
 }
 
+//===========================  testing functions
+template <typename Pmatrix>// This is the easiest way to make a function with templates to pass as an argument a matrix
+void printMatrixx(Pmatrix& matrix, int rows, int columns){
+	cout << "\n# Copiar y pegar este resultado a un archivo markdown para una mejor visualización " << endl;
+	int value;
+	cout << "|-";
+	for(int ii = 0; ii < rows ; ii++){
+		cout << "|" << ii;
+	}
+	cout << "|" << endl;
+
+	cout << "|-";
+	for(int ii = 0; ii < rows ; ii++){
+		cout << "|-";
+	}
+	cout << "|" << endl;
+
+	for(int ii = 0; ii < rows ; ii++){
+		cout << "|" << ii << "|";
+		for(int iii = 0; iii < columns ; iii++){
+			value = matrix[ii][iii];
+			if(value != -1){
+				cout << value << "|";
+			} else{
+				cout << "-" << "|";
+			}
+		}
+		cout  << endl;
+	}
+}
+
+
+
+//=====  
+
 void GrafoMatrizAd::eliminarVertice(string etiqueta){
 	int indiceEliminado;
 	VerticeMatrizAd* tmp;

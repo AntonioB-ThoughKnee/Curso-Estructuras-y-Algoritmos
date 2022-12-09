@@ -62,11 +62,13 @@ int main(){
 }
 #if 0
 	Grafo* g = new Grafo();
+	Grafo* gg = new Grafo();
 	// g->iniciar();
 	Vertice* vtmp;
 	Vertice* va = g->agregarVertice("a");
 	Vertice* vb = g->agregarVertice("b");
 	Vertice* vc = g->agregarVertice("c");
+
 	Vertice* vd = g->agregarVertice("d");
 	Vertice* ve = g->agregarVertice("e");
 	Vertice* vf = g->agregarVertice("f");
