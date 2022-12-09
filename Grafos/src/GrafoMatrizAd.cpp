@@ -106,7 +106,7 @@ void GrafoMatrizAd::eliminarArista(VerticeMatrizAd* vertice1, VerticeMatrizAd* v
 	this->matrizVertices[vertice2->numVertice][vertice1->numVertice] = -1;
 }
 
-void GrafoMatrizAd::modificarArtista(VerticeMatrizAd* vertice1, VerticeMatrizAd* vertice2, int peso){
+void GrafoMatrizAd::modificarArista(VerticeMatrizAd* vertice1, VerticeMatrizAd* vertice2, int peso){
 	this->matrizVertices[vertice1->numVertice][vertice2->numVertice] = peso;
 	this->matrizVertices[vertice2->numVertice][vertice1->numVertice] = peso;
 }

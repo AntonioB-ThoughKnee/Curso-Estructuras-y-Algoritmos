@@ -8,7 +8,17 @@
 #include <vector>
 #include <queue>
 #include <iostream>
-struct ContenedorDijkstra;
+
+struct ContenedorDijkstra{
+  ContenedorDijkstra(Vertice* v, int pesoAcumulado) 
+    : vertice(v), pesoAcumulado(pesoAcumulado) {}
+  ContenedorDijkstra(){}
+
+  Vertice* getVertice() {return vertice;}
+  Vertice* vertice;  //Vértice de llegada
+  int pesoAcumulado; //Peso total para llegar hasta al vértice de llegada
+};
+
 
 namespace Algoritmos{
   /**

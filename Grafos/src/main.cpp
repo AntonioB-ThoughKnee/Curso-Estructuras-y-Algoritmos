@@ -4,6 +4,7 @@
 #include "../include/ColaConPrioridad.hpp"
 #include "../include/Algoritmos.hpp"
 #include "../include/pruebas.hpp"
+#include "../include/Menu.hpp"
 #include <map>
 
 using namespace Algoritmos;
@@ -48,6 +49,16 @@ void printMatrix(Pmatrix& matrix, int rows, int columns){
 
 int main(){ 
 
+Menu* menu= new Menu;
+menu->Run();
+delete  menu;
+
+return 0;
+
+
+
+}
+#if 0
 	Grafo* g = new Grafo();
 	Vertice* vtmp;
 	Vertice* va = g->agregarVertice("a");
@@ -135,3 +146,4 @@ int main(){
 
 	return 0;
 }
+#endif
