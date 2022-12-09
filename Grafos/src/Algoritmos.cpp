@@ -8,10 +8,6 @@ bool existePar(vector<pair<Vertice*, Vertice*>> vec, Vertice* v1, Vertice* v2);
 int encontrarPosCCDeVertice(vector<vector<Vertice*>> CC, Vertice* vert);
 vector<vector<Vertice*>> unir(vector<vector<Vertice*>> CC, int indice1, int indice2);
 
-bool existePar(vector<pair<Vertice*, Vertice*>> vec, Vertice* v1, Vertice* v2);
-int encontrarPosCCDeVertice(vector<vector<Vertice*>> CC, Vertice* vert);
-vector<vector<Vertice*>> unir(vector<vector<Vertice*>> CC, int indice1, int indice2);
-
 //===========================  Estructuras auxiliares
 //Contenedor para guardar un vértice y el peso para llegar hasta este vértice
 
@@ -583,33 +579,7 @@ std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Kruskal(Grafo* g) {
   return toRet;
 }
 
-bool existePar(vector<pair<Vertice*, Vertice*>> vec, Vertice* v1, Vertice* v2) {
-  for (int i = 0; i < vec.size(); i++) {
-    if (vec[i].first == v1 && vec[i].second == v2) {
-      return true;
-    } else if ((vec[i].first == v2 && vec[i].second == v1)) {
-      return true;
-    }
-  }
-  return false;
-}
 
-int encontrarPosCCDeVertice(vector<vector<Vertice*>> CC, Vertice* vert) {
-  for (int i = 0; i < CC.size(); i++) {
-    for (int m = 0; m < CC[i].size(); m++) {
-      if (CC[i][m] == vert) {
-        return i;
-      }
-    }
-  }
-  return -1;
-}
-
-vector<vector<Vertice*>> unir(vector<vector<Vertice*>> CC, int indice1, int indice2) {
-  CC[indice1].insert( CC[indice1].end(), CC[indice2].begin(), CC[indice2].end());
-  CC.erase( next( begin( CC ), indice2 ) );
-  return CC;
-}
 //===========================  Variables globales para "HamiltonBERA" 
 // static std::map<Vertice*, int> relacion1a1; //Relación para traducir entre la matriz de adyacencia y las etiquetas
 // static std::map<Vertice*, bool> visitadosHam;

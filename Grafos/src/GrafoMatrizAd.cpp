@@ -52,7 +52,7 @@ void GrafoMatrizAd::eliminarVertice(string etiqueta){
 	bool valorEncontrado = false;
 
 	//Borrando de los arreglos
-	relacion1a1.clear();
+	relacion1a1->clear();
 	for(int ii = 0; ii < this->M ; ii++){
 		if((this->vertices[ii] == etiqueta || valorEncontrado) && ii < this->M-1){
 			if(!valorEncontrado) indiceEliminado = ii;
@@ -63,7 +63,7 @@ void GrafoMatrizAd::eliminarVertice(string etiqueta){
 			this->verticesActuales[ii] = this->verticesActuales[ii+1];
 			if(tmp != nullptr){
 				tmp->numVertice = tmp->numVertice-1;
-				this->relacion1a1.insert(pair<int, string>(tmp->numVertice, this->vertices[ii]));
+				this->relacion1a1->insert(pair<int, string>(tmp->numVertice, this->vertices[ii]));
 			}
 		}
 		else if(valorEncontrado && ii == this->M-1){
