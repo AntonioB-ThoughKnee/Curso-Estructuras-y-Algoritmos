@@ -46,7 +46,7 @@ void GrafoListaAd::eliminarVertice(string etiqueta){
 		tmp = this->vertices.recuperar(ii);
 		if(tmp->etiqueta == etiqueta){
 			this->numV--;
-			this->vertices.borrar(ii-1);
+			this->vertices.borrar(ii);
 			delete tmp;
 			break;
 		}

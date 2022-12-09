@@ -74,8 +74,7 @@ void GrafoMatrizAd::eliminarVertice(string etiqueta){
 				this->matrizVertices[ii][iii] = matrizVertices[ii][iii+1];
 			}
 			else if(moverValores && subirValores && iii < this->M-1 && ii < this->M-1){
-				this->matrizVertices[ii][iii] = matrizVertices[ii][iii+1];
-				this->matrizVertices[ii][iii] = matrizVertices[ii+1][iii];
+				this->matrizVertices[ii][iii] = matrizVertices[ii+1][iii+1];
 			}
 			else if(subirValores && iii < this->M-1){
 				this->matrizVertices[ii][iii] = matrizVertices[ii+1][iii];
@@ -83,6 +82,7 @@ void GrafoMatrizAd::eliminarVertice(string etiqueta){
 			if(iii == this->M-1) this->matrizVertices[ii][iii] = -1;
 			if(ii == this->M-1) this->matrizVertices[ii][iii] = -1;
 		}
+
 		moverValores = false;
 	}
 

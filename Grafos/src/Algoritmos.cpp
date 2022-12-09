@@ -374,6 +374,7 @@ void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
 
 int Algoritmos::Hamilton(Grafo* g){
   pesoDelrecorrido = 99999;
+  pesoDelrecorridoR = 0;
   solucionAlcanzada = false;
   recorrido = new int[g->numVertices()+1];
   recorridoR = new int[g->numVertices()+1];
