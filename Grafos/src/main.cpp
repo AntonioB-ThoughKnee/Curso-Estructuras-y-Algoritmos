@@ -1,7 +1,6 @@
 #include <iostream>
 #include "../include/ListaIndexadaPlantilla.hpp"
 #include "../include/SeleccionDeGrafo.hpp"
-#include "../include/ColaConPrioridad.hpp"
 #include "../include/Algoritmos.hpp"
 #include "../include/pruebas.hpp"
 #include "../include/Menu.hpp"
@@ -60,6 +59,7 @@ return 0;
 }
 #if 0
 	Grafo* g = new Grafo();
+	// g->iniciar();
 	Vertice* vtmp;
 	Vertice* va = g->agregarVertice("a");
 	Vertice* vb = g->agregarVertice("b");
@@ -136,13 +136,12 @@ return 0;
   prueba->test();
   delete prueba;
 
-	// for(int i = 0; i < g->numVertices(); ++i){
-	// 	delete[] matrizPesos[i];//deletes an inner array of integer;
-	// 	delete[] matrizVertices[i];
-	// }
 
-	// delete[] matrizPesos; //delete pointer holding array of pointers;
-	// delete[] matrizVertices; //delete pointer holding array of pointers;
+	vtmp = g->primerVertice();
+	vtmp = g->siguienteVertice(vtmp);
+	vtmp = g->primerVerticeAdyacente(vtmp);
+	vtmp = g->siguienteVerticeAdyacente(vtmp, vb);
+	
 
 	return 0;
 }

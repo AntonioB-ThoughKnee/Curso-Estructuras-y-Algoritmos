@@ -18,6 +18,7 @@ public:
 	 * 
 	 * @param etiqueta 
 	 */
+	void iniciar();
 	void eliminarVertice(std::string etiqueta);
 	void modificarEtiqueta(VerticeListaAd* vertice, std::string etiqueta);
 	std::string etiqueta(VerticeListaAd* vertice);
@@ -30,6 +31,7 @@ public:
 	VerticeListaAd* primerVerticeAdyacente(VerticeListaAd* vertice);
 	VerticeListaAd* siguienteVerticeAdyacente(VerticeListaAd* vertice1, VerticeListaAd* vertice2);
 	int numVertices();
+	void destruir();
 
 } Grafo;
 

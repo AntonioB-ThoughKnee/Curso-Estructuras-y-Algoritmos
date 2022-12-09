@@ -1,7 +1,6 @@
 #ifndef ALGORITMOS_GRAFO
 #define ALGORITMOS_GRAFO
 #include "ListaIndexadaPlantilla.hpp"
-#include "ColaConPrioridad.hpp"
 #include "SeleccionDeGrafo.hpp"
 #include "relacion1A1.hpp"
 #include <map>
@@ -37,7 +36,7 @@ namespace Algoritmos{
    * La soluciÃ³n se encuentra en la variable global "colorDeVÃ©rtice", el cual es un arreglo donde cada Ã­ndice representa un vÃ©rtice(por medio de la variable global "relaciÃ³n1a1") y el valor en el arreglo representa el color del que estÃ¡ pintado,  retorna el menor nÃºmero de colores para pintar el grafo  
    * 
    * IMPORTANTE: Existe un "#define NN" en "Algoritmos.cpp" el cual debe ser modificado de acuerdo al nÃºmero de vÃ©rtices en en grafo  
-   * @remark Requiere: Grafo con al menos un vÃ©rtice  
+   * @remark Requiere: Grafo con al menos un vÃ©rtice y al menos una solución
    * @remark Efecto: Resuelve el problema de coloreo en un grafo dado  
    * @remark Modifica: Variables globales
    * 
@@ -48,7 +47,7 @@ namespace Algoritmos{
 
   /**
    * @brief Algoritmo de bÃºsqueda Exhaustiva Pura para resolver el problema de los circuitos Hamilton en un grafo no dirigido, la soluciÃ³n se encuentra en la variable global "recorrido" el cual es un arreglo donde los Ã­ndices indican el orden en el que se recorren los vÃ©rtices, y los valores son los vÃ©rtices de acuerdo a la relaciÃ³n1a1  
-   * @remark Requiere: Grafo con al menos un vÃ©rtice  
+   * @remark Requiere: Grafo con al menos un vÃ©rtice y al menos una solución
    * @remark Efecto: Retornar el peso total del circuito Hamilton de menor costo  
    * @remark Modifica: Nada
    * 
@@ -75,8 +74,8 @@ namespace Algoritmos{
   std::vector<std::pair<Vertice*, Vertice*>> Kruskal(Grafo* g);
   /**
    * @brief Algoritmo de bÃºsqueda Exhaustiva Pura con RamificaciÃ³n y Acotamiento para resolver el problema de los circuitos Hamilton en un grafo no dirigido, la soluciÃ³n se encuentra en la variable global "recorrido" el cual es un arreglo donde los Ã­ndices indican el orden en el que se recorren los vÃ©rtices, y los valores son los vÃ©rtices de acuerdo a la relaciÃ³n1a1 
-   * Se hace un Ã¡rbol n-ario para la RamificaciÃ³n y Acotamiento 
-   * @remark Requiere: Grafo con al menos un vÃ©rtice 
+   * Se hace un Ã¡rbol n-ario para la RamificaciÃ³n y el Acotamiento 
+   * @remark Requiere: Grafo con al menos un vÃ©rtice  y al menos una solución
    * @remark Efecto: Retornar el peso total del circuito Hamilton de menor costo 
    * @remark Modifica: Nada
    * 
