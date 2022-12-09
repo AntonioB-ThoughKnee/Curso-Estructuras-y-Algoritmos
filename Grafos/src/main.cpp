@@ -68,14 +68,21 @@ int main(){
 	// Coloreo(g);
 	// Hamilton(g);
 	// HamiltonBERA(g);
-	// g->agregarVertice("r");
+	Vertice* vr = g->agregarVertice("r");
+	g->agregarArista(vr, vb, 9);
+	g->agregarArista(vr, vf, 5);
+	g->agregarArista(vr, ve, 1);
+	g->agregarArista(vr, vd, 4);
+	g->agregarArista(vr, va, 3);
 	// Hamilton(g);
 	// HamiltonBERA(g);
 	// Coloreo(g);
+	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
+	g->eliminarVertice("a");
   // Prim(g);
   // Kruskal(g);
 	// g->eliminarVertice("e");
-	// printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
+	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
 
 
 	vtmp = g->primerVertice();

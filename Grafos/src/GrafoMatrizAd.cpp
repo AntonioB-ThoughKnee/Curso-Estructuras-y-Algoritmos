@@ -51,21 +51,25 @@ void GrafoMatrizAd::eliminarVertice(string etiqueta){
 	bool valorEncontrado = false;
 
 	//Borrando de los arreglos
+	relacion1a1.clear();
 	for(int ii = 0; ii < this->M ; ii++){
 		if((this->vertices[ii] == etiqueta || valorEncontrado) && ii < this->M-1){
 			if(!valorEncontrado) indiceEliminado = ii;
 			valorEncontrado = true;
 			
 			this->vertices[ii] = this->vertices[ii+1]; 
-			tmp = this->verticesActuales[ii];
+			tmp = this->verticesActuales[ii+1];
 			this->verticesActuales[ii] = this->verticesActuales[ii+1];
+			if(tmp != nullptr){
+				tmp->numVertice = tmp->numVertice-1;
+				this->relacion1a1.insert(pair<int, string>(tmp->numVertice, this->vertices[ii]));
+			}
 		}
 		else if(valorEncontrado && ii == this->M-1){
 			this->vertices[ii] = "nullptr";
 			this->verticesActuales[ii] = nullptr;
 		}
 	}
-	relacion1a1.erase(indiceEliminado);
 	delete tmp;
 
 	//Borrando de la matriz de adyacencia
@@ -78,8 +82,8 @@ void GrafoMatrizAd::eliminarVertice(string etiqueta){
 				this->matrizVertices[ii][iii] = matrizVertices[ii][iii+1];
 			}
 			else if(moverValores && subirValores && iii < this->M-1 && ii < this->M-1){
-				this->matrizVertices[ii][iii] = matrizVertices[ii+1][iii];
 				this->matrizVertices[ii][iii] = matrizVertices[ii][iii+1];
+				this->matrizVertices[ii][iii] = matrizVertices[ii+1][iii];
 			}
 			else if(subirValores && iii < this->M-1){
 				this->matrizVertices[ii][iii] = matrizVertices[ii+1][iii];

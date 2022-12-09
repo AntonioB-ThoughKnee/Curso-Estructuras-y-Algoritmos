@@ -236,7 +236,7 @@ int Algoritmos::Coloreo(Grafo* g){
 static std::map<Vertice*, bool> visitadosHam;
 static int* recorridoR; //el primer valor es el inicio y el que le sigue es el vértice adyacente elegido como camino
 static int* recorrido; //Recorrido solución
-static int pesoDelrecorrido = 999999; // "infinito"
+static int pesoDelrecorrido; // "infinito"
 static int pesoDelrecorridoR = 0;
 //=====  
 
@@ -287,6 +287,7 @@ void HamiltonR(Grafo* g, int profundidad, Vertice* vertProcedente){
 }
 
 int Algoritmos::Hamilton(Grafo* g){
+  pesoDelrecorrido = 99999;
   recorrido = new int[g->numVertices()+1];
   recorridoR = new int[g->numVertices()+1];
   Vertice* tmp = g->primerVertice();
