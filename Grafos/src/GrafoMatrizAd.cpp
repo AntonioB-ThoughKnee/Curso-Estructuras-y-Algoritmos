@@ -6,21 +6,12 @@ using namespace std;
 
 GrafoMatrizAd::GrafoMatrizAd() {
 	this->relacion1a1=new std::map<int, std::string>;
-	// this->vertices = new Lista<Vertice*>();
-	this->numNodos = 0;
-	for(int ii = 0; ii < this->M ; ii++){
-		this->vertices[ii] = "nullptr";
-	}
-	
 }
 
 void GrafoMatrizAd::iniciar(){
-	;
-	if(this->numNodos != 0){
-		this->numNodos = 0;
-		for(int ii = 0; ii < this->M ; ii++){
-			this->vertices[ii] = "nullptr";
-		}
+	this->numNodos = 0;
+	for(int ii = 0; ii < this->M ; ii++){
+		this->vertices[ii] = "nullptr";
 	}
 }
 
@@ -173,15 +164,9 @@ void GrafoMatrizAd::destruir(){
 	for(int ii = 0; ii < this->M ; ii++){
 		delete this->verticesActuales[ii];
 	}
-	this->~GrafoMatrizAd();
 }
 
 
 GrafoMatrizAd::~GrafoMatrizAd() {
-	// this->vertices->iniciarCursor();
-	// while (vertices->avanzarCursor()) {
-	// 	delete this->vertices->obtenerCursor();
-	// }
-	// delete vertices;
 }
 

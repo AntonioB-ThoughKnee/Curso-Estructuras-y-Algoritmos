@@ -2,6 +2,8 @@
 #define PRUEBASHPP  
 #include "../include/Algoritmos.hpp"
 #include "../include/SeleccionDeGrafo.hpp"
+#include "time.h"
+#include <bits/stdc++.h>
 #include <map>
 using namespace Algoritmos;
 class Pruebas {

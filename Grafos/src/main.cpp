@@ -47,12 +47,15 @@ void printMatrix(Pmatrix& matrix, int rows, int columns){
 //=====  
 
 int main(){ 
+	Pruebas* prueba=new Pruebas;
+	prueba->test();
+	delete prueba;
+	// Menu* menu= new Menu;
+	// menu->Run();
+	// delete  menu;
 
-Menu* menu= new Menu;
-menu->Run();
-delete  menu;
+	return 0;
 
-return 0;
 
 
 
@@ -78,6 +81,7 @@ return 0;
 	g->agregarArista(vd, vf, 3);
 	g->agregarArista(va, vf, 5);
 	g->agregarArista(ve, vb, 8);
+
 #endif
 
 

@@ -22,19 +22,14 @@ int obtenerIndiceEnAdyacentes(VerticeListaAd* vertice1, VerticeListaAd* vertice2
 }
 
 void GrafoListaAd:: iniciar(){
-	if(this->numV != 0){
-		this->vertices.iniciar();
-		this->vertices.insertar(nullptr, 1);
-		this->numV = 0;
-	}
 
-}
-
-GrafoListaAd::GrafoListaAd() {
 	this->vertices.iniciar();
 	this->vertices.insertar(nullptr, 1);
 	this->numV = 0;
+}
 
+
+GrafoListaAd::GrafoListaAd() {
 }
 
 VerticeListaAd* GrafoListaAd::agregarVertice(string etiqueta){
@@ -151,10 +146,5 @@ void GrafoListaAd::destruir(){
 
 
 GrafoListaAd::~GrafoListaAd() {
-	// this->vertices->iniciarCursor();
-	// while (vertices->avanzarCursor()) {
-	// 	delete this->vertices->obtenerCursor();
-	// }
-	// delete vertices;
 }
 

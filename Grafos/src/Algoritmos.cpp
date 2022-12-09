@@ -175,20 +175,6 @@ void Algoritmos::Floyd(Grafo* g,int**& matrizPesos,Vertice***& matrizVertices,Re
         }
       }
     }
-    cout <<"pivote: "<<pivote<<endl;
-    for(int i =0;i<g->numVertices();++i){
-      cout<<endl;
-      for(int j=0;j<g->numVertices();++j){
-        if (matrizPesos[i][j]==99999){
-          cout<<0<<" ";				
-        }else{
-          cout<<matrizPesos[i][j]<<" ";
-        }
-
-      }
-    }
-    cout<<endl;
-    cout<<endl;
   }
 }
 

@@ -8,6 +8,30 @@ using namespace std;
 
 Menu::Menu(){
   this->grafo=new Grafo();
+  // QUITAR!!
+  this->grafo->iniciar();
+  Vertice* va = this->grafo->agregarVertice("a");
+  this->idVertice.insert({"a",va});
+	Vertice* vb = this->grafo->agregarVertice("b");
+  this->idVertice.insert({"b",vb});
+	Vertice* vc = this->grafo->agregarVertice("c");
+  this->idVertice.insert({"c",vc});
+	Vertice* vd = this->grafo->agregarVertice("d");
+  this->idVertice.insert({"d",vd});
+	Vertice* ve = this->grafo->agregarVertice("e");
+  this->idVertice.insert({"e",ve});
+	Vertice* vf = this->grafo->agregarVertice("f");
+  this->idVertice.insert({"f",vf});
+
+  this->grafo->agregarArista(va, vb, 8);
+	this->grafo->agregarArista(va, vc, 1);
+	this->grafo->agregarArista(vc, vb, 9);
+	this->grafo->agregarArista(vd, vb, 8);
+	this->grafo->agregarArista(vf, vb, 2);
+	this->grafo->agregarArista(vc, ve, 5);
+	this->grafo->agregarArista(vd, vf, 3);
+	this->grafo->agregarArista(va, vf, 5);
+	this->grafo->agregarArista(ve, vb, 8);
 }
 Menu::~Menu(){
   if (this->grafo){
@@ -46,10 +70,10 @@ void Menu::menuOperadores(){
 
   while(loopOperadores){
     string opciones="\nPor favor, seleccione una opcion:\n" 
-    "1-Crear 2-Destruir 3-Agregar Vertice 4-EliminarVertice 5-ModificarEtiqueta\n" 
-    "6-Etiqueta 7-AgregarArista 8-EliminarArista 9-ModificarPeso 10-Peso\n"
-    "11-PrimerVertice 12-SiguienteVertice 13-PrimerVerticeAdjacente 14-SiguienteVerticeAdjacente\n"
-    "15-NumVertices OTRO-SALIR \n";
+    "1-Iniciar 2-Destruir 3-Agregar Vertice 4-EliminarVertice 5-ModificarEtiqueta\n" 
+    "6-AgregarArista 7-EliminarArista 8-ModificarPeso 9-Peso\n"
+    "10-PrimerVertice 11-SiguienteVertice 12-PrimerVerticeAdyacente 13-SiguienteVerticeAdyacente\n"
+    "14-NumVertices OTRO-SALIR \n";
     int opcionOperadores;
     cout<<opciones<<endl;
     cin>>opcionOperadores;
@@ -58,13 +82,16 @@ void Menu::menuOperadores(){
     {
     case 1:
       {
-      cout<<"opcion 1 elegida"<<endl;
+      this->grafo->iniciar();
       break;
       }
     case 2:
       {
-      // cout<<"ahhh si -dijo carlos"<<endl;
-      cout << "opcion 2 elegida" << endl;
+      this->grafo->destruir();
+      if (this->grafo){
+        delete this->grafo;
+        this->grafo=nullptr;
+      }
       break;
       }
     case 3:
@@ -95,11 +122,24 @@ void Menu::menuOperadores(){
       string etiquetaNueva;
       cin>> etiquetaNueva;
       this->grafo->modificarEtiqueta(this->idVertice[etiquetaVertice], etiquetaNueva);
+      // CAMBIAR MAPA!!
+      Vertice* tempViejo = this->idVertice[etiquetaVertice];
+      this->idVertice.erase(etiquetaVertice);
+      this->idVertice.insert({etiquetaNueva, tempViejo});
       break;
       }
     case 6:
       {
-        cout<<"opcion 6 elegida"<<endl;
+        cout<<"Ingrese la etiqueta del vertice1"<<endl;
+        string etiqueta1;
+        cin>> etiqueta1;
+        cout<<"Ingrese la etiqueta del vertice2: "<<endl;
+        string etiqueta2;
+        cin>> etiqueta2;
+        cout<<"Ingrese el peso de la arista que desea agregar: "<<endl;
+        int peso;
+        cin>> peso;
+        this->grafo->agregarArista(this->idVertice[etiqueta1],this->idVertice[etiqueta2],peso);
       break;
       }
     case 7:
@@ -110,10 +150,7 @@ void Menu::menuOperadores(){
         cout<<"Ingrese la etiqueta del vertice2: "<<endl;
         string etiqueta2;
         cin>> etiqueta2;
-        cout<<"Ingrese el peso de la arita que desea agregar: "<<endl;
-        int peso;
-        cin>> peso;
-        this->grafo->agregarArista(this->idVertice[etiqueta1],this->idVertice[etiqueta2],peso);
+        this->grafo->eliminarArista(this->idVertice[etiqueta1],this->idVertice[etiqueta2]);
       break;
       }
     case 8:
@@ -124,7 +161,11 @@ void Menu::menuOperadores(){
         cout<<"Ingrese la etiqueta del vertice2: "<<endl;
         string etiqueta2;
         cin>> etiqueta2;
-        this->grafo->eliminarArista(this->idVertice[etiqueta1],this->idVertice[etiqueta2]);
+        cout<<"Ingrese el peso de la arista que desea modificar: "<<endl;
+        int peso;
+        cin>> peso;
+        this->grafo->modificarArista(this->idVertice[etiqueta1],this->idVertice[etiqueta2],peso);
+        
       break;
       }
     case 9:
@@ -135,29 +176,15 @@ void Menu::menuOperadores(){
         cout<<"Ingrese la etiqueta del vertice2: "<<endl;
         string etiqueta2;
         cin>> etiqueta2;
-        cout<<"Ingrese el peso de la arita que desea modificar: "<<endl;
-        int peso;
-        cin>> peso;
-        this->grafo->modificarArista(this->idVertice[etiqueta1],this->idVertice[etiqueta2],peso);
+        cout<<"El peso es: "<<this->grafo->peso(this->idVertice[etiqueta1],this->idVertice[etiqueta2])<<endl;
       break;
       }
     case 10:
       {
-        cout<<"Ingrese la etiqueta del vertice1"<<endl;
-        string etiqueta1;
-        cin>> etiqueta1;
-        cout<<"Ingrese la etiqueta del vertice2: "<<endl;
-        string etiqueta2;
-        cin>> etiqueta2;
-        cout<<"El peso es: "<<this->grafo->peso(this->idVertice[etiqueta1],this->idVertice[etiqueta2])<<endl;
-      break;
-      }
-    case 11:
-      {
         this->menuPrimerVertice();
       break;
       }
-    case 12:
+    case 11:
       {
       cout<<"Ingrese la etiqueta del vertice del que desea conocer el siguiente vertice: "<<endl;
       string etiqueta;
@@ -165,15 +192,15 @@ void Menu::menuOperadores(){
       this->menuSiguienteVertice(etiqueta);
       break;
       }
-    case 13:
+    case 12:
       {
-      cout<<"Ingrese la etiqueta del vertice del que desea conocer el primer vertice adjacente: "<<endl;
+      cout<<"Ingrese la etiqueta del vertice del que desea conocer el primer vertice adyacente: "<<endl;
       string etiqueta;
       cin>> etiqueta;
       this->menuPrimerVerticeAdyacente(etiqueta);
       break;
       }
-    case 14:
+    case 13:
       {
         cout<<"Ingrese la etiqueta del vertice1"<<endl;
         string etiqueta1;
@@ -184,7 +211,7 @@ void Menu::menuOperadores(){
         this->menuSiguienteVerticeAdyacente(etiqueta1,etiqueta2);
       break;
       }
-    case 15:
+    case 14:
       {    
         this->menuNumVertices();
       break;
