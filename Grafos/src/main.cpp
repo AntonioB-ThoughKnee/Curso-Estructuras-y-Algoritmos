@@ -2,8 +2,14 @@
 #include "../include/ListaIndexadaPlantilla.hpp"
 #include "../include/SeleccionDeGrafo.hpp"
 #include "../include/Algoritmos.hpp"
+#include "../include/pruebas.hpp"
+#include "../include/Menu.hpp"
+#include <map>
+
 using namespace Algoritmos;
 using namespace std;
+
+#define ORIGINAL  // KRUSKAL, PRIM
 
 //===========================  testing functions
 template <typename Pmatrix>// This is the easiest way to make a function with templates to pass as an argument a matrix
@@ -41,19 +47,31 @@ void printMatrix(Pmatrix& matrix, int rows, int columns){
 //=====  
 
 int main(){ 
+	// Pruebas* prueba=new Pruebas;
+	// prueba->test();
+	// delete prueba;
+	Menu* menu= new Menu;
+	menu->Run();
+	delete  menu;
 
+	return 0;
+
+
+
+
+}
+#if 0
 	Grafo* g = new Grafo();
-	Grafo* gg = new Grafo();
 	// g->iniciar();
 	Vertice* vtmp;
 	Vertice* va = g->agregarVertice("a");
 	Vertice* vb = g->agregarVertice("b");
 	Vertice* vc = g->agregarVertice("c");
-
 	Vertice* vd = g->agregarVertice("d");
 	Vertice* ve = g->agregarVertice("e");
 	Vertice* vf = g->agregarVertice("f");
 
+#ifdef ORIGINAL
 	g->agregarArista(va, vb, 8);
 	g->agregarArista(va, vc, 1);
 	g->agregarArista(vc, vb, 9);
@@ -64,51 +82,71 @@ int main(){
 	g->agregarArista(va, vf, 5);
 	g->agregarArista(ve, vb, 8);
 
-	//Floyd(g, va, mAdj, mVert);
+#endif
 
-	Vertice* vva = gg->agregarVertice("a");
-	Vertice* vvb = gg->agregarVertice("b");
-	Vertice* vvc = gg->agregarVertice("c");
-	gg->agregarArista(va, vc, 5);
-	gg->agregarArista(va, vb, 7);
-	gg->agregarArista(vc, vb, 1);
-	ListaIndexada<ContenedorDijkstra>* lista = new ListaIndexada<ContenedorDijkstra>();
-	Dijkstra(gg, va, lista);
-	Coloreo(g);
+
+
+#ifdef PRIM
+	g->agregarArista(va, vb, 2);
+	g->agregarArista(va, vc, 8);
+	g->agregarArista(vc, vb, 3);
+	g->agregarArista(vc, ve, 1);
+	g->agregarArista(va, ve, 7);
+	g->agregarArista(ve, vf, 4);
+	g->agregarArista(va, vf, 3);
+	g->agregarArista(vf, vd, 9);
+	g->agregarArista(va, vd, 6);
+	g->agregarArista(vb, vd, 9);
+	g->agregarArista(vc, vf, 6);
+	g->agregarArista(vb, vf, 5);
+#endif
+	// Relacion1A1* relacion1a1=new Relacion1A1;
+	// int ** matrizPesos=new int *[g->numVertices()];
+	// Vertice *** matrizVertices=new Vertice **[g->numVertices()];
+	// relacion1a1->insertar(va,0);
+	// relacion1a1->insertar(vb,1);
+	// relacion1a1->insertar(vc,2);
+
+	// Floyd(g,matrizPesos,matrizVertices,relacion1a1);
+
+
+
+#ifdef KRUSKAL
+	g->agregarArista(va, vb, 3);
+	g->agregarArista(vb, vc, 9);
+	g->agregarArista(vc, va, 7);
+	g->agregarArista(va, vd, 6);
+	g->agregarArista(va, ve, 8);
+	g->agregarArista(vd, ve, 2);
+	g->agregarArista(vd, vf, 4);
+	g->agregarArista(ve, vf, 5);
+	g->agregarArista(vc, ve, 10);
+#endif
+
+	//Floyd(g, va, mAdj, mVert);
+  	// Coloreo(g);
 	// Hamilton(g);
 	// HamiltonBERA(g);
-	Vertice* vr = g->agregarVertice("r");
-	g->agregarArista(vr, vb, 9);
-	g->agregarArista(vr, vf, 5);
-	g->agregarArista(vr, ve, 1);
-	g->agregarArista(vr, vd, 4);
-	g->agregarArista(vr, va, 3);
-	Hamilton(g);
-	HamiltonBERA(g);
-	Coloreo(g);
-	Vertice* vl = g->agregarVertice("l");
-	g->agregarArista(vl, vb, 3);
-	g->agregarArista(vl, vf, 2);
-	g->agregarArista(vl, ve, 7);
-	g->agregarArista(vl, vd, 4);
-	g->agregarArista(vl, va, 3);
-	Hamilton(g);
-	HamiltonBERA(g);
-	Coloreo(g);
-	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
-	// g->eliminarVertice("a");
-  // Prim(g);
-  // Kruskal(g);
-	// g->eliminarVertice("e");
-	printMatrix(g->matrizVertices, 10, 10); //Línea exclusiva para grafo implementado por matriz
+  #ifdef PRIM
+  Prim(g);
+  #endif
+  #ifdef KRUSKAL
+  Kruskal(g);
+  #endif
+	// Coloreo(g);
+
+  // g->agregarArista(vc, va, 12);
+  Pruebas* prueba=new Pruebas;
+  prueba->test();
+  delete prueba;
 
 
 	vtmp = g->primerVertice();
 	vtmp = g->siguienteVertice(vtmp);
 	vtmp = g->primerVerticeAdyacente(vtmp);
 	vtmp = g->siguienteVerticeAdyacente(vtmp, vb);
-
-	g->destruir();
+	
 
 	return 0;
 }
+#endif

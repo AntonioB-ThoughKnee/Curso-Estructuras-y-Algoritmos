@@ -24,7 +24,7 @@ public:
 	std::string etiqueta(VerticeListaAd* vertice);
 	void agregarArista(VerticeListaAd* vertice1, VerticeListaAd* vertice2, int peso);
 	void eliminarArista(VerticeListaAd* vertice1, VerticeListaAd* vertice2);
-	void modificarArtista(VerticeListaAd* vertice1, VerticeListaAd* vertice2, int peso);
+	void modificarArista(VerticeListaAd* vertice1, VerticeListaAd* vertice2, int peso);
 	int peso(VerticeListaAd* vertice1, VerticeListaAd* vertice2);
 	VerticeListaAd* primerVertice();
 	VerticeListaAd* siguienteVertice(VerticeListaAd* vertice);

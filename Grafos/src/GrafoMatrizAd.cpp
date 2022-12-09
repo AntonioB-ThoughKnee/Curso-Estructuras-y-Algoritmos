@@ -5,21 +5,13 @@
 using namespace std;
 
 GrafoMatrizAd::GrafoMatrizAd() {
-	// this->vertices = new Lista<Vertice*>();
-	this->numNodos = 0;
-	for(int ii = 0; ii < this->M ; ii++){
-		this->vertices[ii] = "nullptr";
-	}
-	
+	this->relacion1a1=new std::map<int, std::string>;
 }
 
 void GrafoMatrizAd::iniciar(){
-	;
-	if(this->numNodos != 0){
-		this->numNodos = 0;
-		for(int ii = 0; ii < this->M ; ii++){
-			this->vertices[ii] = "nullptr";
-		}
+	this->numNodos = 0;
+	for(int ii = 0; ii < this->M ; ii++){
+		this->vertices[ii] = "nullptr";
 	}
 }
 
@@ -30,7 +22,7 @@ VerticeMatrizAd* GrafoMatrizAd::agregarVertice(string etiqueta){
 	}
 	int numN = this->numNodos;
 	VerticeMatrizAd* nuevoV = new VerticeMatrizAd(numN);
-	this->relacion1a1.insert(pair<int, string>(numN, etiqueta));
+	this->relacion1a1->insert(pair<int, string>(numN, etiqueta));
 	for(int ii = 0; ii < this->M ; ii++){
 		this->matrizVertices[numN][ii] = -1;
 		this->matrizVertices[ii][numN] = -1;
@@ -42,41 +34,6 @@ VerticeMatrizAd* GrafoMatrizAd::agregarVertice(string etiqueta){
 
 }
 
-//===========================  testing functions
-template <typename Pmatrix>// This is the easiest way to make a function with templates to pass as an argument a matrix
-void printMatrixx(Pmatrix& matrix, int rows, int columns){
-	cout << "\n# Copiar y pegar este resultado a un archivo markdown para una mejor visualización " << endl;
-	int value;
-	cout << "|-";
-	for(int ii = 0; ii < rows ; ii++){
-		cout << "|" << ii;
-	}
-	cout << "|" << endl;
-
-	cout << "|-";
-	for(int ii = 0; ii < rows ; ii++){
-		cout << "|-";
-	}
-	cout << "|" << endl;
-
-	for(int ii = 0; ii < rows ; ii++){
-		cout << "|" << ii << "|";
-		for(int iii = 0; iii < columns ; iii++){
-			value = matrix[ii][iii];
-			if(value != -1){
-				cout << value << "|";
-			} else{
-				cout << "-" << "|";
-			}
-		}
-		cout  << endl;
-	}
-}
-
-
-
-//=====  
-
 void GrafoMatrizAd::eliminarVertice(string etiqueta){
 	int indiceEliminado;
 	VerticeMatrizAd* tmp;
@@ -86,7 +43,7 @@ void GrafoMatrizAd::eliminarVertice(string etiqueta){
 	bool valorEncontrado = false;
 
 	//Borrando de los arreglos
-	relacion1a1.clear();
+	relacion1a1->clear();
 	for(int ii = 0; ii < this->M ; ii++){
 		if((this->vertices[ii] == etiqueta || valorEncontrado) && ii < this->M-1){
 			if(!valorEncontrado) indiceEliminado = ii;
@@ -97,7 +54,7 @@ void GrafoMatrizAd::eliminarVertice(string etiqueta){
 			this->verticesActuales[ii] = this->verticesActuales[ii+1];
 			if(tmp != nullptr){
 				tmp->numVertice = tmp->numVertice-1;
-				this->relacion1a1.insert(pair<int, string>(tmp->numVertice, this->vertices[ii]));
+				this->relacion1a1->insert(pair<int, string>(tmp->numVertice, this->vertices[ii]));
 			}
 		}
 		else if(valorEncontrado && ii == this->M-1){
@@ -151,7 +108,7 @@ void GrafoMatrizAd::eliminarArista(VerticeMatrizAd* vertice1, VerticeMatrizAd* v
 	this->matrizVertices[vertice2->numVertice][vertice1->numVertice] = -1;
 }
 
-void GrafoMatrizAd::modificarArtista(VerticeMatrizAd* vertice1, VerticeMatrizAd* vertice2, int peso){
+void GrafoMatrizAd::modificarArista(VerticeMatrizAd* vertice1, VerticeMatrizAd* vertice2, int peso){
 	this->matrizVertices[vertice1->numVertice][vertice2->numVertice] = peso;
 	this->matrizVertices[vertice2->numVertice][vertice1->numVertice] = peso;
 }
@@ -207,15 +164,9 @@ void GrafoMatrizAd::destruir(){
 	for(int ii = 0; ii < this->M ; ii++){
 		delete this->verticesActuales[ii];
 	}
-	this->~GrafoMatrizAd();
 }
 
 
 GrafoMatrizAd::~GrafoMatrizAd() {
-	// this->vertices->iniciarCursor();
-	// while (vertices->avanzarCursor()) {
-	// 	delete this->vertices->obtenerCursor();
-	// }
-	// delete vertices;
 }
 

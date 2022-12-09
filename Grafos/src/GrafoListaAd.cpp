@@ -22,19 +22,14 @@ int obtenerIndiceEnAdyacentes(VerticeListaAd* vertice1, VerticeListaAd* vertice2
 }
 
 void GrafoListaAd:: iniciar(){
-	if(this->numV != 0){
-		this->vertices.iniciar();
-		this->vertices.insertar(nullptr, 1);
-		this->numV = 0;
-	}
 
-}
-
-GrafoListaAd::GrafoListaAd() {
 	this->vertices.iniciar();
 	this->vertices.insertar(nullptr, 1);
 	this->numV = 0;
+}
 
+
+GrafoListaAd::GrafoListaAd() {
 }
 
 VerticeListaAd* GrafoListaAd::agregarVertice(string etiqueta){
@@ -56,7 +51,6 @@ void GrafoListaAd::eliminarVertice(string etiqueta){
 			break;
 		}
 	}
-	 
 }
 
 void GrafoListaAd::modificarEtiqueta(VerticeListaAd* vertice, string etiqueta){
@@ -85,7 +79,7 @@ void GrafoListaAd::eliminarArista(VerticeListaAd* vertice1, VerticeListaAd* vert
 	delete tmp;
 }
 
-void GrafoListaAd::modificarArtista(VerticeListaAd* vertice1, VerticeListaAd* vertice2, int peso){
+void GrafoListaAd::modificarArista(VerticeListaAd* vertice1, VerticeListaAd* vertice2, int peso){
 	VerticeListaAd::ContenedorAristas* tmp;
 
 	obtenerIndiceEnAdyacentes(vertice1, vertice2, tmp);
@@ -152,10 +146,5 @@ void GrafoListaAd::destruir(){
 
 
 GrafoListaAd::~GrafoListaAd() {
-	// this->vertices->iniciarCursor();
-	// while (vertices->avanzarCursor()) {
-	// 	delete this->vertices->obtenerCursor();
-	// }
-	// delete vertices;
 }
 

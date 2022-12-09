@@ -1,6 +1,7 @@
 
 #include "../include/Algoritmos.hpp"
 #include <cstring>
+#include <iostream>
 using namespace std;
 
 bool existePar(vector<pair<Vertice*, Vertice*>> vec, Vertice* v1, Vertice* v2);
@@ -9,14 +10,7 @@ vector<vector<Vertice*>> unir(vector<vector<Vertice*>> CC, int indice1, int indi
 
 //===========================  Estructuras auxiliares
 //Contenedor para guardar un vértice y el peso para llegar hasta este vértice
-struct ContenedorDijkstra{
-  ContenedorDijkstra(Vertice* v, int pesoAcumulado) 
-    : vertice(v), pesoAcumulado(pesoAcumulado) {}
-  ContenedorDijkstra(){}
 
-  Vertice* vertice;  //Vértice de llegada
-  int pesoAcumulado; //Peso total para llegar hasta al vértice de llegada
-};
 
 // Clase necesaria para usar una cola de prioridad en Dijkstra
 class Comparador{
@@ -106,11 +100,97 @@ void Algoritmos::Dijkstra(Grafo* g, Vertice* v, ListaIndexada<ContenedorDijkstra
       }
     } else{
       ii--;
-    
     }
-    
   }
 }
+
+void Algoritmos::Floyd(Grafo* g,int**& matrizPesos,Vertice***& matrizVertices,Relacion1A1* relacion1a1){
+  Vertice * v= g->primerVertice();
+  int contador =0;
+  // Se carga la relacion 1 a 1 con los vertices 
+  // y los indices a los que corresponden.
+  while (v!=nullptr)
+  {
+    relacion1a1->insertar(v,contador++);
+    v=g->siguienteVertice(v);
+  }
+  v=g->primerVertice();
+  // Se cargan las matrices con los valores 
+  // iniciales.
+  for(int i =0;i<g->numVertices();++i){
+    matrizPesos[i]=new int[g->numVertices()];
+    matrizVertices[i]=new Vertice*[g->numVertices()];
+    for(int j=0;j<g->numVertices();++j){
+      matrizPesos[i][j]=99999;
+      matrizVertices[i][j]=nullptr;
+    }
+  }
+  // Se carga la matriz de pesos con los 
+  // pesos del grafo. 
+  v=g->primerVertice();
+  int numero= relacion1a1->getDerecha(v);
+  while (v!=nullptr){
+    Vertice * va=g->primerVerticeAdyacente(v);
+    while (va!=nullptr){
+      int fila = relacion1a1->getDerecha(v);
+      int columna = relacion1a1->getDerecha(va);
+      matrizPesos[fila][columna]=g->peso(v,va);
+      va=g->siguienteVerticeAdyacente(v,va);
+    }
+    v=g->siguienteVertice(v);
+  }
+
+	for(int i =0;i<g->numVertices();++i){
+		cout<<endl;
+		for(int j=0;j<g->numVertices();++j){
+			if (matrizPesos[i][j]==99999){
+				cout<<0<<" ";				
+			}else{
+				cout<<matrizPesos[i][j]<<" ";
+			}
+
+		}
+	}
+
+  cout<<endl;
+  cout<<endl;
+
+
+
+
+  //Se corre el algoritmo de Floyd
+  for(int pivote =0;pivote<g->numVertices();++pivote){
+
+    for(int fila=0;fila<g->numVertices();++fila){
+      if(fila!=pivote && matrizPesos[fila][pivote]<99999){
+        for(int columna=0;columna<g->numVertices();++columna){
+          int valorActual=matrizPesos[fila][columna];
+          int temp1 = matrizPesos[fila][pivote];
+          int temp2 = matrizPesos[pivote][columna];
+          int valorNuevo=matrizPesos[fila][pivote]+matrizPesos[pivote][columna];
+          if (fila!=columna && matrizPesos[fila][columna]>(matrizPesos[fila][pivote]+matrizPesos[pivote][columna])){
+            matrizPesos[fila][columna]=valorNuevo;
+            matrizVertices[fila][columna]=relacion1a1->getIzquierda(pivote);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+void Algoritmos::NDijkstra(Grafo* g,ListaIndexada<ContenedorDijkstra>* lista){
+  Vertice * v= g->primerVertice();
+  int contador =0;
+  // Se carga la relacion 1 a 1 con los vertices 
+  // y los indices a los que corresponden.
+  while (v!=nullptr)
+  {
+    Algoritmos::Dijkstra(g,v,&(lista[contador++]));
+    v=g->siguienteVertice(v);
+  }
+};
 
 //===========================  Variables globales para "Coloreo"
 static int coloresUsados; //Usado para comparar las soluciones
@@ -314,143 +394,6 @@ int Algoritmos::Hamilton(Grafo* g){
   return pesoDelrecorrido;
 }
 
-// ----------------------------------------------------------------------------
-void Algoritmos::Prim(Grafo* g) {
-  // Declaraciones e inicalizaciones.
-  map<int, Vertice*> identificador;
-  int id = 0;
-  vector<vector<int>> G;
-  G.resize(g->numVertices());
-  for (int i = 0; i < G.size(); ++i) {
-    G[i].resize(g->numVertices());
-    fill(G[i].begin(), G[i].end(), 99999);
-  }
-  // Llenar map
-  Vertice* v = g->primerVertice();
-  while (v != nullptr) {
-    identificador.insert(pair<int, Vertice*>(id, v));
-    v = g->siguienteVertice(v);
-    id++;
-  }
-  // Llenar matriz.
-  map<int, Vertice*>::iterator itrI;
-  map<int, Vertice*>::iterator itrJ;
-  for (itrI = identificador.begin(); itrI != identificador.end(); ++itrI) {
-    for (itrJ = identificador.begin(); itrJ != identificador.end(); ++itrJ) {
-      Vertice* v1 = itrI->second;
-      Vertice* v2 = itrJ->second;
-      int peso = g->peso(v1, v2);
-      if (peso != -1) {
-        G[itrI->first][itrJ->first] = peso;
-      } else {
-        G[itrI->first][itrJ->first] = 99999;
-      }
-    }
-  }
-
-  // Una vez llenada la matriz, se hace el recorrido de prim.
-  int no_edge;  // number of edge
-
-  // create a array to track selected vertex
-  // selected will become true otherwise false
-  int selected[g->numVertices()];
-
-  // set selected false initially
-  memset(selected, false, sizeof(selected));
-
-  // set number of edge to 0
-  no_edge = 0;
-
-  // the number of egde in minimum spanning tree will be
-  // always less than (V -1), where V is number of vertices in
-  //graph
-
-  // choose 0th vertex and make it true
-  selected[0] = true;
-
-  int x;  //  row number
-  int y;  //  col number
-
-  // print for edge and weight
-  cout << "Edge"
-     << " : "
-     << "Weight";
-  cout << endl;
-  while (no_edge < g->numVertices() - 1) {
-    //For every vertex in the set S, find the all adjacent vertices
-    // , calculate the distance from the vertex selected at step 1.
-    // if the vertex is already in the set S, discard it otherwise
-    //choose another vertex nearest to selected vertex  at step 1.
-
-    int min = 99999;
-    x = 0;
-    y = 0;
-
-    for (int i = 0; i < g->numVertices(); i++) {
-      if (selected[i]) {
-        for (int j = 0; j < g->numVertices(); j++) {
-          if (!selected[j] && G[i][j]) {  // not in selected and there is an edge
-            if (min > G[i][j]) {
-              min = G[i][j];
-              x = i;
-              y = j;
-            }
-          }
-        }
-      }
-    }
-    cout << x << " - " << y << " :  " << G[x][y];
-    cout << endl;
-    selected[y] = true;
-    no_edge++;
-  }
-}
-
-void Algoritmos::Kruskal(Grafo* g) {
-  // Declaraciones e inicializaciones
-  priority_queue<pair<int, int>, std::vector<pair<int,int>>,
-    std::greater<pair<int,int>>> queue; // APO(peso, keyMap)
-  // map<int, pair<Vertice*, Vertice*>> mapa; // map(key, (v, va))
-  vector<pair<Vertice*, Vertice*>> agregados;
-  vector<vector<Vertice*>> CC;
-  CC.resize(g->numVertices());
-  
-  // Recorrido de Kruskal
-  Vertice* v = g->primerVertice();
-  int indiceCC = 0;
-  int indiceAgregados = 0;
-  while (v != nullptr) {
-    CC[indiceCC].push_back(v);
-    indiceCC++;
-
-    Vertice* va = g->primerVerticeAdyacente(v);
-    while (va != nullptr) {
-      if (!existePar(agregados, v, va)) {
-        queue.push(pair<int, int>(g->peso(v, va), indiceAgregados));
-        agregados.push_back(pair<Vertice*, Vertice*>(v, va));
-        indiceAgregados++;
-      }
-      va = g->siguienteVerticeAdyacente(v, va);
-    }
-    v = g->siguienteVertice(v);
-  }
-
-  int n = g->numVertices();
-  int aristasElegidas = 0;
-  while (aristasElegidas < (n-1)) {
-    pair<int, int> parApo = queue.top(); // peso, key
-    queue.pop();
-    pair<Vertice*, Vertice*> arista = agregados[parApo.second];
-    int ident1 = encontrarPosCCDeVertice(CC, arista.first);
-    int ident2 = encontrarPosCCDeVertice(CC, arista.second);
-    if ((ident1 != -1 && ident2 != -1) && (ident1 != ident2)) {
-      cout << g->etiqueta(arista.first) << " - " << g->etiqueta(arista.second) << std::endl;
-      aristasElegidas++;
-      CC = unir(CC, ident1, ident2);
-    }
-  }
-
-}
 
 bool existePar(vector<pair<Vertice*, Vertice*>> vec, Vertice* v1, Vertice* v2) {
   for (int i = 0; i < vec.size(); i++) {
@@ -478,6 +421,155 @@ vector<vector<Vertice*>> unir(vector<vector<Vertice*>> CC, int indice1, int indi
   CC[indice1].insert( CC[indice1].end(), CC[indice2].begin(), CC[indice2].end());
   CC.erase( next( begin( CC ), indice2 ) );
   return CC;
+}
+
+
+// ----------------------------------------------------------------------------
+std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Prim(Grafo* g) {
+  // Declaraciones e inicalizaciones.
+  map<int, Vertice*> identificador;
+  int id = 0;
+  vector<vector<int>> G;
+  G.resize(g->numVertices());
+  for (int i = 0; i < G.size(); ++i) {
+    G[i].resize(g->numVertices());
+    fill(G[i].begin(), G[i].end(), 99999);
+  }
+  // Vector de devolucion
+  vector<pair<Vertice*, Vertice*>> toRet;
+  toRet.resize(g->numVertices() - 1);
+  // Llenar map
+  Vertice* v = g->primerVertice();
+  while (v != nullptr) {
+    identificador.insert(pair<int, Vertice*>(id, v));
+    v = g->siguienteVertice(v);
+    id++;
+  }
+  // Llenar matriz.
+  map<int, Vertice*>::iterator itrI;
+  map<int, Vertice*>::iterator itrJ;
+  for (itrI = identificador.begin(); itrI != identificador.end(); ++itrI) {
+    for (itrJ = identificador.begin(); itrJ != identificador.end(); ++itrJ) {
+      Vertice* v1 = itrI->second;
+      Vertice* v2 = itrJ->second;
+      int peso = g->peso(v1, v2);
+      if (peso != -1) {
+        G[itrI->first][itrJ->first] = peso;
+      } else {
+        G[itrI->first][itrJ->first] = 99999;
+      }
+    }
+  }
+
+  // Una vez llenada la matriz, se hace el recorrido de prim.
+  int numAristaPuesta;  
+
+  int verticesSeleccionados[g->numVertices()];
+
+  /*
+    Ningun vertice ha sido seleccionado, por lo que se deben poner todos en los
+    valores pertenecientes al arreglo en 0, se puede realizar mediante for pero
+    con memset queda mas simple el codigo
+  */
+  memset(verticesSeleccionados, 0, sizeof(verticesSeleccionados));
+
+  /*
+    Inicialmente no se han puesto aristas.
+  */
+  numAristaPuesta = 0;
+
+  /*
+    Similarmente a como fue realizado en clase, se selecciona el primer vertice
+    para que el algoritmo quede mejor definido en terminos de simplicidad.
+  */
+  verticesSeleccionados[0] = true;
+
+  // int menorFila;  
+  // int menorColumna;  
+  cout << "Aristas resultantes del recorrido de Prim: " << endl;
+  cout << endl;
+  while (numAristaPuesta < g->numVertices() - 1) {
+    int minimoEncontradoActual = 99999;
+    int menorFila = 0;
+    int menorColumna = 0;
+
+    for (int i = 0; i < g->numVertices(); i++) {
+      if (verticesSeleccionados[i]) {
+        for (int j = 0; j < g->numVertices(); j++) {
+          if ((!verticesSeleccionados[j]) && (G[i][j] != 0)) {  
+            if (minimoEncontradoActual > G[i][j]) {
+              minimoEncontradoActual = G[i][j];
+              menorFila = i;
+              menorColumna = j;
+            }
+          }
+        }
+      }
+    }
+    cout << g->etiqueta(identificador.find(menorFila)->second) << " - "
+      << g->etiqueta(identificador.find(menorColumna)->second);
+    cout << endl;
+    verticesSeleccionados[menorColumna] = true;
+    numAristaPuesta++;
+    toRet.push_back(pair<Vertice*, Vertice*>(identificador.find(menorFila)->second,
+      identificador.find(menorColumna)->second));
+  }
+  return toRet;
+}
+
+std::vector<std::pair<Vertice*, Vertice*>> Algoritmos::Kruskal(Grafo* g) {
+  // Declaraciones e inicializaciones
+  // priority_queue<pair<int, int>, std::vector<pair<int,int>>,
+  //   std::greater<pair<int,int>>>* queue= new priority_queue<pair<int, int>, std::vector<pair<int,int>>,
+  //   std::greater<pair<int,int>>>; // APO(peso, keyMap)
+  priority_queue<pair<int, int>, std::vector<pair<int,int>>,
+    std::greater<pair<int,int>>> queue; // APO(peso, keyMap)
+  // map<int, pair<Vertice*, Vertice*>> mapa; // map(key, (v, va))
+  vector<pair<Vertice*, Vertice*>> agregados;
+  vector<vector<Vertice*>> CC;
+  CC.resize(g->numVertices());
+  // Vector de devolucion
+  std::vector<std::pair<Vertice*, Vertice*>> toRet;
+  toRet.resize(g->numVertices());
+
+  // Recorrido de Kruskal
+  Vertice* v = g->primerVertice();
+  int indiceCC = 0;
+  int indiceAgregados = 0;
+  while (v != nullptr) {
+    CC[indiceCC].push_back(v);
+    indiceCC++;
+
+    Vertice* va = g->primerVerticeAdyacente(v);
+    while (va != nullptr) {
+      if (!existePar(agregados, v, va)) {
+        queue.push(pair<int, int>(g->peso(v, va), indiceAgregados));
+        agregados.push_back(pair<Vertice*, Vertice*>(v, va));
+        indiceAgregados++;
+      }
+      va = g->siguienteVerticeAdyacente(v, va);
+    }
+    v = g->siguienteVertice(v);
+  }
+
+  int n = g->numVertices();
+  int aristasElegidas = 0;
+  cout << "Resultado del recorrido mediante Kruskal" << endl;
+  while (aristasElegidas < (n-1)) {
+    pair<int, int> parApo = queue.top(); // peso, key
+    queue.pop();
+    pair<Vertice*, Vertice*> arista = agregados[parApo.second];
+    int ident1 = encontrarPosCCDeVertice(CC, arista.first);
+    int ident2 = encontrarPosCCDeVertice(CC, arista.second);
+    if ((ident1 != -1 && ident2 != -1) && (ident1 != ident2)) {
+      cout << g->etiqueta(arista.first) << " - " << g->etiqueta(arista.second) << std::endl;
+      aristasElegidas++;
+      CC = unir(CC, ident1, ident2);
+      toRet.push_back(pair<Vertice*, Vertice*>(arista.first, arista.second));
+    }
+  }
+  // delete queue;
+  return toRet;
 }
 
 
